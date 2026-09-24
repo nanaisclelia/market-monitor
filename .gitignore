@@ -13,3 +13,6 @@ config/settings.local.yaml
 # 运行产物：快照含新闻原文引句，不公开
 data/snapshots/
 site/
+
+# 本地工具
+.tools/
