@@ -1,4 +1,49 @@
-# Market Monitor · 个人金融看台
+# Market Monitor
+
+**A daily closing brief for US equities, precious metals, the CPO / optical-interconnect theme and single-stock movers — built around data discipline: every number is fetched live, cross-checked against a second source, and every opinion is attributed to a named source.**
+
+**Live page:** https://claude.ai/artifact/MNtBzS83NLwwyNcxRe9mhM · bilingual (中文 / EN) · Day / Dark
+
+![Market Monitor — dark mode](docs/screenshot-dark.png)
+
+## What it does
+
+| Module | Content |
+|---|---|
+| **Geopolitics & macro** | 3–5 market-moving events a day, each as *event → affected assets → transmission logic → facts → source* |
+| **US indices** | S&P 500, Dow, Nasdaq, Russell 2000, VIX — close, change, 20-day σ, relative volume, 60-day sparkline, CNBC cross-check |
+| **Precious metals** | LBMA fixes vs COMEX/NYMEX front-month futures for gold, silver, platinum, palladium |
+| **Theme tracker: CPO** | 16 names across the co-packaged-optics value chain (NVIDIA, Broadcom, TSMC, Coherent, Lumentum… plus 4 China A-share optical module makers): equal-weighted 1D/5D/20D/YTD, ranked diverging bar chart, value-chain role |
+| **Movers & alerts** | S&P 500 + Nasdaq-100 + theme members screened for ±7% or ≥2.5σ moves; each flagged stock gets *why it moved* (tagged Confirmed / Analyst / Media report / AI inference, with numbered sources), SEC 8-K filings, analyst rating & target changes, valuation / liquidity / crowding metrics and key technical levels |
+
+## Design principles
+
+- **No number without a source.** Every figure is stored in a timestamped snapshot with its source. If today's bar is missing the page says *N/A* — stale data is never substituted.
+- **Two-source verification.** Index, futures and mover prices are checked against CNBC; gaps above 0.5% are flagged red. LBMA fixes dated differently from the session are marked *stale* and excluded from alert triggers.
+- **Facts separated from views.** Company filings are *Confirmed*; press attributions are *Media report*; unsourced reasoning is explicitly labelled *AI inference*. Analyst views must name the person or firm — never “analysts say”.
+- **Calendar- and DST-correct scheduling.** `exchange_calendars` gives each session's real close (including early closes); `zoneinfo` handles the UK/US daylight-saving mismatch; runs are idempotent under `launchd`.
+
+<p>
+<img src="docs/screenshot-light.png" width="49%" alt="Day mode">
+<img src="docs/screenshot-cpo.png" width="49%" alt="CPO theme tracker">
+</p>
+
+## Stack
+
+Python 3.12 · yfinance · exchange_calendars · pandas · Jinja2 · BeautifulSoup · SEC EDGAR API · LBMA JSON · static HTML/CSS (no JS framework) · macOS launchd
+
+```bash
+uv venv -p 3.12 .venv && uv pip install -p .venv/bin/python -r requirements.txt
+.venv/bin/python -m src.run --market us     # fetch the latest closed session and render site/
+```
+
+*For personal research only — not investment advice.*
+
+---
+
+## 中文说明
+
+### Market Monitor · 个人金融看台
 
 每个交易日在各市场收盘后自动抓取数据，生成静态 HTML 看台（`site/index.html`），并按日期存档快照。
 
