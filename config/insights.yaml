@@ -1,0 +1,61 @@
+# 具名专家观点：仅当句子中同时出现「人名」+「下列机构之一」时才收录，原句逐字引用
+institutions:
+  - Goldman Sachs
+  - JPMorgan
+  - J.P. Morgan
+  - Morgan Stanley
+  - UBS
+  - Citi
+  - Citigroup
+  - Bank of America
+  - BofA
+  - Barclays
+  - Deutsche Bank
+  - HSBC
+  - BNP Paribas
+  - Societe Generale
+  - Wells Fargo
+  - Jefferies
+  - Bernstein
+  - Evercore
+  - Piper Sandler
+  - Raymond James
+  - RBC Capital
+  - TD Securities
+  - Saxo Bank
+  - Standard Chartered
+  - ANZ
+  - Natixis
+  - Scotiabank
+  - Capital Economics
+  - Pantheon Macroeconomics
+  - Wedbush
+  - Needham
+  - Mizuho
+  - Nomura
+  - Macquarie
+  - BMO
+  - Commerzbank
+  - ING
+  - Julius Baer
+  - StoneX
+  - FOREX.com
+  - City Index
+  - OANDA
+  - Swissquote
+  - Marex
+  - Metals Focus
+  - Sprott
+  - Zaner
+  - Blue Line Futures
+  - Commonwealth Bank of Australia
+  - SP Angel
+  - Kitco Metals
+  - Heraeus
+  - World Gold Council
+  - Kitco
+  - LSEG
+  - Morningstar
+  - CICC
+  - CITIC Securities
+  - Huatai

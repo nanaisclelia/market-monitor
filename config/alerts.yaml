@@ -1,0 +1,20 @@
+# 异动阈值（百分比均为绝对值，单位 %）
+stocks:
+  pct_move: 7.0            # 单日涨跌幅 ≥ ±7%
+  sigma_multiple: 2.5      # 或 |涨跌幅| ≥ 2.5 × 20 日日收益率标准差
+  sigma_window: 20
+  sigma_min_abs_pct: 4.0   # σ 触发时还需 |涨跌幅| ≥ 4%（0 = 不设下限）
+  detail_cards: 12         # 生成完整分析卡片的数量（按 |z| 排序），其余进汇总表
+indices:
+  pct_move: 2.0
+metals:
+  gold: 2.0
+  silver: 3.0
+  platinum: 3.0
+  palladium: 3.0
+  # 触发口径：lbma（伦敦定价）/ futures（COMEX 期货）/ either（任一满足）
+  trigger_source: either
+
+# 美股监控池
+universe:
+  us: [sp500, nasdaq100]

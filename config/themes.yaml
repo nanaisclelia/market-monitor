@@ -1,0 +1,26 @@
+# 主题追踪（产业链分类为本看台自定义，可自行增删）
+# market: us 用 NYSE 日历；cn 用上交所日历（深市同日历）
+# 美股成员自动并入异动监控池
+themes:
+  - key: cpo
+    name: CPO 共封装光学 / 光互连
+    name_en: CPO / Co-packaged Optics & Optical Interconnect
+    keywords: [co-packaged optics, CPO, silicon photonics, optical, transceiver, photonic, 光模块]
+    insight_anchors: [AVGO, COHR, LITE, NVDA]
+    members:
+      - {ticker: NVDA,      name: NVIDIA,            role: CPO 交换机平台, role_en: CPO switch platform,       market: us}
+      - {ticker: AVGO,      name: Broadcom,          role: CPO 交换芯片, role_en: CPO switch silicon,         market: us}
+      - {ticker: TSM,       name: TSMC ADR,          role: 硅光封装 / 代工, role_en: Silicon photonics packaging / foundry,      market: us}
+      - {ticker: MRVL,      name: Marvell,           role: 光 DSP / 硅光, role_en: Optical DSP / silicon photonics,        market: us}
+      - {ticker: CRDO,      name: Credo,             role: 高速互连 DSP, role_en: High-speed interconnect DSP,         market: us}
+      - {ticker: COHR,      name: Coherent,          role: 光模块 / 激光器, role_en: Optical modules / lasers,      market: us}
+      - {ticker: LITE,      name: Lumentum,          role: 激光器 / 光器件, role_en: Lasers / optical components,      market: us}
+      - {ticker: FN,        name: Fabrinet,          role: 光模块代工, role_en: Optical module contract mfg,           market: us}
+      - {ticker: AAOI,      name: Applied Optoelectronics, role: 光模块, role_en: Optical modules,         market: us}
+      - {ticker: CIEN,      name: Ciena,             role: 光通信系统, role_en: Optical networking systems,           market: us}
+      - {ticker: TSEM,      name: Tower Semiconductor, role: 硅光代工, role_en: Silicon photonics foundry,          market: us}
+      - {ticker: ANET,      name: Arista,            role: 数据中心交换机, role_en: Data-center switches,       market: us}
+      - {ticker: 300308.SZ, name: 中际旭创, name_en: Zhongji Innolight,           role: 光模块, role_en: Optical modules,              market: cn}
+      - {ticker: 300502.SZ, name: 新易盛, name_en: Eoptolink,             role: 光模块, role_en: Optical modules,              market: cn}
+      - {ticker: 300394.SZ, name: 天孚通信, name_en: TFC Optical,           role: 光引擎 / 无源器件, role_en: Optical engines / passives,    market: cn}
+      - {ticker: 002281.SZ, name: 光迅科技, name_en: Accelink,           role: 光器件, role_en: Optical components,              market: cn}

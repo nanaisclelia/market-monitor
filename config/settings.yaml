@@ -1,0 +1,32 @@
+# 全局设置
+display_tz: Europe/London
+
+# 各市场：交易所日历、收盘后延迟（分钟）、本次更新包含的板块
+markets:
+  us:
+    calendar: XNYS
+    tz: America/New_York
+    delay_minutes: 20
+    sections: [indices, metals, alerts]
+    indices:
+      - {name: S&P 500,   yahoo: "^GSPC", cnbc: ".SPX"}
+      - {name: Dow Jones, yahoo: "^DJI",  cnbc: ".DJI"}
+      - {name: Nasdaq Composite, yahoo: "^IXIC", cnbc: ".IXIC"}
+      - {name: Russell 2000, yahoo: "^RUT", cnbc: ".RUT"}
+      - {name: VIX,       yahoo: "^VIX",  cnbc: ".VIX", alert: false}
+
+metals:
+  - {name: 黄金 Gold,      key: gold,      lbma: gold_pm,      yahoo: "GC=F", cnbc: "@GC.1"}
+  - {name: 白银 Silver,    key: silver,    lbma: silver,       yahoo: "SI=F", cnbc: "@SI.1"}
+  - {name: 铂 Platinum,    key: platinum,  lbma: platinum_pm,  yahoo: "PL=F", cnbc: "@PL.1"}
+  - {name: 钯 Palladium,   key: palladium, lbma: palladium_pm, yahoo: "PA=F", cnbc: "@PA.1"}
+
+# 交叉校验：两源差异超过该百分比标红
+cross_check_tolerance_pct: 0.5
+
+# 收盘数据未就绪时的自动重试次数（launchd 每 10 分钟触发一次）
+max_auto_attempts: 6
+
+# SEC EDGAR 要求 User-Agent 含联系方式，例如 "fin-dashboard your.name@example.com"
+# 留空则跳过 8-K 公告检索（驱动因素只显示财报日和新闻标题）
+sec_user_agent: ""   # 在 config/settings.local.yaml 中填写（该文件不提交）
