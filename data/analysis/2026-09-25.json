@@ -1,0 +1,112 @@
+{
+ "session": "2026-09-25",
+ "generated_at": "2026-09-26T00:05:00+01:00",
+ "author": "Claude（AI 根据所列来源整理）",
+ "author_en": "Claude (AI summary of the cited sources)",
+ "stocks": {
+  "BE": {
+   "headline": "Oracle 重申约 2.4 GW 燃料电池合同，Project Jupiter 担忧缓解，领涨 S&P 500",
+   "headline_en": "Oracle reaffirms ~2.4 GW fuel-cell contract, easing Project Jupiter worries; top S&P 500 gainer",
+   "points": [
+    {"tag": "媒体报道", "text": "报道称 Oracle 在前一日对 Project Jupiter 发出不可抗力通知（起因是配套天然气管道延期）后，仍承诺履行与 Bloom 约 2.4 GW 的燃料电池合同；Barron's 将 Bloom 列为当日 S&P 500 涨幅第一，并归因于 Oracle。报道中未引用 Oracle 高管的原话。", "text_en": "Reports say Oracle remains committed to its roughly 2.4 GW fuel-cell contract with Bloom despite the prior day's force majeure notice on Project Jupiter (tied to delayed gas pipeline infrastructure); Barron's named Bloom the day's top S&P 500 performer and linked the move to Oracle. No direct Oracle executive quote was cited.", "src": [0, 1]},
+    {"tag": "AI 推断", "text": "9/24 Oracle 的不可抗力通知曾拖累 AI 数据中心链条；合同得到确认后，此前反映的交付风险被部分回补。股价仍较 52 周高点低约 18%。", "text_en": "Oracle's 9/24 force majeure notice had weighed on the AI data-center chain; confirmation of the contract unwound part of that delivery-risk discount. Shares remain ~18% below their 52-week high.", "src": []}
+   ],
+   "sources": [
+    {"publisher": "Simply Wall St / Yahoo Finance", "date": "2026-09-25", "title": "Bloom Energy (BE) Is Up 8.7% After Oracle Reaffirms 2.4 GW AI Fuel Cell Deal Commitment", "url": "https://finance.yahoo.com/markets/stocks/articles/bloom-energy-8-7-oracle-220801648.html"},
+    {"publisher": "Barron's", "date": "2026-09-25", "title": "Bloom Energy Stock Is Today's Top S&P 500 Performer. It Has a Lot to Do With Oracle.", "url": "https://www.barrons.com/articles/bloom-energy-stock-oracle-ai-50802d99"}
+   ]
+  },
+  "CRDO": {
+   "headline": "无当日公司公告；芯片股两日回调后反弹，连涨 9 天",
+   "headline_en": "No company news; chip rebound after a two-day skid extends a 9-day winning streak",
+   "points": [
+    {"tag": "媒体报道", "text": "IBD 报道芯片股在连跌两日后反弹，Tower Semiconductor 领涨；Credo 同日上涨，当天没有公司公告。", "text_en": "IBD reported chip stocks rebounding after a two-day skid, led by Tower Semiconductor; Credo rose with no company announcement on the day.", "src": [0]},
+    {"tag": "媒体报道", "text": "背景：9/21 起 Credo 在 ECOC 2026 光通信展示 1.6T 光互连方案，Rosenblatt 给予 Buy 评级、目标价由 215 美元上调至 235 美元，Mizuho 维持 Outperform（目标价 245 美元）。", "text_en": "Context: from 9/21 Credo showcased 1.6T optical connectivity at ECOC 2026; Rosenblatt rated it Buy and raised its target to $235 from $215, and Mizuho kept Outperform ($245 target).", "src": [1]},
+    {"tag": "AI 推断", "text": "本看台数据显示已连涨 9 天，当日高开 2.9%，股价仍较 52 周高点低约 32%。属于超跌后的动量修复，而非新的基本面事件。部分网站将涨幅归因于 9 月初的财报，那不是当日催化剂，未采信。", "text_en": "Our data show a 9-day winning streak, a 2.9% gap-up, and shares still ~32% below the 52-week high — a momentum recovery after a drawdown rather than a new fundamental event. Some sites attributed the move to early-September earnings; that is not a same-day catalyst and was not used.", "src": []}
+   ],
+   "sources": [
+    {"publisher": "Investor's Business Daily", "date": "2026-09-25", "title": "Chip Stocks Rise After Two-Day Skid. Tower Semiconductor Among Leaders.", "url": "https://www.investors.com/news/technology/chip-stocks-rise-after-two-day-skid-tower-semiconductor-among-leaders/"},
+    {"publisher": "Investing.com", "date": "2026-09-21", "title": "Why is Credo Technology stock rallying today?", "url": "https://www.investing.com/news/stock-market-news/why-is-credo-technology-stock-rallying-today-93CH-4909330"}
+   ]
+  },
+  "CVS": {
+   "headline": "无当日公司公告；同业 Humana 获 Barclays 上调后管理式医疗板块走强",
+   "headline_en": "No company news; managed-care peer Humana jumps on a Barclays upgrade",
+   "points": [
+    {"tag": "分析师", "text": "同日 Barclays 将 Humana 由 Neutral 上调至 Overweight，目标价由 407 美元上调至 515 美元，Humana 大涨约 7%；报道未披露分析师姓名和详细理由。", "text_en": "The same day Barclays upgraded Humana to Overweight from Neutral and raised its target to $515 from $407; Humana jumped ~7%. The report did not name the analyst or give detailed reasoning.", "src": [0]},
+    {"tag": "AI 推断", "text": "CVS 旗下 Aetna 是 Medicare Advantage 主要参与者，量比 2.2 倍，涨幅可能来自同业评级上调带来的板块联动。此为推断，未找到直接报道。", "text_en": "CVS's Aetna is a major Medicare Advantage player; with relative volume at 2.2x, the move may reflect read-across from the peer upgrade. This is an inference; no direct report was found.", "src": []},
+    {"tag": "已证实", "text": "部分网站提到的 Aetna 扩大肿瘤预授权打包计划，发布于 9/17（公司新闻稿），并非当日消息。", "text_en": "The Aetna bundled oncology prior-authorization expansion cited by some sites was announced on 9/17 (company press release), not on the day.", "src": [1]}
+   ],
+   "sources": [
+    {"publisher": "24/7 Wall St.", "date": "2026-09-25", "title": "Humana Jumps 7% on Barclays Upgrade and $515 Target; UnitedHealth Nudges Higher", "url": "https://247wallst.com/investing/2026/09/25/humana-jumps-7-on-barclays-upgrade-and-515-target-unitedhealth-nudges-higher/"},
+    {"publisher": "CVS Health 新闻稿", "publisher_en": "CVS Health press release", "date": "2026-09-17", "title": "Aetna expands bundled oncology prior authorizations", "url": "https://www.cvshealth.com/news/company-news/aetna-expands-bundled-oncology-prior-authorizations.html"}
+   ]
+  }
+ },
+ "themes": {
+  "cpo": {
+   "headline": "美股光互连链条反弹，Tower、Credo、Fabrinet 领涨；A股中秋休市",
+   "headline_en": "US optical-interconnect names rebound, led by Tower, Credo and Fabrinet; China A-shares closed for Mid-Autumn",
+   "points": [
+    {"tag": "媒体报道", "text": "IBD 报道芯片股在连跌两日后反弹，Tower Semiconductor 领涨。", "text_en": "IBD reported chip stocks rebounding after a two-day skid, led by Tower Semiconductor.", "src": [0]},
+    {"tag": "AI 推断", "text": "同日 Oracle 重申对 Bloom Energy 的供电合同，缓解了前一日 Project Jupiter 不可抗力通知引发的 AI 数据中心资本开支担忧；9/24 下跌较多的光互连股（Tower -5.7%、Coherent -3.3%）当日反弹。此为推断。", "text_en": "Oracle's reaffirmation of its Bloom Energy power contract eased the AI data-center capex worries sparked by the prior day's Project Jupiter force majeure notice; optical names hit hardest on 9/24 (Tower -5.7%, Coherent -3.3%) bounced. This is an inference.", "src": [1]},
+    {"tag": "已证实", "text": "A股 9/25–9/27 中秋休市（上交所公告），4 只 A股成员显示 9/24 收盘，不计入当日等权收益。", "text_en": "China A-shares are closed 9/25–9/27 for Mid-Autumn (SSE notice); the four A-share members show 9/24 closes and are excluded from today's equal-weighted return.", "src": [2]}
+   ],
+   "sources": [
+    {"publisher": "Investor's Business Daily", "date": "2026-09-25", "title": "Chip Stocks Rise After Two-Day Skid. Tower Semiconductor Among Leaders.", "url": "https://www.investors.com/news/technology/chip-stocks-rise-after-two-day-skid-tower-semiconductor-among-leaders/"},
+    {"publisher": "Simply Wall St / Yahoo Finance", "date": "2026-09-25", "title": "Bloom Energy (BE) Is Up 8.7% After Oracle Reaffirms 2.4 GW AI Fuel Cell Deal Commitment", "url": "https://finance.yahoo.com/markets/stocks/articles/bloom-energy-8-7-oracle-220801648.html"},
+    {"publisher": "上海证券交易所", "publisher_en": "Shanghai Stock Exchange", "date": "2026-09-15", "title": "关于2026年中秋节、国庆节休市安排的公告", "url": "https://www.sse.com.cn/disclosure/announcement/general/c/c_20260915_10832273.shtml"}
+   ]
+  }
+ },
+ "geo": [
+  {
+   "event": "美伊据报商讨分阶段协议重开霍尔木兹，胡塞武装同时向沙特发射导弹",
+   "event_en": "US and Iran reportedly discuss a phased deal to reopen Hormuz as Houthis fire missiles at Saudi Arabia",
+   "assets": "原油（WTI 与 Brent 价差）、能源股、炼化与柴油、航运",
+   "assets_en": "Crude (WTI–Brent spread), energy equities, refining & diesel, shipping",
+   "logic": "谈判预期压低风险溢价，但实物通行尚未恢复，攻击仍在继续，油价在协议预期和供应风险之间来回摆动；美国可能限制柴油出口的消息压制 WTI，导致 WTI 与 Brent 价差扩大。",
+   "logic_en": "Deal hopes compress the risk premium, but physical flows have not resumed and attacks continue, so prices swing between the two; talk of a possible US diesel export ban weighs on WTI and widens its discount to Brent.",
+   "facts": "报道称美伊谈判代表在探讨分阶段协议，内容为重开霍尔木兹海峡、解除美国对伊朗港口的封锁。沙特拦截了胡塞武装发射的导弹。周四霍尔木兹仅 13 艘次通行，曼德海峡 27 艘次。WTI 下跌约 2.3% 至约 92.4 美元，Brent 下跌约 0.9% 至约 105.7 美元，两者价差 12.68 美元，为 5 月以来最大。",
+   "facts_en": "Negotiators were reported to be exploring a phased deal to reopen the Strait of Hormuz and lift the US blockade of Iranian ports. Saudi Arabia intercepted Houthi missiles. Only 13 Hormuz crossings on Thursday; 27 via Bab al-Mandeb. WTI fell ~2.3% to ~$92.4 and Brent ~0.9% to ~$105.7; the $12.68 spread is the widest since May.",
+   "view": {"who": "Jeanne Walters", "org": "Emirates NBD", "org_en": "Emirates NBD", "text": "将 Brent 周四的急涨归因于沙特拦截导弹，以及伊朗军事顾问威胁把冲突扩大到印度洋。", "text_en": "Attributed Thursday's sharp Brent rise to Saudi missile interceptions and an Iranian military adviser's threat to widen the conflict to the Indian Ocean."},
+   "tag": "媒体报道",
+   "sources": [
+    {"publisher": "The National", "date": "2026-09-25", "title": "Oil prices waver in face of Iran war truce and Houthi attacks", "url": "https://www.thenationalnews.com/business/energy/2026/09/25/oil-prices-waver-in-face-of-iran-war-truce-and-houthi-attacks/"},
+    {"publisher": "Yahoo Finance", "date": "2026-09-25", "title": "Stock market today: Dow, S&P 500, Nasdaq notch weekly wins as market shrugs off bond sell-off, oil prices ease", "url": "https://finance.yahoo.com/markets/live/stock-market-today-friday-september-25-dow-sp-500-nasdaq-081738529.html"}
+   ]
+  },
+  {
+   "event": "美中峰会闭幕：贸易休战延至 2027-01-10，芯片议题没有进展",
+   "event_en": "US–China summit ends: trade truce to 2027-01-10, nothing on chips",
+   "assets": "美国农业（ADM、Bunge）、对华芯片（Nvidia）、中概股、稀土",
+   "assets_en": "US agriculture (ADM, Bunge), China-exposed chips (Nvidia), China ADRs, rare earths",
+   "logic": "休战延期把关税回升和稀土管制的尾部风险推迟两个月；大豆采购兑现利好农产品贸易商；芯片出口没有新安排，对 Nvidia 影响有限，其指引已假设中国数据中心收入为零。",
+   "logic_en": "The extension defers tariff and rare-earth tail risks by two months; soybean follow-through supports ag traders; no chip outcome means little change for Nvidia, whose guidance already assumes zero China data-center revenue.",
+   "facts": "财长 Bessent 确认休战延长两个月，称是为了\"争取更多时间\"，并表示中方在履行大豆承诺，但其他农产品采购落后；ADM CEO 称中国希望兑现今年 2500 万吨大豆的承诺。报道称芯片议题\"基本没有进展\"，AI 安全对话继续但无正式协议，针对产能过剩的关税被推迟。",
+   "facts_en": "Treasury Secretary Bessent confirmed the two-month extension to buy \"more time\" and said China is meeting soybean commitments but lagging on other farm purchases; ADM's CEO said China wants to honour its 25mn-tonne soybean commitment this year. Chips were described as essentially a non-event; AI safety talks continue without a formal agreement; an overcapacity tariff was deferred.",
+   "view": null,
+   "tag": "已证实",
+   "sources": [
+    {"publisher": "24/7 Wall St.", "date": "2026-09-25", "title": "Trump and Xi Buy Time on Trade. Farm and Chip Stocks Are Watching Closely.", "url": "https://247wallst.com/investing/2026/09/25/trump-and-xi-buy-time-on-trade-farm-and-chip-stocks-are-watching-closely/"}
+   ]
+  },
+  {
+   "event": "美联储鹰派表态延续，10 年期美债收益率约 5.2%，消费者信心降至 48.1",
+   "event_en": "Fed hawkishness persists; 10-year yield ~5.2%, consumer sentiment falls to 48.1",
+   "assets": "美债、美元、长久期成长股、黄金、可选消费",
+   "assets_en": "Treasuries, dollar, long-duration growth, gold, consumer discretionary",
+   "logic": "美联储官员暗示继续加息，把长端收益率压在高位，美元走强压制金价；消费者信心走弱对可选消费构成压力。但股市当周仍收涨，说明市场已部分消化加息预期。",
+   "logic_en": "Fed officials signalling further hikes keep long yields elevated and the dollar firm, weighing on gold; weaker sentiment pressures discretionary spending — yet equities still finished the week higher, suggesting hikes are partly priced.",
+   "facts": "Fed 理事 Barr 9/23 表示，在其基准情形下\"可能需要进一步的政策调整\"，才能让通胀及时回到目标；纽约联储主席 Williams 9/24 称年底前再次加息\"合理\"。10 年期美债收益率收于约 5.18%。密歇根大学消费者信心终值为 48.1（8 月为 51.7，预期 47.5）。道指结束三周连跌。",
+   "facts_en": "Fed Governor Barr said on 9/23 that in his base case \"further policy adjustments are likely to be needed\" to bring inflation to target in a timely way; NY Fed President Williams said on 9/24 another hike by year-end is \"reasonable\". The 10-year closed around 5.18%. Final UMich sentiment was 48.1 (August 51.7, consensus 47.5). The Dow snapped a three-week losing streak.",
+   "view": null,
+   "tag": "已证实",
+   "sources": [
+    {"publisher": "American Banker", "date": "2026-09-23", "title": "Fed's Barr: 'further policy adjustments are likely'", "url": "https://www.americanbanker.com/news/feds-barr-further-policy-adjustments-are-likely"},
+    {"publisher": "CNBC", "date": "2026-09-24", "title": "New York Fed's Williams says it's 'reasonable' to expect another rate hike by year-end", "url": "https://www.cnbc.com/2026/09/24/feds-williams-another-rate-hike-by-year-end.html"},
+    {"publisher": "Yahoo Finance", "date": "2026-09-25", "title": "Stock market today: Dow, S&P 500, Nasdaq notch weekly wins", "url": "https://finance.yahoo.com/markets/live/stock-market-today-friday-september-25-dow-sp-500-nasdaq-081738529.html"}
+   ]
+  }
+ ]
+}

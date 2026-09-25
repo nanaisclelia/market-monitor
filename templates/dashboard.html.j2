@@ -330,7 +330,7 @@ footer.disc{position:fixed;left:0;right:0;bottom:0;z-index:10;background:var(--p
 <header><h2>{{ L('主题追踪 · ' ~ th.name, 'Theme · ' ~ (th.name_en or th.name)) }}</h2><span class="meta">{% set cn = ok|selectattr('market', 'equalto', 'cn')|list %}{{ L(th.agg.n ~ '/' ~ th.agg.total ~ ' 只有数据 · 美股按 ' ~ us.session ~ ' 收盘' ~ (' · A股按 ' ~ cn[0].session ~ ' 收盘' if cn else ''),
    th.agg.n ~ '/' ~ th.agg.total ~ ' with data · US close ' ~ us.session ~ (' · A-share close ' ~ cn[0].session if cn else '')) }}</span></header>
 <div class="agg">
-  <div><span class="k">{{ L('等权 1 日', 'EW 1D') }}</span><b>{{ chg(th.agg.d1) }}</b></div>
+  <div><span class="k">{{ L('等权 1 日', 'EW 1D') }}{% if th.agg.n_today is defined and th.agg.n_today < th.agg.n %} · {{ L(th.agg.n_today ~ ' 只开市', th.agg.n_today ~ ' trading') }}{% endif %}</span><b>{{ chg(th.agg.d1) }}</b></div>
   <div><span class="k">{{ L('等权 5 日', 'EW 5D') }}</span><b>{{ chg(th.agg.r5) }}</b></div>
   <div><span class="k">{{ L('等权 20 日', 'EW 20D') }}</span><b>{{ chg(th.agg.r20) }}</b></div>
   <div><span class="k">{{ L('等权 YTD', 'EW YTD') }}</span><b>{{ chg(th.agg.ytd, 1) }}</b></div>
@@ -358,7 +358,7 @@ footer.disc{position:fixed;left:0;right:0;bottom:0;z-index:10;background:var(--p
 <td class="t sym">{{ r.ticker }}</td><td class="t">{{ L(r.name, r.name_en or r.name) }}</td><td class="t mut">{{ L(r.role, r.role_en or r.role) }}</td>
 {% if r.stats %}<td>{{ r.stats.close|num }}</td><td>{{ chg(r.stats.pct) }}</td><td>{{ chg(r.r5, 1) }}</td><td>{{ chg(r.r20, 1) }}</td><td>{{ chg(r.ytd, 1) }}</td><td>{% if r.stats.rel_volume %}{{ r.stats.rel_volume|num(1) }}×{% else %}—{% endif %}</td><td>{{ r.vs_ma50|num(1, True, True) }}</td><td class="t">{{ r.spark|spark(84, 22, r.name) }}</td>
 <td>{% if r.why %}<span class="chip alert" title="{{ r.why|join('; ')|en }}">{{ L('异动', 'Alert') }}</span>{% endif %}{% if r.market == 'cn' %} <span class="chip">{{ L('A股', 'China A') }}</span>{% endif %}</td>
-{% else %}<td colspan="9" class="missing">{{ L('数据暂缺', 'Data unavailable') }}（{{ r.error }}）</td>{% endif %}
+{% else %}<td colspan="9" class="missing">{{ L('数据暂缺（' ~ r.error ~ '）', 'Data unavailable (' ~ (r.error|en) ~ ')') }}</td>{% endif %}
 </tr>{% endfor %}</tbody>
 </table></div>
 </div>

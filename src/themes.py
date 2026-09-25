@@ -68,7 +68,9 @@ def build(us_session: date, hist: dict, scfg: dict) -> list[dict]:
         ok = [r for r in rows if r.get("stats")]
 
         def avg(key):
-            vals = [r["stats"]["pct"] if key == "d1" else r.get(key) for r in ok]
+            # 1 日收益只统计与美股同一交易日的成员（A股休市时不把前一交易日的涨跌算进今天）
+            rows_ = [r for r in ok if r["session"] == us_session.isoformat()] if key == "d1" else ok
+            vals = [r["stats"]["pct"] if key == "d1" else r.get(key) for r in rows_]
             vals = [v for v in vals if v is not None]
             return sum(vals) / len(vals) if vals else None
 
@@ -98,8 +100,10 @@ def build(us_session: date, hist: dict, scfg: dict) -> list[dict]:
         out.append({
             "key": t["key"], "name_en": t.get("name_en", t["name"]), "analyst": {"actions": acts[:10], "consensus": None, "targets": None}, "name": t["name"], "members": rows,
             "agg": {"d1": avg("d1"), "r5": avg("r5"), "r20": avg("r20"), "ytd": avg("ytd"),
-                    "up": sum(1 for r in ok if r["stats"]["pct"] > 0),
-                    "down": sum(1 for r in ok if r["stats"]["pct"] < 0), "n": len(ok), "total": len(rows)},
+                    "up": sum(1 for r in ok if r["stats"]["pct"] > 0 and r["session"] == us_session.isoformat()),
+                    "down": sum(1 for r in ok if r["stats"]["pct"] < 0 and r["session"] == us_session.isoformat()),
+                    "n_today": sum(1 for r in ok if r["session"] == us_session.isoformat()),
+                    "n": len(ok), "total": len(rows)},
             "flagged": [r["ticker"] for r in ok if r["why"]],
             "insight": ins,
         })

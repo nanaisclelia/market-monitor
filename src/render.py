@@ -67,7 +67,7 @@ _EN_ITEMS = {
 _EN_PHRASES = [
     ("|涨跌幅| ≥ ", "|Move| ≥ "), ("（20日σ=", " (20d σ="), ("（", " ("), ("）", ")"), ("、", ", "), ("；", "; "),
     ("期货", "futures"), ("涨停", "Limit-up"), ("跌停", "Limit-down"), ("上调评级", "Upgrade"), ("下调评级", "Downgrade"),
-    ("首次覆盖", "Initiate"), ("重申", "Reiterate"), ("维持", "Maintain"), ("主题：", "Theme: "),
+    ("首次覆盖", "Initiate"), ("无数据", "no data"), ("最新 K 线", "latest bar"), ("重申", "Reiterate"), ("维持", "Maintain"), ("主题：", "Theme: "),
 ]
 
 
