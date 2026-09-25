@@ -1,5 +1,5 @@
 {#- public=True：用于公开发布（无 html/head 骨架、不显示新闻原句、不显示存档下拉）。L(zh, en) 输出中英双份，由 data-lang 切换显示 -#}
-{%- macro L(zh, en) -%}<span class="l-zh">{{ zh }}</span><span class="l-en" lang="en">{{ en }}</span>{%- endmacro -%}
+{%- macro L(zh, en) -%}<span class="l-zh"{% if en and en != zh and en|length <= 48 %} title="{{ en }}"{% endif %}>{{ zh }}</span><span class="l-en" lang="en"{% if zh and en != zh and zh|length <= 24 %} title="{{ zh }}"{% endif %}>{{ en }}</span>{%- endmacro -%}
 {%- macro chg(v, d=2) -%}
 {%- if v is none -%}<span class="mut">—</span>
 {%- elif (v|round(d)) == 0 -%}<span class="flat"><i aria-hidden="true">·</i>{{ 0|num(d, False, True) }}</span>
@@ -43,14 +43,24 @@
 {% if not has_q and not has_a %}<p class="none">{{ L('暂无可核实的分析师观点。', 'No verifiable analyst views.') }}</p>{% endif %}
 {%- endmacro -%}
 {%- macro tagchip(t) -%}<span class="chip {{ {'已证实':'conf','分析师':'acc','媒体报道':'warn'}.get(t, '') }}">{{ L(t, {'已证实':'Confirmed','分析师':'Analyst','媒体报道':'Media report','AI 推断':'AI inference'}.get(t, t)) }}</span>{%- endmacro -%}
+{%- macro gchip(g, t=none) -%}
+{%- set GZ = {'A':'一手披露','B':'主流/多源','C':'单一媒体','D':'AI 推断'} -%}{%- set GE = {'A':'Primary','B':'Mainstream / multi-source','C':'Single outlet','D':'AI inference'} -%}
+<span class="grade g{{ g }}" title="{{ GZ[g] }} / {{ GE[g] }}"><b>{{ g }}</b>{{ L(GZ[g], GE[g]) }}</span>
+{%- endmacro -%}
+{%- macro glegend() -%}
+<div class="legend" aria-label="Credibility grades"><span class="mut">{{ L('可信度', 'Credibility') }}</span>{{ gchip('A') }}{{ gchip('B') }}{{ gchip('C') }}{{ gchip('D') }}<span class="mut">{{ L('A 公司公告 / SEC / 交易所 · B 主流媒体或多源一致 · C 单一媒体 · D 待验证', 'A filings / SEC / exchange · B mainstream or multi-source · C single outlet · D unverified') }}</span></div>
+{%- endmacro -%}
 {%- macro srcs(list) -%}
 {% if list %}<ol class="srcs">{% for x in list %}<li><a href="{{ x.url }}" target="_blank" rel="noopener">{{ L(x.publisher, x.publisher_en or x.publisher) }}</a><span class="mut"> · {{ x.date }} · {{ x.title }}</span></li>{% endfor %}</ol>{% endif %}
 {%- endmacro -%}
+{%- macro evmeta(w) -%}{%- set ev = evidence(w) -%}
+<span class="ev">{{ L('证据 ' ~ ev.n ~ ' 条', ev.n ~ ' sources') }} · {{ L('最新 ', 'latest ') }}{{ ev.latest or '—' }} · {% if ev.primary %}<span class="up">{{ L('含一手材料', 'primary doc') }} ✓</span>{% else %}<span class="mut">{{ L('无一手材料', 'no primary doc') }}</span>{% endif %}</span>
+{%- endmacro -%}
 {%- macro why_block(w, zh='异动原因', en='Why it moved') -%}
 {% if w %}<div class="whyb">
-<h4>{{ L(zh, en) }} <span class="h4n">{{ L('AI 根据来源整理', 'AI summary of cited sources') }}</span></h4>
+<h4>{{ L(zh, en) }} <span class="h4n">{{ L('AI 根据来源整理', 'AI summary of cited sources') }} · {{ evmeta(w) }}</span></h4>
 <p class="wh">{{ L(w.headline, w.headline_en or w.headline) }}</p>
-<ul class="pts">{% for p in w.points %}<li>{{ tagchip(p.tag) }}<span>{{ L(p.text, p.text_en or p.text) }}{% for i in p.src %}<sup><a href="#" onclick="return false" title="{{ w.sources[i].publisher }} · {{ w.sources[i].title }}">[{{ i + 1 }}]</a></sup>{% endfor %}</span></li>{% endfor %}</ul>
+<ul class="pts">{% for p in w.points %}<li>{{ gchip(grade(p, w.sources)) }}<span>{% if p.not_catalyst %}<span class="chip">{{ L('非当日催化剂', 'not a same-day catalyst') }}</span> {% endif %}{{ L(p.text, p.text_en or p.text) }}{% for i in p.src %}<sup><a href="#" onclick="return false" title="{{ w.sources[i].publisher }} · {{ w.sources[i].title }}">[{{ i + 1 }}]</a></sup>{% endfor %}</span></li>{% endfor %}</ul>
 {{ srcs(w.sources) }}
 </div>{% endif %}
 {%- endmacro -%}
@@ -179,7 +189,7 @@ figcaption{font:500 10.5px var(--cond);letter-spacing:.08em;text-transform:upper
 .axis div{display:flex;justify-content:space-between}
 
 /* cards */
-.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,540px),1fr));gap:14px}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,540px),1fr));gap:14px;align-items:start}
 .card{border:1px solid var(--line);border-radius:8px;padding:14px 16px;background:var(--sunk);min-width:0}
 .card .top{display:flex;justify-content:space-between;align-items:baseline;gap:6px 10px;flex-wrap:wrap}
 .px{font:500 21px var(--mono);margin-top:6px;display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px}
@@ -224,7 +234,75 @@ td.rs{white-space:normal;min-width:220px;max-width:360px;font:12.5px var(--sans)
 .about h4{margin-top:4px}
 .about p{margin:0;color:var(--sub);font-size:13px;max-width:62ch}
 footer.disc{position:fixed;left:0;right:0;bottom:0;z-index:10;background:var(--panel);border-top:1px solid var(--line);color:var(--mut);font-size:11.5px;text-align:center;padding:7px 16px calc(7px + env(safe-area-inset-bottom,0px))}
-@media (prefers-reduced-motion:no-preference){.seg button{transition:background .15s,color .15s}}
+/* toggles blend into the terminal header */
+.seg{border-color:var(--line);background:var(--sunk);padding:2px;gap:2px;border-radius:7px}
+.seg button{font:500 11px var(--mono);letter-spacing:.04em;padding:4px 9px;border-radius:5px;color:var(--mut)}
+.seg button+button{border-left:0}
+.seg button[aria-pressed="true"]{background:var(--accent-bg);color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}
+/* sticky section nav with scroll highlight */
+.subnav a{border-bottom:2px solid transparent}
+.subnav a.on{color:var(--accent);border-bottom-color:var(--accent)}
+.subnav a.soon{color:var(--mut)}
+.subnav a.soon em{font:500 9px var(--sans);font-style:normal;letter-spacing:0;text-transform:none;margin-left:4px;padding:0 4px;border-radius:3px;background:var(--warn-bg);color:var(--warn)}
+section.blk{scroll-margin-top:110px}
+.totop{position:fixed;right:16px;bottom:calc(44px + env(safe-area-inset-bottom,0px));z-index:11;border:1px solid var(--rule);background:var(--panel);color:var(--sub);font:500 12px var(--mono);border-radius:6px;padding:6px 10px;cursor:pointer;box-shadow:var(--shadow)}
+/* today's conclusion */
+.concl{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:8px;padding:14px 18px;display:grid;gap:8px;box-shadow:var(--shadow)}
+.crow{display:grid;grid-template-columns:88px 1fr;gap:12px;align-items:baseline}
+@media(max-width:640px){.crow{grid-template-columns:1fr;gap:2px}}
+.ck{font:600 11px var(--cond);letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+.crow p{margin:0;font-size:14.5px;font-weight:500}
+.crow ol,.crow ul{margin:0;padding-left:18px;display:grid;gap:3px;font-size:13.5px}
+.crow ul{list-style:none;padding-left:0}
+.when{display:inline-block;min-width:72px;font:500 12px var(--mono);color:var(--sub);margin-right:8px}
+.cfoot{margin:0;font-size:11px;color:var(--mut)}
+/* credibility grades */
+.grade{display:inline-flex;align-items:center;gap:4px;font:500 10.5px/1.7 var(--sans);padding:0 6px 0 0;border-radius:3px;white-space:nowrap;background:var(--track);color:var(--sub)}
+.grade b{display:inline-grid;place-items:center;min-width:17px;height:17px;border-radius:3px 0 0 3px;font:700 10.5px var(--mono);color:var(--panel);background:var(--sub)}
+.grade.gA{background:var(--up-bg);color:var(--up)}.grade.gA b{background:var(--up)}
+.grade.gB{background:var(--accent-bg);color:var(--accent)}.grade.gB b{background:var(--accent)}
+.grade.gC{background:var(--warn-bg);color:var(--warn)}.grade.gC b{background:var(--warn)}
+.grade.gD{background:var(--track);color:var(--mut)}.grade.gD b{background:var(--mut)}
+.legend{display:flex;flex-wrap:wrap;gap:6px 8px;align-items:center;font-size:11px}
+.ev{font:400 11px var(--sans);letter-spacing:0;text-transform:none}
+.chip.ok,.chip.bad{font-weight:600}
+/* toolbars, sorting, extreme values */
+.tbl{display:grid;gap:8px}
+.toolbar{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.fbtn{appearance:none;border:1px solid var(--line);background:var(--sunk);color:var(--sub);font:500 11.5px var(--sans);padding:3px 10px;border-radius:999px;cursor:pointer}
+.fbtn[aria-pressed="true"]{background:var(--accent-bg);color:var(--accent);border-color:var(--accent)}
+.fbtn.tog[aria-pressed="true"]{background:var(--warn-bg);color:var(--warn);border-color:var(--warn)}
+.hint{font-size:11px;color:var(--mut);margin-left:auto}
+th[data-sort]{cursor:pointer;user-select:none}
+th[data-sort]::after{content:"↕";margin-left:4px;opacity:.35;font-size:10px}
+th[data-sort][aria-sort="descending"]::after{content:"↓";opacity:1;color:var(--accent)}
+th[data-sort][aria-sort="ascending"]::after{content:"↑";opacity:1;color:var(--accent)}
+td.hotup{background:var(--up-bg)}td.hotdn{background:var(--dn-bg)}
+td.hotup span,td.hotdn span{font-weight:600}
+td.hotv{background:var(--warn-bg);color:var(--warn);font-weight:600}
+tr[hidden],details[hidden]{display:none}
+.mkt{display:inline-block;font:600 9px var(--mono);padding:0 4px;margin-right:6px;border-radius:2px;vertical-align:1px}
+.mkt.us{background:var(--accent-bg);color:var(--accent)}.mkt.cn{background:var(--warn-bg);color:var(--warn)}
+tr.mk-cn td:first-child{box-shadow:inset 3px 0 0 var(--warn)}tr.mk-us td:first-child{box-shadow:inset 3px 0 0 var(--accent)}
+.bv.dn{background-image:repeating-linear-gradient(135deg,rgba(255,255,255,.28) 0 2px,transparent 2px 5px)}
+/* expandable mover cards */
+details.card{padding:0}
+details.card>*:not(summary){margin-inline:16px}
+details.card>*:last-child{margin-bottom:14px}
+.csum{list-style:none;display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;padding:10px 16px;cursor:pointer;font-size:13px}
+.csum::-webkit-details-marker{display:none}
+.csum .sym{font:600 14px var(--mono)}
+.cline{flex:1 1 240px;color:var(--sub);min-width:0}
+.caret{margin-left:auto;width:8px;height:8px;border-right:1.5px solid var(--mut);border-bottom:1.5px solid var(--mut);transform:rotate(45deg);transition:transform .15s}
+details[open]>.csum .caret{transform:rotate(-135deg)}
+details[open]>.csum{border-bottom:1px solid var(--line);margin-bottom:10px}
+details[open]>.csum .cline{display:none}
+/* roadmap placeholders */
+.road{display:grid;grid-template-columns:auto 1fr;gap:6px 16px;margin:0;font-size:13px}
+.road dt{font:500 10.5px var(--cond);letter-spacing:.08em;text-transform:uppercase;color:var(--mut);padding-top:2px}
+.road dd{margin:0;color:var(--sub)}
+@media (prefers-reduced-motion:no-preference){.seg button,.fbtn{transition:background .15s,color .15s}}
+@media (prefers-reduced-motion:reduce){.caret{transition:none}}
 </style>
 {% if not public %}</head>
 <body>{% endif %}
@@ -254,18 +332,27 @@ footer.disc{position:fixed;left:0;right:0;bottom:0;z-index:10;background:var(--p
     {% if an and an.geo %}<a href="#geo">{{ L('地缘政治', 'Geopolitics') }}</a>{% endif %}
     <a href="#us">{{ L('美股指数', 'US indices') }}</a><a href="#metals">{{ L('贵金属', 'Metals') }}</a>
     {% if us and us.sections.themes %}<a href="#cpo">CPO</a>{% endif %}
-    <a href="#alerts">{{ L('异动预警', 'Movers') }}</a><a href="#cn">{{ L('中国', 'China') }}</a><a href="#uk">{{ L('英国', 'UK') }}</a>
+    <a href="#alerts">{{ L('异动预警', 'Movers') }}</a><a href="#cn" class="soon">{{ L('中国', 'China') }}<em>{{ L('即将上线', 'Soon') }}</em></a><a href="#uk" class="soon">{{ L('英国', 'UK') }}<em>{{ L('即将上线', 'Soon') }}</em></a>
     {% if public %}<a href="#about">{{ L('方法', 'Method') }}</a>{% else %}<a href="#log">{{ L('日志', 'Log') }}</a>{% endif %}
   </nav>
 </header>
 
 <main class="wrap">
 {% if public %}<div class="lede">
-  <p>{{ L('个人研究用的收盘简报。所有数字由程序实时抓取，并与第二数据源交叉校验；驱动因素区分"已证实"与"未证实"；观点只收录可核实身份的具名来源。',
-          'A personal closing brief. Every number is fetched live and cross-checked against a second source; drivers are labelled confirmed vs unconfirmed; views are attributed only to identifiable, named sources.') }}</p>
+  <p>{{ L('个人研究用的收盘简报。所有数字来自收盘后生成的快照，并与第二数据源交叉校验；驱动因素区分"已证实"与"未证实"；观点只收录可核实身份的具名来源。',
+          'A personal closing brief. Every number comes from a post-close snapshot and is cross-checked against a second source; drivers are labelled confirmed vs unconfirmed; views are attributed only to identifiable, named sources.') }}</p>
   {% if us %}<p class="asof">{{ L('本页为 ' ~ us.session ~ ' 美股收盘后的快照，生成于 ' ~ us.generated_at|t(disp_tz) ~ '。',
                                   'Snapshot after the ' ~ us.session ~ ' US close, generated ' ~ us.generated_at|t(disp_tz) ~ '.') }}</p>{% endif %}
 </div>{% endif %}
+
+{% if an and an.summary %}{% set sm = an.summary %}
+<section class="concl" aria-label="Today's conclusion">
+  <div class="crow"><span class="ck">{{ L('市场状态', 'Market state') }}</span><p>{{ L(sm.state, sm.state_en or sm.state) }}</p></div>
+  <div class="crow"><span class="ck">{{ L('核心驱动', 'Key drivers') }}</span><ol>{% for d in sm.drivers %}<li>{{ L(d.zh, d.en) }}</li>{% endfor %}</ol></div>
+  <div class="crow"><span class="ck">{{ L('接下来盯', 'Watch next') }}</span><ul>{% for x in sm.watch %}<li><span class="when">{{ L(x.when, x.when_en or x.when) }}</span>{{ L(x.zh, x.en) }}</li>{% endfor %}</ul></div>
+  <p class="cfoot">{{ L('AI 根据下方各板块来源整理 · 收盘后快照 ', 'AI summary of the cited sources below · post-close snapshot ') }}{{ an.session }}</p>
+</section>
+{% endif %}
 
 {% if us %}
 {% set al = us.sections.alerts %}
@@ -280,9 +367,10 @@ footer.disc{position:fixed;left:0;right:0;bottom:0;z-index:10;background:var(--p
 
 {% if an and an.geo %}
 <section class="blk" id="geo"><header><h2>{{ L('地缘政治与宏观', 'Geopolitics & macro') }}</h2><span class="meta">{{ L('对市场有实际影响的事件 · AI 根据来源整理 · ', 'Market-moving events · AI summary of cited sources · ') }}{{ an.session }}</span></header>
+{{ glegend() }}
 <div class="geo">
 {% for g in an.geo %}<article class="gcard">
-<div class="top"><h3>{{ L(g.event, g.event_en or g.event) }}</h3>{{ tagchip(g.tag) }}</div>
+<div class="top"><h3>{{ L(g.event, g.event_en or g.event) }}</h3>{{ gchip(grade(g, g.sources)) }}</div>
 <dl>
 <dt>{{ L('影响资产', 'Assets') }}</dt><dd>{{ L(g.assets, g.assets_en or g.assets) }}</dd>
 <dt>{{ L('传导逻辑', 'Transmission') }}</dt><dd>{{ L(g.logic, g.logic_en or g.logic) }}</dd>
@@ -352,15 +440,24 @@ footer.disc{position:fixed;left:0;right:0;bottom:0;z-index:10;background:var(--p
   </div>
   <div class="axis"><span></span><div><span>−{{ mx|num(1) }}%</span><span>0</span><span>+{{ mx|num(1) }}%</span></div><span></span></div>
 </figure>
-<div class="tw"><table>
-<thead><tr><th class="t">{{ L('代码', 'Ticker') }}</th><th class="t">{{ L('名称', 'Name') }}</th><th class="t">{{ L('产业链环节', 'Value-chain role') }}</th><th>{{ L('收盘', 'Close') }}</th><th>{{ L('1 日', '1D') }}</th><th>{{ L('5 日', '5D') }}</th><th>{{ L('20 日', '20D') }}</th><th>YTD</th><th>{{ L('量比', 'Rel vol') }}</th><th>vs MA50</th><th class="t">{{ L('60 日', '60-day') }}</th><th></th></tr></thead>
-<tbody>{% for r in th.members %}<tr>
-<td class="t sym">{{ r.ticker }}</td><td class="t">{{ L(r.name, r.name_en or r.name) }}</td><td class="t mut">{{ L(r.role, r.role_en or r.role) }}</td>
-{% if r.stats %}<td>{{ r.stats.close|num }}</td><td>{{ chg(r.stats.pct) }}</td><td>{{ chg(r.r5, 1) }}</td><td>{{ chg(r.r20, 1) }}</td><td>{{ chg(r.ytd, 1) }}</td><td>{% if r.stats.rel_volume %}{{ r.stats.rel_volume|num(1) }}×{% else %}—{% endif %}</td><td>{{ r.vs_ma50|num(1, True, True) }}</td><td class="t">{{ r.spark|spark(84, 22, r.name) }}</td>
-<td>{% if r.why %}<span class="chip alert" title="{{ r.why|join('; ')|en }}">{{ L('异动', 'Alert') }}</span>{% endif %}{% if r.market == 'cn' %} <span class="chip">{{ L('A股', 'China A') }}</span>{% endif %}</td>
+<div class="tbl" data-table="cpo">
+<div class="toolbar" role="group" aria-label="Filter">
+  <button type="button" class="fbtn" data-filter="all" aria-pressed="true">{{ L('全部', 'All') }}</button>
+  <button type="button" class="fbtn" data-filter="us" aria-pressed="false">{{ L('仅美股', 'US only') }}</button>
+  <button type="button" class="fbtn" data-filter="cn" aria-pressed="false">{{ L('仅 A股', 'A-shares only') }}</button>
+  <button type="button" class="fbtn" data-filter="alert" aria-pressed="false">{{ L('仅异常', 'Alerts only') }}</button>
+  <span class="hint">{{ L('点击表头排序', 'Click a header to sort') }}</span>
+</div>
+<div class="tw"><table class="sortable">
+<thead><tr><th class="t">{{ L('代码', 'Ticker') }}</th><th class="t">{{ L('名称', 'Name') }}</th><th class="t">{{ L('产业链环节', 'Value-chain role') }}</th><th>{{ L('收盘', 'Close') }}</th><th data-sort="num">{{ L('1 日', '1D') }}</th><th data-sort="num">{{ L('5 日', '5D') }}</th><th data-sort="num">{{ L('20 日', '20D') }}</th><th data-sort="num">YTD</th><th data-sort="num">{{ L('量比', 'Rel vol') }}</th><th data-sort="num">vs MA50</th><th class="t">{{ L('60 日', '60-day') }}</th><th></th></tr></thead>
+<tbody>{% for r in th.members %}<tr class="mk-{{ r.market }}" data-market="{{ r.market }}" data-alert="{{ 1 if r.why else 0 }}">
+<td class="t sym"><span class="mkt {{ r.market }}">{{ 'CN' if r.market == 'cn' else 'US' }}</span>{{ r.ticker }}</td><td class="t">{{ L(r.name, r.name_en or r.name) }}</td><td class="t mut">{{ L(r.role, r.role_en or r.role) }}</td>
+{% if r.stats %}<td>{{ r.stats.close|num }}</td><td data-v="{{ r.stats.pct }}" class="{{ hot(r.stats.pct, 5) }}">{{ chg(r.stats.pct) }}</td><td data-v="{{ r.r5 }}" class="{{ hot(r.r5, 10) }}">{{ chg(r.r5, 1) }}</td><td data-v="{{ r.r20 }}" class="{{ hot(r.r20, 15) }}">{{ chg(r.r20, 1) }}</td><td data-v="{{ r.ytd }}" class="{{ hot(r.ytd, 100) }}">{{ chg(r.ytd, 1) }}</td><td data-v="{{ r.stats.rel_volume or 0 }}" class="{{ 'hotv' if (r.stats.rel_volume or 0) >= 2 else '' }}">{% if r.stats.rel_volume %}{{ r.stats.rel_volume|num(1) }}×{% else %}—{% endif %}</td><td data-v="{{ r.vs_ma50 }}">{{ r.vs_ma50|num(1, True, True) }}</td><td class="t">{{ r.spark|spark(84, 22, r.name) }}</td>
+<td>{% if r.why %}<span class="chip alert" title="{{ r.why|join('; ')|en }}">{{ L('异动', 'Alert') }}</span>{% endif %}{% if r.market == 'cn' and r.session != us.session %} <span class="chip" title="{{ r.session }}">{{ L('休市·' ~ r.session[5:], 'closed·' ~ r.session[5:]) }}</span>{% endif %}</td>
 {% else %}<td colspan="9" class="missing">{{ L('数据暂缺（' ~ r.error ~ '）', 'Data unavailable (' ~ (r.error|en) ~ ')') }}</td>{% endif %}
 </tr>{% endfor %}</tbody>
 </table></div>
+</div>
 </div>
 {% else %}<p class="missing">{{ L('数据暂缺', 'Data unavailable') }}</p>{% endif %}
 <p class="asof">{{ L('产业链环节分类为本看台自定义。主题收益为成员等权平均的本币收益率，未做汇率换算。A股涨跌停按创业板和科创板 20%、主板 10% 判断。',
@@ -377,13 +474,28 @@ footer.disc{position:fixed;left:0;right:0;bottom:0;z-index:10;background:var(--p
 {% set idx_alerts = us.sections.indices|selectattr('alert')|list %}{% set met_alerts = us.sections.metals|selectattr('alert')|list %}
 {% set AS = (an.stocks if an else {}) or {} %}
 {% if al.hits or idx_alerts or met_alerts %}
-{% if al.hits %}<div class="tw"><table>
-<thead><tr><th class="t">{{ L('代码', 'Ticker') }}</th><th class="t">{{ L('名称', 'Name') }}</th><th class="t">{{ L('行业', 'Sector') }}</th><th>{{ L('收盘', 'Close') }}</th><th>{{ L('涨跌幅', 'Change') }}</th><th>z(σ)</th><th>{{ L('量比', 'Rel vol') }}</th><th>{{ L('校验', 'Check') }}</th><th class="t">{{ L('原因（AI 整理）', 'Reason (AI summary)') }}</th></tr></thead>
-<tbody>{% for h in al.hits %}{% set w = AS.get(h.ticker) %}<tr>
+{% set theme_t = [] %}{% for th in us.sections.themes or [] %}{% for m in th.members %}{% set _ = theme_t.append(m.ticker) %}{% endfor %}{% endfor %}
+{% set ranked = al.hits|map(attribute='stats.z')|map('abs')|list|sort(reverse=True) %}{% set zcut = ranked[2] if ranked|length > 2 else 0 %}
+{{ glegend() }}
+{% if al.hits %}<div class="tbl" data-table="movers">
+<div class="toolbar" role="group" aria-label="Filter">
+  <button type="button" class="fbtn" data-filter="all" aria-pressed="true">{{ L('全部', 'All') }}</button>
+  <button type="button" class="fbtn" data-filter="filing" aria-pressed="false">{{ L('仅有公告 / 财报', 'Filings / earnings only') }}</button>
+  <button type="button" class="fbtn" data-filter="company" aria-pressed="false">{{ L('仅公司催化剂', 'Company catalyst only') }}</button>
+  <button type="button" class="fbtn" data-filter="theme" aria-pressed="false">{{ L('仅主题成员', 'Theme members only') }}</button>
+  <button type="button" class="fbtn tog" data-hide="nocat" aria-pressed="false">{{ L('隐藏无催化剂', 'Hide no-catalyst') }}</button>
+  <span class="hint">{{ L('点击表头排序 · 点击代码展开详情', 'Click a header to sort · click a ticker for details') }}</span>
+</div>
+<div class="tw"><table class="sortable">
+<thead><tr><th class="t">{{ L('代码', 'Ticker') }}</th><th class="t">{{ L('名称', 'Name') }}</th><th class="t">{{ L('行业', 'Sector') }}</th><th>{{ L('收盘', 'Close') }}</th><th data-sort="num">{{ L('涨跌幅', 'Change') }}</th><th data-sort="num">z(σ)</th><th data-sort="num">{{ L('量比', 'Rel vol') }}</th><th>{{ L('校验', 'Check') }}</th><th class="t" data-sort="num">{{ L('证据', 'Evidence') }}</th><th class="t">{{ L('原因（AI 整理）', 'Reason (AI summary)') }}</th></tr></thead>
+<tbody>{% for h in al.hits %}{% set w = AS.get(h.ticker) %}{% set bg = best_grade(w) %}{% set cat = (w.catalyst if w and w.catalyst else 'none') %}
+<tr data-filing="{{ 1 if (h.filings or h.earnings) else 0 }}" data-company="{{ 1 if cat == 'company' else 0 }}" data-theme="{{ 1 if h.ticker in theme_t else 0 }}" data-nocat="{{ 1 if cat == 'none' else 0 }}">
 <td class="t sym">{% if h.detail or w %}<a href="#a-{{ h.ticker }}">{{ h.ticker }}</a>{% else %}{{ h.ticker }}{% endif %}</td><td class="t">{{ h.name }}</td><td class="t mut">{{ L(h.sector or '', (h.sector or '')|en) }}</td>
-<td>{{ h.stats.close|num }}</td><td>{{ chg(h.stats.pct) }}</td><td>{{ h.stats.z|num(1, True) }}</td><td>{{ h.stats.rel_volume|num(1) }}×</td><td>{{ xc(h.xcheck) }}</td>
+<td>{{ h.stats.close|num }}</td><td data-v="{{ h.stats.pct }}" class="{{ hot(h.stats.pct, 7) }}">{{ chg(h.stats.pct) }}</td><td data-v="{{ h.stats.z|abs }}">{{ h.stats.z|num(1, True) }}</td><td data-v="{{ h.stats.rel_volume or 0 }}" class="{{ 'hotv' if (h.stats.rel_volume or 0) >= 2 else '' }}">{{ h.stats.rel_volume|num(1) }}×</td><td>{{ xc(h.xcheck) }}</td>
+<td class="t" data-v="{{ {'A':4,'B':3,'C':2,'D':1}[bg] if w else 0 }}">{% if w %}{{ gchip(bg) }}{% else %}<span class="mut">—</span>{% endif %}{% if cat == 'none' and w %} <span class="chip">{{ L('无催化剂', 'no catalyst') }}</span>{% endif %}</td>
 <td class="rs">{% if w %}<a href="#a-{{ h.ticker }}">{{ L(w.headline, w.headline_en or w.headline) }}</a>{% else %}<span class="mut">—</span>{% endif %}</td></tr>{% endfor %}</tbody>
-</table></div>{% endif %}
+</table></div>
+</div>{% endif %}
 
 <div class="cards">
 {% for r in idx_alerts + met_alerts %}
@@ -396,8 +508,10 @@ footer.disc{position:fixed;left:0;right:0;bottom:0;z-index:10;background:var(--p
 {{ insight(r.insight, '分析师观点', 'Analyst views') }}
 </article>{% endfor %}
 
-{% for h in al.hits if h.detail or AS.get(h.ticker) %}{% set f = h.fundamentals or {} %}{% set st = h.stats %}
-<article class="card" id="a-{{ h.ticker }}">
+{% for h in al.hits if h.detail or AS.get(h.ticker) %}{% set f = h.fundamentals or {} %}{% set st = h.stats %}{% set w = AS.get(h.ticker) %}{% set cat = (w.catalyst if w and w.catalyst else 'none') %}
+{% set featured = (h.filings or h.earnings) or (h.ticker in theme_t) or ((st.z|abs) >= zcut) or cat == 'company' %}
+<details class="card" id="a-{{ h.ticker }}" data-filing="{{ 1 if (h.filings or h.earnings) else 0 }}" data-company="{{ 1 if cat == 'company' else 0 }}" data-theme="{{ 1 if h.ticker in theme_t else 0 }}" data-nocat="{{ 1 if cat == 'none' else 0 }}"{% if featured %} open{% endif %}>
+<summary class="csum"><span class="sym">{{ h.ticker }}</span> {{ chg(st.pct) }}{% if w %} {{ gchip(best_grade(w)) }}<span class="cline">{{ L(w.headline, w.headline_en or w.headline) }}</span>{% endif %}{% if featured %}<span class="chip acc">{{ L('重点', 'Key') }}</span>{% endif %}<span class="caret" aria-hidden="true"></span></summary>
 <div class="top"><h3>{{ h.ticker }} · {{ h.name }}</h3><span class="chip">{{ f.industry or f.sector or L(h.sector or '—', (h.sector or '—')|en) }}</span></div>
 <div class="px">{{ st.close|num }} {{ chg(st.pct) }} <span class="mut">z {{ st.z|num(1,True) }} · {{ L('量比', 'rel vol') }} {{ st.rel_volume|num(1) }}× · {{ L('前收', 'prev') }} {{ st.prev_close|num }}</span></div>
 <div class="why">{{ L(h.why|join('；'), h.why|join('; ')|en) }} · {{ L('校验', 'check') }} {{ xc(h.xcheck) }}</div>
@@ -424,20 +538,30 @@ footer.disc{position:fixed;left:0;right:0;bottom:0;z-index:10;background:var(--p
 </div>
 {{ insight(h.insight, '分析师评级动态', 'Analyst rating changes', h.analyst, st.close) }}
 {% endif %}
-</article>{% endfor %}
+</details>{% endfor %}
 </div>
 {% else %}<p class="none">{{ L('本交易日没有标的触发异动阈值。', 'No instruments triggered alert thresholds this session.') }}</p>{% endif %}
 {% else %}<p class="missing">{{ L('数据暂缺', 'Data unavailable') }}</p>{% endif %}
 </section>
 
-<section class="blk" id="cn"><header><h2>{{ L('中国 · A股 / 港股', 'China · A-shares / Hong Kong') }}</h2><span class="chip acc">{{ L('建设中', 'In progress') }}</span></header><p class="ph">{{ L('计划在港股收盘后 30 分钟更新（09:30 BST / 08:30 GMT），数据源 akshare，已按上交所公告跳过中秋和国庆休市日。CPO 主题中的 A股成员已在上方追踪。',
-   'Planned update 30 min after the Hong Kong close (09:30 BST / 08:30 GMT) via akshare, skipping the Mid-Autumn and National Day closures per the SSE notice. A-share CPO members are already tracked above.') }}</p></section>
-<section class="blk" id="uk"><header><h2>{{ L('英国 · FTSE 100 / 250', 'UK · FTSE 100 / 250') }}</h2><span class="chip acc">{{ L('建设中', 'In progress') }}</span></header><p class="ph">{{ L('计划在伦敦交易所收盘后 20 分钟更新（16:50 伦敦时间）。', 'Planned update 20 min after the LSE close (16:50 London).') }}</p></section>
+<section class="blk soonblk" id="cn"><header><h2>{{ L('中国 · A股 / 港股', 'China · A-shares / Hong Kong') }}</h2><span class="chip warn">Beta · {{ L('即将上线', 'Coming soon') }}</span></header>
+<dl class="road">
+  <dt>{{ L('状态', 'Status') }}</dt><dd>{{ L('数据管线开发中；CPO 主题中的 4 只 A股成员已在上方实时追踪（样例）。', 'Pipeline in development; the four A-share CPO members above are the live sample.') }} <a href="#cpo">{{ L('查看样例 ↑', 'See sample ↑') }}</a></dd>
+  <dt>{{ L('覆盖范围', 'Coverage') }}</dt><dd>{{ L('上证综指、深证成指、创业板指、沪深300、科创50、恒生指数；涨跌家数、涨跌停、两市成交额（对比 5 日均值）；南向资金与北向成交额；融资余额（T+1）；行业涨跌幅前 5 / 后 5；USD/CNY、USD/CNH。', 'SSE Composite, SZSE Component, ChiNext, CSI 300, STAR 50, Hang Seng; breadth, limit-up/down counts, turnover vs 5-day average; southbound flows and northbound turnover; margin balance (T+1); top/bottom 5 sectors; USD/CNY, USD/CNH.') }}</dd>
+  <dt>{{ L('更新节奏', 'Schedule') }}</dt><dd>{{ L('港股收盘后 30 分钟：09:30 BST（10/25 后 08:30 GMT）。按上交所公告跳过休市日：9/25–9/27 中秋、10/1–10/7 国庆。', '30 min after the HK close: 09:30 BST (08:30 GMT after 10/25). Skips SSE holidays: 9/25–9/27 Mid-Autumn, 10/1–10/7 National Day.') }}</dd>
+  <dt>{{ L('数据源', 'Sources') }}</dt><dd>{{ L('akshare（东方财富 / 新浪双接口交叉校验）', 'akshare (East Money / Sina endpoints cross-checked)') }}</dd>
+</dl></section>
+<section class="blk soonblk" id="uk"><header><h2>{{ L('英国 · FTSE 100 / 250', 'UK · FTSE 100 / 250') }}</h2><span class="chip warn">Beta · {{ L('即将上线', 'Coming soon') }}</span></header>
+<dl class="road">
+  <dt>{{ L('状态', 'Status') }}</dt><dd>{{ L('复用美股管线（yfinance + CNBC 校验），待接入 FTSE 成分股清单。', 'Reuses the US pipeline (yfinance + CNBC check); FTSE constituent lists pending.') }}</dd>
+  <dt>{{ L('覆盖范围', 'Coverage') }}</dt><dd>{{ L('FTSE 100、FTSE 250 收盘与宽度；FTSE 350 个股异动（同一套 ±7% / 2.5σ 规则）；当日 LBMA 贵金属定价。', 'FTSE 100 and 250 closes and breadth; FTSE 350 movers (same ±7% / 2.5σ rules); same-day LBMA precious-metal prices.') }}</dd>
+  <dt>{{ L('更新节奏', 'Schedule') }}</dt><dd>{{ L('伦敦交易所收盘后 20 分钟：16:50 伦敦时间，自动随夏令时调整。', '20 min after the LSE close: 16:50 London, DST-aware.') }}</dd>
+</dl></section>
 
 {% if public %}
 <section class="blk" id="about"><header><h2>{{ L('方法', 'Method') }}</h2></header>
 <div class="about">
-  <div><h4>{{ L('数据纪律', 'Data discipline') }}</h4><p>{{ L('所有数字都来自程序抓取，存档为带来源和时间戳的快照。当天数据缺失就显示"暂缺"，绝不回退到旧数据。', 'Every number is fetched programmatically and archived as a snapshot with source and timestamp. Missing data shows as "N/A" — stale data is never substituted.') }}</p></div>
+  <div><h4>{{ L('数据纪律', 'Data discipline') }}</h4><p>{{ L('所有数字都来自收盘后由程序生成的快照，每个数字附来源和时间戳。当天数据缺失就显示"暂缺"，绝不回退到旧数据。', 'Every number comes from a post-close snapshot generated by the pipeline, stored with source and timestamp. Missing data shows as "N/A" — stale data is never substituted.') }}</p></div>
   <div><h4>{{ L('双源校验', 'Cross-checking') }}</h4><p>{{ L('指数、期货和异动个股都与 CNBC 行情比对，差异超过 ' ~ tol ~ '% 标红。LBMA 定价日期与交易日不一致时标"非当日"。', 'Indices, futures and flagged stocks are checked against CNBC quotes; gaps above ' ~ tol ~ '% are flagged red. LBMA fixes from another date are marked stale.') }}</p></div>
   <div><h4>{{ L('事实与观点分离', 'Facts vs views') }}</h4><p>{{ L('每条原因都标注"已证实 / 分析师 / 媒体报道 / AI 推断"并附编号来源；找不到来源时明确写"未检索到"，不做无来源概括。', 'Every reason is tagged Confirmed / Analyst / Media report / AI inference with numbered sources; when nothing is found it says so rather than generalising.') }}</p></div>
   <div><h4>{{ L('调度', 'Scheduling') }}</h4><p>{{ L('用交易所日历取每日实际收盘时刻（含提前收盘），再用 zoneinfo 处理英美夏令时错位，收盘后 20 分钟抓取。技术栈为 Python、yfinance、exchange_calendars 和 Jinja2。', 'Exchange calendars give each session\'s actual close (incl. early closes); zoneinfo handles the UK/US DST mismatch; data is pulled 20 min after the close. Stack: Python, yfinance, exchange_calendars, Jinja2.') }}</p></div>
@@ -451,7 +575,8 @@ footer.disc{position:fixed;left:0;right:0;bottom:0;z-index:10;background:var(--p
 </section>
 {% endif %}
 </main>
-<footer class="disc">{{ L('仅供个人研究参考，不构成投资建议 · 数据来源：Yahoo Finance、CNBC、LBMA、SEC EDGAR、Kitco', 'For personal research only, not investment advice · Data: Yahoo Finance, CNBC, LBMA, SEC EDGAR, Kitco') }}</footer>
+<button type="button" class="totop" id="totop" hidden onclick="window.scrollTo({top:0,behavior:'smooth'})">↑ {{ L('顶部', 'Top') }}</button>
+<footer class="disc">{{ L('仅供个人研究参考，不构成投资建议 · 收盘后快照，非实时行情 · 数据来源：Yahoo Finance、CNBC、LBMA、SEC EDGAR、Kitco', 'For personal research only, not investment advice · Post-close snapshot, not live quotes · Data: Yahoo Finance, CNBC, LBMA, SEC EDGAR, Kitco') }}</footer>
 <script>
 (function () {
   var root = document.documentElement, mq = window.matchMedia("(prefers-color-scheme: dark)");
@@ -471,6 +596,69 @@ footer.disc{position:fixed;left:0;right:0;bottom:0;z-index:10;background:var(--p
   if (mq.addEventListener) mq.addEventListener("change", sync);
   new MutationObserver(sync).observe(root, { attributes: true, attributeFilter: ["data-theme", "data-lang"] });
   sync();
+
+  // 表格排序（数值列，点击切换降序 / 升序）
+  document.querySelectorAll("table.sortable th[data-sort]").forEach(function (th) {
+    th.tabIndex = 0;
+    function go() {
+      var table = th.closest("table"), tbody = table.tBodies[0], idx = Array.prototype.indexOf.call(th.parentNode.children, th);
+      var dir = th.getAttribute("aria-sort") === "descending" ? "ascending" : "descending";
+      table.querySelectorAll("th[data-sort]").forEach(function (h) { h.removeAttribute("aria-sort"); });
+      th.setAttribute("aria-sort", dir);
+      var rows = Array.prototype.slice.call(tbody.rows);
+      function val(r) { var c = r.cells[idx]; var v = c && c.dataset.v; var n = parseFloat(v); return isNaN(n) ? -Infinity : n; }
+      rows.sort(function (a, b) { return dir === "descending" ? val(b) - val(a) : val(a) - val(b); });
+      rows.forEach(function (r) { tbody.appendChild(r); });
+    }
+    th.addEventListener("click", go);
+    th.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); go(); } });
+  });
+
+  // 筛选：同一块内的表格行和详情卡片一起过滤
+  document.querySelectorAll(".tbl").forEach(function (box) {
+    var section = box.closest("section"), mode = "all", hide = {};
+    function items() { return section.querySelectorAll("tbody tr[data-" + (box.dataset.table === "cpo" ? "market" : "filing") + "], details.card[data-filing]"); }
+    function apply() {
+      items().forEach(function (el) {
+        var d = el.dataset, show = true;
+        if (mode === "us" || mode === "cn") show = d.market === mode;
+        else if (mode !== "all") show = d[mode] === "1";
+        Object.keys(hide).forEach(function (k) { if (hide[k] && d[k] === "1") show = false; });
+        el.hidden = !show;
+      });
+    }
+    box.querySelectorAll("[data-filter]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        mode = b.dataset.filter;
+        box.querySelectorAll("[data-filter]").forEach(function (x) { x.setAttribute("aria-pressed", String(x === b)); });
+        apply();
+      });
+    });
+    box.querySelectorAll("[data-hide]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        var k = b.dataset.hide; hide[k] = !hide[k]; b.setAttribute("aria-pressed", String(hide[k])); apply();
+      });
+    });
+  });
+
+  // 点击表格中的代码时展开对应卡片
+  document.querySelectorAll('a[href^="#a-"]').forEach(function (a) {
+    a.addEventListener("click", function () { var d = document.getElementById(a.getAttribute("href").slice(1)); if (d && d.tagName === "DETAILS") d.open = true; });
+  });
+
+  // 导航高亮 + 回到顶部
+  var links = Array.prototype.slice.call(document.querySelectorAll(".subnav a[href^='#']"));
+  var totop = document.getElementById("totop");
+  if ("IntersectionObserver" in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        links.forEach(function (l) { l.classList.toggle("on", l.getAttribute("href") === "#" + e.target.id); });
+      });
+    }, { rootMargin: "-120px 0px -60% 0px" });
+    links.forEach(function (l) { var t = document.querySelector(l.getAttribute("href")); if (t) io.observe(t); });
+  }
+  window.addEventListener("scroll", function () { if (totop) totop.hidden = window.scrollY < 600; }, { passive: true });
 })();
 </script>
 {% if not public %}</body>

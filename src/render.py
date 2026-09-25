@@ -91,9 +91,56 @@ def _en(v) -> str:
     return s
 
 
+# ---- 可信度分级 ----
+# A 公司公告 / SEC / 交易所 / 官方文件；B 主流媒体或多源一致（含具名分析师观点）；C 单一媒体报道；D AI 推断，待验证
+_PRIMARY_MARKS = ("SEC", "EDGAR", "新闻稿", "press release", "交易所", "Exchange", "federalreserve", "Federal Reserve")
+
+
+def _is_primary(src: dict) -> bool:
+    txt = f"{src.get('publisher', '')} {src.get('publisher_en', '')} {src.get('url', '')}"
+    return any(m.lower() in txt.lower() for m in _PRIMARY_MARKS)
+
+
+def _grade(item: dict, sources: list) -> str:
+    """单条要点/事件的可信度等级；分析数据中显式给出的 grade 优先。"""
+    if item.get("grade"):
+        return item["grade"]
+    tag = item.get("tag")
+    cited = [sources[i] for i in item.get("src", []) if i < len(sources)] if "src" in item else sources
+    if tag == "AI 推断" or not cited:
+        return "D"
+    if tag == "已证实":
+        return "A" if any(_is_primary(x) for x in cited) else "B"
+    if tag == "分析师":
+        return "B"
+    return "B" if len(cited) >= 2 else "C"
+
+
+def _evidence(w: dict | None) -> dict:
+    """证据数量 / 最新来源日期 / 是否含一手材料。"""
+    srcs = (w or {}).get("sources", [])
+    dates = sorted(x.get("date", "") for x in srcs if x.get("date"))
+    return {"n": len(srcs), "latest": dates[-1] if dates else None, "primary": any(_is_primary(x) for x in srcs)}
+
+
+def _best_grade(w: dict | None) -> str:
+    if not w:
+        return "D"
+    gs = [_grade(p, w.get("sources", [])) for p in w.get("points", []) if not p.get("not_catalyst")]
+    return min(gs) if gs else "D"
+
+
+def _hot(v, thr) -> str:
+    """极端值徽标：|v| ≥ 阈值时给单元格加色块。"""
+    if v is None:
+        return ""
+    return "hotup" if v >= thr else ("hotdn" if v <= -thr else "")
+
+
 def _env():
     env = Environment(loader=FileSystemLoader(ROOT / "templates"), autoescape=select_autoescape(["html"]))
     env.filters.update(num=_num, big=_big, t=_fmt_time, spark=_spark, en=_en)
+    env.globals.update(grade=_grade, evidence=_evidence, best_grade=_best_grade, hot=_hot)
     return env
 
 

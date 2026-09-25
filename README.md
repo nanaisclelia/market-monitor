@@ -10,6 +10,7 @@
 
 | Module | Content |
 |---|---|
+| **Today's conclusion** | Market state, three key drivers, and dated items to watch next |
 | **Geopolitics & macro** | 3–5 market-moving events a day, each as *event → affected assets → transmission logic → facts → source* |
 | **US indices** | S&P 500, Dow, Nasdaq, Russell 2000, VIX — close, change, 20-day σ, relative volume, 60-day sparkline, CNBC cross-check |
 | **Precious metals** | LBMA fixes vs COMEX/NYMEX front-month futures for gold, silver, platinum, palladium |
@@ -20,7 +21,9 @@
 
 - **No number without a source.** Every figure is stored in a timestamped snapshot with its source. If today's bar is missing the page says *N/A* — stale data is never substituted.
 - **Two-source verification.** Index, futures and mover prices are checked against CNBC; gaps above 0.5% are flagged red. LBMA fixes dated differently from the session are marked *stale* and excluded from alert triggers.
-- **Facts separated from views.** Company filings are *Confirmed*; press attributions are *Media report*; unsourced reasoning is explicitly labelled *AI inference*. Analyst views must name the person or firm — never “analysts say”.
+- **Credibility grades on every claim.** **A** company filing / SEC / exchange · **B** mainstream outlet or multiple sources agreeing · **C** single outlet · **D** AI inference, unverified. Each AI-written reason also shows its evidence count, latest source date and whether a primary document exists. Analyst views must name the person or firm — never “analysts say”.
+- **Snapshot, not a ticker.** Everything is a post-close snapshot, labelled as such; the page never implies live quotes.
+- **Built for scanning.** A three-line *today's conclusion* (market state · key drivers · what to watch next) sits above the tape; movers are summary rows with expandable detail, sortable and filterable (filings only, company catalyst only, theme members, hide no-catalyst).
 - **Calendar- and DST-correct scheduling.** `exchange_calendars` gives each session's real close (including early closes); `zoneinfo` handles the UK/US daylight-saving mismatch; runs are idempotent under `launchd`.
 
 <p>

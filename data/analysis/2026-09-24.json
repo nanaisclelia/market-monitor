@@ -51,7 +51,8 @@
      "publisher_en": "Yahoo Finance ratings data"
     }
    ],
-   "headline_en": "People Inc. withdraws takeover offer; deal premium unwinds"
+   "headline_en": "People Inc. withdraws takeover offer; deal premium unwinds",
+   "catalyst": "company"
   },
   "GEN": {
    "headline": "据报道初步接洽收购 GoDaddy，收购方股价承压",
@@ -86,7 +87,8 @@
      "url": "https://www.investors.com/news/go-daddy-stock-buy-point-gen-digital-takeover-offer/"
     }
    ],
-   "headline_en": "Reported initial approach for GoDaddy weighs on the acquirer"
+   "headline_en": "Reported initial approach for GoDaddy weighs on the acquirer",
+   "catalyst": "company"
   },
   "ROL": {
    "headline": "Piper Sandler 下调至 Neutral：AI 搜索与私募竞争冲击长期增长",
@@ -116,7 +118,8 @@
      "url": "https://finance.yahoo.com/markets/stocks/articles/piper-sandler-cuts-rollins-neutral-153409149.html"
     }
    ],
-   "headline_en": "Piper Sandler cuts to Neutral: AI search and PE competition threaten long-term growth"
+   "headline_en": "Piper Sandler cuts to Neutral: AI search and PE competition threaten long-term growth",
+   "catalyst": "company"
   },
   "FSLR": {
    "headline": "高利率压制光伏项目融资，同日撤回 337 调查申诉",
@@ -160,7 +163,8 @@
      "url": "https://finance.yahoo.com/markets/stocks/articles/equities-drop-intraday-yields-oil-180618123.html"
     }
    ],
-   "headline_en": "Higher rates weigh on solar project financing; Section 337 complaint withdrawn"
+   "headline_en": "Higher rates weigh on solar project financing; Section 337 complaint withdrawn",
+   "catalyst": "sector"
   },
   "ARM": {
    "headline": "Oracle 对 Project Jupiter 发出不可抗力通知，AI 数据中心链条承压",
@@ -196,7 +200,8 @@
      "url": "https://www.fxleaders.com/news/2026/09/24/arm-stock-risks-returning-below-300-as-oracle-data-center-uncertainty-weighs/"
     }
    ],
-   "headline_en": "Oracle's force majeure notice on Project Jupiter hits the AI data-center chain"
+   "headline_en": "Oracle's force majeure notice on Project Jupiter hits the AI data-center chain",
+   "catalyst": "sector"
   },
   "P": {
    "headline": "分析师日给出 FY2028 收入指引，增速 39–45%，领涨 S&P 500",
@@ -234,7 +239,8 @@
      "url": "https://www.investing.com/news/stock-market-news/why-is-everpure-stock-surging-today-93CH-4914112"
     }
    ],
-   "headline_en": "Analyst Day FY2028 guide implies 39–45% growth; top S&P 500 gainer"
+   "headline_en": "Analyst Day FY2028 guide implies 39–45% growth; top S&P 500 gainer",
+   "catalyst": "company"
   },
   "NBIS": {
    "headline": "BNP Paribas Exane 上调至 Outperform，GPU 云服务再度提价",
@@ -264,7 +270,8 @@
      "url": "https://finance.yahoo.com/markets/stocks/articles/nebius-stock-soars-8-bnp-180550903.html"
     }
    ],
-   "headline_en": "BNP Paribas Exane upgrades to Outperform as GPU cloud prices rise again"
+   "headline_en": "BNP Paribas Exane upgrades to Outperform as GPU cloud prices rise again",
+   "catalyst": "company"
   },
   "CRL": {
    "headline": "投资者日称 2026 年指引将落在区间上沿，并发布 2030 目标",
@@ -293,7 +300,8 @@
      "url": "https://www.sec.gov/Archives/edgar/data/1100682/000110068226000142/crl-20260924.htm"
     }
    ],
-   "headline_en": "Investor Day: 2026 guide at the top end; 2030 targets unveiled"
+   "headline_en": "Investor Day: 2026 guide at the top end; 2030 targets unveiled",
+   "catalyst": "company"
   },
   "WY": {
    "headline": "8-K 披露调整 Q3 展望，股价跌至 52 周低点",
@@ -329,7 +337,8 @@
      "url": "https://www.ad-hoc-news.de/boerse/news/corporate-news/weyerhaeuser-stock-falls-2-83-percent-as-timberland-gains-lift-eps/70178264"
     }
    ],
-   "headline_en": "8-K adjusts Q3 outlook; shares at 52-week low"
+   "headline_en": "8-K adjusts Q3 outlook; shares at 52-week low",
+   "catalyst": "company"
   },
   "ILMN": {
    "headline": "无当日公司公告；延续纳入 S&P 500 后的动量",
@@ -351,7 +360,8 @@
      "url": "https://www.quiverquant.com/news/Illumina+gains+as+recent+index+inclusion+and+stronger+outlook+appear+to+support+shares"
     }
    ],
-   "headline_en": "No company news; momentum after S&P 500 inclusion"
+   "headline_en": "No company news; momentum after S&P 500 inclusion",
+   "catalyst": "none"
   },
   "XYL": {
    "headline": "未检索到当日公司层面催化剂",
@@ -373,7 +383,8 @@
      "url": "https://finance.yahoo.com/markets/stocks/articles/equities-drop-intraday-yields-oil-180618123.html"
     }
    ],
-   "headline_en": "No company-specific catalyst found"
+   "headline_en": "No company-specific catalyst found",
+   "catalyst": "none"
   },
   "FDX": {
    "headline": "未检索到当日公司层面催化剂",
@@ -396,7 +407,8 @@
      "publisher_en": "Business Today (citing Bloomberg)"
     }
    ],
-   "headline_en": "No company-specific catalyst found"
+   "headline_en": "No company-specific catalyst found",
+   "catalyst": "none"
   },
   "PNR": {
    "headline": "未检索到当日公司层面催化剂",
@@ -409,7 +421,8 @@
     }
    ],
    "sources": [],
-   "headline_en": "No company-specific catalyst found"
+   "headline_en": "No company-specific catalyst found",
+   "catalyst": "none"
   },
   "J": {
    "headline": "未检索到当日公司层面催化剂",
@@ -422,7 +435,8 @@
     }
    ],
    "sources": [],
-   "headline_en": "No company-specific catalyst found"
+   "headline_en": "No company-specific catalyst found",
+   "catalyst": "none"
   },
   "RL": {
    "headline": "未检索到当日公司层面催化剂",
@@ -435,7 +449,8 @@
     }
    ],
    "sources": [],
-   "headline_en": "No company-specific catalyst found"
+   "headline_en": "No company-specific catalyst found",
+   "catalyst": "none"
   },
   "A": {
    "headline": "未检索到当日公司层面催化剂",
@@ -457,7 +472,8 @@
      "url": "https://www.marketbeat.com/instant-alerts/event-agilent-technologies-sees-growth-from-china-replacement-cycles-and-lab-automation-2026-09-23/"
     }
    ],
-   "headline_en": "No company-specific catalyst found"
+   "headline_en": "No company-specific catalyst found",
+   "catalyst": "none"
   }
  },
  "themes": {

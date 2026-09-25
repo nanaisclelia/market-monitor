@@ -8,39 +8,126 @@
    "headline": "Oracle 重申约 2.4 GW 燃料电池合同，Project Jupiter 担忧缓解，领涨 S&P 500",
    "headline_en": "Oracle reaffirms ~2.4 GW fuel-cell contract, easing Project Jupiter worries; top S&P 500 gainer",
    "points": [
-    {"tag": "媒体报道", "text": "报道称 Oracle 在前一日对 Project Jupiter 发出不可抗力通知（起因是配套天然气管道延期）后，仍承诺履行与 Bloom 约 2.4 GW 的燃料电池合同；Barron's 将 Bloom 列为当日 S&P 500 涨幅第一，并归因于 Oracle。报道中未引用 Oracle 高管的原话。", "text_en": "Reports say Oracle remains committed to its roughly 2.4 GW fuel-cell contract with Bloom despite the prior day's force majeure notice on Project Jupiter (tied to delayed gas pipeline infrastructure); Barron's named Bloom the day's top S&P 500 performer and linked the move to Oracle. No direct Oracle executive quote was cited.", "src": [0, 1]},
-    {"tag": "AI 推断", "text": "9/24 Oracle 的不可抗力通知曾拖累 AI 数据中心链条；合同得到确认后，此前反映的交付风险被部分回补。股价仍较 52 周高点低约 18%。", "text_en": "Oracle's 9/24 force majeure notice had weighed on the AI data-center chain; confirmation of the contract unwound part of that delivery-risk discount. Shares remain ~18% below their 52-week high.", "src": []}
+    {
+     "tag": "媒体报道",
+     "text": "报道称 Oracle 在前一日对 Project Jupiter 发出不可抗力通知（起因是配套天然气管道延期）后，仍承诺履行与 Bloom 约 2.4 GW 的燃料电池合同；Barron's 将 Bloom 列为当日 S&P 500 涨幅第一，并归因于 Oracle。报道中未引用 Oracle 高管的原话。",
+     "text_en": "Reports say Oracle remains committed to its roughly 2.4 GW fuel-cell contract with Bloom despite the prior day's force majeure notice on Project Jupiter (tied to delayed gas pipeline infrastructure); Barron's named Bloom the day's top S&P 500 performer and linked the move to Oracle. No direct Oracle executive quote was cited.",
+     "src": [
+      0,
+      1
+     ]
+    },
+    {
+     "tag": "AI 推断",
+     "text": "9/24 Oracle 的不可抗力通知曾拖累 AI 数据中心链条；合同得到确认后，此前反映的交付风险被部分回补。股价仍较 52 周高点低约 18%。",
+     "text_en": "Oracle's 9/24 force majeure notice had weighed on the AI data-center chain; confirmation of the contract unwound part of that delivery-risk discount. Shares remain ~18% below their 52-week high.",
+     "src": []
+    }
    ],
    "sources": [
-    {"publisher": "Simply Wall St / Yahoo Finance", "date": "2026-09-25", "title": "Bloom Energy (BE) Is Up 8.7% After Oracle Reaffirms 2.4 GW AI Fuel Cell Deal Commitment", "url": "https://finance.yahoo.com/markets/stocks/articles/bloom-energy-8-7-oracle-220801648.html"},
-    {"publisher": "Barron's", "date": "2026-09-25", "title": "Bloom Energy Stock Is Today's Top S&P 500 Performer. It Has a Lot to Do With Oracle.", "url": "https://www.barrons.com/articles/bloom-energy-stock-oracle-ai-50802d99"}
-   ]
+    {
+     "publisher": "Simply Wall St / Yahoo Finance",
+     "date": "2026-09-25",
+     "title": "Bloom Energy (BE) Is Up 8.7% After Oracle Reaffirms 2.4 GW AI Fuel Cell Deal Commitment",
+     "url": "https://finance.yahoo.com/markets/stocks/articles/bloom-energy-8-7-oracle-220801648.html"
+    },
+    {
+     "publisher": "Barron's",
+     "date": "2026-09-25",
+     "title": "Bloom Energy Stock Is Today's Top S&P 500 Performer. It Has a Lot to Do With Oracle.",
+     "url": "https://www.barrons.com/articles/bloom-energy-stock-oracle-ai-50802d99"
+    }
+   ],
+   "catalyst": "company"
   },
   "CRDO": {
    "headline": "无当日公司公告；芯片股两日回调后反弹，连涨 9 天",
    "headline_en": "No company news; chip rebound after a two-day skid extends a 9-day winning streak",
    "points": [
-    {"tag": "媒体报道", "text": "IBD 报道芯片股在连跌两日后反弹，Tower Semiconductor 领涨；Credo 同日上涨，当天没有公司公告。", "text_en": "IBD reported chip stocks rebounding after a two-day skid, led by Tower Semiconductor; Credo rose with no company announcement on the day.", "src": [0]},
-    {"tag": "媒体报道", "text": "背景：9/21 起 Credo 在 ECOC 2026 光通信展示 1.6T 光互连方案，Rosenblatt 给予 Buy 评级、目标价由 215 美元上调至 235 美元，Mizuho 维持 Outperform（目标价 245 美元）。", "text_en": "Context: from 9/21 Credo showcased 1.6T optical connectivity at ECOC 2026; Rosenblatt rated it Buy and raised its target to $235 from $215, and Mizuho kept Outperform ($245 target).", "src": [1]},
-    {"tag": "AI 推断", "text": "本看台数据显示已连涨 9 天，当日高开 2.9%，股价仍较 52 周高点低约 32%。属于超跌后的动量修复，而非新的基本面事件。部分网站将涨幅归因于 9 月初的财报，那不是当日催化剂，未采信。", "text_en": "Our data show a 9-day winning streak, a 2.9% gap-up, and shares still ~32% below the 52-week high — a momentum recovery after a drawdown rather than a new fundamental event. Some sites attributed the move to early-September earnings; that is not a same-day catalyst and was not used.", "src": []}
+    {
+     "tag": "媒体报道",
+     "text": "IBD 报道芯片股在连跌两日后反弹，Tower Semiconductor 领涨；Credo 同日上涨，当天没有公司公告。",
+     "text_en": "IBD reported chip stocks rebounding after a two-day skid, led by Tower Semiconductor; Credo rose with no company announcement on the day.",
+     "src": [
+      0
+     ]
+    },
+    {
+     "tag": "媒体报道",
+     "text": "背景：9/21 起 Credo 在 ECOC 2026 光通信展示 1.6T 光互连方案，Rosenblatt 给予 Buy 评级、目标价由 215 美元上调至 235 美元，Mizuho 维持 Outperform（目标价 245 美元）。",
+     "text_en": "Context: from 9/21 Credo showcased 1.6T optical connectivity at ECOC 2026; Rosenblatt rated it Buy and raised its target to $235 from $215, and Mizuho kept Outperform ($245 target).",
+     "src": [
+      1
+     ]
+    },
+    {
+     "tag": "AI 推断",
+     "text": "本看台数据显示已连涨 9 天，当日高开 2.9%，股价仍较 52 周高点低约 32%。属于超跌后的动量修复，而非新的基本面事件。部分网站将涨幅归因于 9 月初的财报，那不是当日催化剂，未采信。",
+     "text_en": "Our data show a 9-day winning streak, a 2.9% gap-up, and shares still ~32% below the 52-week high — a momentum recovery after a drawdown rather than a new fundamental event. Some sites attributed the move to early-September earnings; that is not a same-day catalyst and was not used.",
+     "src": [],
+     "not_catalyst": false
+    }
    ],
    "sources": [
-    {"publisher": "Investor's Business Daily", "date": "2026-09-25", "title": "Chip Stocks Rise After Two-Day Skid. Tower Semiconductor Among Leaders.", "url": "https://www.investors.com/news/technology/chip-stocks-rise-after-two-day-skid-tower-semiconductor-among-leaders/"},
-    {"publisher": "Investing.com", "date": "2026-09-21", "title": "Why is Credo Technology stock rallying today?", "url": "https://www.investing.com/news/stock-market-news/why-is-credo-technology-stock-rallying-today-93CH-4909330"}
-   ]
+    {
+     "publisher": "Investor's Business Daily",
+     "date": "2026-09-25",
+     "title": "Chip Stocks Rise After Two-Day Skid. Tower Semiconductor Among Leaders.",
+     "url": "https://www.investors.com/news/technology/chip-stocks-rise-after-two-day-skid-tower-semiconductor-among-leaders/"
+    },
+    {
+     "publisher": "Investing.com",
+     "date": "2026-09-21",
+     "title": "Why is Credo Technology stock rallying today?",
+     "url": "https://www.investing.com/news/stock-market-news/why-is-credo-technology-stock-rallying-today-93CH-4909330"
+    }
+   ],
+   "catalyst": "sector"
   },
   "CVS": {
    "headline": "无当日公司公告；同业 Humana 获 Barclays 上调后管理式医疗板块走强",
    "headline_en": "No company news; managed-care peer Humana jumps on a Barclays upgrade",
    "points": [
-    {"tag": "分析师", "text": "同日 Barclays 将 Humana 由 Neutral 上调至 Overweight，目标价由 407 美元上调至 515 美元，Humana 大涨约 7%；报道未披露分析师姓名和详细理由。", "text_en": "The same day Barclays upgraded Humana to Overweight from Neutral and raised its target to $515 from $407; Humana jumped ~7%. The report did not name the analyst or give detailed reasoning.", "src": [0]},
-    {"tag": "AI 推断", "text": "CVS 旗下 Aetna 是 Medicare Advantage 主要参与者，量比 2.2 倍，涨幅可能来自同业评级上调带来的板块联动。此为推断，未找到直接报道。", "text_en": "CVS's Aetna is a major Medicare Advantage player; with relative volume at 2.2x, the move may reflect read-across from the peer upgrade. This is an inference; no direct report was found.", "src": []},
-    {"tag": "已证实", "text": "部分网站提到的 Aetna 扩大肿瘤预授权打包计划，发布于 9/17（公司新闻稿），并非当日消息。", "text_en": "The Aetna bundled oncology prior-authorization expansion cited by some sites was announced on 9/17 (company press release), not on the day.", "src": [1]}
+    {
+     "tag": "分析师",
+     "text": "同日 Barclays 将 Humana 由 Neutral 上调至 Overweight，目标价由 407 美元上调至 515 美元，Humana 大涨约 7%；报道未披露分析师姓名和详细理由。",
+     "text_en": "The same day Barclays upgraded Humana to Overweight from Neutral and raised its target to $515 from $407; Humana jumped ~7%. The report did not name the analyst or give detailed reasoning.",
+     "src": [
+      0
+     ]
+    },
+    {
+     "tag": "AI 推断",
+     "text": "CVS 旗下 Aetna 是 Medicare Advantage 主要参与者，量比 2.2 倍，涨幅可能来自同业评级上调带来的板块联动。此为推断，未找到直接报道。",
+     "text_en": "CVS's Aetna is a major Medicare Advantage player; with relative volume at 2.2x, the move may reflect read-across from the peer upgrade. This is an inference; no direct report was found.",
+     "src": []
+    },
+    {
+     "tag": "已证实",
+     "text": "部分网站提到的 Aetna 扩大肿瘤预授权打包计划，发布于 9/17（公司新闻稿），并非当日消息。",
+     "text_en": "The Aetna bundled oncology prior-authorization expansion cited by some sites was announced on 9/17 (company press release), not on the day.",
+     "src": [
+      1
+     ],
+     "not_catalyst": true
+    }
    ],
    "sources": [
-    {"publisher": "24/7 Wall St.", "date": "2026-09-25", "title": "Humana Jumps 7% on Barclays Upgrade and $515 Target; UnitedHealth Nudges Higher", "url": "https://247wallst.com/investing/2026/09/25/humana-jumps-7-on-barclays-upgrade-and-515-target-unitedhealth-nudges-higher/"},
-    {"publisher": "CVS Health 新闻稿", "publisher_en": "CVS Health press release", "date": "2026-09-17", "title": "Aetna expands bundled oncology prior authorizations", "url": "https://www.cvshealth.com/news/company-news/aetna-expands-bundled-oncology-prior-authorizations.html"}
-   ]
+    {
+     "publisher": "24/7 Wall St.",
+     "date": "2026-09-25",
+     "title": "Humana Jumps 7% on Barclays Upgrade and $515 Target; UnitedHealth Nudges Higher",
+     "url": "https://247wallst.com/investing/2026/09/25/humana-jumps-7-on-barclays-upgrade-and-515-target-unitedhealth-nudges-higher/"
+    },
+    {
+     "publisher": "CVS Health 新闻稿",
+     "publisher_en": "CVS Health press release",
+     "date": "2026-09-17",
+     "title": "Aetna expands bundled oncology prior authorizations",
+     "url": "https://www.cvshealth.com/news/company-news/aetna-expands-bundled-oncology-prior-authorizations.html"
+    }
+   ],
+   "catalyst": "none"
   }
  },
  "themes": {
@@ -48,14 +135,51 @@
    "headline": "美股光互连链条反弹，Tower、Credo、Fabrinet 领涨；A股中秋休市",
    "headline_en": "US optical-interconnect names rebound, led by Tower, Credo and Fabrinet; China A-shares closed for Mid-Autumn",
    "points": [
-    {"tag": "媒体报道", "text": "IBD 报道芯片股在连跌两日后反弹，Tower Semiconductor 领涨。", "text_en": "IBD reported chip stocks rebounding after a two-day skid, led by Tower Semiconductor.", "src": [0]},
-    {"tag": "AI 推断", "text": "同日 Oracle 重申对 Bloom Energy 的供电合同，缓解了前一日 Project Jupiter 不可抗力通知引发的 AI 数据中心资本开支担忧；9/24 下跌较多的光互连股（Tower -5.7%、Coherent -3.3%）当日反弹。此为推断。", "text_en": "Oracle's reaffirmation of its Bloom Energy power contract eased the AI data-center capex worries sparked by the prior day's Project Jupiter force majeure notice; optical names hit hardest on 9/24 (Tower -5.7%, Coherent -3.3%) bounced. This is an inference.", "src": [1]},
-    {"tag": "已证实", "text": "A股 9/25–9/27 中秋休市（上交所公告），4 只 A股成员显示 9/24 收盘，不计入当日等权收益。", "text_en": "China A-shares are closed 9/25–9/27 for Mid-Autumn (SSE notice); the four A-share members show 9/24 closes and are excluded from today's equal-weighted return.", "src": [2]}
+    {
+     "tag": "媒体报道",
+     "text": "IBD 报道芯片股在连跌两日后反弹，Tower Semiconductor 领涨。",
+     "text_en": "IBD reported chip stocks rebounding after a two-day skid, led by Tower Semiconductor.",
+     "src": [
+      0
+     ]
+    },
+    {
+     "tag": "AI 推断",
+     "text": "同日 Oracle 重申对 Bloom Energy 的供电合同，缓解了前一日 Project Jupiter 不可抗力通知引发的 AI 数据中心资本开支担忧；9/24 下跌较多的光互连股（Tower -5.7%、Coherent -3.3%）当日反弹。此为推断。",
+     "text_en": "Oracle's reaffirmation of its Bloom Energy power contract eased the AI data-center capex worries sparked by the prior day's Project Jupiter force majeure notice; optical names hit hardest on 9/24 (Tower -5.7%, Coherent -3.3%) bounced. This is an inference.",
+     "src": [
+      1
+     ]
+    },
+    {
+     "tag": "已证实",
+     "text": "A股 9/25–9/27 中秋休市（上交所公告），4 只 A股成员显示 9/24 收盘，不计入当日等权收益。",
+     "text_en": "China A-shares are closed 9/25–9/27 for Mid-Autumn (SSE notice); the four A-share members show 9/24 closes and are excluded from today's equal-weighted return.",
+     "src": [
+      2
+     ]
+    }
    ],
    "sources": [
-    {"publisher": "Investor's Business Daily", "date": "2026-09-25", "title": "Chip Stocks Rise After Two-Day Skid. Tower Semiconductor Among Leaders.", "url": "https://www.investors.com/news/technology/chip-stocks-rise-after-two-day-skid-tower-semiconductor-among-leaders/"},
-    {"publisher": "Simply Wall St / Yahoo Finance", "date": "2026-09-25", "title": "Bloom Energy (BE) Is Up 8.7% After Oracle Reaffirms 2.4 GW AI Fuel Cell Deal Commitment", "url": "https://finance.yahoo.com/markets/stocks/articles/bloom-energy-8-7-oracle-220801648.html"},
-    {"publisher": "上海证券交易所", "publisher_en": "Shanghai Stock Exchange", "date": "2026-09-15", "title": "关于2026年中秋节、国庆节休市安排的公告", "url": "https://www.sse.com.cn/disclosure/announcement/general/c/c_20260915_10832273.shtml"}
+    {
+     "publisher": "Investor's Business Daily",
+     "date": "2026-09-25",
+     "title": "Chip Stocks Rise After Two-Day Skid. Tower Semiconductor Among Leaders.",
+     "url": "https://www.investors.com/news/technology/chip-stocks-rise-after-two-day-skid-tower-semiconductor-among-leaders/"
+    },
+    {
+     "publisher": "Simply Wall St / Yahoo Finance",
+     "date": "2026-09-25",
+     "title": "Bloom Energy (BE) Is Up 8.7% After Oracle Reaffirms 2.4 GW AI Fuel Cell Deal Commitment",
+     "url": "https://finance.yahoo.com/markets/stocks/articles/bloom-energy-8-7-oracle-220801648.html"
+    },
+    {
+     "publisher": "上海证券交易所",
+     "publisher_en": "Shanghai Stock Exchange",
+     "date": "2026-09-15",
+     "title": "关于2026年中秋节、国庆节休市安排的公告",
+     "url": "https://www.sse.com.cn/disclosure/announcement/general/c/c_20260915_10832273.shtml"
+    }
    ]
   }
  },
@@ -69,11 +193,27 @@
    "logic_en": "Deal hopes compress the risk premium, but physical flows have not resumed and attacks continue, so prices swing between the two; talk of a possible US diesel export ban weighs on WTI and widens its discount to Brent.",
    "facts": "报道称美伊谈判代表在探讨分阶段协议，内容为重开霍尔木兹海峡、解除美国对伊朗港口的封锁。沙特拦截了胡塞武装发射的导弹。周四霍尔木兹仅 13 艘次通行，曼德海峡 27 艘次。WTI 下跌约 2.3% 至约 92.4 美元，Brent 下跌约 0.9% 至约 105.7 美元，两者价差 12.68 美元，为 5 月以来最大。",
    "facts_en": "Negotiators were reported to be exploring a phased deal to reopen the Strait of Hormuz and lift the US blockade of Iranian ports. Saudi Arabia intercepted Houthi missiles. Only 13 Hormuz crossings on Thursday; 27 via Bab al-Mandeb. WTI fell ~2.3% to ~$92.4 and Brent ~0.9% to ~$105.7; the $12.68 spread is the widest since May.",
-   "view": {"who": "Jeanne Walters", "org": "Emirates NBD", "org_en": "Emirates NBD", "text": "将 Brent 周四的急涨归因于沙特拦截导弹，以及伊朗军事顾问威胁把冲突扩大到印度洋。", "text_en": "Attributed Thursday's sharp Brent rise to Saudi missile interceptions and an Iranian military adviser's threat to widen the conflict to the Indian Ocean."},
+   "view": {
+    "who": "Jeanne Walters",
+    "org": "Emirates NBD",
+    "org_en": "Emirates NBD",
+    "text": "将 Brent 周四的急涨归因于沙特拦截导弹，以及伊朗军事顾问威胁把冲突扩大到印度洋。",
+    "text_en": "Attributed Thursday's sharp Brent rise to Saudi missile interceptions and an Iranian military adviser's threat to widen the conflict to the Indian Ocean."
+   },
    "tag": "媒体报道",
    "sources": [
-    {"publisher": "The National", "date": "2026-09-25", "title": "Oil prices waver in face of Iran war truce and Houthi attacks", "url": "https://www.thenationalnews.com/business/energy/2026/09/25/oil-prices-waver-in-face-of-iran-war-truce-and-houthi-attacks/"},
-    {"publisher": "Yahoo Finance", "date": "2026-09-25", "title": "Stock market today: Dow, S&P 500, Nasdaq notch weekly wins as market shrugs off bond sell-off, oil prices ease", "url": "https://finance.yahoo.com/markets/live/stock-market-today-friday-september-25-dow-sp-500-nasdaq-081738529.html"}
+    {
+     "publisher": "The National",
+     "date": "2026-09-25",
+     "title": "Oil prices waver in face of Iran war truce and Houthi attacks",
+     "url": "https://www.thenationalnews.com/business/energy/2026/09/25/oil-prices-waver-in-face-of-iran-war-truce-and-houthi-attacks/"
+    },
+    {
+     "publisher": "Yahoo Finance",
+     "date": "2026-09-25",
+     "title": "Stock market today: Dow, S&P 500, Nasdaq notch weekly wins as market shrugs off bond sell-off, oil prices ease",
+     "url": "https://finance.yahoo.com/markets/live/stock-market-today-friday-september-25-dow-sp-500-nasdaq-081738529.html"
+    }
    ]
   },
   {
@@ -88,7 +228,12 @@
    "view": null,
    "tag": "已证实",
    "sources": [
-    {"publisher": "24/7 Wall St.", "date": "2026-09-25", "title": "Trump and Xi Buy Time on Trade. Farm and Chip Stocks Are Watching Closely.", "url": "https://247wallst.com/investing/2026/09/25/trump-and-xi-buy-time-on-trade-farm-and-chip-stocks-are-watching-closely/"}
+    {
+     "publisher": "24/7 Wall St.",
+     "date": "2026-09-25",
+     "title": "Trump and Xi Buy Time on Trade. Farm and Chip Stocks Are Watching Closely.",
+     "url": "https://247wallst.com/investing/2026/09/25/trump-and-xi-buy-time-on-trade-farm-and-chip-stocks-are-watching-closely/"
+    }
    ]
   },
   {
@@ -103,10 +248,61 @@
    "view": null,
    "tag": "已证实",
    "sources": [
-    {"publisher": "American Banker", "date": "2026-09-23", "title": "Fed's Barr: 'further policy adjustments are likely'", "url": "https://www.americanbanker.com/news/feds-barr-further-policy-adjustments-are-likely"},
-    {"publisher": "CNBC", "date": "2026-09-24", "title": "New York Fed's Williams says it's 'reasonable' to expect another rate hike by year-end", "url": "https://www.cnbc.com/2026/09/24/feds-williams-another-rate-hike-by-year-end.html"},
-    {"publisher": "Yahoo Finance", "date": "2026-09-25", "title": "Stock market today: Dow, S&P 500, Nasdaq notch weekly wins", "url": "https://finance.yahoo.com/markets/live/stock-market-today-friday-september-25-dow-sp-500-nasdaq-081738529.html"}
+    {
+     "publisher": "American Banker",
+     "date": "2026-09-23",
+     "title": "Fed's Barr: 'further policy adjustments are likely'",
+     "url": "https://www.americanbanker.com/news/feds-barr-further-policy-adjustments-are-likely"
+    },
+    {
+     "publisher": "CNBC",
+     "date": "2026-09-24",
+     "title": "New York Fed's Williams says it's 'reasonable' to expect another rate hike by year-end",
+     "url": "https://www.cnbc.com/2026/09/24/feds-williams-another-rate-hike-by-year-end.html"
+    },
+    {
+     "publisher": "Yahoo Finance",
+     "date": "2026-09-25",
+     "title": "Stock market today: Dow, S&P 500, Nasdaq notch weekly wins",
+     "url": "https://finance.yahoo.com/markets/live/stock-market-today-friday-september-25-dow-sp-500-nasdaq-081738529.html"
+    }
    ]
   }
- ]
+ ],
+ "summary": {
+  "state": "风险偏好小幅修复：股指收涨、VIX 回落 5%，但长债收益率仍在 2007 年以来高位附近，属于\"利率压制下的反弹\"。",
+  "state_en": "Risk appetite modestly repaired: indices up, VIX -5%, but long yields sit near their highest since 2007 — a rebound under rate pressure.",
+  "drivers": [
+   {
+    "zh": "油价：美伊据报商讨重开霍尔木兹，WTI 跌约 2.3%，但通行仍稀少、胡塞袭击未停",
+    "en": "Oil: reported US–Iran talks on reopening Hormuz cut WTI ~2.3%, but transits stay sparse and Houthi attacks continue"
+   },
+   {
+    "zh": "长债收益率：Barr、Williams 暗示继续加息，10 年期约 5.18%",
+    "en": "Long yields: Barr and Williams signal more hikes; 10-year ~5.18%"
+   },
+   {
+    "zh": "AI 数据中心预期：Oracle 重申 Bloom 合同，前一日的 Project Jupiter 担忧缓解，光互连链条反弹",
+    "en": "AI data-center expectations: Oracle reaffirms Bloom contract, easing Project Jupiter worries; optical interconnect rebounds"
+   }
+  ],
+  "watch": [
+   {
+    "when": "9/28–9/30",
+    "zh": "A股中秋后复市三天，随即国庆休市（10/1–10/7）：CPO A股成员将补反映 9/25 的美股反弹",
+    "en": "A-shares reopen for three days, then close for National Day (10/1–10/7): CPO A-share members catch up with the 9/25 US rebound"
+   },
+   {
+    "when": "10/2",
+    "zh": "美国 9 月非农就业（按 BLS 每月第一个周五发布的惯例）：决定 10 月加息概率",
+    "en": "US September payrolls (BLS first-Friday convention): key for October hike odds"
+   },
+   {
+    "when": "持续",
+    "when_en": "Ongoing",
+    "zh": "触发位：10 年期美债 5.2% 附近（2007 年以来高位），以及美伊协议是否落地、霍尔木兹日通行量能否回升",
+    "en": "Trigger levels: 10-year near 5.2% (highest since 2007); whether a US–Iran deal materialises and daily Hormuz transits recover"
+   }
+  ]
+ }
 }
