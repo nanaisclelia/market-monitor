@@ -419,6 +419,11 @@ body.isstale main{opacity:.72}
 .mapline{display:flex;flex-wrap:wrap;gap:6px}
 .mchip{display:inline-flex;gap:6px;align-items:baseline;padding:4px 10px;border:1px solid var(--line);border-radius:999px;background:var(--sunk);font:12.5px var(--mono)}
 .mchip b{font:600 11.5px var(--sans);color:var(--sub)}.mchip i{font-style:normal;font-size:10.5px}
+.mchip .zv{font-size:11px;color:var(--mut)}
+.mchip .zl{font:500 10.5px var(--sans);padding:0 5px;border-radius:3px;background:var(--track);color:var(--mut)}
+.mchip.zm .zl{background:var(--warn-bg);color:var(--warn)}
+.mchip.zx{border-color:var(--dn)}.mchip.zx .zl{background:var(--dn-bg);color:var(--dn);font-weight:600}
+.mapverdict{margin:0;font-size:13px}
 .mapfoot{margin:0;font-size:12.5px;color:var(--sub)}
 .fl{list-style:none;padding:0;margin:0;display:grid;gap:8px}
 .fl li{border:1px solid var(--line);border-radius:6px;padding:8px 12px;display:grid;gap:2px;font-size:13.5px}
@@ -469,7 +474,8 @@ h2 small{text-transform:none;letter-spacing:0}
     {% if an and an.review %}<a href="#b-review" data-view="brief">{{ L('昨日验证', "Yesterday's check") }}</a>{% endif %}
     <a href="#b-map" data-view="brief">{{ L('市场地图', 'Market map') }}</a>
     <a href="#b-follow" data-view="brief">{{ L('我的关注', 'Following') }}<em id="fcount" hidden></em></a>
-    <a href="#desk" data-view="desk">{{ L('研究台', 'Research desk') }}</a>
+    {% set nrep = ((us.sections.alerts.hits|drop_q(us.gate))|length if us else 0) + ((s.get('uk').sections.alerts.hits|drop_q(s.get('uk').gate))|length if s.get('uk') else 0) %}
+    <a href="#desk" data-view="desk" title="{{ nrep }} 只今日重新定价 / {{ nrep }} repriced today">{{ L('研究台', 'Research desk') }}{% if nrep %}<em>{{ nrep }}</em>{% endif %}</a>
     <a href="#method" data-view="desk">{{ L('方法', 'Method') }}</a>
   </nav>
   <nav class="wrap subnav deskonly" aria-label="Research desk sections">
@@ -532,11 +538,18 @@ h2 small{text-transform:none;letter-spacing:0}
 {% endif %}
 
 <section class="blk" id="b-map"><header><h2>{{ L('市场地图', 'Market map') }}</h2><span class="meta">{{ L('收盘快照，非实时', 'Closing snapshot, not live') }}</span></header>
+{%- macro zchip(name_zh, name_en, st, note_zh='', note_en='') -%}{%- set z = st.z if st and st.z is not none else none -%}
+{%- set az = z|abs if z is not none else 0 -%}{%- set lv = 'n' if az < 1 else ('m' if az < 2 else 'x') -%}
+<span class="mchip z{{ lv }}" title="当日涨跌 ÷ 20 日日波动率 / daily move ÷ 20-day σ"><b>{{ L(name_zh, name_en) }}</b>{{ chg(st.pct) }}<span class="zv">{{ z|num(1, True) }}σ</span><span class="zl">{{ L({'n':'正常波动内','m':'偏大','x':'超出正常区间'}[lv], {'n':'within normal','m':'larger than usual','x':'outside normal range'}[lv]) }}</span>{% if note_zh %}<i class="mut">{{ L(note_zh, note_en) }}</i>{% endif %}</span>
+{%- endmacro -%}
+{% set zs = [] %}
 <div class="mapline">
-{% if us %}{% for r in us.sections.indices if r.stats %}<span class="mchip"><b>{{ r.name.replace(' Composite', '') }}</b>{{ chg(r.stats.pct) }}</span>{% endfor %}{% endif %}
-{% if uk %}{% for r in uk.sections.indices if r.stats %}<span class="mchip"><b>{{ r.name }}</b>{{ chg(r.stats.pct) }}</span>{% endfor %}{% endif %}
-{% if us %}{% for m in us.sections.metals[:2] if m.lbma %}<span class="mchip"><b>{{ L(m.name.split(' ')[0], m.name.split(' ')[-1]) }}</b>{{ chg(m.lbma.pct) }}{% if not m.lbma.current %}<i class="mut">{{ L('非当日', 'stale') }}</i>{% endif %}</span>{% endfor %}{% endif %}
+{% if us %}{% for r in us.sections.indices if r.stats %}{{ zchip(r.name.replace(' Composite', ''), r.name.replace(' Composite', ''), r.stats) }}{% set _ = zs.append((r.name, r.stats.z)) %}{% endfor %}{% endif %}
+{% if uk %}{% for r in uk.sections.indices if r.stats %}{{ zchip(r.name, r.name, r.stats) }}{% set _ = zs.append((r.name, r.stats.z)) %}{% endfor %}{% endif %}
+{% if us %}{% for m in us.sections.metals[:2] if m.futures %}{{ zchip(m.name.split(' ')[0], m.name.split(' ')[-1], m.futures, '期货', 'futures') }}{% set _ = zs.append((m.name.split(' ')[-1], m.futures.z)) %}{% endfor %}{% endif %}
 </div>
+{% set outl = [] %}{% for n, z in zs if z is not none and z|abs >= 2 %}{% set _ = outl.append(n) %}{% endfor %}{% set larg = [] %}{% for n, z in zs if z is not none and z|abs >= 1 and z|abs < 2 %}{% set _ = larg.append(n) %}{% endfor %}
+<p class="mapverdict">{% if outl %}{{ L('超出正常区间（≥2σ）：' ~ outl|join('、') ~ '。', 'Outside the normal range (≥2σ): ' ~ outl|join(', ') ~ '.') }}{% else %}{{ L('今天没有指数或贵金属超出正常波动区间（≥2σ）。', 'No index or metal moved outside its normal range (≥2σ) today.') }}{% endif %}{% if larg %} {{ L('偏大（1–2σ）：' ~ larg|join('、') ~ '。', 'Larger than usual (1–2σ): ' ~ larg|join(', ') ~ '.') }}{% endif %} <span class="mut">{{ L('σ = 各自过去 20 个交易日的日涨跌幅标准差，所以 VIX 跌 5% 也可能只是正常波动。', 'σ = each asset\'s own 20-day std of daily moves — a 5% VIX drop can still be normal.') }}</span></p>
 {% set nus = (us.sections.alerts.hits|drop_q(us.gate))|length if us else 0 %}{% set nuk = (uk.sections.alerts.hits|drop_q(uk.gate))|length if uk else 0 %}
 <p class="mapfoot">{{ L('今日重新定价 ' ~ (nus + nuk) ~ ' 只（美 ' ~ nus ~ ' · 英 ' ~ nuk ~ '）——这是对价格变化的解释，不是交易提醒。', (nus + nuk) ~ ' repriced today (US ' ~ nus ~ ' · UK ' ~ nuk ~ ') — explanations of price moves, not trade alerts.') }} <a href="#alerts" data-view="desk">{{ L('在研究台查看 →', 'Open in research desk →') }}</a></p>
 </section>
