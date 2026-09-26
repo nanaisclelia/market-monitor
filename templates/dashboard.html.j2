@@ -311,7 +311,7 @@ details[open]>.csum .cline{display:none}
 <header class="mast">
   <div class="wrap mrow">
     <div class="brand"><span class="logo" aria-hidden="true">MM</span><div><h1>Market Monitor</h1><p class="tag">{{ L('收盘简报 · 地缘 / 美股 / 贵金属 / 主题 / 异动', 'Closing brief · Geopolitics / US equities / Metals / Themes / Movers') }}</p></div></div>
-    {% if us %}<div class="status"><span class="pill"><i></i>{{ L('NYSE 已收盘', 'NYSE closed') }}</span><span>{{ us.session }} · {{ us.session_close_utc|t(us.exchange_tz, '%H:%M %Z') }}</span></div>{% endif %}
+    {% set uk = s.get('uk') %}{% if us or uk %}<div class="status">{% if uk %}<span class="pill" title="{{ uk.session_close_utc|t(uk.exchange_tz) }}"><i></i>LSE {{ uk.session[5:] }}</span>{% endif %}{% if us %}<span class="pill" title="{{ us.session_close_utc|t(us.exchange_tz) }}"><i></i>NYSE {{ us.session[5:] }}</span><span>{{ L('收盘快照', 'Closing snapshot') }}</span>{% endif %}</div>{% endif %}
     {% if not public %}<select id="archive" aria-label="历史快照 / Archive" onchange="if(this.value)location.href=this.value">
       <option value="">历史快照 / Archive…</option>
       {% if is_archive %}<option value="../index.html">最新 / Latest</option>{% endif %}
@@ -332,7 +332,7 @@ details[open]>.csum .cline{display:none}
     {% if an and an.geo %}<a href="#geo">{{ L('地缘政治', 'Geopolitics') }}</a>{% endif %}
     <a href="#us">{{ L('美股指数', 'US indices') }}</a><a href="#metals">{{ L('贵金属', 'Metals') }}</a>
     {% if us and us.sections.themes %}<a href="#cpo">CPO</a>{% endif %}
-    <a href="#alerts">{{ L('异动预警', 'Movers') }}</a><a href="#cn" class="soon">{{ L('中国', 'China') }}<em>{{ L('即将上线', 'Soon') }}</em></a><a href="#uk" class="soon">{{ L('英国', 'UK') }}<em>{{ L('即将上线', 'Soon') }}</em></a>
+    <a href="#alerts">{{ L('异动预警', 'Movers') }}</a><a href="#cn" class="soon">{{ L('中国', 'China') }}<em>{{ L('即将上线', 'Soon') }}</em></a>{% if s.get('uk') %}<a href="#uk">{{ L('英国', 'UK') }}</a>{% else %}<a href="#uk" class="soon">{{ L('英国', 'UK') }}<em>{{ L('即将上线', 'Soon') }}</em></a>{% endif %}
     {% if public %}<a href="#about">{{ L('方法', 'Method') }}</a>{% else %}<a href="#log">{{ L('日志', 'Log') }}</a>{% endif %}
   </nav>
 </header>
@@ -531,7 +531,7 @@ details[open]>.csum .cline{display:none}
 <dt>{{ L('20日均成交额', '20d avg $ volume') }}</dt><dd>{{ st.avg_dollar_vol20|big }}</dd>
 <dt>{{ L('空头占流通股 · 回补天数', 'Short % float · days to cover') }}</dt><dd>{{ ((f.short_pct_float * 100) if f.short_pct_float is not none else none)|num(1, False, True) }} · {{ f.short_ratio|num(1) }}</dd>
 <dt>{{ L('Beta · 20日σ', 'Beta · 20d σ') }}</dt><dd>{{ f.beta|num(2) }} · {{ st.sigma20|num(2, False, True) }}</dd>
-<dt>{{ L('卖方一致评级', 'Street consensus') }}</dt><dd>{{ f.rec_key or '—' }} · {{ L('目标价', 'target') }} {{ f.target_mean|num }}</dd>
+<dt>{{ L('卖方一致评级', 'Street consensus') }}</dt><dd>{{ (f.rec_key if f.rec_key and f.rec_key != 'none' else '—') }} · {{ L('目标价', 'target') }} {{ f.target_mean|num }}</dd>
 <dt>{{ L('监管', 'Regulatory') }}</dt><dd class="mut">{{ L('无自动数据源', 'No automated source') }}</dd>
 </dl></div>
 <div><h4>{{ L('技术面关键位', 'Key technical levels') }}</h4>{{ tech(h.technicals) }}</div>
@@ -544,18 +544,79 @@ details[open]>.csum .cline{display:none}
 {% else %}<p class="missing">{{ L('数据暂缺', 'Data unavailable') }}</p>{% endif %}
 </section>
 
+
+{% if uk %}{% set ual = uk.sections.alerts %}{% set UA = (uk.analysis.stocks if uk.analysis else {}) or {} %}
+<section class="blk" id="uk"><header><h2>{{ L('英国 · 伦敦交易所', 'UK · London Stock Exchange') }}</h2><span class="meta">{{ L('FTSE 100 / 250 · 监控 FTSE 350：' ~ ual.with_data ~ '/' ~ ual.universe_size ~ ' · 触发 ' ~ ual.hits|length ~ ' 只', 'FTSE 100 / 250 · FTSE 350 tracked: ' ~ ual.with_data ~ '/' ~ ual.universe_size ~ ' · ' ~ ual.hits|length ~ ' triggered') }}</span></header>
+{{ asof(uk, '个股价格单位为便士（GBp）', 'stock prices in pence (GBp)') }}
+{% if ual.patched_from_cnbc %}<p class="asof">{{ L('Yahoo 日线未收录当日收盘竞价价：' ~ ual.patched_from_cnbc ~ ' 只的当日收盘取自 CNBC（已核对前收一致），指数与异动股再用 Yahoo 报价校验。' ~ (ual.cnbc_symbol_mismatch|length ~ ' 只 CNBC 代码对应其他证券，已改用 Yahoo 报价。' if ual.cnbc_symbol_mismatch else ''),
+   'Yahoo daily bars lacked the closing-auction price: ' ~ ual.patched_from_cnbc ~ ' closes taken from CNBC (previous close verified), with indices and movers re-checked against Yahoo quotes.' ~ (' ' ~ ual.cnbc_symbol_mismatch|length ~ ' CNBC symbols mapped to other securities and were replaced by Yahoo quotes.' if ual.cnbc_symbol_mismatch else '')) }}</p>{% endif %}
+<div class="tw"><table>
+<thead><tr><th class="t">{{ L('指数', 'Index') }}</th><th>{{ L('收盘', 'Close') }}</th><th>{{ L('涨跌幅', 'Change') }}</th><th>{{ L('20日σ', '20d σ') }}</th><th class="t">{{ L('60 日走势', '60-day') }}</th><th class="t">{{ L('收盘来源', 'Close source') }}</th><th>{{ L('双源校验', 'Cross-check') }}</th><th></th></tr></thead>
+<tbody>{% for r in uk.sections.indices %}<tr>
+<td class="t">{{ r.name }}</td>
+{% if r.stats %}<td>{{ r.stats.close|num }}</td><td>{{ chg(r.stats.pct) }}</td><td>{{ r.stats.sigma20|num(2, False, True) }}</td><td class="t">{{ r.spark|spark(96, 24, r.name) }}</td><td class="t mut">{{ L(r.close_source or '—', (r.close_source or '—')|en) }}</td><td>{{ xc(r.xcheck) }}</td>
+{% else %}<td colspan="6" class="missing">{{ L('数据暂缺', 'Data unavailable') }}</td>{% endif %}
+<td>{% if r.alert %}<span class="chip alert">{{ L('异动', 'Alert') }}</span>{% endif %}</td></tr>{% endfor %}</tbody>
+</table></div>
+
+<h4>{{ L('FTSE 350 异动', 'FTSE 350 movers') }}</h4>
+{% if ual.hits %}<div class="tbl" data-table="movers">
+<div class="toolbar" role="group" aria-label="Filter">
+  <button type="button" class="fbtn" data-filter="all" aria-pressed="true">{{ L('全部', 'All') }}</button>
+  <button type="button" class="fbtn" data-filter="company" aria-pressed="false">{{ L('仅公司催化剂', 'Company catalyst only') }}</button>
+  <button type="button" class="fbtn tog" data-hide="nocat" aria-pressed="false">{{ L('隐藏无催化剂', 'Hide no-catalyst') }}</button>
+  <span class="hint">{{ L('点击表头排序 · 点击代码展开详情', 'Click a header to sort · click a ticker for details') }}</span>
+</div>
+<div class="tw"><table class="sortable">
+<thead><tr><th class="t">{{ L('代码', 'Ticker') }}</th><th class="t">{{ L('名称', 'Name') }}</th><th class="t">{{ L('指数', 'Index') }}</th><th>{{ L('收盘', 'Close') }}</th><th data-sort="num">{{ L('涨跌幅', 'Change') }}</th><th data-sort="num">z(σ)</th><th data-sort="num">{{ L('量比', 'Rel vol') }}</th><th>{{ L('校验', 'Check') }}</th><th class="t" data-sort="num">{{ L('证据', 'Evidence') }}</th><th class="t">{{ L('原因（AI 整理）', 'Reason (AI summary)') }}</th></tr></thead>
+<tbody>{% for h in ual.hits %}{% set w = UA.get(h.ticker) %}{% set bg = best_grade(w) %}{% set cat = (w.catalyst if w and w.catalyst else 'none') %}
+<tr data-filing="0" data-company="{{ 1 if cat == 'company' else 0 }}" data-theme="0" data-nocat="{{ 1 if cat == 'none' else 0 }}">
+<td class="t sym"><a href="#a-{{ h.ticker }}">{{ h.epic }}</a></td><td class="t">{{ h.name }}</td><td class="t mut">{{ h.index }}</td>
+<td>{{ h.stats.close|num }}</td><td data-v="{{ h.stats.pct }}" class="{{ hot(h.stats.pct, 7) }}">{{ chg(h.stats.pct) }}</td><td data-v="{{ h.stats.z|abs }}">{{ h.stats.z|num(1, True) }}</td><td data-v="{{ h.stats.rel_volume or 0 }}" class="{{ 'hotv' if (h.stats.rel_volume or 0) >= 2 else '' }}">{% if h.stats.rel_volume %}{{ h.stats.rel_volume|num(1) }}×{% else %}—{% endif %}</td><td>{{ xc(h.xcheck) }}</td>
+<td class="t" data-v="{{ {'A':4,'B':3,'C':2,'D':1}[bg] if w else 0 }}">{% if w %}{{ gchip(bg) }}{% else %}<span class="mut">—</span>{% endif %}{% if cat == 'none' and w %} <span class="chip">{{ L('无催化剂', 'no catalyst') }}</span>{% endif %}</td>
+<td class="rs">{% if w %}<a href="#a-{{ h.ticker }}">{{ L(w.headline, w.headline_en or w.headline) }}</a>{% else %}<span class="mut">—</span>{% endif %}</td></tr>{% endfor %}</tbody>
+</table></div>
+</div>
+<div class="cards">
+{% for h in ual.hits if h.detail or UA.get(h.ticker) %}{% set f = h.fundamentals or {} %}{% set st = h.stats %}{% set w = UA.get(h.ticker) %}{% set cat = (w.catalyst if w and w.catalyst else 'none') %}
+{% set featured = cat == 'company' %}
+<details class="card" id="a-{{ h.ticker }}" data-filing="0" data-company="{{ 1 if cat == 'company' else 0 }}" data-theme="0" data-nocat="{{ 1 if cat == 'none' else 0 }}"{% if featured %} open{% endif %}>
+<summary class="csum"><span class="sym">{{ h.epic }}</span> {{ chg(st.pct) }}{% if w %} {{ gchip(best_grade(w)) }}<span class="cline">{{ L(w.headline, w.headline_en or w.headline) }}</span>{% endif %}{% if featured %}<span class="chip acc">{{ L('重点', 'Key') }}</span>{% endif %}<span class="caret" aria-hidden="true"></span></summary>
+<div class="top"><h3>{{ h.epic }} · {{ h.name }}</h3><span class="chip">{{ f.industry or h.sector or '—' }} · {{ h.index }}</span></div>
+<div class="px">{{ st.close|num }}<span class="mut">GBp</span> {{ chg(st.pct) }} <span class="mut">z {{ st.z|num(1,True) }} · {{ L('量比', 'rel vol') }} {{ st.rel_volume|num(1) }}× · {{ L('前收', 'prev') }} {{ st.prev_close|num }}</span></div>
+<div class="why">{{ L(h.why|join('；'), h.why|join('; ')|en) }} · {{ L('收盘来源', 'close') }}: {{ L(h.close_source or '—', (h.close_source or '—')|en) }} · {{ L('校验', 'check') }} {{ xc(h.xcheck) }}</div>
+{{ why_block(w) }}
+{% if h.detail %}
+{{ headlines(h.insight) }}
+<div class="two">
+<div><h4>{{ L('风险指标', 'Risk metrics') }}</h4><dl class="kv">
+<dt>{{ L('P/E（TTM / 预期）', 'P/E (TTM / fwd)') }}</dt><dd>{{ f.trailing_pe|num(1) }} / {{ f.forward_pe|num(1) }}</dd>
+<dt>{{ L('市值', 'Market cap') }}</dt><dd>{{ f.market_cap|big }}</dd>
+<dt>{{ L('20日均成交额（便士计）', '20d avg value (pence)') }}</dt><dd>{{ st.avg_dollar_vol20|big }}</dd>
+<dt>{{ L('Beta · 20日σ', 'Beta · 20d σ') }}</dt><dd>{{ f.beta|num(2) }} · {{ st.sigma20|num(2, False, True) }}</dd>
+<dt>{{ L('卖方一致评级', 'Street consensus') }}</dt><dd>{{ (f.rec_key if f.rec_key and f.rec_key != 'none' else '—') }} · {{ L('目标价', 'target') }} {{ f.target_mean|num }}</dd>
+<dt>{{ L('监管', 'Regulatory') }}</dt><dd class="mut">{{ L('RNS 公告暂未自动接入', 'RNS feed not yet automated') }}</dd>
+</dl></div>
+<div><h4>{{ L('技术面关键位', 'Key technical levels') }}</h4>{{ tech(h.technicals) }}</div>
+</div>
+{{ insight(h.insight, '分析师评级动态', 'Analyst rating changes', h.analyst, st.close) }}
+{% endif %}
+</details>{% endfor %}
+</div>
+{% else %}<p class="none">{{ L('本交易日 FTSE 350 没有标的触发异动阈值。', 'No FTSE 350 stock triggered alert thresholds this session.') }}</p>{% endif %}
+</section>
+{% else %}<section class="blk soonblk" id="uk"><header><h2>{{ L('英国 · FTSE 100 / 250', 'UK · FTSE 100 / 250') }}</h2><span class="chip warn">Beta · {{ L('即将上线', 'Coming soon') }}</span></header>
+<dl class="road">
+  <dt>{{ L('状态', 'Status') }}</dt><dd>{{ L('复用美股管线（yfinance + CNBC 校验），待接入 FTSE 成分股清单。', 'Reuses the US pipeline (yfinance + CNBC check); FTSE constituent lists pending.') }}</dd>
+  <dt>{{ L('覆盖范围', 'Coverage') }}</dt><dd>{{ L('FTSE 100、FTSE 250 收盘与宽度；FTSE 350 个股异动（同一套 ±7% / 2.5σ 规则）；当日 LBMA 贵金属定价。', 'FTSE 100 and 250 closes and breadth; FTSE 350 movers (same ±7% / 2.5σ rules); same-day LBMA precious-metal prices.') }}</dd>
+  <dt>{{ L('更新节奏', 'Schedule') }}</dt><dd>{{ L('伦敦交易所收盘后 20 分钟：16:50 伦敦时间，自动随夏令时调整。', '20 min after the LSE close: 16:50 London, DST-aware.') }}</dd>
+</dl></section>{% endif %}
 <section class="blk soonblk" id="cn"><header><h2>{{ L('中国 · A股 / 港股', 'China · A-shares / Hong Kong') }}</h2><span class="chip warn">Beta · {{ L('即将上线', 'Coming soon') }}</span></header>
 <dl class="road">
   <dt>{{ L('状态', 'Status') }}</dt><dd>{{ L('数据管线开发中；CPO 主题中的 4 只 A股成员已在上方实时追踪（样例）。', 'Pipeline in development; the four A-share CPO members above are the live sample.') }} <a href="#cpo">{{ L('查看样例 ↑', 'See sample ↑') }}</a></dd>
   <dt>{{ L('覆盖范围', 'Coverage') }}</dt><dd>{{ L('上证综指、深证成指、创业板指、沪深300、科创50、恒生指数；涨跌家数、涨跌停、两市成交额（对比 5 日均值）；南向资金与北向成交额；融资余额（T+1）；行业涨跌幅前 5 / 后 5；USD/CNY、USD/CNH。', 'SSE Composite, SZSE Component, ChiNext, CSI 300, STAR 50, Hang Seng; breadth, limit-up/down counts, turnover vs 5-day average; southbound flows and northbound turnover; margin balance (T+1); top/bottom 5 sectors; USD/CNY, USD/CNH.') }}</dd>
   <dt>{{ L('更新节奏', 'Schedule') }}</dt><dd>{{ L('港股收盘后 30 分钟：09:30 BST（10/25 后 08:30 GMT）。按上交所公告跳过休市日：9/25–9/27 中秋、10/1–10/7 国庆。', '30 min after the HK close: 09:30 BST (08:30 GMT after 10/25). Skips SSE holidays: 9/25–9/27 Mid-Autumn, 10/1–10/7 National Day.') }}</dd>
   <dt>{{ L('数据源', 'Sources') }}</dt><dd>{{ L('akshare（东方财富 / 新浪双接口交叉校验）', 'akshare (East Money / Sina endpoints cross-checked)') }}</dd>
-</dl></section>
-<section class="blk soonblk" id="uk"><header><h2>{{ L('英国 · FTSE 100 / 250', 'UK · FTSE 100 / 250') }}</h2><span class="chip warn">Beta · {{ L('即将上线', 'Coming soon') }}</span></header>
-<dl class="road">
-  <dt>{{ L('状态', 'Status') }}</dt><dd>{{ L('复用美股管线（yfinance + CNBC 校验），待接入 FTSE 成分股清单。', 'Reuses the US pipeline (yfinance + CNBC check); FTSE constituent lists pending.') }}</dd>
-  <dt>{{ L('覆盖范围', 'Coverage') }}</dt><dd>{{ L('FTSE 100、FTSE 250 收盘与宽度；FTSE 350 个股异动（同一套 ±7% / 2.5σ 规则）；当日 LBMA 贵金属定价。', 'FTSE 100 and 250 closes and breadth; FTSE 350 movers (same ±7% / 2.5σ rules); same-day LBMA precious-metal prices.') }}</dd>
-  <dt>{{ L('更新节奏', 'Schedule') }}</dt><dd>{{ L('伦敦交易所收盘后 20 分钟：16:50 伦敦时间，自动随夏令时调整。', '20 min after the LSE close: 16:50 London, DST-aware.') }}</dd>
 </dl></section>
 
 {% if public %}

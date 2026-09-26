@@ -43,3 +43,8 @@ def quotes(symbols: list[str], chunk: int = 40) -> dict[str, dict]:
 def yahoo_to_cnbc(ticker: str) -> str:
     """美股个股代码转换（BRK-B -> BRK.B）。"""
     return ticker.replace("-", ".")
+
+
+def uk_symbol(epic: str) -> str:
+    """LSE 代码 → CNBC 代码（BARC → BARC-GB）。"""
+    return f"{epic}-GB"

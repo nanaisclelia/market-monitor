@@ -128,6 +128,141 @@
     }
    ],
    "catalyst": "none"
+  },
+  "HWG.L": {
+   "catalyst": "company",
+   "headline": "Peel Pepper 将收购报价提高至 187 便士，董事会转为推荐；股价收于报价价位",
+   "headline_en": "Peel Pepper lifts its offer to 187p and the board now recommends; shares close at the offer price",
+   "points": [
+    {
+     "tag": "已证实",
+     "text": "Peel Pepper 将现金收购报价从 8/6 的 172.5 便士提高到 187 便士（+8.4%），对应估值约 6.317 亿英镑，较要约期前（8/5 收盘 143.6 便士）溢价 30.2%。董事会从此前的立场转为推荐接受，Barclays 与 Peel Hunt 认为条款\"公允合理\"。",
+     "text_en": "Peel Pepper raised its cash offer from 172.5p (8/6) to 187p (+8.4%), valuing Harworth at ~£631.7m, a 30.2% premium to the 143.6p close on 8/5 before the offer period. The board reversed its stance and now recommends acceptance; Barclays and Peel Hunt advised the terms are \"fair and reasonable\".",
+     "src": [
+      0
+     ]
+    },
+    {
+     "tag": "已证实",
+     "text": "Peel Pepper 以 187 便士买入 72,080,449 股，预计 9/29 交割，之后持股约 52.1%。它在 9/17 持股超过 30%，按《收购守则》Rule 9.1(a) 触发强制要约。融资来自 HSBC UK 与 NatWest 的过渡性贷款（9/25 签署）。当日成交量约为 20 日均量的 221 倍，与这笔大宗买入相符。",
+     "text_en": "Peel Pepper agreed to buy 72,080,449 shares at 187p (settlement expected 9/29), taking it to ~52.1%. Crossing 30% on 9/17 made the offer mandatory under Takeover Code Rule 9.1(a). Financing comes from HSBC UK and NatWest under an interim facilities agreement dated 9/25. Volume of ~221x the 20-day average is consistent with this block purchase.",
+     "src": [
+      0
+     ]
+    },
+    {
+     "tag": "分析师",
+     "text": "Jefferies 当日维持 Hold，目标价 180 便士，低于报价价位。",
+     "text_en": "Jefferies reiterated Hold with a 180p target, below the offer price.",
+     "src": [
+      1
+     ]
+    },
+    {
+     "tag": "AI 推断",
+     "text": "交易含义：股价已贴近 187 便士报价，剩余套利空间取决于能否再次加价。收购方交割后持股过半，竞购方出现的可能性下降，下行风险主要在于交易条件变化。",
+     "text_en": "Trade read: shares now sit at the 187p offer, so remaining arbitrage upside depends on a further bump. With the bidder above 50% after settlement, a rival bid is less likely; downside risk lies mainly in changes to deal terms.",
+     "src": []
+    }
+   ],
+   "sources": [
+    {
+     "publisher": "Investing.com",
+     "date": "2026-09-25",
+     "title": "Peel Pepper raises bid for Harworth Group to 187 pence per share",
+     "url": "https://www.investing.com/news/company-news/peel-pepper-raises-bid-for-harworth-group-to-187-pence-per-share-93CH-4916651"
+    },
+    {
+     "publisher": "MarketBeat",
+     "date": "2026-09-25",
+     "title": "Harworth Group (LON:HWG) Stock Keeps \"Hold\" Rating at Jefferies Financial Group",
+     "url": "https://www.marketbeat.com/instant-alerts/analyst-harworth-group-lon-hwg-stock-keeps-hold-rating-at-jefferies-financial-group-2026-09-25/"
+    }
+   ]
+  },
+  "CWR.L": {
+   "catalyst": "sector",
+   "headline": "无当日公司公告；同业 Bloom Energy 因 Oracle 合同大涨，燃料电池板块联动",
+   "headline_en": "No company news; fuel-cell read-across from Bloom Energy's Oracle-driven rally",
+   "points": [
+    {
+     "tag": "AI 推断",
+     "text": "同日美国燃料电池公司 Bloom Energy 因 Oracle 重申约 2.4 GW 合同而上涨 8.3%。Ceres 同为固体氧化物燃料电池技术公司，涨幅可能来自板块联动。此为推断，未找到直接报道。",
+     "text_en": "The same day US fuel-cell maker Bloom Energy rose 8.3% as Oracle reaffirmed its ~2.4 GW contract; as a fellow solid-oxide fuel-cell technology company, Ceres may have moved in sympathy. This is an inference; no direct report was found.",
+     "src": [
+      0
+     ]
+    },
+    {
+     "tag": "媒体报道",
+     "text": "部分网站把 Ceres 的上涨归因于技术性反弹，但那篇文章是 7/30 发布的，不是当日原因。",
+     "text_en": "Some sites attribute Ceres moves to a technical bounce, but that article dates from 7/30, not the day.",
+     "src": [
+      1
+     ],
+     "not_catalyst": true
+    }
+   ],
+   "sources": [
+    {
+     "publisher": "Simply Wall St / Yahoo Finance",
+     "date": "2026-09-25",
+     "title": "Bloom Energy (BE) Is Up 8.7% After Oracle Reaffirms 2.4 GW AI Fuel Cell Deal Commitment",
+     "url": "https://finance.yahoo.com/markets/stocks/articles/bloom-energy-8-7-oracle-220801648.html"
+    },
+    {
+     "publisher": "AskTraders",
+     "date": "2026-07-30",
+     "title": "Ceres Power Shares Surge to Lead FTSE 250 Gainers",
+     "url": "https://www.asktraders.com/analysis/ceres-power-shares-surge-to-lead-ftse-250-gainers/"
+    }
+   ]
+  },
+  "GRG.L": {
+   "catalyst": "none",
+   "headline": "未检索到当日公司公告；9/30 将发布第三季度交易更新",
+   "headline_en": "No company news found; Q3 trading update due 9/30",
+   "points": [
+    {
+     "tag": "媒体报道",
+     "text": "单一来源报道称股价站上 200 日均线（约 1,833 便士），公司将于 9/30 发布第三季度交易更新。",
+     "text_en": "A single source reports the shares cleared the 200-day line (~1,833p) ahead of a Q3 trading update on 9/30.",
+     "src": [
+      0
+     ]
+    }
+   ],
+   "sources": [
+    {
+     "publisher": "ad-hoc-news",
+     "date": "2026-09-25",
+     "title": "Greggs stock clears 200-day line at 1,833p before Q3 update",
+     "url": "https://www.ad-hoc-news.de/boerse/news/corporate-news/greggs-stock-clears-200-day-line-at-1-833p-before-q3-update/70184222"
+    }
+   ]
+  },
+  "SEIT.L": {
+   "catalyst": "none",
+   "headline": "未检索到当日公司公告；信托处于有序清盘阶段",
+   "headline_en": "No company news found; trust is in managed wind-down",
+   "points": [
+    {
+     "tag": "媒体报道",
+     "text": "背景：SEIT 在 4 月顺应股东要求启动有序清盘并返还资本。当日未检索到新公告；该股流动性较低，单日波动容易放大。",
+     "text_en": "Context: in April SEIT bowed to shareholder demands for a managed wind-down and return of capital. No new announcement found for the day; the thinly traded shares can swing sharply.",
+     "src": [
+      0
+     ]
+    }
+   ],
+   "sources": [
+    {
+     "publisher": "QuotedData",
+     "date": "2026-04",
+     "title": "SDCL Efficiency Income bows to investors' demands for a managed wind-down and return of capital",
+     "url": "https://quoteddata.com/2026/04/sdcl-efficiency-income-bows-to-investors-demands-for-a-managed-wind-down-and-return-of-capital/"
+    }
+   ]
   }
  },
  "themes": {
@@ -291,6 +426,11 @@
     "when": "9/28–9/30",
     "zh": "A股中秋后复市三天，随即国庆休市（10/1–10/7）：CPO A股成员将补反映 9/25 的美股反弹",
     "en": "A-shares reopen for three days, then close for National Day (10/1–10/7): CPO A-share members catch up with the 9/25 US rebound"
+   },
+   {
+    "when": "9/29–9/30",
+    "zh": "英国：Harworth 大宗收购股份交割（9/29，公司公告）；Greggs 第三季度交易更新（9/30，单一媒体来源）",
+    "en": "UK: Harworth block purchase settles (9/29, company announcement); Greggs Q3 trading update (9/30, single-outlet source)"
    },
    {
     "when": "10/2",

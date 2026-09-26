@@ -18,3 +18,4 @@ metals:
 # 美股监控池
 universe:
   us: [sp500, nasdaq100]
+  uk: [ftse100, ftse250]   # FTSE 350

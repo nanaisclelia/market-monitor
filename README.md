@@ -1,6 +1,6 @@
 # Market Monitor
 
-**A daily closing brief for US equities, precious metals, the CPO / optical-interconnect theme and single-stock movers — built around data discipline: every number is fetched live, cross-checked against a second source, and every opinion is attributed to a named source.**
+**A daily closing brief for US and UK equities, precious metals, the CPO / optical-interconnect theme and single-stock movers — built around data discipline: every number is fetched live, cross-checked against a second source, and every opinion is attributed to a named source.**
 
 **Live page:** https://claude.ai/artifact/MNtBzS83NLwwyNcxRe9mhM · bilingual (中文 / EN) · Day / Dark
 
@@ -13,6 +13,7 @@
 | **Today's conclusion** | Market state, three key drivers, and dated items to watch next |
 | **Geopolitics & macro** | 3–5 market-moving events a day, each as *event → affected assets → transmission logic → facts → source* |
 | **US indices** | S&P 500, Dow, Nasdaq, Russell 2000, VIX — close, change, 20-day σ, relative volume, 60-day sparkline, CNBC cross-check |
+| **UK equities** | FTSE 100 / 250 closes, FTSE 350 movers with the same alert rules and AI-summarised reasons; closing-auction prices patched from CNBC when Yahoo lags, with symbol-mapping checks and Yahoo cross-verification |
 | **Precious metals** | LBMA fixes vs COMEX/NYMEX front-month futures for gold, silver, platinum, palladium |
 | **Theme tracker: CPO** | 16 names across the co-packaged-optics value chain (NVIDIA, Broadcom, TSMC, Coherent, Lumentum… plus 4 China A-share optical module makers): equal-weighted 1D/5D/20D/YTD, ranked diverging bar chart, value-chain role |
 | **Movers & alerts** | S&P 500 + Nasdaq-100 + theme members screened for ±7% or ≥2.5σ moves; each flagged stock gets *why it moved* (tagged Confirmed / Analyst / Media report / AI inference, with numbered sources), SEC 8-K filings, analyst rating & target changes, valuation / liquidity / crowding metrics and key technical levels |
@@ -50,7 +51,7 @@ uv venv -p 3.12 .venv && uv pip install -p .venv/bin/python -r requirements.txt
 
 每个交易日在各市场收盘后自动抓取数据，生成静态 HTML 看台（`site/index.html`），并按日期存档快照。
 
-**当前阶段**：美股主要指数 + 贵金属 + 主题追踪（CPO）+ 异动预警。中国（A股/港股）、英国、地缘、交易 Case 为下一阶段。
+**当前阶段**：美股 + 英股（FTSE 100/250、FTSE 350 异动）+ 贵金属 + 主题追踪（CPO）+ 异动预警。中国（A股/港股）、英国、地缘、交易 Case 为下一阶段。
 
 ---
 
@@ -98,6 +99,7 @@ launchd 每 10 分钟调用一次 `run --auto`。程序用 `exchange_calendars` 
 
 | 市场 | 触发（伦敦时间，自动随夏令时变化） |
 |---|---|
+| 英股 | 16:50 伦敦时间（收盘竞价后 20 分钟） |
 | 美股 | 10/25 前 21:20 BST · 10/25–11/1 **20:20 GMT** · 11/1 后 21:20 GMT |
 
 - 电脑休眠时不会运行；唤醒后下一个 10 分钟周期会自动补跑（同一交易日只跑一次）。

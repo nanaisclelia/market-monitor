@@ -41,12 +41,34 @@ def _nasdaq100():
             for r in j["data"]["data"]["rows"]]
 
 
-LOADERS = {"sp500": _sp500, "nasdaq100": _nasdaq100}
+def _ftse(url: str, index: str):
+    html = http_get(url).text
+    for t in pd.read_html(io.StringIO(html)):
+        cols = [str(c) for c in t.columns]
+        if "Ticker" in cols and "Company" in cols and len(t) >= 90:
+            sec = next((c for c in cols if "sector" in c.lower()), None)
+            return [{"ticker": str(r["Ticker"]).strip().replace(".", "-") + ".L", "epic": str(r["Ticker"]).strip(),
+                     "name": r["Company"], "sector": (r[sec] if sec and isinstance(r[sec], str) else None), "index": index}
+                    for _, r in t.iterrows() if isinstance(r["Ticker"], str)]
+    raise RuntimeError(f"{index}: constituent table not found")
+
+
+LOADERS = {"sp500": _sp500, "nasdaq100": _nasdaq100,
+           "ftse100": lambda: _ftse("https://en.wikipedia.org/wiki/FTSE_100_Index", "FTSE 100"),
+           "ftse250": lambda: _ftse("https://en.wikipedia.org/wiki/FTSE_250_Index", "FTSE 250")}
 
 
 def us(sets: list[str]) -> dict[str, dict]:
     out: dict[str, dict] = {}
     for s in sets:
         for it in _cached(s, LOADERS[s]):
+            out.setdefault(it["ticker"], it)
+    return out
+
+
+def uk(sets: list[str]) -> dict[str, dict]:
+    out: dict[str, dict] = {}
+    for s_ in sets:
+        for it in _cached(s_, LOADERS[s_]):
             out.setdefault(it["ticker"], it)
     return out

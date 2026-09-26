@@ -14,7 +14,7 @@ log = get_logger()
 
 
 def history(tickers: list[str], period: str = "1y", chunk: int = 100,
-            retries: int = 3) -> dict[str, pd.DataFrame]:
+            retries: int = 3, keep_last_nan: bool = False) -> dict[str, pd.DataFrame]:
     """返回 {ticker: DataFrame[Open, High, Low, Close, Volume]}，下载失败的 ticker 不在结果中。"""
     out: dict[str, pd.DataFrame] = {}
     pending = list(dict.fromkeys(tickers))
@@ -27,7 +27,12 @@ def history(tickers: list[str], period: str = "1y", chunk: int = 100,
             for t in batch:
                 try:
                     sub = df[t] if isinstance(df.columns, pd.MultiIndex) else df
-                    sub = sub[["Open", "High", "Low", "Close", "Volume"]].dropna(subset=["Close"])
+                    sub = sub[["Open", "High", "Low", "Close", "Volume"]]
+                    last = sub.iloc[-1:] if keep_last_nan and len(sub) and sub["Open"].iloc[-1] == sub["Open"].iloc[-1] else None
+                    sub = sub.dropna(subset=["Close"])
+                    if last is not None and last["Close"].isna().all():
+                        # 最新一根收盘价缺失（Yahoo 伦敦收盘竞价常延迟入库）：保留该行待其他来源补齐
+                        sub = pd.concat([sub, last])
                 except KeyError:
                     sub = pd.DataFrame()
                 if len(sub):
@@ -119,3 +124,14 @@ def analyst(ticker: str, days: int = 30, limit: int = 6) -> dict:
     except Exception as e:  # noqa: BLE001
         log.warning("analyst targets %s: %s", ticker, e)
     return out
+
+
+def quote_last(ticker: str) -> dict | None:
+    """Yahoo 报价接口的最新价 / 前收（用于交叉校验；逐只请求，只用于少量标的）。"""
+    try:
+        fi = yf.Ticker(ticker).fast_info
+        lp, pc = fi.get("lastPrice"), fi.get("previousClose")
+        return {"last": float(lp), "prev_close": float(pc) if pc else None, "source": "Yahoo quote"} if lp else None
+    except Exception as e:  # noqa: BLE001
+        log.warning("yfinance quote %s: %s", ticker, e)
+        return None

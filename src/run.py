@@ -11,11 +11,11 @@ import argparse
 import sys
 from datetime import date
 
-from . import build_us, calendars, render
+from . import build_uk, build_us, calendars, render
 from .common import DATA, SNAPSHOTS, get_logger, read_json, settings, write_json
 
 log = get_logger()
-BUILDERS = {"us": build_us}
+BUILDERS = {"us": build_us, "uk": build_uk}
 STATE = DATA / "state.json"
 
 

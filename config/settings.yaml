@@ -14,6 +14,14 @@ markets:
       - {name: Nasdaq Composite, yahoo: "^IXIC", cnbc: ".IXIC"}
       - {name: Russell 2000, yahoo: "^RUT", cnbc: ".RUT"}
       - {name: VIX,       yahoo: "^VIX",  cnbc: ".VIX", alert: false}
+  uk:
+    calendar: XLON
+    tz: Europe/London
+    delay_minutes: 20          # 16:30 收盘 + 收盘竞价，16:50 抓取
+    sections: [indices, alerts]
+    indices:
+      - {name: FTSE 100, yahoo: "^FTSE", cnbc: ".FTSE"}
+      - {name: FTSE 250, yahoo: "^FTMC", cnbc: ".FTMC"}
 
 metals:
   - {name: 黄金 Gold,      key: gold,      lbma: gold_pm,      yahoo: "GC=F", cnbc: "@GC.1"}
