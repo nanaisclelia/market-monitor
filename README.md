@@ -6,6 +6,19 @@
 
 ![Market Monitor — dark mode](docs/screenshot-dark.png)
 
+## Product structure
+
+**Morning brief (default, ~3 minutes)** — data freshness per market (session, next update, China closed/open), one-sentence market state, *what actually changed* (three variables and why each matters), *what not to over-read*, three frozen open questions you can follow, one corrected call from yesterday, a one-line market map.
+
+**Research desk** — everything else: trigger checklist, geopolitics, indices, metals, CPO theme, today's repricing (US and UK), technicals, method.
+
+The loop the product is built around: **freshness → what changed → what didn't → three testable questions → yesterday's call corrected → dig deeper in the desk.**
+
+- **Frozen calls.** Each day's open questions (expectation, horizon, confidence, falsifier, evidence) are written to `data/calls/<date>.json` once, hashed with SHA-256; the page shows the hash and an integrity check, and the code refuses to overwrite a frozen file. Reviews use only *evidence consistent / inconclusive / falsified*.
+- **Release gate.** Before rendering, each market passes automated checks — index completeness and two-source agreement, coverage, outliers ≥ 40%, split / corporate-action ratios, pence-vs-pound unit errors, mover reconciliation, symbol mapping. Failures show *pending verification*; suspicious names are quarantined rather than displayed.
+- **Movers are explanations, not signals.** Cards show *explanation confidence* and whether a same-day primary document exists; only same-day primary + fundamental-change items open by default.
+- **Non-comparable data stays separate.** Closed-market members sit in a folded "not same-day" group and every aggregate states its sample, exclusions and session.
+
 ## What it does
 
 | Module | Content |

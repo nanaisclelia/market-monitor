@@ -78,6 +78,18 @@
 {{ srcs(w.sources) }}
 </div>{% endif %}
 {%- endmacro -%}
+{%- macro cporow(r, sess) -%}<tr class="mk-{{ r.market }}" data-market="{{ r.market }}" data-alert="{{ 1 if r.why else 0 }}">
+<td class="t sym"><span class="mkt {{ r.market }}">{{ 'CN' if r.market == 'cn' else 'US' }}</span>{{ r.ticker }}</td><td class="t">{{ L(r.name, r.name_en or r.name) }}</td><td class="t mut">{{ L(r.role, r.role_en or r.role) }}</td>
+{% if r.stats %}<td>{{ r.stats.close|num }}</td><td data-v="{{ r.stats.pct }}" class="{{ hot(r.stats.pct, 5) }}">{{ chg(r.stats.pct) }}</td><td data-v="{{ r.r5 }}" class="{{ hot(r.r5, 10) }}">{{ chg(r.r5, 1) }}</td><td data-v="{{ r.r20 }}" class="{{ hot(r.r20, 15) }}">{{ chg(r.r20, 1) }}</td><td data-v="{{ r.ytd }}" class="{{ hot(r.ytd, 100) }}">{{ chg(r.ytd, 1) }}</td><td data-v="{{ r.stats.rel_volume or 0 }}" class="{{ 'hotv' if (r.stats.rel_volume or 0) >= 2 else '' }}">{% if r.stats.rel_volume %}{{ r.stats.rel_volume|num(1) }}×{% else %}—{% endif %}</td><td data-v="{{ r.vs_ma50 }}">{{ r.vs_ma50|num(1, True, True) }}</td><td class="t">{{ r.spark|spark(84, 22, r.name) }}</td>
+<td>{% if r.why %}<span class="chip alert" title="{{ r.why|join('; ')|en }}">{{ L('异动', 'Alert') }}</span>{% endif %}{% if r.market == 'cn' and r.session != sess %} <span class="chip" title="{{ r.session }}">{{ L('休市·' ~ r.session[5:], 'closed·' ~ r.session[5:]) }}</span>{% endif %}</td>
+{% else %}<td colspan="9" class="missing">{{ L('数据暂缺（' ~ r.error ~ '）', 'Data unavailable (' ~ (r.error|en) ~ ')') }}</td>{% endif %}
+</tr>{%- endmacro -%}
+{%- macro gatebox(snap) -%}{%- set gt = snap.gate -%}{% if gt %}
+<details class="gate {{ gt.status }}"{% if gt.status == 'fail' %} open{% endif %}><summary><span class="gs {{ gt.status }}">{{ L({'pass':'发布闸门：通过','warn':'发布闸门：通过（有警告）','fail':'发布闸门：未通过 · 待核验'}[gt.status], {'pass':'Release gate: passed','warn':'Release gate: passed with warnings','fail':'Release gate: failed · pending verification'}[gt.status]) }}</span>
+<span class="mut">{{ L(gt.checks|length ~ ' 项自动检查' ~ ('，隔离 ' ~ gt.quarantine|length ~ ' 只' if gt.quarantine else ''), gt.checks|length ~ ' automated checks' ~ (', ' ~ gt.quarantine|length ~ ' quarantined' if gt.quarantine else '')) }}</span></summary>
+<ul class="gl">{% for c in gt.checks %}<li><span class="gs {{ c.status }}">{{ {'pass':'✓','warn':'!','fail':'✗'}[c.status] }}</span> <b>{{ L(c.name, c.name_en) }}</b> <span class="mut">{{ L(c.detail, c.detail_en) }}</span></li>{% endfor %}</ul>
+{% if gt.status == 'fail' %}<p class="missing">{{ L('本市场数据未通过发布闸门：以下数值待核验，请勿作为结论使用。', 'This market failed the release gate: figures below are pending verification — do not rely on them.') }}</p>{% endif %}
+</details>{% endif %}{%- endmacro -%}
 {%- macro headlines(b) -%}
 {% if b and b.headlines %}<ul class="hl">{% for h in b.headlines %}<li><span class="chip warn">{{ L('未证实', 'Unconfirmed') }}</span><a href="{{ h.url }}" target="_blank" rel="noopener">{{ h.title }}</a><span class="mut">{{ h.provider }}</span></li>{% endfor %}</ul>{% endif %}
 {%- endmacro -%}
@@ -365,6 +377,66 @@ main.wrap>*{min-width:0}
   table.review td:first-child,table.review td:nth-child(2){width:auto}
   .hint{display:none}
 }
+/* ===== two-layer product: brief / desk ===== */
+.tasknav{display:flex;gap:2px 20px;flex-wrap:wrap;padding-block:2px 8px;overflow-x:auto}
+.tasknav a{font:600 12.5px var(--sans);color:var(--sub);padding:4px 0;border-bottom:2px solid transparent;white-space:nowrap}
+.tasknav a:hover{text-decoration:none;color:var(--ink)}
+.tasknav a.on{color:var(--ink);border-bottom-color:var(--accent)}
+.tasknav em{font:600 10px var(--mono);font-style:normal;margin-left:4px;padding:0 5px;border-radius:8px;background:var(--accent);color:var(--panel)}
+body[data-view="brief"] .deskonly{display:none}
+.subnav{border-top:1px solid var(--line);padding-top:6px}
+.fresh{background:var(--sunk);border-bottom:1px solid var(--line)}
+.frow{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 8px;padding-block:6px;font-size:12px;color:var(--sub)}
+.fk{font:600 10.5px var(--cond);letter-spacing:.08em;text-transform:uppercase;color:var(--mut)}
+.fsep{color:var(--rule)}
+.fm b{color:var(--ink);font-weight:600}
+.stale{margin:0 auto 6px;padding:8px 12px;border-radius:6px;background:var(--dn-bg);color:var(--dn);font-weight:600;font-size:13px}
+body.isstale main{opacity:.72}
+.bhero{display:grid;gap:10px;padding:6px 0 4px}
+.bkicker{margin:0;font:600 11px var(--cond);letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+.bstate{margin:0;font:600 clamp(18px,2.6vw,24px)/1.35 var(--sans);text-wrap:balance;max-width:40ch}
+.bh{font:600 12px var(--cond);letter-spacing:.1em;text-transform:uppercase;color:var(--sub);margin:12px 0 0}
+.bchg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+@media(max-width:820px){.bchg{grid-template-columns:minmax(0,1fr)}}
+.view,.bhero>*,.bchg>*,.qs>*,.q>*,section.blk>*{min-width:0}
+.bchg article{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:12px 14px;display:grid;gap:6px;align-content:start}
+.bchg h3{font-size:14px}.bchg p{margin:0;font-size:13.5px}
+.why{color:var(--sub)}.wk{display:inline-block;font:600 10px var(--cond);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-right:6px}
+.bnot{margin:0;padding-left:18px;display:grid;gap:4px;font-size:13.5px;color:var(--sub)}
+.qs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+@media(max-width:900px){.qs{grid-template-columns:minmax(0,1fr)}}
+.q{border:1px solid var(--line);border-radius:8px;padding:12px 14px;background:var(--sunk);display:grid;gap:8px;align-content:start}
+.q h3{font-size:14.5px;line-height:1.4}
+.qd{display:grid;grid-template-columns:auto 1fr;gap:3px 10px;margin:0;font-size:12.5px}
+.qd dt{font:500 10.5px var(--cond);letter-spacing:.06em;text-transform:uppercase;color:var(--mut);padding-top:2px}.qd dd{margin:0}
+.follow{justify-self:start;appearance:none;border:1px solid var(--accent);background:transparent;color:var(--accent);font:600 12px var(--sans);padding:4px 12px;border-radius:999px;cursor:pointer}
+.follow .on{display:none}.follow[aria-pressed="true"]{background:var(--accent);color:var(--panel)}
+.follow[aria-pressed="true"] .on{display:inline}.follow[aria-pressed="true"] .off{display:none}
+.frozen{margin:0;font-size:11.5px;color:var(--mut)}
+.fix{border-left:3px solid var(--warn);padding:6px 12px;display:grid;gap:4px}
+.fix p{margin:0;font-size:13.5px}
+.allrev summary{cursor:pointer;font-size:12.5px;color:var(--accent)}
+.mapline{display:flex;flex-wrap:wrap;gap:6px}
+.mchip{display:inline-flex;gap:6px;align-items:baseline;padding:4px 10px;border:1px solid var(--line);border-radius:999px;background:var(--sunk);font:12.5px var(--mono)}
+.mchip b{font:600 11.5px var(--sans);color:var(--sub)}.mchip i{font-style:normal;font-size:10.5px}
+.mapfoot{margin:0;font-size:12.5px;color:var(--sub)}
+.fl{list-style:none;padding:0;margin:0;display:grid;gap:8px}
+.fl li{border:1px solid var(--line);border-radius:6px;padding:8px 12px;display:grid;gap:2px;font-size:13.5px}
+.fl .st{font-size:12px}
+.todesk{margin:4px 0 0}.cta{display:inline-block;padding:10px 16px;border-radius:8px;background:var(--ink);color:var(--panel);font-weight:600;font-size:13.5px}
+.cta:hover{text-decoration:none;opacity:.9}
+.deskhead h2{font-size:14px}.deskhead p{margin:4px 0 0;font-size:12.5px;color:var(--sub);max-width:90ch}
+h2 small{text-transform:none;letter-spacing:0}
+.kc{font-size:11.5px;color:var(--sub);white-space:nowrap}
+.disc2{margin:6px 0 0;font-size:11.5px;color:var(--mut);font-style:italic}
+.closedgrp{margin-top:6px;border:1px dashed var(--rule);border-radius:6px;padding:6px 10px}
+.closedgrp summary{cursor:pointer;font-size:12.5px;color:var(--warn)}
+.gate{border:1px solid var(--line);border-radius:6px;padding:6px 10px;font-size:12.5px}
+.gate summary{cursor:pointer;display:flex;flex-wrap:wrap;gap:4px 10px;align-items:center}
+.gate.fail{border-color:var(--dn)}
+.gl{list-style:none;padding:6px 0 0;margin:0;display:grid;gap:3px}
+.gs{display:inline-block;font:600 10.5px/1.7 var(--sans);padding:0 6px;border-radius:3px;letter-spacing:0;text-transform:none}
+.gs.pass{background:var(--up-bg);color:var(--up)}.gs.warn{background:var(--warn-bg);color:var(--warn)}.gs.fail{background:var(--dn-bg);color:var(--dn)}
 @media (prefers-reduced-motion:no-preference){.seg button,.fbtn{transition:background .15s,color .15s}}
 @media (prefers-reduced-motion:reduce){.caret{transition:none}}
 </style>
@@ -375,7 +447,7 @@ main.wrap>*{min-width:0}
 <header class="mast">
   <div class="wrap mrow">
     <div class="brand"><span class="logo" aria-hidden="true">MM</span><div><h1>Market Monitor</h1><p class="tag">{{ L('收盘简报 · 地缘 / 美股 / 贵金属 / 主题 / 异动', 'Closing brief · Geopolitics / US equities / Metals / Themes / Movers') }}</p></div></div>
-    {% set uk = s.get('uk') %}{% if us or uk %}<div class="status">{% if uk %}<span class="pill" title="{{ uk.session_close_utc|t(uk.exchange_tz) }}"><i></i>LSE {{ uk.session[5:] }}</span>{% endif %}{% if us %}<span class="pill" title="{{ us.session_close_utc|t(us.exchange_tz) }}"><i></i>NYSE {{ us.session[5:] }}</span><span>{{ L('收盘快照', 'Closing snapshot') }}</span>{% endif %}</div>{% endif %}
+    {% set uk = s.get('uk') %}
     {% if not public %}<select id="archive" aria-label="历史快照 / Archive" onchange="if(this.value)location.href=this.value">
       <option value="">历史快照 / Archive…</option>
       {% if is_archive %}<option value="../index.html">最新 / Latest</option>{% endif %}
@@ -392,42 +464,103 @@ main.wrap>*{min-width:0}
       </div>
     </div>
   </div>
-  <nav class="wrap subnav" aria-label="Sections">
-    {% if an and an.review %}<a href="#review">{{ L('验证', 'Check') }}</a>{% endif %}{% if an and an.geo %}<a href="#geo">{{ L('地缘政治', 'Geopolitics') }}</a>{% endif %}
+  <nav class="wrap tasknav" aria-label="Tasks">
+    <a href="#brief" data-view="brief">{{ L('晨间简报', 'Morning brief') }}</a>
+    {% if an and an.review %}<a href="#b-review" data-view="brief">{{ L('昨日验证', "Yesterday's check") }}</a>{% endif %}
+    <a href="#b-map" data-view="brief">{{ L('市场地图', 'Market map') }}</a>
+    <a href="#b-follow" data-view="brief">{{ L('我的关注', 'Following') }}<em id="fcount" hidden></em></a>
+    <a href="#desk" data-view="desk">{{ L('研究台', 'Research desk') }}</a>
+    <a href="#method" data-view="desk">{{ L('方法', 'Method') }}</a>
+  </nav>
+  <nav class="wrap subnav deskonly" aria-label="Research desk sections">
+    {% if an and an.geo %}<a href="#geo">{{ L('地缘政治', 'Geopolitics') }}</a>{% endif %}
     <a href="#us">{{ L('美股指数', 'US indices') }}</a><a href="#metals">{{ L('贵金属', 'Metals') }}</a>
     {% if us and us.sections.themes %}<a href="#cpo">CPO</a>{% endif %}
-    <a href="#alerts">{{ L('异动预警', 'Movers') }}</a><a href="#cn" class="soon">{{ L('中国', 'China') }}<em>{{ L('即将上线', 'Soon') }}</em></a>{% if s.get('uk') %}<a href="#uk">{{ L('英国', 'UK') }}</a>{% else %}<a href="#uk" class="soon">{{ L('英国', 'UK') }}<em>{{ L('即将上线', 'Soon') }}</em></a>{% endif %}
-    <a href="#method">{{ L('方法', 'Method') }}</a>{% if not public %}<a href="#log">{{ L('日志', 'Log') }}</a>{% endif %}
+    <a href="#alerts">{{ L('今日重新定价', 'Repricing') }}</a>{% if s.get('uk') %}<a href="#uk">{{ L('英国', 'UK') }}</a>{% endif %}
+    {% if not public %}<a href="#log">{{ L('日志', 'Log') }}</a>{% endif %}
   </nav>
 </header>
 
-<main class="wrap">
-{% if public %}<div class="lede">
-  <p>{{ L('个人研究用的收盘简报。所有数字来自收盘后生成的快照，并与第二数据源交叉校验；驱动因素区分"已证实"与"未证实"；观点只收录可核实身份的具名来源。',
-          'A personal closing brief. Every number comes from a post-close snapshot and is cross-checked against a second source; drivers are labelled confirmed vs unconfirmed; views are attributed only to identifiable, named sources.') }}</p>
-  {% if us %}<p class="asof">{{ L('本页为 ' ~ us.session ~ ' 美股收盘后的快照，生成于 ' ~ us.generated_at|t(disp_tz) ~ '。',
-                                  'Snapshot after the ' ~ us.session ~ ' US close, generated ' ~ us.generated_at|t(disp_tz) ~ '.') }}</p>{% endif %}
-</div>{% endif %}
+<div class="fresh" id="fresh" data-expires="{{ fresh.expires or '' }}">
+  <div class="wrap frow">
+    <span class="fk">{{ L('生成于', 'Generated') }}</span><span class="fv mono">{{ fresh.generated|t(disp_tz, '%m/%d %H:%M %Z') }}</span>
+    {% for m in fresh.markets %}<span class="fsep" aria-hidden="true">｜</span><span class="fm"><b>{{ L(m.label, m.label_en) }}</b> {{ L('收盘 ' ~ (m.session|wd('zh')), 'close ' ~ (m.session|wd('en'))) }} <span class="mut">· {{ L('下次', 'next') }} {{ m.next|t(disp_tz, '%m/%d %H:%M') }}</span></span>{% endfor %}
+    {% if fresh.cn %}<span class="fsep" aria-hidden="true">｜</span><span class="fm"><b>{{ L('中国', 'China') }}</b> {% if fresh.cn.open_today %}{{ L('今日开市', 'open today') }}{% else %}{{ L('休市', 'closed') }} <span class="mut">· {{ L((fresh.cn.next_open|wd('zh')) ~ ' 开市', 'reopens ' ~ (fresh.cn.next_open|wd('en'))) }}</span>{% endif %} <span class="mut">· {{ L('看台未覆盖', 'not covered') }}</span></span>{% endif %}
+  </div>
+  <div class="stale wrap" id="stale" hidden>{{ L('数据已过期：原定 ' ~ (fresh.expires|t(disp_tz, '%m/%d %H:%M')) ~ ' 前完成下一次更新，当前显示的仍是上一交易日收盘。以下内容仅供回看，请勿当作当前行情。', 'Stale: the next update was due before ' ~ (fresh.expires|t(disp_tz, '%m/%d %H:%M')) ~ '; this still shows the previous close. Treat it as a look-back, not current prices.') }}</div>
+</div>
 
+<main class="wrap">
+<div class="view" id="v-brief">
 {% if an and an.summary %}{% set sm = an.summary %}
-<section class="concl" aria-label="Today's conclusion">
-  <div class="crow"><span class="ck">{{ L('市场状态', 'Market state') }}</span><p>{{ L(sm.state, sm.state_en or sm.state) }}</p></div>
+<section class="bhero" id="brief" aria-label="Morning brief">
+  <p class="bkicker">{{ L('晨间简报 · 3 分钟', 'Morning brief · 3 minutes') }}</p>
+  <p class="bstate">{{ L(sm.state, sm.state_en or sm.state) }}</p>
+  {% if sm.changed %}<h2 class="bh">{{ L('今天真正改变了什么', 'What actually changed') }}</h2>
+  <div class="bchg">{% for c in sm.changed %}<article><h3>{{ L(c.var, c.var_en) }}</h3><p>{{ L(c.what, c.what_en) }}</p><p class="why"><span class="wk">{{ L('为什么重要', 'Why it matters') }}</span>{{ L(c.why, c.why_en) }}</p></article>{% endfor %}</div>{% endif %}
+  {% if sm.not_changed %}<h2 class="bh">{{ L('今天不应过度解读', "Don't over-read") }}</h2>
+  <ul class="bnot">{% for x in sm.not_changed %}<li>{{ L(x.zh, x.en) }}</li>{% endfor %}</ul>{% endif %}
+</section>
+
+{% set cl = us.calls if us else none %}
+{% if cl %}<section class="blk" id="b-questions"><header><h2>{{ L('三个待验证问题', 'Three open questions') }}</h2><span class="meta">{{ L('发布后冻结 · 不可静默改写', 'Frozen on publication · no silent edits') }}</span></header>
+<div class="qs">{% for q in cl['items'][:3] %}<article class="q" data-qid="{{ q.id }}">
+  <h3>{{ L(q.q, q.q_en) }}</h3>
+  <dl class="qd"><dt>{{ L('预期', 'Expect') }}</dt><dd>{{ L(q.expect, q.expect_en) }}</dd>
+  <dt>{{ L('当前', 'Now') }}</dt><dd class="mono">{{ L(q.now, q.now_en) }}</dd>
+  <dt>{{ L('时限', 'By') }}</dt><dd class="mono">{{ L(q.horizon|wd('zh'), q.horizon|wd('en')) }}</dd>
+  <dt>{{ L('置信度', 'Confidence') }}</dt><dd>{{ L(q.confidence, q.confidence_en) }}</dd>
+  <dt>{{ L('反证条件', 'Falsified if') }}</dt><dd>{{ L(q.falsifier, q.falsifier_en) }}</dd></dl>
+  <button type="button" class="follow" data-follow="{{ q.id }}" aria-pressed="false"><span class="on">{{ L('已关注', 'Following') }} ✓</span><span class="off">+ {{ L('关注此问题', 'Follow') }}</span></button>
+</article>{% endfor %}</div>
+<p class="frozen">{{ L('冻结于 ' ~ (cl.frozen_at|t(disp_tz, '%m/%d %H:%M %Z')) ~ ' · SHA-256 ' ~ cl.sha256[:12], 'Frozen ' ~ (cl.frozen_at|t(disp_tz, '%m/%d %H:%M %Z')) ~ ' · SHA-256 ' ~ cl.sha256[:12]) }} · {% if cl.intact %}<span class="up">{{ L('内容校验 ✓', 'integrity ✓') }}</span>{% else %}<span class="dn">{{ L('内容校验失败：冻结后被改动', 'integrity failed: edited after freezing') }}</span>{% endif %} · {{ L('共 ' ~ cl['items']|length ~ ' 条，其余见研究台', cl['items']|length ~ ' in total — the rest are in the research desk') }}</p>
+</section>{% endif %}
+
+{% if an.review %}{% set rv = an.review %}{% set VC = {'证据一致':'ok','证据不充分':'part','被证伪':'miss','待到期':'na'} %}
+{% set fix = rv['items'][sm.correction] if sm.correction is defined else none %}
+<section class="blk" id="b-review"><header><h2>{{ L('昨日判断，今日验证', "Yesterday's calls, checked") }}</h2><span class="meta">{{ L(rv['from'] ~ ' 的判断 → ' ~ an.session ~ ' 的证据', rv['from'] ~ ' calls → ' ~ an.session ~ ' evidence') }}</span></header>
+{% if fix %}<div class="fix"><span class="ck">{{ L('今天修正的一个判断', 'One call corrected today') }}</span>
+<p><b>{{ L(fix.claim, fix.claim_en) }}</b> <span class="vd {{ VC.get(fix.verdict, 'na') }}">{{ L(fix.verdict, fix.verdict_en) }}</span></p>
+<p class="mut">{{ L(fix.outcome, fix.outcome_en) }}</p><p>→ {{ L(fix.lesson, fix.lesson_en) }}</p></div>{% endif %}
+<details class="allrev"><summary>{{ L('查看全部 ' ~ rv['items']|length ~ ' 条复盘', 'All ' ~ rv['items']|length ~ ' reviews') }}</summary>
+<div class="tw"><table class="review">
+<thead><tr><th class="t">{{ L('当时的判断', 'Call') }}</th><th class="t">{{ L('今日证据', 'Evidence today') }}</th><th class="t">{{ L('结论', 'Verdict') }}</th><th class="t">{{ L('修正', 'Correction') }}</th></tr></thead>
+<tbody>{% for r in rv['items'] %}<tr><td class="t">{{ L(r.claim, r.claim_en or r.claim) }}</td><td class="t">{{ L(r.outcome, r.outcome_en or r.outcome) }}</td><td class="t"><span class="vd {{ VC.get(r.verdict, 'na') }}">{{ L(r.verdict, r.verdict_en or r.verdict) }}</span></td><td class="t mut">{{ L(r.lesson, r.lesson_en or r.lesson) }}</td></tr>{% endfor %}</tbody>
+</table></div></details>
+<p class="frozen">{{ L('结论只用三种：证据一致 / 证据不充分 / 被证伪。单日相关不等于因果验证。', 'Only three verdicts: evidence consistent / inconclusive / falsified. One day of correlation is not causal proof.') }}{% if rv.note %} {{ L(rv.note, rv.note_en) }}{% if rv.provenance_url %} <a href="{{ rv.provenance_url }}" target="_blank" rel="noopener">{{ L('查看原文', 'original') }} ↗</a>{% endif %}{% endif %}</p>
+</section>{% endif %}
+{% endif %}
+
+<section class="blk" id="b-map"><header><h2>{{ L('市场地图', 'Market map') }}</h2><span class="meta">{{ L('收盘快照，非实时', 'Closing snapshot, not live') }}</span></header>
+<div class="mapline">
+{% if us %}{% for r in us.sections.indices if r.stats %}<span class="mchip"><b>{{ r.name.replace(' Composite', '') }}</b>{{ chg(r.stats.pct) }}</span>{% endfor %}{% endif %}
+{% if uk %}{% for r in uk.sections.indices if r.stats %}<span class="mchip"><b>{{ r.name }}</b>{{ chg(r.stats.pct) }}</span>{% endfor %}{% endif %}
+{% if us %}{% for m in us.sections.metals[:2] if m.lbma %}<span class="mchip"><b>{{ L(m.name.split(' ')[0], m.name.split(' ')[-1]) }}</b>{{ chg(m.lbma.pct) }}{% if not m.lbma.current %}<i class="mut">{{ L('非当日', 'stale') }}</i>{% endif %}</span>{% endfor %}{% endif %}
+</div>
+{% set nus = (us.sections.alerts.hits|drop_q(us.gate))|length if us else 0 %}{% set nuk = (uk.sections.alerts.hits|drop_q(uk.gate))|length if uk else 0 %}
+<p class="mapfoot">{{ L('今日重新定价 ' ~ (nus + nuk) ~ ' 只（美 ' ~ nus ~ ' · 英 ' ~ nuk ~ '）——这是对价格变化的解释，不是交易提醒。', (nus + nuk) ~ ' repriced today (US ' ~ nus ~ ' · UK ' ~ nuk ~ ') — explanations of price moves, not trade alerts.') }} <a href="#alerts" data-view="desk">{{ L('在研究台查看 →', 'Open in research desk →') }}</a></p>
+</section>
+
+<section class="blk" id="b-follow"><header><h2>{{ L('我的关注', 'Following') }}</h2><span class="meta">{{ L('只保存在本浏览器，无需注册', 'Saved in this browser only — no sign-up') }}</span></header>
+<div id="followlist"><p class="none">{{ L('还没有关注的问题。在上方「三个待验证问题」中点「关注此问题」，次日这里会显示它的验证结果。', 'Nothing followed yet. Tap "Follow" on an open question above; its outcome appears here the next day.') }}</p></div>
+</section>
+
+<p class="todesk"><a href="#desk" data-view="desk" class="cta">{{ L('进入研究台：完整数据、重新定价解释、CPO、英国、技术面 →', 'Open the research desk: full data, repricing explanations, CPO, UK, technicals →') }}</a></p>
+<script type="application/json" id="calldata">{{ {'calls': (us.calls['items'] if us and us.calls else []), 'reviews': ((us.analysis.review['items'] if us and us.analysis and us.analysis.review else []))}|tojson }}</script>
+</div>
+
+<div class="view" id="v-desk" hidden>
+<section class="deskhead" id="desk"><h2>{{ L('研究台', 'Research desk') }}</h2><p>{{ L('完整数据、重新定价解释、主题与技术面。所有异动都是对价格变化的解释，不是交易提醒；个人研究参考，不构成投资建议。', 'Full data, repricing explanations, themes and technicals. Every mover is an explanation of a price change, not a trade alert; personal research only, not investment advice.') }}</p></section>
+{% if an and an.summary %}{% set sm = an.summary %}
+<section class="concl" aria-label="Drivers and triggers">
   <div class="crow"><span class="ck">{{ L('核心驱动', 'Key drivers') }}</span><ol>{% for d in sm.drivers %}<li>{{ L(d.zh, d.en) }}</li>{% endfor %}</ol></div>
-  <div class="crow"><span class="ck">{{ L('接下来盯', 'Watch next') }}</span>
-  {% if sm.watch and sm.watch[0].cond %}<div class="tw"><table class="watch">
+  <div class="crow"><span class="ck">{{ L('触发器清单', 'Trigger checklist') }}</span>
+  <div class="tw"><table class="watch">
   <thead><tr><th class="t">{{ L('触发条件', 'Trigger') }}</th><th class="t">{{ L('当前值', 'Now') }}</th><th class="t">{{ L('可能影响', 'Likely impact') }}</th><th class="t">{{ L('时间', 'When') }}</th></tr></thead>
   <tbody>{% for x in sm.watch %}<tr><td class="t">{{ L(x.cond, x.cond_en or x.cond) }}</td><td class="t mono">{{ L(x.current, x.current_en or x.current) }}</td><td class="t">{{ L(x.impact, x.impact_en or x.impact) }}</td><td class="t mono mut">{{ L(x.when, x.when_en or x.when) }}</td></tr>{% endfor %}</tbody>
-  </table></div>
-  {% else %}<ul>{% for x in sm.watch %}<li><span class="when">{{ L(x.when, x.when_en or x.when) }}</span>{{ L(x.zh, x.en) }}</li>{% endfor %}</ul>{% endif %}</div>
-  <p class="cfoot">{{ L('AI 根据下方各板块来源整理 · 收盘后快照 ', 'AI summary of the cited sources below · post-close snapshot ') }}{{ an.session }}</p>
+  </table></div></div>
+  {% if us and us.calls %}<div class="crow"><span class="ck">{{ L('全部冻结问题', 'All frozen questions') }}</span><ol>{% for q in us.calls['items'] %}<li>{{ L(q.q, q.q_en) }} <span class="mut mono">{{ q.horizon }} · {{ L(q.confidence, q.confidence_en) }}</span></li>{% endfor %}</ol></div>{% endif %}
 </section>
-{% if an.review %}{% set VC = {'符合':'ok','部分符合':'part','不符合':'miss','未触发':'na','待定':'na'} %}
-<section class="blk" id="review"><header><h2>{{ L('昨日判断，今日验证', "Yesterday's calls, checked") }}</h2><span class="meta">{{ L('回看 ' ~ an.review['from'] ~ ' 的判断 → ' ~ an.session ~ ' 的结果', an.review['from'] ~ ' calls → ' ~ an.session ~ ' outcome') }}</span></header>
-<div class="tw"><table class="review">
-<thead><tr><th class="t">{{ L('当时的判断', 'Call') }}</th><th class="t">{{ L('今日结果', 'What happened') }}</th><th class="t">{{ L('结论', 'Verdict') }}</th><th class="t">{{ L('修正 / 学到什么', 'Correction / lesson') }}</th></tr></thead>
-<tbody>{% for r in an.review['items'] %}<tr><td class="t">{{ L(r.claim, r.claim_en or r.claim) }}</td><td class="t">{{ L(r.outcome, r.outcome_en or r.outcome) }}</td><td class="t"><span class="vd {{ VC.get(r.verdict, 'na') }}">{{ L(r.verdict, r.verdict_en or r.verdict) }}</span></td><td class="t mut">{{ L(r.lesson, r.lesson_en or r.lesson) }}</td></tr>{% endfor %}</tbody>
-</table></div>
-</section>{% endif %}
 {% endif %}
 
 {% if us %}
@@ -458,7 +591,7 @@ main.wrap>*{min-width:0}
 </section>
 {% endif %}
 
-<section class="blk" id="us"><header><h2>{{ L('美股主要指数', 'US indices') }}</h2>{% if us %}<span class="meta">Yahoo Finance · {{ L('校验', 'check') }} CNBC · {{ L('阈值', 'tolerance') }} {{ tol }}%</span>{% endif %}</header>
+<section class="blk" id="us"><header><h2>{{ L('美股主要指数', 'US indices') }} {% if us and us.gate %}<span class="gs {{ us.gate.status }}">{{ L({'pass':'闸门通过','warn':'闸门警告','fail':'待核验'}[us.gate.status], {'pass':'gate passed','warn':'gate warning','fail':'pending verification'}[us.gate.status]) }}</span>{% endif %}</h2>{% if us %}<span class="meta">Yahoo Finance · {{ L('校验', 'check') }} CNBC · {{ L('阈值', 'tolerance') }} {{ tol }}%</span>{% endif %}</header>
 {% if us %}{{ asof(us, '指数收盘价', 'index closes') }}
 <div class="tw"><table>
 <thead><tr><th class="t">{{ L('指数', 'Index') }}</th><th>{{ L('收盘', 'Close') }}</th><th>{{ L('涨跌幅', 'Change') }}</th><th>{{ L('20日σ', '20d σ') }}</th><th>{{ L('量比', 'Rel vol') }}</th><th class="t">{{ L('60 日走势', '60-day') }}</th><th>{{ L('双源校验', 'Cross-check') }}</th><th></th></tr></thead>
@@ -488,16 +621,15 @@ main.wrap>*{min-width:0}
 </section>
 
 {% if us %}{% for th in us.sections.themes or [] %}
-{% set ok = th.members|selectattr('stats')|list %}
+{% set g = theme_groups(th, us.session) %}{% set ok = g.today %}
 <section class="blk" id="{{ th.key }}">
-<header><h2>{{ L('主题追踪 · ' ~ th.name, 'Theme · ' ~ (th.name_en or th.name)) }}</h2><span class="meta">{% set cn = ok|selectattr('market', 'equalto', 'cn')|list %}{{ L(th.agg.n ~ '/' ~ th.agg.total ~ ' 有效数据 · 美股按 ' ~ us.session ~ ' 收盘' ~ (' · A股按 ' ~ cn[0].session ~ ' 收盘' if cn else ''),
-   th.agg.n ~ '/' ~ th.agg.total ~ ' with valid data · US close ' ~ us.session ~ (' · A-share close ' ~ cn[0].session if cn else '')) }}</span></header>
+<header><h2>{{ L('主题追踪 · ' ~ th.name, 'Theme · ' ~ (th.name_en or th.name)) }}</h2><span class="meta">{{ L('当日样本 ' ~ g.today|length ~ ' 只 · 交易日 ' ~ us.session, 'Same-day sample ' ~ g.today|length ~ ' · session ' ~ us.session) }}{% if g.closed %} · {{ L('排除：休市 ' ~ g.closed|length ~ ' 只（收盘日 ' ~ g.closed[0].session ~ '）', 'excluded: ' ~ g.closed|length ~ ' closed (last close ' ~ g.closed[0].session ~ ')') }}{% endif %}{% if g.missing %} · {{ L('缺失 ' ~ g.missing|length ~ ' 只（' ~ g.missing|map(attribute='ticker')|join('、') ~ '）', g.missing|length ~ ' missing (' ~ g.missing|map(attribute='ticker')|join(', ') ~ ')') }}{% endif %}</span></header>
 <div class="agg">
-  <div><span class="k">{{ L('等权 1 日', 'EW 1D') }}{% if th.agg.n_today is defined and th.agg.n_today < th.agg.n %} · {{ L(th.agg.n_today ~ ' 只开市', th.agg.n_today ~ ' trading') }}{% endif %}</span><b>{{ chg(th.agg.d1) }}</b></div>
-  <div><span class="k">{{ L('等权 5 日', 'EW 5D') }}</span><b>{{ chg(th.agg.r5) }}</b></div>
-  <div><span class="k">{{ L('等权 20 日', 'EW 20D') }}</span><b>{{ chg(th.agg.r20) }}</b></div>
-  <div><span class="k">{{ L('等权 YTD', 'EW YTD') }}</span><b>{{ chg(th.agg.ytd, 1) }}</b></div>
-  <div><span class="k">{{ L('上涨 / 下跌', 'Up / Down') }}</span><b><span class="up">{{ th.agg.up }}</span> / <span class="dn">{{ th.agg.down }}</span></b></div>
+  <div><span class="k">{{ L('等权 1 日 · n=' ~ g.today|length, 'EW 1D · n=' ~ g.today|length) }}</span><b>{{ chg(g.agg.d1) }}</b></div>
+  <div><span class="k">{{ L('等权 5 日 · n=' ~ g.today|length, 'EW 5D · n=' ~ g.today|length) }}</span><b>{{ chg(g.agg.r5) }}</b></div>
+  <div><span class="k">{{ L('等权 20 日 · n=' ~ g.today|length, 'EW 20D · n=' ~ g.today|length) }}</span><b>{{ chg(g.agg.r20) }}</b></div>
+  <div><span class="k">{{ L('等权 YTD · n=' ~ g.today|length, 'EW YTD · n=' ~ g.today|length) }}</span><b>{{ chg(g.agg.ytd, 1) }}</b></div>
+  <div><span class="k">{{ L('上涨 / 下跌', 'Up / Down') }}</span><b><span class="up">{{ g.agg.up }}</span> / <span class="dn">{{ g.agg.down }}</span></b></div>
   <div><span class="k">{{ L('触发异动', 'Alerts') }}</span><b>{{ th.flagged|length }}</b></div>
 </div>
 {% if an and an.themes and an.themes.get(th.key) %}{{ why_block(an.themes[th.key], us.session, '板块原因', 'Why the sector moved') }}{% endif %}
@@ -505,7 +637,7 @@ main.wrap>*{min-width:0}
 {% set mx = [ok|map(attribute='stats.pct')|map('abs')|max, 0.5]|max %}
 <div class="tgrid">
 <figure aria-label="Daily change ranking">
-  <figcaption>{{ L('当日涨跌幅（%）· 按幅度排序', 'Daily change (%) · ranked') }}</figcaption>
+  <figcaption>{{ L('当日涨跌幅（%）· 仅当日样本 ' ~ g.today|length ~ ' 只 · ' ~ us.session, 'Daily change (%) · same-day sample of ' ~ g.today|length ~ ' · ' ~ us.session) }}</figcaption>
   <div class="bars">
   {% for r in ok|sort(attribute='stats.pct', reverse=True) %}{% set p = r.stats.pct %}
     <div class="br" title="{{ r.name }} · {{ r.role_en or r.role }} · {{ p|num(2, True, True) }}"><span class="bl">{{ r.ticker.split('.')[0] }}<small>{{ L(r.name, r.name_en or r.name) }}</small></span>
@@ -518,34 +650,32 @@ main.wrap>*{min-width:0}
 <div class="tbl" data-table="cpo">
 <div class="toolbar" role="group" aria-label="Filter">
   <button type="button" class="fbtn" data-filter="all" aria-pressed="true">{{ L('全部', 'All') }}</button>
-  <button type="button" class="fbtn" data-filter="us" aria-pressed="false">{{ L('仅美股', 'US only') }}</button>
-  <button type="button" class="fbtn" data-filter="cn" aria-pressed="false">{{ L('仅 A股', 'A-shares only') }}</button>
   <button type="button" class="fbtn" data-filter="alert" aria-pressed="false">{{ L('仅异常', 'Alerts only') }}</button>
   <button type="button" class="fbtn colbtn" data-cols aria-pressed="false">{{ L('显示全部列', 'All columns') }}</button>
   <span class="hint">{{ L('点击表头排序', 'Click a header to sort') }}</span>
 </div>
 <div class="tw"><table class="sortable compact cpo">
 <thead><tr><th class="t">{{ L('代码', 'Ticker') }}</th><th class="t">{{ L('名称', 'Name') }}</th><th class="t">{{ L('产业链环节', 'Value-chain role') }}</th><th>{{ L('收盘', 'Close') }}</th><th data-sort="num">{{ L('1 日', '1D') }}</th><th data-sort="num">{{ L('5 日', '5D') }}</th><th data-sort="num">{{ L('20 日', '20D') }}</th><th data-sort="num">YTD</th><th data-sort="num">{{ L('量比', 'Rel vol') }}</th><th data-sort="num">vs MA50</th><th class="t">{{ L('60 日', '60-day') }}</th><th></th></tr></thead>
-<tbody>{% for r in th.members %}<tr class="mk-{{ r.market }}" data-market="{{ r.market }}" data-alert="{{ 1 if r.why else 0 }}">
-<td class="t sym"><span class="mkt {{ r.market }}">{{ 'CN' if r.market == 'cn' else 'US' }}</span>{{ r.ticker }}</td><td class="t">{{ L(r.name, r.name_en or r.name) }}</td><td class="t mut">{{ L(r.role, r.role_en or r.role) }}</td>
-{% if r.stats %}<td>{{ r.stats.close|num }}</td><td data-v="{{ r.stats.pct }}" class="{{ hot(r.stats.pct, 5) }}">{{ chg(r.stats.pct) }}</td><td data-v="{{ r.r5 }}" class="{{ hot(r.r5, 10) }}">{{ chg(r.r5, 1) }}</td><td data-v="{{ r.r20 }}" class="{{ hot(r.r20, 15) }}">{{ chg(r.r20, 1) }}</td><td data-v="{{ r.ytd }}" class="{{ hot(r.ytd, 100) }}">{{ chg(r.ytd, 1) }}</td><td data-v="{{ r.stats.rel_volume or 0 }}" class="{{ 'hotv' if (r.stats.rel_volume or 0) >= 2 else '' }}">{% if r.stats.rel_volume %}{{ r.stats.rel_volume|num(1) }}×{% else %}—{% endif %}</td><td data-v="{{ r.vs_ma50 }}">{{ r.vs_ma50|num(1, True, True) }}</td><td class="t">{{ r.spark|spark(84, 22, r.name) }}</td>
-<td>{% if r.why %}<span class="chip alert" title="{{ r.why|join('; ')|en }}">{{ L('异动', 'Alert') }}</span>{% endif %}{% if r.market == 'cn' and r.session != us.session %} <span class="chip" title="{{ r.session }}">{{ L('休市·' ~ r.session[5:], 'closed·' ~ r.session[5:]) }}</span>{% endif %}</td>
-{% else %}<td colspan="9" class="missing">{{ L('数据暂缺（' ~ r.error ~ '）', 'Data unavailable (' ~ (r.error|en) ~ ')') }}</td>{% endif %}
-</tr>{% endfor %}</tbody>
+<tbody>{% for r in g.today %}{{ cporow(r, us.session) }}{% endfor %}</tbody>
 </table></div>
 <p class="empty" hidden></p>
 </div>
 </div>
+{% if g.closed %}<details class="closedgrp">
+<summary>{{ L('非当日 · 不可横比：' ~ g.closed|length ~ ' 只休市（收盘日 ' ~ g.closed[0].session ~ '），不参与上方排名与汇总', 'Not same-day · not comparable: ' ~ g.closed|length ~ ' closed (last close ' ~ g.closed[0].session ~ '), excluded from the ranking and aggregates above') }}</summary>
+<div class="tw"><table class="compact cpo"><thead><tr><th class="t">{{ L('代码', 'Ticker') }}</th><th class="t">{{ L('名称', 'Name') }}</th><th class="t">{{ L('产业链环节', 'Value-chain role') }}</th><th>{{ L('收盘', 'Close') }}</th><th>{{ L('1 日', '1D') }}</th><th>{{ L('5 日', '5D') }}</th><th>{{ L('20 日', '20D') }}</th><th>YTD</th><th>{{ L('量比', 'Rel vol') }}</th><th>vs MA50</th><th class="t">{{ L('60 日', '60-day') }}</th><th></th></tr></thead>
+<tbody>{% for r in g.closed %}{{ cporow(r, us.session) }}{% endfor %}</tbody></table></div>
+</details>{% endif %}
 {% else %}<p class="missing">{{ L('数据暂缺', 'Data unavailable') }}</p>{% endif %}
-<p class="asof formula">{% set nt = th.agg.n_today if th.agg.n_today is defined else th.agg.n %}{{ L('口径：当日等权收益 = 当日开市成员涨跌幅的算术平均（本日 ' ~ nt ~ ' 只）；休市成员（' ~ (th.agg.n - nt) ~ ' 只）不参与当日计算，但保留在 5 日 / 20 日 / YTD 中（按其最近收盘）。收益为本币口径，未做汇率换算。产业链环节分类为本看台自定义；A股涨跌停按创业板和科创板 20%、主板 10% 判断。',
-   'Method: EW 1D = arithmetic mean of 1-day returns of members trading that session (' ~ nt ~ ' today); closed members (' ~ (th.agg.n - nt) ~ ') are excluded from 1D but kept in 5D / 20D / YTD at their latest close. Local-currency returns, not FX-adjusted. Value-chain roles are our own classification; A-share limits: 20% ChiNext/STAR, 10% main board.') }}</p>
+<p class="asof formula">{% set nt = g.today|length %}{{ L('口径：所有汇总（1 日 / 5 日 / 20 日 / YTD / 涨跌家数）= 当日开市成员的算术平均，本日样本 ' ~ nt ~ ' 只；休市成员（' ~ g.closed|length ~ ' 只）与缺失成员（' ~ g.missing|length ~ ' 只）一律排除，休市成员单列在下方折叠组。收益为本币口径，未做汇率换算。产业链环节分类为本看台自定义；A股涨跌停按创业板和科创板 20%、主板 10% 判断。',
+   'Method: every aggregate (1D / 5D / 20D / YTD / breadth) = arithmetic mean over members trading that session, n=' ~ nt ~ '; closed (' ~ g.closed|length ~ ') and missing (' ~ g.missing|length ~ ') members are excluded, closed ones listed in the folded group below. Local-currency returns, not FX-adjusted. Value-chain roles are our own classification; A-share limits: 20% ChiNext/STAR, 10% main board.') }}</p>
 {{ insight(th.insight, '主题 · 分析师评级动态', 'Theme · analyst rating changes', th.analyst, none, 7, true) }}
 </section>
 {% endfor %}{% endif %}
 
-<section class="blk" id="alerts"><header><h2>{{ L('异动预警', 'Movers & alerts') }} {{ gq() }}</h2>{% if us %}<span class="meta">{{ L('触发 ' ~ us.sections.alerts.hits|length ~ ' 只 · 监控 ' ~ us.sections.alerts.with_data ~ '/' ~ us.sections.alerts.universe_size,
+<section class="blk" id="alerts"><header><h2>{{ L('今日重新定价', "Today's repricing") }} {{ gq() }}<small>{{ L('解释，不是交易提醒', 'explanations, not trade alerts') }}</small></h2>{% if us %}<span class="meta">{{ L('触发 ' ~ us.sections.alerts.hits|length ~ ' 只 · 监控 ' ~ us.sections.alerts.with_data ~ '/' ~ us.sections.alerts.universe_size,
    us.sections.alerts.hits|length ~ ' triggered · ' ~ us.sections.alerts.with_data ~ '/' ~ us.sections.alerts.universe_size ~ ' tracked') }}</span>{% endif %}</header>
-{% if us %}{% set al = us.sections.alerts %}{% set cr = al.criteria %}
+{% if us %}{% set al = us.sections.alerts %}{% set cr = al.criteria %}{{ gatebox(us) }}
 <p class="asof">{{ L('触发规则：个股 |涨跌幅| ≥ ' ~ cr.pct_move ~ '%，或 ≥ ' ~ cr.sigma_multiple ~ ' 倍 ' ~ cr.sigma_window ~ ' 日σ 且 ≥ ' ~ cr.sigma_min_abs_pct ~ '%；指数 ≥ ±2%；黄金 ±2%，银/铂/钯 ±3%。监控池：S&P 500 + Nasdaq-100 + 主题成员。',
    'Rules: stocks |move| ≥ ' ~ cr.pct_move ~ '%, or ≥ ' ~ cr.sigma_multiple ~ '× ' ~ cr.sigma_window ~ '-day σ and ≥ ' ~ cr.sigma_min_abs_pct ~ '%; indices ≥ ±2%; gold ±2%, silver/platinum/palladium ±3%. Universe: S&P 500 + Nasdaq-100 + theme members.') }}</p>
 {% set idx_alerts = us.sections.indices|selectattr('alert')|list %}{% set met_alerts = us.sections.metals|selectattr('alert')|list %}
@@ -565,7 +695,7 @@ main.wrap>*{min-width:0}
 </div>
 <div class="tw"><table class="sortable compact mv">
 <thead><tr><th class="t">{{ L('代码', 'Ticker') }}</th><th class="t">{{ L('名称', 'Name') }}</th><th class="t">{{ L('行业', 'Sector') }}</th><th>{{ L('收盘', 'Close') }}</th><th data-sort="num">{{ L('涨跌幅', 'Change') }}</th><th data-sort="num">z(σ)</th><th data-sort="num">{{ L('量比', 'Rel vol') }}</th><th>{{ L('校验', 'Check') }}</th><th class="t" data-sort="num">{{ L('证据', 'Evidence') }}</th><th class="t">{{ L('性质', 'Nature') }}</th><th class="t">{{ L('原因（AI 整理）', 'Reason (AI summary)') }}</th></tr></thead>
-<tbody>{% for h in al.hits %}{% set w = AS.get(h.ticker) %}{% set bg = best_grade(w, us.session) %}{% set cat = (w.catalyst if w and w.catalyst else 'none') %}
+<tbody>{% for h in al.hits|drop_q(us.gate) %}{% set w = AS.get(h.ticker) %}{% set bg = best_grade(w, us.session) %}{% set cat = (w.catalyst if w and w.catalyst else 'none') %}
 <tr data-filing="{{ 1 if (h.filings or h.earnings) else 0 }}" data-company="{{ 1 if cat == 'company' else 0 }}" data-theme="{{ 1 if h.ticker in theme_t else 0 }}" data-nocat="{{ 1 if cat == 'none' else 0 }}">
 <td class="t sym">{% if h.detail or w %}<a href="#a-{{ h.ticker }}">{{ h.ticker }}</a>{% else %}{{ h.ticker }}{% endif %}</td><td class="t">{{ h.name }}</td><td class="t mut">{{ L(h.sector or '', (h.sector or '')|en) }}</td>
 <td>{{ h.stats.close|num }}</td><td data-v="{{ h.stats.pct }}" class="{{ hot(h.stats.pct, 7) }}">{{ chg(h.stats.pct) }}</td><td data-v="{{ h.stats.z|abs }}">{{ h.stats.z|num(1, True) }}</td><td data-v="{{ h.stats.rel_volume or 0 }}" class="{{ 'hotv' if (h.stats.rel_volume or 0) >= 2 else '' }}">{{ h.stats.rel_volume|num(1) }}×</td><td>{{ xc(h.xcheck) }}</td>
@@ -586,14 +716,14 @@ main.wrap>*{min-width:0}
 {{ insight(r.insight, '分析师观点', 'Analyst views') }}
 </article>{% endfor %}
 
-{% set sess_m = us.session %}{% for h in al.hits if h.detail or AS.get(h.ticker) %}{% set f = h.fundamentals or {} %}{% set st = h.stats %}{% set w = AS.get(h.ticker) %}{% set cat = (w.catalyst if w and w.catalyst else 'none') %}
-{% set featured = h.ticker == open_t %}
+{% set sess_m = us.session %}{% for h in al.hits|drop_q(us.gate) if h.detail or AS.get(h.ticker) %}{% set f = h.fundamentals or {} %}{% set st = h.stats %}{% set w = AS.get(h.ticker) %}{% set cat = (w.catalyst if w and w.catalyst else 'none') %}
+{% set featured = w and best_grade(w, sess_m) == 'A' and w.nature == '基本面变化' %}
 <details class="card" id="a-{{ h.ticker }}" data-filing="{{ 1 if (h.filings or h.earnings) else 0 }}" data-company="{{ 1 if cat == 'company' else 0 }}" data-theme="{{ 1 if h.ticker in theme_t else 0 }}" data-nocat="{{ 1 if cat == 'none' else 0 }}"{% if featured %} open{% endif %}>
-<summary class="csum"><span class="sym">{{ h.ticker }}</span> {{ chg(st.pct) }}{% if w %} {{ gchip(best_grade(w, sess_m)) }} {{ nchip(w.nature) }}<span class="cline">{{ L(w.headline, w.headline_en or w.headline) }}</span>{% endif %}{% if featured %}<span class="chip acc">{{ L('证据最强', 'Strongest evidence') }}</span>{% endif %}<span class="caret" aria-hidden="true"></span></summary>
+<summary class="csum"><span class="sym">{{ h.ticker }}</span> {{ chg(st.pct) }}{% if w %} <span class="kc">{{ L('解释置信度', 'Explanation confidence') }} {{ gchip(best_grade(w, sess_m)) }}</span><span class="kc">{{ L('当日一手材料', 'Same-day primary') }}：{% if evidence(w, sess_m).primary == 'today' %}<b class="up">{{ L('有', 'yes') }}</b>{% else %}<b>{{ L('无', 'none') }}</b>{% endif %}</span>{{ nchip(w.nature) }}<span class="cline">{{ L(w.headline, w.headline_en or w.headline) }}</span>{% endif %}<span class="caret" aria-hidden="true"></span></summary>
 <div class="top"><h3>{{ h.ticker }} · {{ h.name }}</h3><span class="chip">{{ f.industry or f.sector or L(h.sector or '—', (h.sector or '—')|en) }}</span></div>
 <div class="px">{{ st.close|num }} {{ chg(st.pct) }} <span class="mut">z {{ st.z|num(1,True) }} · {{ L('量比', 'rel vol') }} {{ st.rel_volume|num(1) }}× · {{ L('前收', 'prev') }} {{ st.prev_close|num }}</span></div>
 <div class="why">{{ L(h.why|join('；'), h.why|join('; ')|en) }} · {{ L('校验', 'check') }} {{ xc(h.xcheck) }}</div>
-{{ why_block(AS.get(h.ticker), us.session) }}
+{{ why_block(AS.get(h.ticker), us.session) }}{% if AS.get(h.ticker) %}<p class="disc2">{{ L('这解释了市场讨论，不证明该事件导致了涨跌，也不是投资信号。', 'This explains the market discussion; it does not prove the event caused the move and is not an investment signal.') }}</p>{% endif %}
 {% if h.detail %}
 <h4>{{ L('驱动因素（系统检索）', 'Drivers (system search)') }}</h4>
 {% if h.earnings or h.filings %}<ul class="hl">
@@ -625,6 +755,7 @@ main.wrap>*{min-width:0}
 
 {% if uk %}{% set ual = uk.sections.alerts %}{% set UA = (uk.analysis.stocks if uk.analysis else {}) or {} %}
 <section class="blk" id="uk"><header><h2>{{ L('英国 · 伦敦交易所', 'UK · London Stock Exchange') }}</h2><span class="meta">{{ L('FTSE 100 / 250 · 监控 FTSE 350：' ~ ual.with_data ~ '/' ~ ual.universe_size ~ ' · 触发 ' ~ ual.hits|length ~ ' 只', 'FTSE 100 / 250 · FTSE 350 tracked: ' ~ ual.with_data ~ '/' ~ ual.universe_size ~ ' · ' ~ ual.hits|length ~ ' triggered') }}</span></header>
+{{ gatebox(uk) }}
 {{ asof(uk, '个股价格单位为便士（GBp）', 'stock prices in pence (GBp)') }}
 {% if ual.patched_from_cnbc %}<p class="asof">{{ L('Yahoo 日线未收录当日收盘竞价价：' ~ ual.patched_from_cnbc ~ ' 只的当日收盘取自 CNBC（已核对前收一致），指数与异动股再用 Yahoo 报价校验。' ~ (ual.cnbc_symbol_mismatch|length ~ ' 只 CNBC 代码对应其他证券，已改用 Yahoo 报价。' if ual.cnbc_symbol_mismatch else ''),
    'Yahoo daily bars lacked the closing-auction price: ' ~ ual.patched_from_cnbc ~ ' closes taken from CNBC (previous close verified), with indices and movers re-checked against Yahoo quotes.' ~ (' ' ~ ual.cnbc_symbol_mismatch|length ~ ' CNBC symbols mapped to other securities and were replaced by Yahoo quotes.' if ual.cnbc_symbol_mismatch else '')) }}</p>{% endif %}
@@ -649,7 +780,7 @@ main.wrap>*{min-width:0}
 </div>
 <div class="tw"><table class="sortable compact mv">
 <thead><tr><th class="t">{{ L('代码', 'Ticker') }}</th><th class="t">{{ L('名称', 'Name') }}</th><th class="t">{{ L('指数', 'Index') }}</th><th>{{ L('收盘', 'Close') }}</th><th data-sort="num">{{ L('涨跌幅', 'Change') }}</th><th data-sort="num">z(σ)</th><th data-sort="num">{{ L('量比', 'Rel vol') }}</th><th>{{ L('校验', 'Check') }}</th><th class="t" data-sort="num">{{ L('证据', 'Evidence') }}</th><th class="t">{{ L('性质', 'Nature') }}</th><th class="t">{{ L('原因（AI 整理）', 'Reason (AI summary)') }}</th></tr></thead>
-<tbody>{% for h in ual.hits %}{% set w = UA.get(h.ticker) %}{% set bg = best_grade(w, uk.session) %}{% set cat = (w.catalyst if w and w.catalyst else 'none') %}
+<tbody>{% for h in ual.hits|drop_q(uk.gate) %}{% set w = UA.get(h.ticker) %}{% set bg = best_grade(w, uk.session) %}{% set cat = (w.catalyst if w and w.catalyst else 'none') %}
 <tr data-filing="0" data-company="{{ 1 if cat == 'company' else 0 }}" data-theme="0" data-nocat="{{ 1 if cat == 'none' else 0 }}">
 <td class="t sym"><a href="#a-{{ h.ticker }}">{{ h.epic }}</a></td><td class="t">{{ h.name }}</td><td class="t mut">{{ h.index }}</td>
 <td>{{ h.stats.close|num }}</td><td data-v="{{ h.stats.pct }}" class="{{ hot(h.stats.pct, 7) }}">{{ chg(h.stats.pct) }}</td><td data-v="{{ h.stats.z|abs }}">{{ h.stats.z|num(1, True) }}</td><td data-v="{{ h.stats.rel_volume or 0 }}" class="{{ 'hotv' if (h.stats.rel_volume or 0) >= 2 else '' }}">{% if h.stats.rel_volume %}{{ h.stats.rel_volume|num(1) }}×{% else %}—{% endif %}</td><td>{{ xc(h.xcheck) }}</td>
@@ -659,14 +790,14 @@ main.wrap>*{min-width:0}
 <p class="empty" hidden></p>
 </div>
 <div class="cards">
-{% set sess_m = uk.session %}{% for h in ual.hits if h.detail or UA.get(h.ticker) %}{% set f = h.fundamentals or {} %}{% set st = h.stats %}{% set w = UA.get(h.ticker) %}{% set cat = (w.catalyst if w and w.catalyst else 'none') %}
-{% set featured = h.ticker == uk_open_t %}
+{% set sess_m = uk.session %}{% for h in ual.hits|drop_q(uk.gate) if h.detail or UA.get(h.ticker) %}{% set f = h.fundamentals or {} %}{% set st = h.stats %}{% set w = UA.get(h.ticker) %}{% set cat = (w.catalyst if w and w.catalyst else 'none') %}
+{% set featured = w and best_grade(w, sess_m) == 'A' and w.nature == '基本面变化' %}
 <details class="card" id="a-{{ h.ticker }}" data-filing="0" data-company="{{ 1 if cat == 'company' else 0 }}" data-theme="0" data-nocat="{{ 1 if cat == 'none' else 0 }}"{% if featured %} open{% endif %}>
-<summary class="csum"><span class="sym">{{ h.epic }}</span> {{ chg(st.pct) }}{% if w %} {{ gchip(best_grade(w, sess_m)) }} {{ nchip(w.nature) }}<span class="cline">{{ L(w.headline, w.headline_en or w.headline) }}</span>{% endif %}{% if featured %}<span class="chip acc">{{ L('证据最强', 'Strongest evidence') }}</span>{% endif %}<span class="caret" aria-hidden="true"></span></summary>
+<summary class="csum"><span class="sym">{{ h.epic }}</span> {{ chg(st.pct) }}{% if w %} <span class="kc">{{ L('解释置信度', 'Explanation confidence') }} {{ gchip(best_grade(w, sess_m)) }}</span><span class="kc">{{ L('当日一手材料', 'Same-day primary') }}：{% if evidence(w, sess_m).primary == 'today' %}<b class="up">{{ L('有', 'yes') }}</b>{% else %}<b>{{ L('无', 'none') }}</b>{% endif %}</span>{{ nchip(w.nature) }}<span class="cline">{{ L(w.headline, w.headline_en or w.headline) }}</span>{% endif %}<span class="caret" aria-hidden="true"></span></summary>
 <div class="top"><h3>{{ h.epic }} · {{ h.name }}</h3><span class="chip">{{ f.industry or h.sector or '—' }} · {{ h.index }}</span></div>
 <div class="px">{{ st.close|num }}<span class="mut">GBp</span> {{ chg(st.pct) }} <span class="mut">z {{ st.z|num(1,True) }} · {{ L('量比', 'rel vol') }} {{ st.rel_volume|num(1) }}× · {{ L('前收', 'prev') }} {{ st.prev_close|num }}</span></div>
 <div class="why">{{ L(h.why|join('；'), h.why|join('; ')|en) }} · {{ L('收盘来源', 'close') }}: {{ L(h.close_source or '—', (h.close_source or '—')|en) }} · {{ L('校验', 'check') }} {{ xc(h.xcheck) }}</div>
-{{ why_block(w, uk.session) }}
+{{ why_block(w, uk.session) }}{% if w %}<p class="disc2">{{ L('这解释了市场讨论，不证明该事件导致了涨跌，也不是投资信号。', 'This explains the market discussion; it does not prove the event caused the move and is not an investment signal.') }}</p>{% endif %}
 {% if h.detail %}
 {{ headlines(h.insight) }}
 <div class="two">
@@ -724,6 +855,7 @@ main.wrap>*{min-width:0}
 {% else %}<p class="none">{{ L('无错误。', 'No errors.') }}</p>{% endif %}
 </section>
 {% endif %}
+</div>
 </main>
 <button type="button" class="totop" id="totop" hidden onclick="window.scrollTo({top:0,behavior:'smooth'})">↑ {{ L('顶部', 'Top') }}</button>
 <footer class="disc">{{ L('仅供个人研究参考，不构成投资建议 · 收盘后快照，非实时行情 · 数据来源：Yahoo Finance、CNBC、LBMA、SEC EDGAR、Kitco', 'For personal research only, not investment advice · Post-close snapshot, not live quotes · Data: Yahoo Finance, CNBC, LBMA, SEC EDGAR, Kitco') }}</footer>
@@ -825,6 +957,63 @@ main.wrap>*{min-width:0}
   document.querySelectorAll('a[href^="#a-"]').forEach(function (a) {
     a.addEventListener("click", function () { var d = document.getElementById(a.getAttribute("href").slice(1)); if (d && d.tagName === "DETAILS") d.open = true; });
   });
+
+  // ===== 两层视图：晨间简报 / 研究台 =====
+  var vb = document.getElementById("v-brief"), vd = document.getElementById("v-desk");
+  var tasks = Array.prototype.slice.call(document.querySelectorAll(".tasknav a"));
+  function viewFor(hash) {
+    if (!hash || hash === "#" || hash === "#brief") return "brief";
+    var t = document.getElementById(hash.slice(1));
+    return t && vd && vd.contains(t) ? "desk" : "brief";
+  }
+  function showView(v, hash) {
+    if (!vb || !vd) return;
+    vb.hidden = v !== "brief"; vd.hidden = v !== "desk";
+    document.body.setAttribute("data-view", v);
+    tasks.forEach(function (a) { a.classList.toggle("on", a.getAttribute("href") === (hash || (v === "brief" ? "#brief" : "#desk"))); });
+    var t = hash && document.getElementById(hash.slice(1));
+    if (t && t.tagName === "DETAILS") t.open = true;
+    if (t) setTimeout(function () { t.scrollIntoView({ block: "start" }); }, 0); else window.scrollTo(0, 0);
+  }
+  window.addEventListener("hashchange", function () { showView(viewFor(location.hash), location.hash); });
+  showView(viewFor(location.hash), location.hash);
+
+  // ===== 数据新鲜度：过期后明确降级 =====
+  var fr = document.getElementById("fresh"), st = document.getElementById("stale");
+  if (fr && st && fr.dataset.expires && Date.now() > Date.parse(fr.dataset.expires)) { st.hidden = false; document.body.classList.add("isstale"); }
+
+  // ===== 关注问题（仅本地保存）+ 次日回看 =====
+  var data = {}; try { data = JSON.parse(document.getElementById("calldata").textContent); } catch (e) {}
+  var KEY = "mm-follow";
+  function getF() { try { return JSON.parse(localStorage.getItem(KEY) || "{}"); } catch (e) { return {}; } }
+  function setF(f) { try { localStorage.setItem(KEY, JSON.stringify(f)); } catch (e) {} }
+  function esc(x) { return String(x == null ? "" : x).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+  function bi(zh, en) { return '<span class="l-zh">' + esc(zh) + '</span><span class="l-en" lang="en">' + esc(en || zh) + "</span>"; }
+  function renderF() {
+    var f = getF(), ids = Object.keys(f), box = document.getElementById("followlist"), cnt = document.getElementById("fcount");
+    document.querySelectorAll("[data-follow]").forEach(function (b) { b.setAttribute("aria-pressed", String(!!f[b.dataset.follow])); });
+    if (cnt) { cnt.hidden = !ids.length; cnt.textContent = ids.length; }
+    if (!box || !ids.length) return;
+    var reviews = {}; (data.reviews || []).forEach(function (r) { if (r.id) reviews[r.id] = r; });
+    var today = new Date().toISOString().slice(0, 10);
+    box.innerHTML = '<ul class="fl">' + ids.map(function (id) {
+      var c = f[id], r = reviews[id], stz, ste;
+      if (r) { stz = "昨日关注的问题已验证：" + r.verdict + "。" + (r.outcome || ""); ste = "Checked: " + (r.verdict_en || r.verdict) + ". " + (r.outcome_en || ""); }
+      else if (c.horizon && today > c.horizon) { stz = "时限已过（" + c.horizon + "），等待下一期复盘给出结论。"; ste = "Horizon passed (" + c.horizon + "); verdict due in the next review."; }
+      else { stz = "待到期：时限 " + (c.horizon || "—") + "；反证条件：" + (c.f || ""); ste = "Open until " + (c.horizon || "—") + "; falsified if: " + (c.f_en || c.f || ""); }
+      return "<li><b>" + bi(c.q, c.q_en) + '</b><span class="st mut">' + bi(stz, ste) + '</span><button type="button" class="fbtn" data-unfollow="' + esc(id) + '">' + bi("取消关注", "Unfollow") + "</button></li>";
+    }).join("") + "</ul>";
+    box.querySelectorAll("[data-unfollow]").forEach(function (b) { b.addEventListener("click", function () { var g = getF(); delete g[b.dataset.unfollow]; setF(g); renderF(); if (!Object.keys(g).length) location.reload(); }); });
+  }
+  document.querySelectorAll("[data-follow]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var f = getF(), id = b.dataset.follow;
+      if (f[id]) delete f[id];
+      else { var c = (data.calls || []).filter(function (x) { return x.id === id; })[0] || {}; f[id] = { q: c.q, q_en: c.q_en, horizon: c.horizon, f: c.falsifier, f_en: c.falsifier_en, at: new Date().toISOString() }; }
+      setF(f); renderF();
+    });
+  });
+  renderF();
 
   // 导航高亮 + 回到顶部
   var links = Array.prototype.slice.call(document.querySelectorAll(".subnav a[href^='#']"));

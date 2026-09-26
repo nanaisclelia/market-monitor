@@ -1,0 +1,95 @@
+{
+ "session": "2026-09-25",
+ "frozen_at": "2026-09-26T00:36:34+00:00",
+ "sha256": "916733db083dad4766416b518d06d7f7f8d250db845c235034ea0da131b5ff46",
+ "items": [
+  {
+   "id": "2026-09-25-q1",
+   "q": "10 年期美债会否上破 5.2%，并打断科技股反弹？",
+   "q_en": "Will the 10-year break above 5.2% and interrupt the tech rebound?",
+   "expect": "若 10 年期收于 5.2% 以上，纳指在同一周内回落。",
+   "expect_en": "If the 10-year closes above 5.2%, the Nasdaq falls within the same week.",
+   "horizon": "2026-10-02",
+   "confidence": "中",
+   "confidence_en": "Medium",
+   "falsifier": "10 年期收于 5.2% 以上，但纳指当周仍上涨。",
+   "falsifier_en": "The 10-year closes above 5.2% yet the Nasdaq rises that week.",
+   "now": "5.18%（9/25）",
+   "now_en": "5.18% (9/25)",
+   "evidence": [
+    "Yahoo Finance 9/25",
+    "American Banker 9/23（Barr）",
+    "CNBC 9/24（Williams）"
+   ]
+  },
+  {
+   "id": "2026-09-25-q2",
+   "q": "霍尔木兹通行能否恢复，并压低油价风险溢价？",
+   "q_en": "Will Hormuz traffic recover and compress the oil risk premium?",
+   "expect": "若日通行量明显高于 13 艘次，或美伊协议落地，Brent 回落、WTI 与 Brent 价差收窄。",
+   "expect_en": "If daily transits rise clearly above 13 or a US–Iran deal is signed, Brent falls and the WTI–Brent spread narrows.",
+   "horizon": "2026-10-09",
+   "confidence": "低",
+   "confidence_en": "Low",
+   "falsifier": "通行明显恢复，但 Brent 不跌反涨。",
+   "falsifier_en": "Traffic clearly recovers but Brent rises.",
+   "now": "13 艘次（9/24）；价差 12.68 美元",
+   "now_en": "13 crossings (9/24); spread $12.68",
+   "evidence": [
+    "The National 9/25"
+   ]
+  },
+  {
+   "id": "2026-09-25-q3",
+   "q": "A股 CPO 成员复市后，会否补涨 9/25 美股光互连的反弹？",
+   "q_en": "Will China A-share CPO members catch up with the 9/25 US optical rebound when they reopen?",
+   "expect": "9/28 复市首日，4 只 A股成员的等权收益为正。",
+   "expect_en": "On the 9/28 reopening, the four A-share members' equal-weighted return is positive.",
+   "horizon": "2026-09-28",
+   "confidence": "中",
+   "confidence_en": "Medium",
+   "falsifier": "9/28 的等权收益 ≤ 0。",
+   "falsifier_en": "The 9/28 equal-weighted return is ≤ 0.",
+   "now": "美股 11 只等权 +2.07%（9/25）",
+   "now_en": "US 11-name EW +2.07% (9/25)",
+   "evidence": [
+    "本看台 9/25 快照",
+    "上交所休市公告"
+   ]
+  },
+  {
+   "id": "2026-09-25-q4",
+   "q": "9 月非农会否推高 10 月加息概率？",
+   "q_en": "Will September payrolls lift October hike odds?",
+   "expect": "非农明显强于预期时，10 月加息概率上升，10 年期收益率上行。",
+   "expect_en": "A clearly strong print lifts October hike odds and the 10-year yield.",
+   "horizon": "2026-10-02",
+   "confidence": "低",
+   "confidence_en": "Low",
+   "falsifier": "非农明显偏强，但加息概率下降。",
+   "falsifier_en": "A clearly strong print but lower hike odds.",
+   "now": "10/2 发布",
+   "now_en": "Due 10/2",
+   "evidence": [
+    "BLS 发布惯例"
+   ]
+  },
+  {
+   "id": "2026-09-25-q5",
+   "q": "Harworth 交割后，股价是否维持在 187 便士 ±1% 以内？",
+   "q_en": "Will Harworth hold within ±1% of 187p after settlement?",
+   "expect": "最终报价 + 收购方持股过半，股价贴近报价。",
+   "expect_en": "Best-and-final price plus a majority holder keeps the shares pinned to the offer.",
+   "horizon": "2026-09-29",
+   "confidence": "高",
+   "confidence_en": "High",
+   "falsifier": "9/29 收盘偏离 187 便士超过 1%。",
+   "falsifier_en": "9/29 close more than 1% away from 187p.",
+   "now": "187.00 便士（9/25）",
+   "now_en": "187.00p (9/25)",
+   "evidence": [
+    "RNS 9/25"
+   ]
+  }
+ ]
+}

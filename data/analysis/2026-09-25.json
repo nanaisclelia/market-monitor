@@ -166,8 +166,8 @@
     {
      "tag": "AI 推断",
      "src": [],
-     "text": "交易含义：公告明确这是\"最终报价\"，按《收购守则》，除非出现第三方竞购或获收购委员会同意，不能再加价。收购方交割后持股约 52.1%，竞购方出现的可能性很低，因此以 187 便士为上限的套利空间基本为零，剩余风险主要是交割与要约完成。（更正：此前写的\"取决于能否再次加价\"不准确。）",
-     "text_en": "Trade read: the announcement states this is \"best and final\" — under the Takeover Code it cannot be raised absent a third-party offer or Panel consent. With the bidder at ~52.1% after settlement a rival bid is unlikely, so upside above 187p is essentially nil; residual risk is settlement and completion. (Correction: the earlier note that upside depended on a further bump was inaccurate.)"
+     "text": "研究解读：事件改变了什么——收购价从 172.5 便士变为\"最终\"的 187 便士，董事会立场由反对转为推荐，收购方交割后持股将过半。尚存的完成风险——9/29 大宗交割，以及要约其余条件能否满足。按《收购守则》，除非出现第三方竞购，报价不会再提高。以上不构成个体化行动建议。",
+     "text_en": "Research reading — what changed: the price moved from 172.5p to a \"best and final\" 187p, the board switched to recommending, and the bidder will hold a majority after settlement. Completion risks remaining: the 9/29 block settlement and satisfaction of other offer conditions. Under the Takeover Code the price will not rise absent a third-party bid. Not individual advice."
     }
    ],
    "sources": [
@@ -500,7 +500,47 @@
     "when_en": "9/29–9/30",
     "src": "RNS；单一媒体"
    }
-  ]
+  ],
+  "changed": [
+   {
+    "var": "油价风险溢价",
+    "var_en": "Oil risk premium",
+    "what": "美伊据报商讨重开霍尔木兹，WTI 跌约 2.3%；但通行仍只有 13 艘次，胡塞袭击未停。",
+    "what_en": "Reported US–Iran talks on reopening Hormuz cut WTI ~2.3%, but transits stay at 13 and Houthi attacks continue.",
+    "why": "油价决定通胀预期，通胀预期决定美联储还要不要加息。",
+    "why_en": "Oil drives inflation expectations, which drive whether the Fed keeps hiking.",
+    "grade_src": "geo:0"
+   },
+   {
+    "var": "长端利率",
+    "var_en": "Long-end rates",
+    "what": "Barr、Williams 继续暗示加息，10 年期美债约 5.18%，接近 2007 年以来高位。",
+    "what_en": "Barr and Williams keep signalling hikes; 10-year ~5.18%, near the highest since 2007.",
+    "why": "利率越高，未来盈利折现越少，最先受影响的是高估值科技股和黄金。",
+    "why_en": "Higher rates shrink the present value of future profits — richly valued tech and gold feel it first.",
+    "grade_src": "geo:2"
+   },
+   {
+    "var": "AI 数据中心预期",
+    "var_en": "AI data-center expectations",
+    "what": "Oracle 重申与 Bloom 的供电合同，前一日的 Project Jupiter 延期担忧缓解，美股光互连链条反弹。",
+    "what_en": "Oracle reaffirmed its Bloom power contract, easing the prior day's Project Jupiter worries; US optical names rebounded.",
+    "why": "CPO / 光互连的估值取决于数据中心投资节奏，一条合同消息就能让整个链条重新定价。",
+    "why_en": "CPO / optical valuations hinge on data-center capex timing; one contract headline can reprice the chain.",
+    "grade_src": "theme:cpo"
+   }
+  ],
+  "not_changed": [
+   {
+    "zh": "VIX 回落、道指结束三周连跌，不等于利率压力已经解除：10 年期仍在 5.18%，美联储官员仍在暗示加息。",
+    "en": "A lower VIX and the Dow's first weekly gain in four do not mean rate pressure is gone: the 10-year is still 5.18% and Fed officials still signal hikes."
+   },
+   {
+    "zh": "个股大涨不等于交易信号：Harworth 的涨幅来自收购条款，Bloom 来自合同确认，都是一次性的重新定价。",
+    "en": "Big single-stock moves are not trading signals: Harworth repriced to deal terms and Bloom to a contract confirmation — one-off repricings."
+   }
+  ],
+  "correction": 1
  },
  "review": {
   "from": "2026-09-24",
@@ -508,10 +548,10 @@
    {
     "claim": "霍尔木兹相关的供应中断消息会被放大到油价上",
     "claim_en": "Hormuz disruption headlines get amplified in oil prices",
-    "outcome": "9/25 的方向相反：协议传闻使 WTI 下跌约 2.3%，Brent 从接近 108 美元的高位回落，说明消息对油价的敏感度是双向的",
-    "outcome_en": "Reversed on 9/25: deal headlines cut WTI ~2.3%, while Brent eased from near $108 — headline sensitivity cut both ways",
-    "verdict": "符合",
-    "verdict_en": "Held",
+    "outcome": "9/25 的方向相反：协议传闻使 WTI 下跌约 2.3%，Brent 从接近 108 美元的高位回落，说明消息对油价的敏感度是双向的（相关性，不构成因果证明）",
+    "outcome_en": "Reversed on 9/25: deal headlines cut WTI ~2.3%, while Brent eased from near $108 — headline sensitivity cut both ways (correlation, not proof of causation)",
+    "verdict": "证据一致",
+    "verdict_en": "Evidence consistent",
     "lesson": "机制成立，但应把\"双向放大\"写进判断，而不是只写上行",
     "lesson_en": "Mechanism held; the call should state two-way amplification, not just upside"
    },
@@ -520,18 +560,18 @@
     "claim_en": "Hawkish Fed lifts long yields and pressures long-duration assets",
     "outcome": "收益率维持高位（10 年期 5.18%，+2bp），但纳指仍上涨 0.48%，道指结束三周连跌",
     "outcome_en": "Yields stayed high (10-year 5.18%, +2bp) yet the Nasdaq rose 0.48% and the Dow ended a three-week losing streak",
-    "verdict": "部分符合",
-    "verdict_en": "Partly",
+    "verdict": "证据不充分",
+    "verdict_en": "Inconclusive",
     "lesson": "收益率高位横盘时，股市已部分消化；应以\"新高突破\"作为触发条件，而不是\"处于高位\"",
     "lesson_en": "When yields plateau, equities partly price it in; use a new-high break as the trigger, not the level itself"
    },
    {
     "claim": "Oracle 不可抗力通知可能波及光互连链条（AI 推断）",
     "claim_en": "Oracle's force majeure notice may spill over to optical interconnects (AI inference)",
-    "outcome": "9/25 Oracle 重申 Bloom 合同，美股 CPO 等权当日上涨 2.07%，Tower +6.1%",
-    "outcome_en": "On 9/25 Oracle reaffirmed its Bloom contract; the US CPO basket rose 2.07% EW, Tower +6.1%",
-    "verdict": "符合",
-    "verdict_en": "Held",
+    "outcome": "9/25 Oracle 重申 Bloom 合同，美股 CPO 等权当日上涨 2.07%，Tower +6.1%（时间上吻合，但同日还有其他驱动，不能单独归因）",
+    "outcome_en": "On 9/25 Oracle reaffirmed its Bloom contract; the US CPO basket rose 2.07% EW, Tower +6.1% (timing fits, but other drivers were present — not attributable on its own)",
+    "verdict": "证据一致",
+    "verdict_en": "Evidence consistent",
     "lesson": "事件驱动的回撤在驱动因素反转后迅速修复，验证了\"拥挤板块对消息敏感\"的判断",
     "lesson_en": "An event-driven drawdown reversed as soon as the driver did, consistent with the crowding sensitivity call"
    },
@@ -540,11 +580,14 @@
     "claim_en": "Truce extension lowers near-term tail risk",
     "outcome": "峰会闭幕确认延期，没有新增关税或管制；芯片议题没有进展，产能过剩关税被推迟",
     "outcome_en": "Summit ended with the extension confirmed and no new tariffs or controls; chips a non-event, overcapacity tariff deferred",
-    "verdict": "符合",
-    "verdict_en": "Held",
+    "verdict": "证据一致",
+    "verdict_en": "Evidence consistent",
     "lesson": "风险被推迟而非消除，下一个检验点是 2027-01-10",
     "lesson_en": "Risk deferred, not removed; next checkpoint is 2027-01-10"
    }
-  ]
+  ],
+  "note": "追溯复盘：9/24 的判断写于冻结机制上线之前，原文以首次 git 提交中的 9/24 分析文件为准。",
+  "note_en": "Retroactive review: the 9/24 calls predate the freeze mechanism; the original text is the 9/24 analysis file in the first git commit.",
+  "provenance_url": "https://github.com/nanaisclelia/market-monitor/blob/f60baa0/data/analysis/2026-09-24.json"
  }
 }

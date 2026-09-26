@@ -7,6 +7,9 @@ from zoneinfo import ZoneInfo
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 from markupsafe import Markup
 
+from datetime import date, timedelta
+
+from . import calendars, calls, gate
 from .common import DATA, ROOT, SITE, SNAPSHOTS, read_json, settings, utcnow
 
 MARKETS = ["cn", "uk", "us"]
@@ -181,10 +184,28 @@ def _hot(v, thr) -> str:
     return "hotup" if v >= thr else ("hotdn" if v <= -thr else "")
 
 
+_WD_ZH = "一二三四五六日"
+
+
+def _wd(iso_s: str | None, lang: str = "zh") -> str:
+    """日期 → 「9/25（周五）」/「Fri 9/25」。"""
+    if not iso_s:
+        return "—"
+    d = date.fromisoformat(iso_s[:10])
+    return f"{d.month}/{d.day}（周{_WD_ZH[d.weekday()]}）" if lang == "zh" else f"{d.strftime('%a')} {d.month}/{d.day}"
+
+
+def _drop_q(hits: list, g: dict | None) -> list:
+    """剔除被发布闸门隔离的标的。"""
+    q = (g or {}).get("quarantine") or {}
+    return [h for h in hits if h["ticker"] not in q]
+
+
 def _env():
     env = Environment(loader=FileSystemLoader(ROOT / "templates"), autoescape=select_autoescape(["html"]))
-    env.filters.update(num=_num, big=_big, t=_fmt_time, spark=_spark, en=_en)
-    env.globals.update(grade=_grade, evidence=_evidence, best_grade=_best_grade, hot=_hot, open_ticker=_open_ticker, GRADE_RANK=GRADE_RANK)
+    env.filters.update(num=_num, big=_big, t=_fmt_time, spark=_spark, en=_en, wd=_wd, drop_q=_drop_q)
+    env.globals.update(grade=_grade, evidence=_evidence, best_grade=_best_grade, hot=_hot, open_ticker=_open_ticker, GRADE_RANK=GRADE_RANK,
+                       theme_groups=_theme_groups)
     return env
 
 
@@ -194,17 +215,66 @@ def _dates():
 
 def _page(env, snaps: dict, title_date: str, archive: list[str], is_archive: bool, public: bool = False) -> str:
     cfg = settings()
-    return env.get_template("dashboard.html.j2").render(
+    return env.get_template("dashboard.html.j2").render(fresh=_freshness(snaps),
         s=snaps, date=title_date, archive=archive, is_archive=is_archive, public=public,
         disp_tz=cfg["display_tz"], now=utcnow().isoformat(), tol=cfg["cross_check_tolerance_pct"],
     )
 
 
 def _with_analysis(snap: dict | None) -> dict | None:
-    """附上 AI 整理的原因分析（data/analysis/<交易日>.json，由 Claude 定时任务写入）。"""
+    """附上 AI 分析、发布闸门结果、当日冻结判断。"""
     if snap:
-        snap = {**snap, "analysis": read_json(DATA / "analysis" / f"{snap['session']}.json")}
+        an = read_json(DATA / "analysis" / f"{snap['session']}.json")
+        snap = {**snap, "analysis": an, "gate": gate.check(snap), "calls": calls.load(snap["session"])}
+        if an and an.get("review"):
+            snap["prev_calls"] = calls.load(an["review"]["from"])
     return snap
+
+
+def _freshness(snaps: dict) -> dict:
+    """每个市场的新鲜度：对应交易日、下次更新时间、过期时间（供前端判断降级）。"""
+    cfg, now = settings(), utcnow()
+    out = {"generated": now.isoformat(), "markets": []}
+    expiries = []
+    for key, label, label_en in (("uk", "英国", "UK"), ("us", "美国", "US")):
+        m, snap = cfg["markets"].get(key), snaps.get(key)
+        if not m or not snap:
+            continue
+        cal, sess = m["calendar"], date.fromisoformat(snap["session"])
+        d = sess + timedelta(days=1)
+        while not calendars.is_session(cal, d):
+            d += timedelta(days=1)
+        nxt = calendars.session_close(cal, d) + timedelta(minutes=m["delay_minutes"])
+        expiries.append(nxt + timedelta(hours=3))
+        out["markets"].append({"key": key, "label": label, "label_en": label_en, "session": snap["session"],
+                               "generated": snap["generated_at"], "next": nxt.isoformat(), "next_session": d.isoformat()})
+    # 中国：看台尚未覆盖，只报告交易所状态
+    try:
+        today = now.astimezone(__import__("zoneinfo").ZoneInfo("Asia/Shanghai")).date()
+        d = today
+        while not calendars.is_session("XSHG", d):
+            d += timedelta(days=1)
+        out["cn"] = {"open_today": d == today, "next_open": d.isoformat()}
+    except Exception:  # noqa: BLE001
+        out["cn"] = None
+    out["expires"] = min(expiries).isoformat() if expiries else None
+    return out
+
+
+def _theme_groups(th: dict, session: str) -> dict:
+    """CPO 等主题：当日可比样本 / 休市（非当日，不可横比）/ 数据缺失 三组，汇总只用当日样本。"""
+    ok = [r for r in th["members"] if r.get("stats")]
+    today = [r for r in ok if r.get("session") == session]
+    closed = [r for r in ok if r.get("session") != session]
+    missing = [r for r in th["members"] if not r.get("stats")]
+
+    def mean(vals):
+        vals = [v for v in vals if v is not None]
+        return sum(vals) / len(vals) if vals else None
+    agg = {"d1": mean([r["stats"]["pct"] for r in today]), "r5": mean([r.get("r5") for r in today]),
+           "r20": mean([r.get("r20") for r in today]), "ytd": mean([r.get("ytd") for r in today]),
+           "up": sum(r["stats"]["pct"] > 0 for r in today), "down": sum(r["stats"]["pct"] < 0 for r in today)}
+    return {"today": today, "closed": closed, "missing": missing, "agg": agg}
 
 
 def render_all() -> None:
