@@ -1,6 +1,6 @@
 # Market Monitor
 
-**A daily closing brief for US and UK equities, precious metals, the CPO / optical-interconnect theme and single-stock movers — built around data discipline: every number is fetched live, cross-checked against a second source, and every opinion is attributed to a named source.**
+**A daily closing brief for US and UK equities, precious metals, the CPO / optical-interconnect theme and single-stock movers — built around data discipline: every number comes from a post-close snapshot, cross-checked against a second source, and every opinion is attributed to a named source.**
 
 **Live page:** https://claude.ai/artifact/MNtBzS83NLwwyNcxRe9mhM · bilingual (中文 / EN) · Day / Dark
 
@@ -51,7 +51,7 @@ uv venv -p 3.12 .venv && uv pip install -p .venv/bin/python -r requirements.txt
 
 每个交易日在各市场收盘后自动抓取数据，生成静态 HTML 看台（`site/index.html`），并按日期存档快照。
 
-**当前阶段**：美股 + 英股（FTSE 100/250、FTSE 350 异动）+ 贵金属 + 主题追踪（CPO）+ 异动预警。中国（A股/港股）、英国、地缘、交易 Case 为下一阶段。
+**当前阶段**：美股 + 英股（FTSE 100/250、FTSE 350 异动）+ 贵金属 + 主题追踪（CPO）+ 异动预警。中国（A股/港股）为下一阶段。
 
 ---
 
