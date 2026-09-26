@@ -424,6 +424,28 @@ body.isstale main{opacity:.72}
 .mchip.zm .zl{background:var(--warn-bg);color:var(--warn)}
 .mchip.zx{border-color:var(--dn)}.mchip.zx .zl{background:var(--dn-bg);color:var(--dn);font-weight:600}
 .mapverdict{margin:0;font-size:13px}
+.pulse{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 8px;padding-block:0 7px;font-size:12.5px;color:var(--sub)}
+.pulse .pi{color:var(--sub)}.pulse a.pi:hover{color:var(--accent);text-decoration:none}
+.pulse b{color:var(--ink)}
+.env.better{color:var(--up)}.env.worse{color:var(--dn)}.env.mixed{color:var(--warn)}
+.maprow{display:grid;grid-template-columns:120px minmax(0,1fr);gap:8px;align-items:start}
+@media(max-width:640px){.maprow{grid-template-columns:minmax(0,1fr)}}
+.mk{font:600 10.5px var(--cond);letter-spacing:.08em;text-transform:uppercase;color:var(--mut);padding-top:6px}
+.mchip.zq{border-style:dashed;border-color:var(--dn)}.mchip.zq .zl{background:var(--dn-bg);color:var(--dn)}
+.mchip.zb .zl{background:var(--up-bg);color:var(--up)}
+.states{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:4px}
+@media(max-width:760px){.states{grid-template-columns:minmax(0,1fr)}}
+.stt{border:1px solid var(--line);border-radius:8px;padding:10px 12px;display:grid;gap:4px;align-content:start;background:var(--sunk)}
+.stt p{margin:0;font-size:13px}.stt p.mut{font-size:11.5px}
+.sk{font:600 10.5px var(--cond);letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+.facs{list-style:none;padding:0;margin:2px 0;display:flex;flex-wrap:wrap;gap:4px 10px;font-size:12.5px}
+.facs li{margin:0}.facs li.v1{color:var(--dn)}.facs li.v-1{color:var(--up)}.facs li.v0{color:var(--mut)}
+.secbars{display:flex;flex-wrap:wrap;gap:6px}
+.sb{display:inline-flex;gap:6px;align-items:baseline;padding:3px 8px;border-radius:4px;font-size:12px;background:var(--sunk);border:1px solid var(--line)}
+.sb b{font-weight:500;color:var(--sub)}.sb i{font-style:normal;font-size:10.5px}
+.sb.up{box-shadow:inset 3px 0 0 var(--up)}.sb.dn{box-shadow:inset 3px 0 0 var(--dn)}
+.blbl{display:none;font-family:var(--sans);font-weight:500}
+@media(max-width:640px){.blbl{display:inline}.tasknav em{border-radius:4px}}
 .mapfoot{margin:0;font-size:12.5px;color:var(--sub)}
 .fl{list-style:none;padding:0;margin:0;display:grid;gap:8px}
 .fl li{border:1px solid var(--line);border-radius:6px;padding:8px 12px;display:grid;gap:2px;font-size:13.5px}
@@ -475,12 +497,12 @@ h2 small{text-transform:none;letter-spacing:0}
     <a href="#b-map" data-view="brief">{{ L('市场地图', 'Market map') }}</a>
     <a href="#b-follow" data-view="brief">{{ L('我的关注', 'Following') }}<em id="fcount" hidden></em></a>
     {% set nrep = ((us.sections.alerts.hits|drop_q(us.gate))|length if us else 0) + ((s.get('uk').sections.alerts.hits|drop_q(s.get('uk').gate))|length if s.get('uk') else 0) %}
-    <a href="#desk" data-view="desk" title="{{ nrep }} 只今日重新定价 / {{ nrep }} repriced today">{{ L('研究台', 'Research desk') }}{% if nrep %}<em>{{ nrep }}</em>{% endif %}</a>
+    <a href="#desk" data-view="desk" title="{{ nrep }} 只今日重新定价 / {{ nrep }} repriced today">{{ L('研究台', 'Research desk') }}{% if nrep %}<em>{{ nrep }}<span class="blbl">{{ L(' 个重新定价', ' repriced') }}</span></em>{% endif %}</a>
     <a href="#method" data-view="desk">{{ L('方法', 'Method') }}</a>
   </nav>
   <nav class="wrap subnav deskonly" aria-label="Research desk sections">
     {% if an and an.geo %}<a href="#geo">{{ L('地缘政治', 'Geopolitics') }}</a>{% endif %}
-    <a href="#us">{{ L('美股指数', 'US indices') }}</a><a href="#metals">{{ L('贵金属', 'Metals') }}</a>
+    <a href="#us">{{ L('美股指数', 'US indices') }}</a>{% if us and us.sections.cross %}<a href="#cross">{{ L('跨资产', 'Cross-asset') }}</a>{% endif %}<a href="#metals">{{ L('贵金属', 'Metals') }}</a>
     {% if us and us.sections.themes %}<a href="#cpo">CPO</a>{% endif %}
     <a href="#alerts">{{ L('今日重新定价', 'Repricing') }}</a>{% if s.get('uk') %}<a href="#uk">{{ L('英国', 'UK') }}</a>{% endif %}
     {% if not public %}<a href="#log">{{ L('日志', 'Log') }}</a>{% endif %}
@@ -492,6 +514,14 @@ h2 small{text-transform:none;letter-spacing:0}
     <span class="fk">{{ L('生成于', 'Generated') }}</span><span class="fv mono">{{ fresh.generated|t(disp_tz, '%m/%d %H:%M %Z') }}</span>
     {% for m in fresh.markets %}<span class="fsep" aria-hidden="true">｜</span><span class="fm"><b>{{ L(m.label, m.label_en) }}</b> {{ L('收盘 ' ~ (m.session|wd('zh')), 'close ' ~ (m.session|wd('en'))) }} <span class="mut">· {{ L('下次', 'next') }} {{ m.next|t(disp_tz, '%m/%d %H:%M') }}</span></span>{% endfor %}
     {% if fresh.cn %}<span class="fsep" aria-hidden="true">｜</span><span class="fm"><b>{{ L('中国', 'China') }}</b> {% if fresh.cn.open_today %}{{ L('今日开市', 'open today') }}{% else %}{{ L('休市', 'closed') }} <span class="mut">· {{ L((fresh.cn.next_open|wd('zh')) ~ ' 开市', 'reopens ' ~ (fresh.cn.next_open|wd('en'))) }}</span>{% endif %} <span class="mut">· {{ L('看台未覆盖', 'not covered') }}</span></span>{% endif %}
+  </div>
+  {% set nrep_p = ((us.sections.alerts.hits|drop_q(us.gate))|length if us else 0) + ((s.get('uk').sections.alerts.hits|drop_q(s.get('uk').gate))|length if s.get('uk') else 0) %}
+  <div class="wrap pulse"><span class="fk">{{ L('市场脉冲', 'Pulse') }}</span>
+    <a href="#b-map" class="pi">{{ L('单日异常', 'One-day outliers') }} <b class="{{ 'dn' if pulse.anomalies else '' }}">{{ L(pulse.anomalies|length ~ ' / ' ~ pulse.n_checked, pulse.anomalies|length ~ ' / ' ~ pulse.n_checked) }}</b></a><span class="fsep">｜</span>
+    <a href="#b-map" class="pi">{{ L('环境压力', 'Macro pressure') }} <b class="env {{ pulse.env }}">{{ L({'worse':'加剧','better':'缓和','mixed':'混合'}[pulse.env], {'worse':'rising','better':'easing','mixed':'mixed'}[pulse.env]) }}</b></a><span class="fsep">｜</span>
+    <a href="#alerts" data-view="desk" class="pi">{{ L('局部重新定价 ' ~ nrep_p ~ ' 只', nrep_p ~ ' names repriced') }}</a><span class="fsep">｜</span>
+    <span class="pi">{% if pulse.gate == 'pass' %}{{ L('美英数据完整', 'US/UK data complete') }}{% elif pulse.gate == 'warn' %}{{ L('美英数据可用 · ' ~ pulse.quarantine|length ~ ' 项隔离', 'US/UK data usable · ' ~ pulse.quarantine|length ~ ' quarantined') }}{% else %}<b class="dn">{{ L('数据待核验', 'Data pending verification') }}</b>{% endif %}</span>
+    {% if fresh.cn and not fresh.cn.open_today %}<span class="fsep">｜</span><span class="pi">{{ L('中国休市', 'China closed') }}</span>{% endif %}
   </div>
   <div class="stale wrap" id="stale" hidden>{{ L('数据已过期：原定 ' ~ (fresh.expires|t(disp_tz, '%m/%d %H:%M')) ~ ' 前完成下一次更新，当前显示的仍是上一交易日收盘。以下内容仅供回看，请勿当作当前行情。', 'Stale: the next update was due before ' ~ (fresh.expires|t(disp_tz, '%m/%d %H:%M')) ~ '; this still shows the previous close. Treat it as a look-back, not current prices.') }}</div>
 </div>
@@ -542,14 +572,37 @@ h2 small{text-transform:none;letter-spacing:0}
 {%- set az = z|abs if z is not none else 0 -%}{%- set lv = 'n' if az < 1 else ('m' if az < 2 else 'x') -%}
 <span class="mchip z{{ lv }}" title="当日涨跌 ÷ 20 日日波动率 / daily move ÷ 20-day σ"><b>{{ L(name_zh, name_en) }}</b>{{ chg(st.pct) }}<span class="zv">{{ z|num(1, True) }}σ</span><span class="zl">{{ L({'n':'正常波动内','m':'偏大','x':'超出正常区间'}[lv], {'n':'within normal','m':'larger than usual','x':'outside normal range'}[lv]) }}</span>{% if note_zh %}<i class="mut">{{ L(note_zh, note_en) }}</i>{% endif %}</span>
 {%- endmacro -%}
-{% set zs = [] %}
-<div class="mapline">
-{% if us %}{% for r in us.sections.indices if r.stats %}{{ zchip(r.name.replace(' Composite', ''), r.name.replace(' Composite', ''), r.stats) }}{% set _ = zs.append((r.name, r.stats.z)) %}{% endfor %}{% endif %}
-{% if uk %}{% for r in uk.sections.indices if r.stats %}{{ zchip(r.name, r.name, r.stats) }}{% set _ = zs.append((r.name, r.stats.z)) %}{% endfor %}{% endif %}
-{% if us %}{% for m in us.sections.metals[:2] if m.futures %}{{ zchip(m.name.split(' ')[0], m.name.split(' ')[-1], m.futures, '期货', 'futures') }}{% set _ = zs.append((m.name.split(' ')[-1], m.futures.z)) %}{% endfor %}{% endif %}
+{%- macro xchip(c) -%}{%- set z = c.z if c.z is defined else none -%}{%- set az = z|abs if z is not none else 0 -%}{%- set lv = 'n' if az < 1 else ('m' if az < 2 else 'x') -%}
+{%- set qd = pulse.quarantine.get(c.key) -%}
+<span class="mchip {{ 'zq' if qd else 'z' ~ lv }}"><b>{{ L(c.name, c.name_en) }}</b>{% if c.quote_only %}<span class="mono">{{ c.close|num(4) }}</span>{{ chg(c.chg) }}<span class="zl">{{ L('仅报价', 'quote only') }}</span>
+{% elif qd %}<span class="mono">{{ c.close|num }}</span><span class="zl">{{ L('待核验', 'pending') }}</span><i class="mut">{{ L(qd, 'contract roll — not comparable' if c.roll else 'sources disagree') }}</i>
+{% elif c.unit == 'bp' %}<span class="mono">{{ c.close|num(2) }}%</span><span class="{{ 'up' if c.chg > 0 else 'dn' }}">{{ c.chg|num(1, True) }}bp</span><span class="zv">{{ z|num(1, True) }}σ</span><span class="zl">{{ L({'n':'正常波动内','m':'偏大','x':'超出正常区间'}[lv], {'n':'within normal','m':'larger than usual','x':'outside normal range'}[lv]) }}</span>
+{% else %}<span class="mono">{{ c.close|num(2) }}</span>{{ chg(c.chg) }}<span class="zv">{{ z|num(1, True) }}σ</span><span class="zl">{{ L({'n':'正常波动内','m':'偏大','x':'超出正常区间'}[lv], {'n':'within normal','m':'larger than usual','x':'outside normal range'}[lv]) }}</span>{% endif %}</span>
+{%- endmacro -%}
+<div class="maprow"><span class="mk">{{ L('股指', 'Equities') }}</span><div class="mapline">
+{% if us %}{% for r in us.sections.indices if r.stats %}{{ zchip(r.name.replace(' Composite', ''), r.name.replace(' Composite', ''), r.stats) }}{% endfor %}{% endif %}
+{% if uk %}{% for r in uk.sections.indices if r.stats %}{{ zchip(r.name, r.name, r.stats) }}{% endfor %}{% endif %}
+</div></div>
+{% if us and us.sections.cross %}<div class="maprow"><span class="mk">{{ L('利率 / 商品 / 汇率', 'Rates / commodities / FX') }}</span><div class="mapline">
+{% for c in us.sections.cross if not c.error %}{{ xchip(c) }}{% endfor %}
+{% for m in us.sections.metals[:2] if m.futures %}{{ zchip(m.name.split(' ')[0], m.name.split(' ')[-1], m.futures, '期货', 'futures') }}{% endfor %}
+</div></div>{% endif %}
+{% set bu = us.sections.breadth if us else none %}{% set bk = uk.sections.breadth if uk else none %}
+{% if (bu and bu.n) or (bk and bk.n) %}<div class="maprow"><span class="mk">{{ L('市场宽度', 'Breadth') }}</span><div class="mapline">
+{% for bb, nm, nm_en in [(bu, 'S&P 500 + 纳指 100', 'S&P 500 + Nasdaq-100'), (bk, 'FTSE 350', 'FTSE 350')] if bb and bb.n %}
+<span class="mchip {{ 'zn' if 40 < bb.pct_adv < 60 else 'zb' }}"><b>{{ L(nm, nm_en) }}</b><span class="up">▲{{ bb.adv }}</span><span class="dn">▼{{ bb.dec }}</span><span class="zv">{{ bb.pct_adv|num(0) }}%</span><span class="zl">{{ L('行业 ' ~ bb.sectors_up ~ '/' ~ bb.sectors_total ~ ' 上涨', bb.sectors_up ~ '/' ~ bb.sectors_total ~ ' sectors up') }}</span></span>
+{% endfor %}</div></div>{% endif %}
+
+<div class="states">
+  <div class="stt"><span class="sk">{{ L('单日异常', 'One-day outliers') }}</span>
+    <p>{% if pulse.anomalies %}<b class="dn">{{ L(pulse.anomalies|length ~ ' 项超出正常区间（≥2σ）：' ~ pulse.anomalies|join('、'), pulse.anomalies|length ~ ' outside normal range (≥2σ): ' ~ pulse.anomalies|join(', ')) }}</b>{% else %}<b>{{ L('无', 'None') }}</b> · {{ L('已检查 ' ~ pulse.n_checked ~ ' 项：股指、利率、原油、美元、人民币、贵金属，均在 2σ 以内。', pulse.n_checked ~ ' checked — equities, rates, oil, dollar, CNY, metals — all within 2σ.') }}{% endif %}</p>
+    <p class="mut">{{ L('统计阈值：当日变动 ÷ 自身 20 日波动率。它回答"今天的波动是否罕见"，不回答"环境是否危险"。', 'Statistical threshold: today\'s move ÷ its own 20-day σ. It answers "was today rare?", not "is the backdrop risky?".') }}</p></div>
+  <div class="stt"><span class="sk">{{ L('环境压力', 'Macro pressure') }}</span>
+    <p><b class="env {{ pulse.env }}">{{ L({'worse':'加剧','better':'缓和','mixed':'混合'}[pulse.env], {'worse':'rising','better':'easing','mixed':'mixed'}[pulse.env]) }}</b> · {{ L(pulse.relief ~ ' 项缓和 / ' ~ pulse.stress ~ ' 项加剧 / ' ~ (pulse.factors|length - pulse.relief - pulse.stress) ~ ' 项中性', pulse.relief ~ ' easing / ' ~ pulse.stress ~ ' rising / ' ~ (pulse.factors|length - pulse.relief - pulse.stress) ~ ' neutral') }}</p>
+    <ul class="facs">{% for f in pulse.factors %}<li class="v{{ f.vote }}"><b>{{ L(f.zh, f.en) }}</b> {% if f.key == 'breadth' %}{{ L('上涨占比 ' ~ (f.pct_adv|num(0)) ~ '%', (f.pct_adv|num(0)) ~ '% advancing') }}{% else %}{{ f.z|num(2, True) }}σ{% endif %} → {{ L({1:'压力↑',-1:'缓和↓',0:'中性'}[f.vote], {1:'pressure ↑',-1:'easing ↓',0:'neutral'}[f.vote]) }}</li>{% endfor %}</ul>
+    <p class="mut">{{ L('利率、油价、波动率、美元上行视为压力；宽度 ≥60% 上涨视为缓和、≤40% 视为压力；|z| < 0.5 视为中性。3 项以上同向才判"加剧 / 缓和"。多个资产各约 1σ 的同向变化，也可能是重要的环境转变。', 'Rising rates, oil, volatility and dollar count as pressure; breadth ≥60% advancing eases, ≤40% adds pressure; |z| < 0.5 is neutral. Three or more in the same direction are needed to call it. Several ~1σ moves in the same direction can still mark a regime shift.') }}</p></div>
 </div>
-{% set outl = [] %}{% for n, z in zs if z is not none and z|abs >= 2 %}{% set _ = outl.append(n) %}{% endfor %}{% set larg = [] %}{% for n, z in zs if z is not none and z|abs >= 1 and z|abs < 2 %}{% set _ = larg.append(n) %}{% endfor %}
-<p class="mapverdict">{% if outl %}{{ L('超出正常区间（≥2σ）：' ~ outl|join('、') ~ '。', 'Outside the normal range (≥2σ): ' ~ outl|join(', ') ~ '.') }}{% else %}{{ L('今天没有指数或贵金属超出正常波动区间（≥2σ）。', 'No index or metal moved outside its normal range (≥2σ) today.') }}{% endif %}{% if larg %} {{ L('偏大（1–2σ）：' ~ larg|join('、') ~ '。', 'Larger than usual (1–2σ): ' ~ larg|join(', ') ~ '.') }}{% endif %} <span class="mut">{{ L('σ = 各自过去 20 个交易日的日涨跌幅标准差，所以 VIX 跌 5% 也可能只是正常波动。', 'σ = each asset\'s own 20-day std of daily moves — a 5% VIX drop can still be normal.') }}</span></p>
+{% if pulse.quarantine %}<p class="mapverdict mut">{{ L('已由发布闸门隔离、不参与判断：', 'Quarantined by the release gate and excluded: ') }}{% for k, v in pulse.quarantine.items() %}{{ k }}（{{ v }}）{% if not loop.last %}、{% endif %}{% endfor %}</p>{% endif %}
 {% set nus = (us.sections.alerts.hits|drop_q(us.gate))|length if us else 0 %}{% set nuk = (uk.sections.alerts.hits|drop_q(uk.gate))|length if uk else 0 %}
 <p class="mapfoot">{{ L('今日重新定价 ' ~ (nus + nuk) ~ ' 只（美 ' ~ nus ~ ' · 英 ' ~ nuk ~ '）——这是对价格变化的解释，不是交易提醒。', (nus + nuk) ~ ' repriced today (US ' ~ nus ~ ' · UK ' ~ nuk ~ ') — explanations of price moves, not trade alerts.') }} <a href="#alerts" data-view="desk">{{ L('在研究台查看 →', 'Open in research desk →') }}</a></p>
 </section>
@@ -616,6 +669,27 @@ h2 small{text-transform:none;letter-spacing:0}
 </table></div>
 {% else %}<p class="missing">{{ L('数据暂缺', 'Data unavailable') }}</p>{% endif %}
 </section>
+
+{% if us and us.sections.cross %}
+<section class="blk" id="cross"><header><h2>{{ L('跨资产与市场宽度', 'Cross-asset & breadth') }}</h2><span class="meta">Yahoo Finance · {{ L('校验', 'check') }} CNBC</span></header>
+<div class="tw"><table>
+<thead><tr><th class="t">{{ L('资产', 'Asset') }}</th><th>{{ L('收盘', 'Close') }}</th><th>{{ L('变动', 'Change') }}</th><th>{{ L('20日σ', '20d σ') }}</th><th>z</th><th class="t">{{ L('60 日走势', '60-day') }}</th><th>{{ L('双源校验', 'Cross-check') }}</th><th class="t">{{ L('状态', 'Status') }}</th></tr></thead>
+<tbody>{% for c in us.sections.cross %}{% set qd = pulse.quarantine.get(c.key) %}<tr>
+<td class="t">{{ L(c.name, c.name_en) }}</td>
+{% if c.error %}<td colspan="7" class="missing">{{ L('数据暂缺（' ~ c.error ~ '）', 'Data unavailable (' ~ (c.error|en) ~ ')') }}</td>
+{% elif c.quote_only %}<td>{{ c.close|num(4) }}</td><td>{{ chg(c.chg) }}</td><td colspan="3" class="mut t">{{ L('仅 CNBC 报价，无可靠历史，不计算 σ', 'CNBC quote only; no reliable history, no σ') }}</td><td></td><td class="t"></td>
+{% else %}<td>{{ c.close|num(3 if c.unit == 'bp' else 2) }}{{ '%' if c.unit == 'bp' else '' }}</td>
+<td>{% if c.unit == 'bp' %}<span class="{{ 'up' if c.chg > 0 else 'dn' }}">{{ c.chg|num(1, True) }}bp</span>{% else %}{{ chg(c.chg) }}{% endif %}</td>
+<td>{{ c.sigma|num(2) }}{{ 'bp' if c.unit == 'bp' else '%' }}</td><td>{{ c.z|num(1, True) }}</td><td class="t">{{ c.spark|spark(96, 24, c.name) }}</td>
+<td>{% if c.xcheck and c.xcheck.status == 'ok' %}<span class="chip ok">✓ {{ (c.xcheck.diff_bp|num(1, True) ~ 'bp') if c.xcheck.diff_bp is defined else c.xcheck.diff_pct|num(2, True, True) }}</span>{% elif c.xcheck and c.xcheck.status == 'bad' %}<span class="chip bad">✗ {{ c.xcheck.other|num(2) }}</span>{% else %}<span class="chip">{{ L('未校验', 'Unverified') }}</span>{% endif %}</td>
+<td class="t">{% if qd %}<span class="gs fail">{{ L('待核验', 'Pending') }}</span> <span class="mut">{{ L(qd ~ ('；次月合约 ' ~ (c.roll.next_contract|num(2)) if c.roll else ''), ('contract roll; next month ' ~ (c.roll.next_contract|num(2))) if c.roll else 'sources disagree') }}</span>{% else %}<span class="gs pass">{{ L('通过', 'OK') }}</span>{% endif %}</td>{% endif %}
+</tr>{% endfor %}</tbody></table></div>
+{% set bu = us.sections.breadth %}{% if bu and bu.n %}
+<h4>{{ L('行业扩散（S&P 500 + 纳指 100，行业涨跌幅中位数）', 'Sector diffusion (S&P 500 + Nasdaq-100, median move by sector)') }}</h4>
+<div class="secbars">{% for x in bu.sectors %}<span class="sb {{ 'up' if x.median > 0 else 'dn' }}"><b>{{ x.name }}</b>{{ chg(x.median) }}<i class="mut">n={{ x.n }}</i></span>{% endfor %}</div>
+{% if bu.source %}<p class="asof">{{ L('宽度来源：' ~ bu.source, 'Breadth source: ' ~ (bu.source_en or bu.source)) }}</p>{% endif %}{% endif %}
+</section>
+{% endif %}
 
 <section class="blk" id="metals"><header><h2>{{ L('贵金属', 'Precious metals') }}<small>{{ L('USD / 盎司', 'USD / oz') }}</small></h2><span class="meta">{{ L('LBMA 定价 · COMEX/NYMEX 近月期货 · 校验 CNBC', 'LBMA prices · COMEX/NYMEX front-month · check CNBC') }}</span></header>
 {% if us %}{{ asof(us, '期货为 Yahoo 日线最新价，非 COMEX 官方结算价', 'futures are Yahoo last prices, not official COMEX settlements') }}

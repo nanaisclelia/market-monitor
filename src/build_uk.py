@@ -12,7 +12,7 @@ from zoneinfo import ZoneInfo
 import pandas as pd
 
 from . import alerts as A
-from . import calendars
+from . import calendars, crossasset
 from .build_us import _insight_block, _upto
 from .common import ErrorLog, get_logger, iso, load_yaml, settings, utcnow
 from .fetchers import cnbc, universe, yahoo
@@ -160,6 +160,7 @@ def build(session: date) -> dict:
         short = (h["fundamentals"].get("short_name") or h["name"]).split()[0].strip(",.")
         h["insight"] = _insight_block(t, [h["epic"], short, h["name"].split()[0]])
         h["analyst"] = yahoo.analyst(t)
+    snap["sections"]["breadth"] = crossasset.breadth({t: v[0] for t, v in stats.items()}, uni)
     snap["sections"]["alerts"] = {
         "universe": sets, "universe_size": len(uni), "with_data": len(stats), "patched_from_cnbc": patched,
         "cnbc_symbol_mismatch": mismatched,

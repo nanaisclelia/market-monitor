@@ -73,5 +73,25 @@ def check(snap: dict | None) -> dict | None:
             checks.append({"name": "代码映射", "name_en": "Symbol mapping", "status": "pass" if not mm else "warn",
                            "detail": f"{len(mm)} 只第二源代码映射到其他证券，已改用备用来源：" + "、".join(mm) if mm else "无映射错误",
                            "detail_en": f"{len(mm)} remapped" if mm else "no mapping errors"})
+    cross = snap["sections"].get("cross") or []
+    if cross:
+        rolled = [r["name"] for r in cross if r.get("roll")]
+        badx = [r["name"] for r in cross if (r.get("xcheck") or {}).get("status") == "bad" and not r.get("roll")]
+        for r in cross:
+            if r.get("roll"):
+                quarantine[r["key"]] = "期货合约换月：跨合约涨跌不可比"
+            elif (r.get("xcheck") or {}).get("status") == "bad":
+                quarantine[r["key"]] = "双源不一致"
+        checks.append({"name": "跨资产对账 / 合约换月", "name_en": "Cross-asset reconciliation / contract rolls",
+                       "status": "warn" if rolled or badx else "pass",
+                       "detail": ("合约换月已隔离：" + "、".join(rolled) + "；" if rolled else "") + ("双源不一致：" + "、".join(badx) if badx else "")
+                       or f"{len(cross)} 项通过", "detail_en": f"{len(rolled)} roll(s) quarantined, {len(badx)} mismatched"})
+    br = snap["sections"].get("breadth")
+    if br is not None:
+        n_uni = (snap["sections"].get("alerts") or {}).get("universe_size") or br.get("n") or 0
+        ok_b = br.get("n", 0) >= 0.8 * n_uni if n_uni else False
+        checks.append({"name": "市场宽度样本", "name_en": "Breadth sample", "status": "pass" if ok_b else "warn",
+                       "detail": f"{br.get('n', 0)}/{n_uni} 只" + (f"（{br['source']}）" if br.get("source") else ""),
+                       "detail_en": f"{br.get('n', 0)}/{n_uni}"})
     worst = "fail" if any(c["status"] == "fail" for c in checks) else ("warn" if any(c["status"] == "warn" for c in checks) else "pass")
     return {"status": worst, "checks": checks, "quarantine": quarantine}

@@ -6,7 +6,7 @@ from datetime import date, datetime, timedelta
 from zoneinfo import ZoneInfo
 
 from . import alerts as A
-from . import calendars, insights, themes
+from . import calendars, crossasset, insights, themes
 from .common import ErrorLog, get_logger, iso, load_yaml, settings, utcnow
 from .fetchers import cnbc, lbma, news, universe, yahoo
 
@@ -141,11 +141,12 @@ def build(session: date) -> dict:
         err.add("themes", f"主题追踪失败: {e}")
         snap["sections"]["themes"] = []
 
-    hits = []
+    hits, all_stats = [], {}
     for t, meta in uni.items():
         st = A.day_stats(sh.get(t), session, scfg["sigma_window"])
         if st is None:
             continue
+        all_stats[t] = st
         why = A.stock_triggered(st, scfg)
         if why:
             hits.append({"ticker": t, "name": meta["name"], "sector": meta.get("sector"), "stats": st, "why": why})
@@ -181,6 +182,12 @@ def build(session: date) -> dict:
         short = (h["fundamentals"].get("short_name") or h["name"]).split()[0].strip(",.")
         h["insight"] = _insight_block(t, [t, short, h["name"].split()[0]])
         h["analyst"] = yahoo.analyst(t)
+    snap["sections"]["breadth"] = crossasset.breadth(all_stats, uni)
+    try:
+        snap["sections"]["cross"] = crossasset.build(session, tz)
+    except Exception as e:  # noqa: BLE001
+        err.add("cross", f"跨资产数据失败: {e}")
+        snap["sections"]["cross"] = []
     snap["sections"]["alerts"] = {
         "universe": acfg["universe"]["us"], "universe_size": len(uni), "with_data": len(uni) - len(missing),
         "criteria": scfg, "hits": hits, "sec_enabled": bool(ua),

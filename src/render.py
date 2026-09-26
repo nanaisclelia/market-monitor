@@ -215,7 +215,7 @@ def _dates():
 
 def _page(env, snaps: dict, title_date: str, archive: list[str], is_archive: bool, public: bool = False) -> str:
     cfg = settings()
-    return env.get_template("dashboard.html.j2").render(fresh=_freshness(snaps),
+    return env.get_template("dashboard.html.j2").render(fresh=_freshness(snaps), pulse=_pulse(snaps),
         s=snaps, date=title_date, archive=archive, is_archive=is_archive, public=public,
         disp_tz=cfg["display_tz"], now=utcnow().isoformat(), tol=cfg["cross_check_tolerance_pct"],
     )
@@ -259,6 +259,61 @@ def _freshness(snaps: dict) -> dict:
         out["cn"] = None
     out["expires"] = min(expiries).isoformat() if expiries else None
     return out
+
+
+def _pulse(snaps: dict) -> dict:
+    """市场脉冲：单日异常（统计阈值）与环境压力（利率 / 油价 / 波动率 / 美元 / 宽度是否共同恶化或改善）分开判断。"""
+    us, uk = snaps.get("us"), snaps.get("uk")
+    q = {}
+    for sn in (us, uk):
+        if sn and sn.get("gate"):
+            q.update(sn["gate"].get("quarantine") or {})
+    zs = []
+    for sn in (us, uk):
+        if not sn:
+            continue
+        for r in sn["sections"].get("indices", []):
+            if r.get("stats") and r["stats"].get("z") is not None:
+                zs.append((r["name"], r["stats"]["z"]))
+    if us:
+        for m in us["sections"].get("metals", [])[:4]:
+            f = m.get("futures")
+            if f and f.get("z") is not None:
+                zs.append((m["name"].split(" ")[-1], f["z"]))
+        for c in us["sections"].get("cross", []):
+            if c.get("z") is not None and c["key"] not in q:
+                zs.append((c["name_en"], c["z"]))
+    anomalies = [n for n, z in zs if abs(z) >= 2]
+    # 环境压力：每个因子投票 +1（压力加剧）/ -1（缓和）/ 0（中性，|z| < 0.5）
+    factors = []
+
+    def vote(key, zh, en, z, sign=1):
+        if z is None:
+            return
+        v = 0 if abs(z) < 0.5 else (1 if z * sign > 0 else -1)
+        factors.append({"key": key, "zh": zh, "en": en, "z": z, "vote": v})
+    cross = {c["key"]: c for c in (us["sections"].get("cross", []) if us else []) if c["key"] not in q}
+    if "us10y" in cross:
+        vote("rates", "长端利率", "Long rates", cross["us10y"].get("z"))
+    oil = cross.get("wti") or cross.get("brent")
+    if oil:
+        vote("oil", "油价", "Oil", oil.get("z"))
+    vix = next((r for r in (us["sections"].get("indices", []) if us else []) if r["name"] == "VIX" and r.get("stats")), None)
+    if vix:
+        vote("vol", "波动率", "Volatility", vix["stats"].get("z"))
+    if "dxy" in cross:
+        vote("usd", "美元", "Dollar", cross["dxy"].get("z"))
+    br = us["sections"].get("breadth") if us else None
+    if br and br.get("pct_adv") is not None:
+        # 宽度：上涨占比 60% 以上视为缓和，40% 以下视为压力
+        pa = br["pct_adv"]
+        factors.append({"key": "breadth", "zh": "市场宽度", "en": "Breadth", "z": None, "pct_adv": pa,
+                        "vote": -1 if pa >= 60 else (1 if pa <= 40 else 0)})
+    up, down = sum(f["vote"] > 0 for f in factors), sum(f["vote"] < 0 for f in factors)
+    env = "worse" if up >= 3 and down <= 1 else ("better" if down >= 3 and up <= 1 else "mixed")
+    gates = [sn["gate"]["status"] for sn in (us, uk) if sn and sn.get("gate")]
+    return {"anomalies": anomalies, "n_checked": len(zs), "env": env, "factors": factors, "stress": up, "relief": down,
+            "gate": "fail" if "fail" in gates else ("warn" if "warn" in gates else "pass"), "quarantine": q}
 
 
 def _theme_groups(th: dict, session: str) -> dict:
