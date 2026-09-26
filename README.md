@@ -22,9 +22,11 @@
 
 - **No number without a source.** Every figure is stored in a timestamped snapshot with its source. If today's bar is missing the page says *N/A* — stale data is never substituted.
 - **Two-source verification.** Index, futures and mover prices are checked against CNBC; gaps above 0.5% are flagged red. LBMA fixes dated differently from the session are marked *stale* and excluded from alert triggers.
-- **Credibility grades on every claim.** **A** company filing / SEC / exchange · **B** mainstream outlet or multiple sources agreeing · **C** single outlet · **D** AI inference, unverified. Each AI-written reason also shows its evidence count, latest source date and whether a primary document exists. Analyst views must name the person or firm — never “analysts say”.
+- **Evidence grades on every claim.** **A** same-day primary disclosure (filing / RNS / SEC / exchange) · **A·bg** primary but background only, never counted as a same-day catalyst · **B+** two or more independent sources agree · **B** single mainstream outlet · **C** low-confidence single source · **D** AI inference. Each reason shows evidence count, latest source date and whether the primary document is *same-day*, *background only* or absent. Analyst views must name the person or firm — never “analysts say”.
+- **Change vs noise.** Every mover is classified as *fundamental change*, *expectations shift*, *positioning / sentiment* or *unattributed* — the question an investor actually asks.
+- **Yesterday's calls, checked.** Each day re-scores the previous session's calls (held / partly / missed) with the lesson learned, so the brief builds judgement rather than just reporting.
 - **Snapshot, not a ticker.** Everything is a post-close snapshot, labelled as such; the page never implies live quotes.
-- **Built for scanning.** A three-line *today's conclusion* (market state · key drivers · what to watch next) sits above the tape; movers are summary rows with expandable detail, sortable and filterable (filings only, company catalyst only, theme members, hide no-catalyst).
+- **Built for scanning.** A *today's conclusion* (market state · key drivers · a trigger / current value / likely impact checklist) sits above the tape; movers are summary rows with expandable detail, sortable and filterable (filings only, company catalyst only, theme members, hide no-catalyst).
 - **Calendar- and DST-correct scheduling.** `exchange_calendars` gives each session's real close (including early closes); `zoneinfo` handles the UK/US daylight-saving mismatch; runs are idempotent under `launchd`.
 
 <p>

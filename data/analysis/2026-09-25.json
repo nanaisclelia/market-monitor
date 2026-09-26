@@ -38,7 +38,8 @@
      "url": "https://www.barrons.com/articles/bloom-energy-stock-oracle-ai-50802d99"
     }
    ],
-   "catalyst": "company"
+   "catalyst": "company",
+   "nature": "预期变化"
   },
   "CRDO": {
    "headline": "无当日公司公告；芯片股两日回调后反弹，连涨 9 天",
@@ -82,7 +83,8 @@
      "url": "https://www.investing.com/news/stock-market-news/why-is-credo-technology-stock-rallying-today-93CH-4909330"
     }
    ],
-   "catalyst": "sector"
+   "catalyst": "sector",
+   "nature": "仓位/情绪波动"
   },
   "CVS": {
    "headline": "无当日公司公告；同业 Humana 获 Barclays 上调后管理式医疗板块走强",
@@ -127,19 +129,21 @@
      "url": "https://www.cvshealth.com/news/company-news/aetna-expands-bundled-oncology-prior-authorizations.html"
     }
    ],
-   "catalyst": "none"
+   "catalyst": "none",
+   "nature": "暂不归因"
   },
   "HWG.L": {
    "catalyst": "company",
-   "headline": "Peel Pepper 将收购报价提高至 187 便士，董事会转为推荐；股价收于报价价位",
-   "headline_en": "Peel Pepper lifts its offer to 187p and the board now recommends; shares close at the offer price",
+   "headline": "Peel Pepper 以 187 便士提出\"最终\"报价，董事会一致推荐；股价收于报价价位",
+   "headline_en": "Peel Pepper makes a 187p \"best and final\" offer with unanimous board backing; shares close at the offer price",
    "points": [
     {
      "tag": "已证实",
      "text": "Peel Pepper 将现金收购报价从 8/6 的 172.5 便士提高到 187 便士（+8.4%），对应估值约 6.317 亿英镑，较要约期前（8/5 收盘 143.6 便士）溢价 30.2%。董事会从此前的立场转为推荐接受，Barclays 与 Peel Hunt 认为条款\"公允合理\"。",
      "text_en": "Peel Pepper raised its cash offer from 172.5p (8/6) to 187p (+8.4%), valuing Harworth at ~£631.7m, a 30.2% premium to the 143.6p close on 8/5 before the offer period. The board reversed its stance and now recommends acceptance; Barclays and Peel Hunt advised the terms are \"fair and reasonable\".",
      "src": [
-      0
+      0,
+      1
      ]
     },
     {
@@ -147,7 +151,8 @@
      "text": "Peel Pepper 以 187 便士买入 72,080,449 股，预计 9/29 交割，之后持股约 52.1%。它在 9/17 持股超过 30%，按《收购守则》Rule 9.1(a) 触发强制要约。融资来自 HSBC UK 与 NatWest 的过渡性贷款（9/25 签署）。当日成交量约为 20 日均量的 221 倍，与这笔大宗买入相符。",
      "text_en": "Peel Pepper agreed to buy 72,080,449 shares at 187p (settlement expected 9/29), taking it to ~52.1%. Crossing 30% on 9/17 made the offer mandatory under Takeover Code Rule 9.1(a). Financing comes from HSBC UK and NatWest under an interim facilities agreement dated 9/25. Volume of ~221x the 20-day average is consistent with this block purchase.",
      "src": [
-      0
+      0,
+      1
      ]
     },
     {
@@ -155,17 +160,24 @@
      "text": "Jefferies 当日维持 Hold，目标价 180 便士，低于报价价位。",
      "text_en": "Jefferies reiterated Hold with a 180p target, below the offer price.",
      "src": [
-      1
+      2
      ]
     },
     {
      "tag": "AI 推断",
-     "text": "交易含义：股价已贴近 187 便士报价，剩余套利空间取决于能否再次加价。收购方交割后持股过半，竞购方出现的可能性下降，下行风险主要在于交易条件变化。",
-     "text_en": "Trade read: shares now sit at the 187p offer, so remaining arbitrage upside depends on a further bump. With the bidder above 50% after settlement, a rival bid is less likely; downside risk lies mainly in changes to deal terms.",
-     "src": []
+     "src": [],
+     "text": "交易含义：公告明确这是\"最终报价\"，按《收购守则》，除非出现第三方竞购或获收购委员会同意，不能再加价。收购方交割后持股约 52.1%，竞购方出现的可能性很低，因此以 187 便士为上限的套利空间基本为零，剩余风险主要是交割与要约完成。（更正：此前写的\"取决于能否再次加价\"不准确。）",
+     "text_en": "Trade read: the announcement states this is \"best and final\" — under the Takeover Code it cannot be raised absent a third-party offer or Panel consent. With the bidder at ~52.1% after settlement a rival bid is unlikely, so upside above 187p is essentially nil; residual risk is settlement and completion. (Correction: the earlier note that upside depended on a further bump was inaccurate.)"
     }
    ],
    "sources": [
+    {
+     "publisher": "RNS 公告（Investegate 转载）",
+     "publisher_en": "RNS announcement (via Investegate)",
+     "date": "2026-09-25",
+     "title": "Recommended Increased Best and Final Cash Offer of 187 Pence per Harworth Share",
+     "url": "https://www.investegate.co.uk/announcement/rns/harworth-group--hwg/recommended-increased-best-and-final-offer-/9790397"
+    },
     {
      "publisher": "Investing.com",
      "date": "2026-09-25",
@@ -178,7 +190,8 @@
      "title": "Harworth Group (LON:HWG) Stock Keeps \"Hold\" Rating at Jefferies Financial Group",
      "url": "https://www.marketbeat.com/instant-alerts/analyst-harworth-group-lon-hwg-stock-keeps-hold-rating-at-jefferies-financial-group-2026-09-25/"
     }
-   ]
+   ],
+   "nature": "基本面变化"
   },
   "CWR.L": {
    "catalyst": "sector",
@@ -216,7 +229,8 @@
      "title": "Ceres Power Shares Surge to Lead FTSE 250 Gainers",
      "url": "https://www.asktraders.com/analysis/ceres-power-shares-surge-to-lead-ftse-250-gainers/"
     }
-   ]
+   ],
+   "nature": "仓位/情绪波动"
   },
   "GRG.L": {
    "catalyst": "none",
@@ -239,7 +253,8 @@
      "title": "Greggs stock clears 200-day line at 1,833p before Q3 update",
      "url": "https://www.ad-hoc-news.de/boerse/news/corporate-news/greggs-stock-clears-200-day-line-at-1-833p-before-q3-update/70184222"
     }
-   ]
+   ],
+   "nature": "暂不归因"
   },
   "SEIT.L": {
    "catalyst": "none",
@@ -262,7 +277,8 @@
      "title": "SDCL Efficiency Income bows to investors' demands for a managed wind-down and return of capital",
      "url": "https://quoteddata.com/2026/04/sdcl-efficiency-income-bows-to-investors-demands-for-a-managed-wind-down-and-return-of-capital/"
     }
-   ]
+   ],
+   "nature": "暂不归因"
   }
  },
  "themes": {
@@ -315,7 +331,8 @@
      "title": "关于2026年中秋节、国庆节休市安排的公告",
      "url": "https://www.sse.com.cn/disclosure/announcement/general/c/c_20260915_10832273.shtml"
     }
-   ]
+   ],
+   "nature": "预期变化"
   }
  },
  "geo": [
@@ -361,13 +378,19 @@
    "facts": "财长 Bessent 确认休战延长两个月，称是为了\"争取更多时间\"，并表示中方在履行大豆承诺，但其他农产品采购落后；ADM CEO 称中国希望兑现今年 2500 万吨大豆的承诺。报道称芯片议题\"基本没有进展\"，AI 安全对话继续但无正式协议，针对产能过剩的关税被推迟。",
    "facts_en": "Treasury Secretary Bessent confirmed the two-month extension to buy \"more time\" and said China is meeting soybean commitments but lagging on other farm purchases; ADM's CEO said China wants to honour its 25mn-tonne soybean commitment this year. Chips were described as essentially a non-event; AI safety talks continue without a formal agreement; an overcapacity tariff was deferred.",
    "view": null,
-   "tag": "已证实",
+   "tag": "媒体报道",
    "sources": [
     {
      "publisher": "24/7 Wall St.",
      "date": "2026-09-25",
      "title": "Trump and Xi Buy Time on Trade. Farm and Chip Stocks Are Watching Closely.",
      "url": "https://247wallst.com/investing/2026/09/25/trump-and-xi-buy-time-on-trade-farm-and-chip-stocks-are-watching-closely/"
+    },
+    {
+     "publisher": "Bloomberg",
+     "date": "2026-09-25",
+     "title": "Trump, Xi Wrap Summit With Tea as Trade Truce Extended Into 2027",
+     "url": "https://www.bloomberg.com/news/articles/2026-09-25/trump-hosts-xi-for-tea-with-final-day-of-summit-underway"
     }
    ]
   },
@@ -423,25 +446,104 @@
   ],
   "watch": [
    {
-    "when": "9/28–9/30",
-    "zh": "A股中秋后复市三天，随即国庆休市（10/1–10/7）：CPO A股成员将补反映 9/25 的美股反弹",
-    "en": "A-shares reopen for three days, then close for National Day (10/1–10/7): CPO A-share members catch up with the 9/25 US rebound"
-   },
-   {
-    "when": "9/29–9/30",
-    "zh": "英国：Harworth 大宗收购股份交割（9/29，公司公告）；Greggs 第三季度交易更新（9/30，单一媒体来源）",
-    "en": "UK: Harworth block purchase settles (9/29, company announcement); Greggs Q3 trading update (9/30, single-outlet source)"
-   },
-   {
-    "when": "10/2",
-    "zh": "美国 9 月非农就业（按 BLS 每月第一个周五发布的惯例）：决定 10 月加息概率",
-    "en": "US September payrolls (BLS first-Friday convention): key for October hike odds"
-   },
-   {
+    "cond": "10 年期美债上破 5.2%",
+    "cond_en": "US 10-year breaks above 5.2%",
+    "current": "5.18%（9/25 收盘）",
+    "current_en": "5.18% (9/25 close)",
+    "impact": "压制长久期科技、黄金、公用事业与光伏",
+    "impact_en": "Pressure on long-duration tech, gold, utilities & solar",
     "when": "持续",
     "when_en": "Ongoing",
-    "zh": "触发位：10 年期美债 5.2% 附近（2007 年以来高位），以及美伊协议是否落地、霍尔木兹日通行量能否回升",
-    "en": "Trigger levels: 10-year near 5.2% (highest since 2007); whether a US–Iran deal materialises and daily Hormuz transits recover"
+    "src": "Yahoo Finance 9/25"
+   },
+   {
+    "cond": "霍尔木兹日通行量回升 / 美伊协议落地",
+    "cond_en": "Hormuz daily transits recover / US–Iran deal signed",
+    "current": "13 艘次（周四）",
+    "current_en": "13 crossings (Thu)",
+    "impact": "油价风险溢价回落，WTI 与 Brent 价差收窄",
+    "impact_en": "Oil risk premium falls; WTI–Brent spread narrows",
+    "when": "持续",
+    "when_en": "Ongoing",
+    "src": "The National 9/25"
+   },
+   {
+    "cond": "9 月非农显著偏强 / 偏弱",
+    "cond_en": "September payrolls surprise strong / weak",
+    "current": "10/2 发布",
+    "current_en": "Due 10/2",
+    "impact": "修正 10 月加息预期（强 → 加息概率上升）",
+    "impact_en": "Reprices October hike odds (strong → higher odds)",
+    "when": "10/2",
+    "when_en": "10/2",
+    "src": "BLS 惯例"
+   },
+   {
+    "cond": "A股复市补跌 / 补涨",
+    "cond_en": "A-shares catch up on reopening",
+    "current": "4 只 A股停在 9/24（-2.7% 至 -4.2%）",
+    "current_en": "4 A-shares frozen at 9/24 (-2.7% to -4.2%)",
+    "impact": "CPO A股成员对 9/25 美股光互连反弹的补涨幅度",
+    "impact_en": "How much CPO A-share members catch up with the 9/25 US optical rebound",
+    "when": "9/28–9/30",
+    "when_en": "9/28–9/30",
+    "src": "上交所公告"
+   },
+   {
+    "cond": "Harworth 大宗交割 / Greggs 第三季度更新",
+    "cond_en": "Harworth block settles / Greggs Q3 update",
+    "current": "9/29 交割；9/30 发布",
+    "current_en": "Settles 9/29; update 9/30",
+    "impact": "Harworth 套利价差应维持在接近零；Greggs 是否兑现 200 日线突破",
+    "impact_en": "Harworth spread should stay near zero; whether Greggs' 200-day breakout holds",
+    "when": "9/29–9/30",
+    "when_en": "9/29–9/30",
+    "src": "RNS；单一媒体"
+   }
+  ]
+ },
+ "review": {
+  "from": "2026-09-24",
+  "items": [
+   {
+    "claim": "霍尔木兹相关的供应中断消息会被放大到油价上",
+    "claim_en": "Hormuz disruption headlines get amplified in oil prices",
+    "outcome": "9/25 的方向相反：协议传闻使 WTI 下跌约 2.3%，Brent 从接近 108 美元的高位回落，说明消息对油价的敏感度是双向的",
+    "outcome_en": "Reversed on 9/25: deal headlines cut WTI ~2.3%, while Brent eased from near $108 — headline sensitivity cut both ways",
+    "verdict": "符合",
+    "verdict_en": "Held",
+    "lesson": "机制成立，但应把\"双向放大\"写进判断，而不是只写上行",
+    "lesson_en": "Mechanism held; the call should state two-way amplification, not just upside"
+   },
+   {
+    "claim": "美联储转鹰推高长端收益率，压制长久期资产",
+    "claim_en": "Hawkish Fed lifts long yields and pressures long-duration assets",
+    "outcome": "收益率维持高位（10 年期 5.18%，+2bp），但纳指仍上涨 0.48%，道指结束三周连跌",
+    "outcome_en": "Yields stayed high (10-year 5.18%, +2bp) yet the Nasdaq rose 0.48% and the Dow ended a three-week losing streak",
+    "verdict": "部分符合",
+    "verdict_en": "Partly",
+    "lesson": "收益率高位横盘时，股市已部分消化；应以\"新高突破\"作为触发条件，而不是\"处于高位\"",
+    "lesson_en": "When yields plateau, equities partly price it in; use a new-high break as the trigger, not the level itself"
+   },
+   {
+    "claim": "Oracle 不可抗力通知可能波及光互连链条（AI 推断）",
+    "claim_en": "Oracle's force majeure notice may spill over to optical interconnects (AI inference)",
+    "outcome": "9/25 Oracle 重申 Bloom 合同，美股 CPO 等权当日上涨 2.07%，Tower +6.1%",
+    "outcome_en": "On 9/25 Oracle reaffirmed its Bloom contract; the US CPO basket rose 2.07% EW, Tower +6.1%",
+    "verdict": "符合",
+    "verdict_en": "Held",
+    "lesson": "事件驱动的回撤在驱动因素反转后迅速修复，验证了\"拥挤板块对消息敏感\"的判断",
+    "lesson_en": "An event-driven drawdown reversed as soon as the driver did, consistent with the crowding sensitivity call"
+   },
+   {
+    "claim": "中美休战延期降低短期尾部风险",
+    "claim_en": "Truce extension lowers near-term tail risk",
+    "outcome": "峰会闭幕确认延期，没有新增关税或管制；芯片议题没有进展，产能过剩关税被推迟",
+    "outcome_en": "Summit ended with the extension confirmed and no new tariffs or controls; chips a non-event, overcapacity tariff deferred",
+    "verdict": "符合",
+    "verdict_en": "Held",
+    "lesson": "风险被推迟而非消除，下一个检验点是 2027-01-10",
+    "lesson_en": "Risk deferred, not removed; next checkpoint is 2027-01-10"
    }
   ]
  }

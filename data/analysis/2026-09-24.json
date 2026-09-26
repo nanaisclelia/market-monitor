@@ -52,7 +52,8 @@
     }
    ],
    "headline_en": "People Inc. withdraws takeover offer; deal premium unwinds",
-   "catalyst": "company"
+   "catalyst": "company",
+   "nature": "预期变化"
   },
   "GEN": {
    "headline": "据报道初步接洽收购 GoDaddy，收购方股价承压",
@@ -88,7 +89,8 @@
     }
    ],
    "headline_en": "Reported initial approach for GoDaddy weighs on the acquirer",
-   "catalyst": "company"
+   "catalyst": "company",
+   "nature": "预期变化"
   },
   "ROL": {
    "headline": "Piper Sandler 下调至 Neutral：AI 搜索与私募竞争冲击长期增长",
@@ -119,7 +121,8 @@
     }
    ],
    "headline_en": "Piper Sandler cuts to Neutral: AI search and PE competition threaten long-term growth",
-   "catalyst": "company"
+   "catalyst": "company",
+   "nature": "预期变化"
   },
   "FSLR": {
    "headline": "高利率压制光伏项目融资，同日撤回 337 调查申诉",
@@ -164,7 +167,8 @@
     }
    ],
    "headline_en": "Higher rates weigh on solar project financing; Section 337 complaint withdrawn",
-   "catalyst": "sector"
+   "catalyst": "sector",
+   "nature": "预期变化"
   },
   "ARM": {
    "headline": "Oracle 对 Project Jupiter 发出不可抗力通知，AI 数据中心链条承压",
@@ -201,7 +205,8 @@
     }
    ],
    "headline_en": "Oracle's force majeure notice on Project Jupiter hits the AI data-center chain",
-   "catalyst": "sector"
+   "catalyst": "sector",
+   "nature": "预期变化"
   },
   "P": {
    "headline": "分析师日给出 FY2028 收入指引，增速 39–45%，领涨 S&P 500",
@@ -240,7 +245,8 @@
     }
    ],
    "headline_en": "Analyst Day FY2028 guide implies 39–45% growth; top S&P 500 gainer",
-   "catalyst": "company"
+   "catalyst": "company",
+   "nature": "基本面变化"
   },
   "NBIS": {
    "headline": "BNP Paribas Exane 上调至 Outperform，GPU 云服务再度提价",
@@ -271,7 +277,8 @@
     }
    ],
    "headline_en": "BNP Paribas Exane upgrades to Outperform as GPU cloud prices rise again",
-   "catalyst": "company"
+   "catalyst": "company",
+   "nature": "基本面变化"
   },
   "CRL": {
    "headline": "投资者日称 2026 年指引将落在区间上沿，并发布 2030 目标",
@@ -301,7 +308,8 @@
     }
    ],
    "headline_en": "Investor Day: 2026 guide at the top end; 2030 targets unveiled",
-   "catalyst": "company"
+   "catalyst": "company",
+   "nature": "基本面变化"
   },
   "WY": {
    "headline": "8-K 披露调整 Q3 展望，股价跌至 52 周低点",
@@ -338,7 +346,8 @@
     }
    ],
    "headline_en": "8-K adjusts Q3 outlook; shares at 52-week low",
-   "catalyst": "company"
+   "catalyst": "company",
+   "nature": "基本面变化"
   },
   "ILMN": {
    "headline": "无当日公司公告；延续纳入 S&P 500 后的动量",
@@ -361,7 +370,8 @@
     }
    ],
    "headline_en": "No company news; momentum after S&P 500 inclusion",
-   "catalyst": "none"
+   "catalyst": "none",
+   "nature": "仓位/情绪波动"
   },
   "XYL": {
    "headline": "未检索到当日公司层面催化剂",
@@ -384,7 +394,8 @@
     }
    ],
    "headline_en": "No company-specific catalyst found",
-   "catalyst": "none"
+   "catalyst": "none",
+   "nature": "暂不归因"
   },
   "FDX": {
    "headline": "未检索到当日公司层面催化剂",
@@ -408,7 +419,8 @@
     }
    ],
    "headline_en": "No company-specific catalyst found",
-   "catalyst": "none"
+   "catalyst": "none",
+   "nature": "暂不归因"
   },
   "PNR": {
    "headline": "未检索到当日公司层面催化剂",
@@ -422,7 +434,8 @@
    ],
    "sources": [],
    "headline_en": "No company-specific catalyst found",
-   "catalyst": "none"
+   "catalyst": "none",
+   "nature": "暂不归因"
   },
   "J": {
    "headline": "未检索到当日公司层面催化剂",
@@ -436,7 +449,8 @@
    ],
    "sources": [],
    "headline_en": "No company-specific catalyst found",
-   "catalyst": "none"
+   "catalyst": "none",
+   "nature": "暂不归因"
   },
   "RL": {
    "headline": "未检索到当日公司层面催化剂",
@@ -450,7 +464,8 @@
    ],
    "sources": [],
    "headline_en": "No company-specific catalyst found",
-   "catalyst": "none"
+   "catalyst": "none",
+   "nature": "暂不归因"
   },
   "A": {
    "headline": "未检索到当日公司层面催化剂",
@@ -473,7 +488,8 @@
     }
    ],
    "headline_en": "No company-specific catalyst found",
-   "catalyst": "none"
+   "catalyst": "none",
+   "nature": "暂不归因"
   }
  },
  "themes": {
@@ -534,7 +550,8 @@
      "publisher_en": "Cailian Press (CLS)"
     }
    ],
-   "headline_en": "Broad sector decline, A-share optical names weaker than US peers; no sector-level negative filing found"
+   "headline_en": "Broad sector decline, A-share optical names weaker than US peers; no sector-level negative filing found",
+   "nature": "预期变化"
   }
  },
  "geo": [

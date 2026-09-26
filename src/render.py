@@ -92,8 +92,17 @@ def _en(v) -> str:
 
 
 # ---- 可信度分级 ----
-# A 公司公告 / SEC / 交易所 / 官方文件；B 主流媒体或多源一致（含具名分析师观点）；C 单一媒体报道；D AI 推断，待验证
-_PRIMARY_MARKS = ("SEC", "EDGAR", "新闻稿", "press release", "交易所", "Exchange", "federalreserve", "Federal Reserve")
+# A  当日一手披露（公司公告 / SEC / 交易所 / 官方文件，且发布于当日）
+# Ab 背景一手材料（一手来源，但并非当日发布，不能作为当日催化剂）
+# B+ 两家以上独立来源一致（至少一家主流）
+# B  主流媒体单源
+# C  低置信单源 / 间接报道（内容农场、自动生成稿、博客式分析站）
+# D  AI 推断，待验证
+_PRIMARY_MARKS = ("SEC", "EDGAR", "新闻稿", "press release", "交易所", "Exchange", "federalreserve", "Federal Reserve", "RNS")
+_MAINSTREAM = ("reuters", "bloomberg", "financial times", "wall street journal", "wsj", "cnbc", "barron", "associated press",
+               "mt newswires", "investing.com", "investor's business daily", "the national", "american banker",
+               "supply chain dive", "benzinga", "yahoo finance", "business today", "rttnews", "hotel dive", "healthcare dive")
+GRADE_RANK = {"A": 6, "B+": 5, "Ab": 4, "B": 3, "C": 2, "D": 1}
 
 
 def _is_primary(src: dict) -> bool:
@@ -101,33 +110,68 @@ def _is_primary(src: dict) -> bool:
     return any(m.lower() in txt.lower() for m in _PRIMARY_MARKS)
 
 
-def _grade(item: dict, sources: list) -> str:
-    """单条要点/事件的可信度等级；分析数据中显式给出的 grade 优先。"""
+def _root(src: dict) -> str:
+    """出版方归一：「MT Newswires / Yahoo Finance」算 MT Newswires；「Business Today（援引 Bloomberg）」算 Bloomberg。"""
+    pub = (src.get("publisher_en") or src.get("publisher") or "").lower()
+    if "citing bloomberg" in pub or "援引 bloomberg" in pub:
+        return "bloomberg"
+    return pub.split("/")[0].split("(")[0].split("（")[0].strip()
+
+
+def _is_mainstream(src: dict) -> bool:
+    return _is_primary(src) or any(m in _root(src) or m in (src.get("publisher") or "").lower() for m in _MAINSTREAM)
+
+
+def _cited(item: dict, sources: list) -> list:
+    return [sources[i] for i in item.get("src", []) if i < len(sources)] if "src" in item else list(sources)
+
+
+def _grade(item: dict, sources: list, session: str | None = None) -> str:
+    """单条要点 / 事件的证据强度；分析数据中显式给出的 grade 优先。"""
     if item.get("grade"):
         return item["grade"]
-    tag = item.get("tag")
-    cited = [sources[i] for i in item.get("src", []) if i < len(sources)] if "src" in item else sources
-    if tag == "AI 推断" or not cited:
+    cited = _cited(item, sources)
+    if item.get("tag") == "AI 推断" or not cited:
         return "D"
-    if tag == "已证实":
-        return "A" if any(_is_primary(x) for x in cited) else "B"
-    if tag == "分析师":
+    prim = [x for x in cited if _is_primary(x)]
+    if item.get("tag") == "已证实" and prim:
+        return "A" if session and any((x.get("date") or "")[:10] == session for x in prim) else "Ab"
+    roots = {_root(x) for x in cited}
+    if len(roots) >= 2 and any(_is_mainstream(x) for x in cited):
+        return "B+"
+    if any(_is_mainstream(x) for x in cited):
         return "B"
-    return "B" if len(cited) >= 2 else "C"
+    return "C"
 
 
-def _evidence(w: dict | None) -> dict:
-    """证据数量 / 最新来源日期 / 是否含一手材料。"""
+def _evidence(w: dict | None, session: str | None = None) -> dict:
+    """证据数量 / 最新来源日期 / 一手材料是否为当日。"""
     srcs = (w or {}).get("sources", [])
     dates = sorted(x.get("date", "") for x in srcs if x.get("date"))
-    return {"n": len(srcs), "latest": dates[-1] if dates else None, "primary": any(_is_primary(x) for x in srcs)}
+    prim = [x for x in srcs if _is_primary(x)]
+    today = any(session and (x.get("date") or "")[:10] == session for x in prim)
+    return {"n": len(srcs), "latest": dates[-1] if dates else None,
+            "primary": "today" if today else ("background" if prim else "none")}
 
 
-def _best_grade(w: dict | None) -> str:
+def _best_grade(w: dict | None, session: str | None = None) -> str:
     if not w:
         return "D"
-    gs = [_grade(p, w.get("sources", [])) for p in w.get("points", []) if not p.get("not_catalyst")]
-    return min(gs) if gs else "D"
+    gs = [_grade(p, w.get("sources", []), session) for p in w.get("points", []) if not p.get("not_catalyst")]
+    return max(gs, key=lambda g: GRADE_RANK[g]) if gs else "D"
+
+
+def _open_ticker(hits: list, stocks: dict, session: str | None) -> str | None:
+    """每个市场默认只展开 1 张卡：证据最强者，其次涨跌幅最大者。"""
+    best, key = None, None
+    for h in hits:
+        w = stocks.get(h["ticker"])
+        if not (h.get("detail") or w):
+            continue
+        k = (GRADE_RANK[_best_grade(w, session)] if w else 0, abs(h["stats"]["pct"]))
+        if key is None or k > key:
+            best, key = h["ticker"], k
+    return best
 
 
 def _hot(v, thr) -> str:
@@ -140,7 +184,7 @@ def _hot(v, thr) -> str:
 def _env():
     env = Environment(loader=FileSystemLoader(ROOT / "templates"), autoescape=select_autoescape(["html"]))
     env.filters.update(num=_num, big=_big, t=_fmt_time, spark=_spark, en=_en)
-    env.globals.update(grade=_grade, evidence=_evidence, best_grade=_best_grade, hot=_hot)
+    env.globals.update(grade=_grade, evidence=_evidence, best_grade=_best_grade, hot=_hot, open_ticker=_open_ticker, GRADE_RANK=GRADE_RANK)
     return env
 
 
