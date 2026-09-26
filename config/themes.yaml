@@ -5,6 +5,8 @@ themes:
   - key: cpo
     name: CPO 共封装光学 / 光互连
     name_en: CPO / Co-packaged Optics & Optical Interconnect
+    col_label: 产业链环节
+    col_label_en: Value-chain role
     keywords: [co-packaged optics, CPO, silicon photonics, optical, transceiver, photonic, 光模块]
     insight_anchors: [AVGO, COHR, LITE, NVDA]
     members:
@@ -24,3 +26,68 @@ themes:
       - {ticker: 300502.SZ, name: 新易盛, name_en: Eoptolink,             role: 光模块, role_en: Optical modules,              market: cn}
       - {ticker: 300394.SZ, name: 天孚通信, name_en: TFC Optical,           role: 光引擎 / 无源器件, role_en: Optical engines / passives,    market: cn}
       - {ticker: 002281.SZ, name: 光迅科技, name_en: Accelink,           role: 光器件, role_en: Optical components,              market: cn}
+
+  - key: tmt
+    name: TMT 科技 / 传媒 / 电信
+    name_en: TMT · Technology, Media & Telecom
+    col_label: 细分
+    col_label_en: Segment
+    keywords: [AI, cloud, advertising, streaming, telecom, software, 云, 广告]
+    insight_anchors: [MSFT, META, GOOGL]
+    members:
+      - {ticker: AAPL,   name: Apple,       role: 硬件 / 生态,     role_en: Hardware / ecosystem,   market: us}
+      - {ticker: MSFT,   name: Microsoft,   role: 软件 / 云,       role_en: Software / cloud,       market: us}
+      - {ticker: GOOGL,  name: Alphabet,    role: 搜索广告 / 云,   role_en: Search ads / cloud,     market: us}
+      - {ticker: AMZN,   name: Amazon,      role: 电商 / 云,       role_en: E-commerce / cloud,     market: us}
+      - {ticker: META,   name: Meta,        role: 社交 / 广告,     role_en: Social / advertising,   market: us}
+      - {ticker: ORCL,   name: Oracle,      role: 数据库 / 云基建, role_en: Database / cloud infra, market: us}
+      - {ticker: CRM,    name: Salesforce,  role: 企业软件,        role_en: Enterprise software,    market: us}
+      - {ticker: ADBE,   name: Adobe,       role: 创意软件,        role_en: Creative software,      market: us}
+      - {ticker: NFLX,   name: Netflix,     role: 流媒体,          role_en: Streaming,              market: us}
+      - {ticker: DIS,    name: Disney,      role: 传媒 / 娱乐,     role_en: Media / entertainment,  market: us}
+      - {ticker: CMCSA,  name: Comcast,     role: 有线 / 传媒,     role_en: Cable / media,          market: us}
+      - {ticker: T,      name: AT&T,        role: 电信,            role_en: Telecom,                market: us}
+      - {ticker: VZ,     name: Verizon,     role: 电信,            role_en: Telecom,                market: us}
+      - {ticker: TMUS,   name: T-Mobile US, role: 电信,            role_en: Telecom,                market: us}
+      - {ticker: BT-A.L, name: BT Group,    role: 电信,            role_en: Telecom,                market: uk}
+      - {ticker: VOD.L,  name: Vodafone,    role: 电信,            role_en: Telecom,                market: uk}
+      - {ticker: WPP.L,  name: WPP,         role: 广告,            role_en: Advertising,            market: uk}
+      - {ticker: REL.L,  name: RELX,        role: 信息服务,        role_en: Information services,   market: uk}
+      - {ticker: AUTO.L, name: Auto Trader, role: 在线平台,        role_en: Online marketplace,     market: uk}
+
+  - key: cyc
+    name: 周期商品
+    name_en: Cyclical commodities
+    col_label: 商品暴露
+    col_label_en: Commodity exposure
+    keywords: [copper, iron ore, aluminium, aluminum, oil, crude, natural gas, steel, commodities, 铜, 铁矿, 原油]
+    insight_anchors: [FCX, XOM, RIO.L]
+    # 期货：近月合约（Yahoo）+ CNBC 近月 / 次月；若 Yahoo 与次月吻合即判定换月并隔离
+    futures:
+      - {key: copper,   name: 铜,       name_en: Copper,       yahoo: "HG=F",  cnbc: "@HG.1", roll: "@HG.2", kind: price, unit_label: 美元/磅}
+      - {key: aluminum, name: 铝,       name_en: Aluminium,    yahoo: "ALI=F", kind: price, unit_label: 美元/吨}
+      - {key: ironore,  name: 铁矿石,   name_en: Iron ore,     yahoo: "TIO=F", kind: price, unit_label: 美元/吨}
+      - {key: wti_c,    name: WTI 原油, name_en: WTI crude,    yahoo: "CL=F",  cnbc: "@CL.1", roll: "@CL.2", kind: price, unit_label: 美元/桶}
+      - {key: natgas,   name: 天然气,   name_en: Natural gas,  yahoo: "NG=F",  cnbc: "@NG.1", roll: "@NG.2", kind: price, unit_label: 美元/MMBtu}
+      - {key: soy,      name: 大豆,     name_en: Soybeans,     yahoo: "ZS=F",  cnbc: "@S.1",  roll: "@S.2",  kind: price, unit_label: 美分/蒲式耳}
+      - {key: corn,     name: 玉米,     name_en: Corn,         yahoo: "ZC=F",  cnbc: "@C.1",  roll: "@C.2",  kind: price, unit_label: 美分/蒲式耳}
+      - {key: wheat,    name: 小麦,     name_en: Wheat,        yahoo: "ZW=F",  cnbc: "@W.1",  roll: "@W.2",  kind: price, unit_label: 美分/蒲式耳}
+    members:
+      - {ticker: FCX,       name: Freeport-McMoRan, role: 铜 / 金,        role_en: Copper / gold,          market: us}
+      - {ticker: SCCO,      name: Southern Copper,  role: 铜,             role_en: Copper,                 market: us}
+      - {ticker: AA,        name: Alcoa,            role: 铝,             role_en: Aluminium,              market: us}
+      - {ticker: NUE,       name: Nucor,            role: 钢,             role_en: Steel,                  market: us}
+      - {ticker: CLF,       name: Cleveland-Cliffs, role: 钢 / 铁矿,      role_en: Steel / iron ore,       market: us}
+      - {ticker: XOM,       name: ExxonMobil,       role: 油气,           role_en: Oil & gas,              market: us}
+      - {ticker: CVX,       name: Chevron,          role: 油气,           role_en: Oil & gas,              market: us}
+      - {ticker: COP,       name: ConocoPhillips,   role: 油气上游,       role_en: Upstream oil & gas,     market: us}
+      - {ticker: DOW,       name: Dow,              role: 化工,           role_en: Chemicals,              market: us}
+      - {ticker: RIO.L,     name: Rio Tinto,        role: 铁矿 / 铜,      role_en: Iron ore / copper,      market: uk}
+      - {ticker: GLEN.L,    name: Glencore,         role: 铜 / 煤 / 贸易, role_en: Copper / coal / trading, market: uk}
+      - {ticker: AAL.L,     name: Anglo American,   role: 铜 / 铁矿,      role_en: Copper / iron ore,      market: uk}
+      - {ticker: ANTO.L,    name: Antofagasta,      role: 铜,             role_en: Copper,                 market: uk}
+      - {ticker: SHEL.L,    name: Shell,            role: 油气,           role_en: Oil & gas,              market: uk}
+      - {ticker: BP.L,      name: BP,               role: 油气,           role_en: Oil & gas,              market: uk}
+      - {ticker: 601899.SS, name: 紫金矿业, name_en: Zijin Mining,  role: 铜 / 金, role_en: Copper / gold, market: cn}
+      - {ticker: 600362.SS, name: 江西铜业, name_en: Jiangxi Copper, role: 铜,     role_en: Copper,        market: cn}
+      - {ticker: 601088.SS, name: 中国神华, name_en: China Shenhua, role: 煤炭,    role_en: Coal,          market: cn}

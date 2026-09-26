@@ -86,6 +86,20 @@ def check(snap: dict | None) -> dict | None:
                        "status": "warn" if rolled or badx else "pass",
                        "detail": ("合约换月已隔离：" + "、".join(rolled) + "；" if rolled else "") + ("双源不一致：" + "、".join(badx) if badx else "")
                        or f"{len(cross)} 项通过", "detail_en": f"{len(rolled)} roll(s) quarantined, {len(badx)} mismatched"})
+    tf = [(th["key"], f) for th in (snap["sections"].get("themes") or []) for f in (th.get("futures") or [])]
+    if tf:
+        rolled = []
+        for tk, f in tf:
+            if f.get("roll"):
+                quarantine[f"{tk}:{f['key']}"] = "期货合约换月：跨合约涨跌不可比"
+                rolled.append(f["name"])
+            elif (f.get("xcheck") or {}).get("status") == "bad":
+                quarantine[f"{tk}:{f['key']}"] = "双源不一致"
+                rolled.append(f["name"])
+        checks.append({"name": "主题期货对账 / 合约换月", "name_en": "Theme futures reconciliation / rolls",
+                       "status": "warn" if rolled else "pass",
+                       "detail": "已隔离：" + "、".join(rolled) if rolled else f"{len(tf)} 项通过",
+                       "detail_en": f"{len(rolled)} quarantined" if rolled else f"{len(tf)} passed"})
     br = snap["sections"].get("breadth")
     if br is not None:
         n_uni = (snap["sections"].get("alerts") or {}).get("universe_size") or br.get("n") or 0

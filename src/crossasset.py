@@ -31,17 +31,20 @@ def _same_day(q: dict | None, session: date, tz: str) -> bool:
     return bool(q and q.get("time")) and datetime.fromisoformat(q["time"]).astimezone(ZoneInfo(tz)).date() == session
 
 
-def build(session: date, tz: str = "America/New_York", window: int = 20) -> list[dict]:
-    hist = yahoo.history([a["yahoo"] for a in ASSETS], period="6mo")
-    syms = [a["cnbc"] for a in ASSETS] + [a["roll"] for a in ASSETS if a.get("roll")] + [q["cnbc"] for q in QUOTE_ONLY]
+def build(session: date, tz: str = "America/New_York", window: int = 20, assets: list | None = None,
+          quote_only: list | None = None) -> list[dict]:
+    assets = ASSETS if assets is None else assets
+    quote_only = QUOTE_ONLY if quote_only is None else quote_only
+    hist = yahoo.history([a["yahoo"] for a in assets], period="6mo")
+    syms = [a["cnbc"] for a in assets if a.get("cnbc")] + [a["roll"] for a in assets if a.get("roll")] + [q["cnbc"] for q in quote_only]
     try:
         cq = cnbc.quotes(syms)
     except Exception as e:  # noqa: BLE001
         log.warning("cross-asset CNBC: %s", e)
         cq = {}
     out = []
-    for a in ASSETS:
-        row = {k: a[k] for k in ("key", "name", "name_en", "kind", "stress")}
+    for a in assets:
+        row = {k: a.get(k) for k in ("key", "name", "name_en", "kind", "stress", "unit_label")}
         df = hist.get(a["yahoo"])
         if df is None or not len(df):
             row["error"] = "无数据"
@@ -63,7 +66,7 @@ def build(session: date, tz: str = "America/New_York", window: int = 20) -> list
         row.update({"close": float(c.iloc[-1]), "prev": float(c.iloc[-2]), "chg": chg, "unit": unit,
                     "sigma": sig, "z": chg / sig if sig else None, "spark": [round(float(x), 4) for x in c.iloc[-60:]],
                     "source": "Yahoo Finance"})
-        q = cq.get(a["cnbc"])
+        q = cq.get(a.get("cnbc") or "")
         if _same_day(q, session, tz):
             if a["kind"] == "yield":
                 diff_bp = (q["last"] - row["close"]) * 100
@@ -80,7 +83,7 @@ def build(session: date, tz: str = "America/New_York", window: int = 20) -> list
         if rq and rq.get("last") and abs(rq["last"] / row["close"] - 1) < 0.003 and (row["xcheck"]["status"] != "ok"):
             row["roll"] = {"next_contract": rq["last"], "note": "Yahoo 当日切换到次月合约，与前一日近月价格不可比"}
         out.append(row)
-    for qo in QUOTE_ONLY:
+    for qo in quote_only:
         q = cq.get(qo["cnbc"])
         out.append({"key": qo["key"], "name": qo["name"], "name_en": qo["name_en"], "kind": "quote",
                     "close": q["last"] if q else None, "chg": q.get("change_pct") if q else None, "unit": "%",

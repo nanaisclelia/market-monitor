@@ -129,10 +129,8 @@ def build(session: date) -> dict:
     if uni and len(missing) > 0.2 * len(uni):
         err.add("alerts", f"{len(missing)}/{len(uni)} 只股票缺当日数据，异动结果不完整")
     # ---------- 主题追踪（CPO 等）：美股成员复用上面的日线，A股成员单独下载 ----------
-    cn_t = [m["ticker"] for t in themes.config() for m in t["members"] if m["market"] == "cn"]
-    th_hist = {**sh, **(yahoo.history(cn_t, period="1y") if cn_t else {})}
     try:
-        snap["sections"]["themes"] = themes.build(session, th_hist, scfg)
+        snap["sections"]["themes"] = themes.build(session, None, scfg)
         for th in snap["sections"]["themes"]:
             for r in th["members"]:
                 if r.get("error"):

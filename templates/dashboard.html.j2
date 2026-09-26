@@ -79,9 +79,9 @@
 </div>{% endif %}
 {%- endmacro -%}
 {%- macro cporow(r, sess) -%}<tr class="mk-{{ r.market }}" data-market="{{ r.market }}" data-alert="{{ 1 if r.why else 0 }}">
-<td class="t sym"><span class="mkt {{ r.market }}">{{ 'CN' if r.market == 'cn' else 'US' }}</span>{{ r.ticker }}</td><td class="t">{{ L(r.name, r.name_en or r.name) }}</td><td class="t mut">{{ L(r.role, r.role_en or r.role) }}</td>
+<td class="t sym"><span class="mkt {{ r.market }}">{{ {'cn':'CN','uk':'UK','us':'US'}[r.market] }}</span>{{ r.ticker }}</td><td class="t">{{ L(r.name, r.name_en or r.name) }}</td><td class="t mut">{{ L(r.role, r.role_en or r.role) }}</td>
 {% if r.stats %}<td>{{ r.stats.close|num }}</td><td data-v="{{ r.stats.pct }}" class="{{ hot(r.stats.pct, 5) }}">{{ chg(r.stats.pct) }}</td><td data-v="{{ r.r5 }}" class="{{ hot(r.r5, 10) }}">{{ chg(r.r5, 1) }}</td><td data-v="{{ r.r20 }}" class="{{ hot(r.r20, 15) }}">{{ chg(r.r20, 1) }}</td><td data-v="{{ r.ytd }}" class="{{ hot(r.ytd, 100) }}">{{ chg(r.ytd, 1) }}</td><td data-v="{{ r.stats.rel_volume or 0 }}" class="{{ 'hotv' if (r.stats.rel_volume or 0) >= 2 else '' }}">{% if r.stats.rel_volume %}{{ r.stats.rel_volume|num(1) }}×{% else %}—{% endif %}</td><td data-v="{{ r.vs_ma50 }}">{{ r.vs_ma50|num(1, True, True) }}</td><td class="t">{{ r.spark|spark(84, 22, r.name) }}</td>
-<td>{% if r.why %}<span class="chip alert" title="{{ r.why|join('; ')|en }}">{{ L('异动', 'Alert') }}</span>{% endif %}{% if r.market == 'cn' and r.session != sess %} <span class="chip" title="{{ r.session }}">{{ L('休市·' ~ r.session[5:], 'closed·' ~ r.session[5:]) }}</span>{% endif %}</td>
+<td>{% if r.why %}<span class="chip alert" title="{{ r.why|join('; ')|en }}">{{ L('异动', 'Alert') }}</span>{% endif %}{% if r.session and r.session != sess %} <span class="chip" title="{{ r.session }}">{{ L('休市·' ~ r.session[5:], 'closed·' ~ r.session[5:]) }}</span>{% endif %}</td>
 {% else %}<td colspan="9" class="missing">{{ L('数据暂缺（' ~ r.error ~ '）', 'Data unavailable (' ~ (r.error|en) ~ ')') }}</td>{% endif %}
 </tr>{%- endmacro -%}
 {%- macro gatebox(snap) -%}{%- set gt = snap.gate -%}{% if gt %}
@@ -308,7 +308,8 @@ td.hotup span,td.hotdn span{font-weight:600}
 td.hotv{background:var(--warn-bg);color:var(--warn);font-weight:600}
 tr[hidden],details[hidden]{display:none}
 .mkt{display:inline-block;font:600 9px var(--mono);padding:0 4px;margin-right:6px;border-radius:2px;vertical-align:1px}
-.mkt.us{background:var(--accent-bg);color:var(--accent)}.mkt.cn{background:var(--warn-bg);color:var(--warn)}
+.mkt.us{background:var(--accent-bg);color:var(--accent)}.mkt.cn{background:var(--warn-bg);color:var(--warn)}.mkt.uk{background:var(--up-bg);color:var(--up)}
+tr.mk-uk td:first-child{box-shadow:inset 3px 0 0 var(--up)}
 tr.mk-cn td:first-child{box-shadow:inset 3px 0 0 var(--warn)}tr.mk-us td:first-child{box-shadow:inset 3px 0 0 var(--accent)}
 .bv.dn{background-image:repeating-linear-gradient(135deg,rgba(255,255,255,.28) 0 2px,transparent 2px 5px)}
 /* expandable mover cards */
@@ -362,6 +363,7 @@ main.wrap>*{min-width:0}
   table.review td:nth-child(3){order:-1}
 }
 /* empty state */
+[hidden]{display:none!important}
 .empty{margin:0;padding:14px 16px;border:1px dashed var(--rule);border-radius:6px;color:var(--sub);font-size:13px;display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center}
 .empty b{color:var(--ink)}
 .empty button{appearance:none;border:0;background:none;color:var(--accent);font:500 13px var(--sans);cursor:pointer;padding:0}
@@ -503,7 +505,7 @@ h2 small{text-transform:none;letter-spacing:0}
   <nav class="wrap subnav deskonly" aria-label="Research desk sections">
     {% if an and an.geo %}<a href="#geo">{{ L('地缘政治', 'Geopolitics') }}</a>{% endif %}
     <a href="#us">{{ L('美股指数', 'US indices') }}</a>{% if us and us.sections.cross %}<a href="#cross">{{ L('跨资产', 'Cross-asset') }}</a>{% endif %}<a href="#metals">{{ L('贵金属', 'Metals') }}</a>
-    {% if us and us.sections.themes %}<a href="#cpo">CPO</a>{% endif %}
+    {% if us %}{% for th in us.sections.themes or [] %}<a href="#{{ th.key }}">{{ th.key|upper if th.key != 'cyc' else L('周期', 'Cyclicals') }}</a>{% endfor %}{% endif %}
     <a href="#alerts">{{ L('今日重新定价', 'Repricing') }}</a>{% if s.get('uk') %}<a href="#uk">{{ L('英国', 'UK') }}</a>{% endif %}
     {% if not public %}<a href="#log">{{ L('日志', 'Log') }}</a>{% endif %}
   </nav>
@@ -720,6 +722,18 @@ h2 small{text-transform:none;letter-spacing:0}
   <div><span class="k">{{ L('触发异动', 'Alerts') }}</span><b>{{ th.flagged|length }}</b></div>
 </div>
 {% if an and an.themes and an.themes.get(th.key) %}{{ why_block(an.themes[th.key], us.session, '板块原因', 'Why the sector moved') }}{% endif %}
+{% if th.futures %}<h4>{{ L('商品期货（近月合约）', 'Commodity futures (front month)') }}</h4>
+<div class="tw"><table class="futs">
+<thead><tr><th class="t">{{ L('品种', 'Commodity') }}</th><th>{{ L('收盘', 'Close') }}</th><th class="t">{{ L('单位', 'Unit') }}</th><th>{{ L('涨跌', 'Change') }}</th><th>{{ L('20日σ', '20d σ') }}</th><th>z</th><th class="t">{{ L('60 日走势', '60-day') }}</th><th>{{ L('双源校验', 'Cross-check') }}</th><th class="t">{{ L('状态', 'Status') }}</th></tr></thead>
+<tbody>{% for f in th.futures %}{% set qd = pulse.quarantine.get(th.key ~ ':' ~ f.key) %}<tr>
+<td class="t">{{ L(f.name, f.name_en) }}</td>
+{% if f.error %}<td colspan="8" class="missing">{{ L('数据暂缺（' ~ f.error ~ '）', 'Data unavailable (' ~ (f.error|en) ~ ')') }}</td>
+{% else %}<td>{{ f.close|num }}</td><td class="t mut">{{ f.unit_label or '' }}</td><td>{% if qd %}<span class="mut">—</span>{% else %}{{ chg(f.chg) }}{% endif %}</td><td>{{ f.sigma|num(2) }}%</td><td>{% if qd %}<span class="mut">—</span>{% else %}{{ f.z|num(1, True) }}{% endif %}</td><td class="t">{{ f.spark|spark(96, 24, f.name) }}</td>
+<td>{% if f.xcheck and f.xcheck.status == 'ok' %}<span class="chip ok">✓ {{ f.xcheck.diff_pct|num(2, True, True) }}</span>{% elif f.xcheck and f.xcheck.status == 'bad' %}<span class="chip bad">✗ {{ f.xcheck.other|num(2) }}</span>{% else %}<span class="chip">{{ L('无第二源', 'no 2nd source') }}</span>{% endif %}</td>
+<td class="t">{% if qd %}<span class="gs fail">{{ L('待核验', 'Pending') }}</span> <span class="mut">{{ L(qd ~ ('；次月合约 ' ~ (f.roll.next_contract|num(3)) if f.roll else ''), ('contract roll; next month ' ~ (f.roll.next_contract|num(3))) if f.roll else 'sources disagree') }}</span>{% elif f.xcheck and f.xcheck.status == 'ok' %}<span class="gs pass">{{ L('通过', 'OK') }}</span>{% else %}<span class="gs warn">{{ L('单源', 'Single source') }}</span>{% endif %}</td>{% endif %}
+</tr>{% endfor %}</tbody></table></div>
+<p class="asof">{{ L('期货来自 Yahoo 近月合约，与 CNBC 近月 / 次月合约比对；Yahoo 价格与次月吻合即判定换月并隔离（跨合约涨跌不可比）。铝、铁矿石暂无第二源，标"单源"。', 'Futures are Yahoo front-month contracts checked against CNBC front / next month; a Yahoo print matching the next month is treated as a roll and quarantined. Aluminium and iron ore have no second source yet (single source).') }}</p>
+{% endif %}
 {% if ok %}
 {% set mx = [ok|map(attribute='stats.pct')|map('abs')|max, 0.5]|max %}
 <div class="tgrid">
@@ -742,7 +756,7 @@ h2 small{text-transform:none;letter-spacing:0}
   <span class="hint">{{ L('点击表头排序', 'Click a header to sort') }}</span>
 </div>
 <div class="tw"><table class="sortable compact cpo">
-<thead><tr><th class="t">{{ L('代码', 'Ticker') }}</th><th class="t">{{ L('名称', 'Name') }}</th><th class="t">{{ L('产业链环节', 'Value-chain role') }}</th><th>{{ L('收盘', 'Close') }}</th><th data-sort="num">{{ L('1 日', '1D') }}</th><th data-sort="num">{{ L('5 日', '5D') }}</th><th data-sort="num">{{ L('20 日', '20D') }}</th><th data-sort="num">YTD</th><th data-sort="num">{{ L('量比', 'Rel vol') }}</th><th data-sort="num">vs MA50</th><th class="t">{{ L('60 日', '60-day') }}</th><th></th></tr></thead>
+<thead><tr><th class="t">{{ L('代码', 'Ticker') }}</th><th class="t">{{ L('名称', 'Name') }}</th><th class="t">{{ L(th.col_label or '细分', th.col_label_en or 'Segment') }}</th><th>{{ L('收盘', 'Close') }}</th><th data-sort="num">{{ L('1 日', '1D') }}</th><th data-sort="num">{{ L('5 日', '5D') }}</th><th data-sort="num">{{ L('20 日', '20D') }}</th><th data-sort="num">YTD</th><th data-sort="num">{{ L('量比', 'Rel vol') }}</th><th data-sort="num">vs MA50</th><th class="t">{{ L('60 日', '60-day') }}</th><th></th></tr></thead>
 <tbody>{% for r in g.today %}{{ cporow(r, us.session) }}{% endfor %}</tbody>
 </table></div>
 <p class="empty" hidden></p>
@@ -750,12 +764,12 @@ h2 small{text-transform:none;letter-spacing:0}
 </div>
 {% if g.closed %}<details class="closedgrp">
 <summary>{{ L('非当日 · 不可横比：' ~ g.closed|length ~ ' 只休市（收盘日 ' ~ g.closed[0].session ~ '），不参与上方排名与汇总', 'Not same-day · not comparable: ' ~ g.closed|length ~ ' closed (last close ' ~ g.closed[0].session ~ '), excluded from the ranking and aggregates above') }}</summary>
-<div class="tw"><table class="compact cpo"><thead><tr><th class="t">{{ L('代码', 'Ticker') }}</th><th class="t">{{ L('名称', 'Name') }}</th><th class="t">{{ L('产业链环节', 'Value-chain role') }}</th><th>{{ L('收盘', 'Close') }}</th><th>{{ L('1 日', '1D') }}</th><th>{{ L('5 日', '5D') }}</th><th>{{ L('20 日', '20D') }}</th><th>YTD</th><th>{{ L('量比', 'Rel vol') }}</th><th>vs MA50</th><th class="t">{{ L('60 日', '60-day') }}</th><th></th></tr></thead>
+<div class="tw"><table class="compact cpo"><thead><tr><th class="t">{{ L('代码', 'Ticker') }}</th><th class="t">{{ L('名称', 'Name') }}</th><th class="t">{{ L(th.col_label or '细分', th.col_label_en or 'Segment') }}</th><th>{{ L('收盘', 'Close') }}</th><th>{{ L('1 日', '1D') }}</th><th>{{ L('5 日', '5D') }}</th><th>{{ L('20 日', '20D') }}</th><th>YTD</th><th>{{ L('量比', 'Rel vol') }}</th><th>vs MA50</th><th class="t">{{ L('60 日', '60-day') }}</th><th></th></tr></thead>
 <tbody>{% for r in g.closed %}{{ cporow(r, us.session) }}{% endfor %}</tbody></table></div>
 </details>{% endif %}
 {% else %}<p class="missing">{{ L('数据暂缺', 'Data unavailable') }}</p>{% endif %}
-<p class="asof formula">{% set nt = g.today|length %}{{ L('口径：所有汇总（1 日 / 5 日 / 20 日 / YTD / 涨跌家数）= 当日开市成员的算术平均，本日样本 ' ~ nt ~ ' 只；休市成员（' ~ g.closed|length ~ ' 只）与缺失成员（' ~ g.missing|length ~ ' 只）一律排除，休市成员单列在下方折叠组。收益为本币口径，未做汇率换算。产业链环节分类为本看台自定义；A股涨跌停按创业板和科创板 20%、主板 10% 判断。',
-   'Method: every aggregate (1D / 5D / 20D / YTD / breadth) = arithmetic mean over members trading that session, n=' ~ nt ~ '; closed (' ~ g.closed|length ~ ') and missing (' ~ g.missing|length ~ ') members are excluded, closed ones listed in the folded group below. Local-currency returns, not FX-adjusted. Value-chain roles are our own classification; A-share limits: 20% ChiNext/STAR, 10% main board.') }}</p>
+<p class="asof formula">{% set nt = g.today|length %}{{ L('口径：所有汇总（1 日 / 5 日 / 20 日 / YTD / 涨跌家数）= 当日开市成员的算术平均，本日样本 ' ~ nt ~ ' 只；休市成员（' ~ g.closed|length ~ ' 只）与缺失成员（' ~ g.missing|length ~ ' 只）一律排除，休市成员单列在下方折叠组。收益为本币口径（美元 / 便士 / 人民币），未做汇率换算。「' ~ (th.col_label or '细分') ~ '」分类为本看台自定义；A股涨跌停按创业板和科创板 20%、主板 10% 判断。',
+   'Method: every aggregate (1D / 5D / 20D / YTD / breadth) = arithmetic mean over members trading that session, n=' ~ nt ~ '; closed (' ~ g.closed|length ~ ') and missing (' ~ g.missing|length ~ ') members are excluded, closed ones listed in the folded group below. Local-currency returns (USD / pence / CNY), not FX-adjusted. The "' ~ (th.col_label_en or 'Segment') ~ '" labels are our own classification; A-share limits: 20% ChiNext/STAR, 10% main board.') }}</p>
 {{ insight(th.insight, '主题 · 分析师评级动态', 'Theme · analyst rating changes', th.analyst, none, 7, true) }}
 </section>
 {% endfor %}{% endif %}

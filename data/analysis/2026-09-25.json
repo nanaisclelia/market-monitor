@@ -333,6 +333,114 @@
     }
    ],
    "nature": "预期变化"
+  },
+  "tmt": {
+   "nature": "预期变化",
+   "headline": "TMT 内部分化：微软推出企业版 Copilot 并获上调目标价，Meta 在一周大涨后回吐；等权收益约为零",
+   "headline_en": "TMT splits: Microsoft rallies on an enterprise Copilot relaunch and a target raise while Meta gives back a big week; equal-weighted flat",
+   "points": [
+    {
+     "tag": "分析师",
+     "src": [
+      0,
+      1
+     ],
+     "text": "微软把消费版和办公版 Copilot 合并为一个面向企业的应用（含 Autopilot 自主代理），并称企业付费订阅已超过 3000 万。Oppenheimer 分析师 Brian Schwartz 维持 Outperform，目标价由 515 美元上调至 570 美元，理由是客户越来越把微软当作主要的企业 AI 平台。微软当日上涨 3.66%。",
+     "text_en": "Microsoft merged its consumer and workplace Copilot into one enterprise app (with an Autopilot agent) and cited 30m+ paid enterprise seats. Oppenheimer's Brian Schwartz kept Outperform and raised his target to $570 from $515, citing customers standardising on Microsoft as their primary enterprise AI platform. MSFT +3.66%."
+    },
+    {
+     "tag": "媒体报道",
+     "src": [
+      2
+     ],
+     "text": "Meta 下跌 3.33%：报道称 Goldman Sachs 语气转谨慎（未披露分析师姓名和目标价），Wedbush、BMO 维持 Hold；亚马逊禁止 Muse AI 代理在其平台下单。Meta 此前一周因 Muse 走红上涨约 16%，前一交易日创 52 周新高。",
+     "text_en": "Meta fell 3.33%: Goldman Sachs reportedly struck a less optimistic tone (analyst and target not disclosed), Wedbush and BMO reiterated Hold, and Amazon barred the Muse AI agent from purchases on its platform. Meta had gained ~16% on the week on Muse's success and hit a 52-week high the prior session."
+    },
+    {
+     "tag": "AI 推断",
+     "src": [],
+     "text": "等权 -0.01% 掩盖了内部方向相反的两股力量：企业软件 / 云的变现预期上修，消费 AI 叙事出现获利了结；电信股波动很小，表现出防御属性。这属于预期层面的再分配，不是板块整体重新定价。",
+     "text_en": "The flat EW return hides opposite moves: enterprise software/cloud monetisation expectations rose while the consumer-AI narrative saw profit-taking; telecoms barely moved, acting defensively. A redistribution of expectations within the sector, not a sector-wide repricing."
+    }
+   ],
+   "sources": [
+    {
+     "publisher": "24/7 Wall St.",
+     "date": "2026-09-25",
+     "title": "Microsoft Climbs 4% as Oppenheimer Lifts Target to $570 on Copilot Enterprise Pivot",
+     "url": "https://247wallst.com/investing/2026/09/25/microsoft-climbs-3-as-oppenheimer-lifts-target-to-570-on-copilot-enterprise-pivot-alphabet-ticks-up/"
+    },
+    {
+     "publisher": "Motley Fool",
+     "date": "2026-09-25",
+     "title": "Microsoft Stock Jumps 4% After Revamping Copilot With Code Generation and Agentic AI Tools",
+     "url": "https://www.fool.com/coverage/stock-market-today/2026/09/25/stock-market-today-sept-25-microsoft-stock-jumps-4-after-revamping-copilot-with-code-generation-and-agentic-ai-tools/"
+    },
+    {
+     "publisher": "Investing.com",
+     "date": "2026-09-25",
+     "title": "Why is Meta Platforms stock sliding today?",
+     "url": "https://www.investing.com/news/stock-market-news/why-is-meta-platforms-stock-sliding-today-93CH-4917834"
+    }
+   ]
+  },
+  "cyc": {
+   "nature": "预期变化",
+   "headline": "资源内部轮动：铜价接近纪录高位、Escondida 停产抬高供应风险，金属矿业股走强；原油回落拖累油气股",
+   "headline_en": "Rotation within resources: copper near record highs and the Escondida halt lift supply risk, miners rise; softer crude drags oil & gas",
+   "points": [
+    {
+     "tag": "媒体报道",
+     "src": [
+      0,
+      1
+     ],
+     "text": "全球最大铜矿 BHP Escondida 在 9/23 一名承包商工人死亡后全面停产，复产须等监管部门确认安全，尚无时间表（背景事件，非当日）。",
+     "text_en": "BHP's Escondida, the world's largest copper mine, halted all operations after a contractor was killed on 9/23; restart awaits regulator clearance with no timeline (background event, not same-day)."
+    },
+    {
+     "tag": "媒体报道",
+     "src": [
+      2
+     ],
+     "text": "伦敦盘中矿业股领涨：Glencore 约 +3%、Anglo American 约 +2.6%、Antofagasta 约 +2.6%；铜价小跌 0.3% 至 6.76 美元/磅，但仍接近纪录高位。油价回落拖累 BP（约 -2.5%）、Shell（约 -1%）。报道数字为盘中，收盘以本看台数据为准。",
+     "text_en": "Miners led London intraday — Glencore ~+3%, Anglo American ~+2.6%, Antofagasta ~+2.6% — while copper eased 0.3% to $6.76/lb, still near record highs. Softer crude weighed on BP (~-2.5%) and Shell (~-1%). Figures are intraday; closes per this dashboard."
+    },
+    {
+     "tag": "AI 推断",
+     "src": [
+      3
+     ],
+     "text": "同日美伊据报商讨重开霍尔木兹，WTI 跌约 2.3%，美股油气股同步走弱（COP -1.58%、XOM -0.96%）；金属与能源方向相反，属于资源板块内部轮动，而非整体周期预期改变。天然气期货因 Yahoo 换月已隔离，不参与判断。",
+     "text_en": "Reported US–Iran talks on reopening Hormuz cut WTI ~2.3% the same day and US oil names followed (COP -1.58%, XOM -0.96%). Metals and energy diverged — a rotation within resources rather than a change in the overall cycle view. Natural gas futures are quarantined (Yahoo contract roll)."
+    }
+   ],
+   "sources": [
+    {
+     "publisher": "Mining Technology",
+     "date": "2026-09-23",
+     "title": "BHP suspends activities at Escondida mine after maintenance accident",
+     "url": "https://www.mining-technology.com/news/bhp-suspends-activities-escondida-mine/"
+    },
+    {
+     "publisher": "Yahoo Finance",
+     "date": "2026-09-23",
+     "title": "World's largest copper mine halts operations after worker death",
+     "url": "https://ca.finance.yahoo.com/news/fatal-accident-occurs-bhps-chile-181850851.html"
+    },
+    {
+     "publisher": "Proactive Investors",
+     "date": "2026-09-25",
+     "title": "Miners power London as easing crude weighs energy stocks",
+     "url": "https://www.proactiveinvestors.com/companies/news/1099125/miners-power-london-as-easing-crude-weighs-energy-stocks-1099125.html"
+    },
+    {
+     "publisher": "The National",
+     "date": "2026-09-25",
+     "title": "Oil prices waver in face of Iran war truce and Houthi attacks",
+     "url": "https://www.thenationalnews.com/business/energy/2026/09/25/oil-prices-waver-in-face-of-iran-war-truce-and-houthi-attacks/"
+    }
+   ]
   }
  },
  "geo": [

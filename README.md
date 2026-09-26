@@ -31,6 +31,8 @@ The loop the product is built around: **freshness → what changed → what didn
 | **UK equities** | FTSE 100 / 250 closes, FTSE 350 movers with the same alert rules and AI-summarised reasons; closing-auction prices patched from CNBC when Yahoo lags, with symbol-mapping checks and Yahoo cross-verification |
 | **Precious metals** | LBMA fixes vs COMEX/NYMEX front-month futures for gold, silver, platinum, palladium |
 | **Theme tracker: CPO** | 16 names across the co-packaged-optics value chain (NVIDIA, Broadcom, TSMC, Coherent, Lumentum… plus 4 China A-share optical module makers): equal-weighted 1D/5D/20D/YTD, ranked diverging bar chart, value-chain role |
+| **Theme tracker: TMT** | 19 US/UK technology, media and telecom names by segment; same-day sample, ranking, sector reason |
+| **Theme tracker: cyclical commodities** | Front-month futures (copper, aluminium, iron ore, WTI, natural gas, soybeans, corn, wheat) with roll detection, plus 18 US/UK/China producers by commodity exposure |
 | **Movers & alerts** | S&P 500 + Nasdaq-100 + theme members screened for ±7% or ≥2.5σ moves; each flagged stock gets *why it moved* (tagged Confirmed / Analyst / Media report / AI inference, with numbered sources), SEC 8-K filings, analyst rating & target changes, valuation / liquidity / crowding metrics and key technical levels |
 
 ## Design principles
