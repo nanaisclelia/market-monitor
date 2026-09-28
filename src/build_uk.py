@@ -126,7 +126,13 @@ def build(session: date) -> dict:
         elif src.startswith("CNBC"):
             h["xcheck"] = _xcheck_yahoo(h["stats"]["close"], t, session, cal, tol)
         else:
-            h["xcheck"] = _xcheck_cnbc(h["stats"], sq.get(cnbc.uk_symbol(h["epic"])), session, tz, tol)
+            q = sq.get(cnbc.uk_symbol(h["epic"]))
+            # 第二源的前收与我们的前收不一致 → 代码映射到其他证券（如 TW-GB），改用 Yahoo 报价校验
+            if q and q.get("prev_close") and abs(q["prev_close"] / h["stats"]["prev_close"] - 1) > 0.02:
+                h["xcheck"] = _xcheck_yahoo(h["stats"]["close"], t, session, cal, tol)
+                h["xcheck"]["note"] = "CNBC 代码对应其他证券，改用 Yahoo 报价校验"
+            else:
+                h["xcheck"] = _xcheck_cnbc(h["stats"], q, session, tz, tol)
         if n >= scfg["detail_cards"]:
             continue
         h["detail"] = True

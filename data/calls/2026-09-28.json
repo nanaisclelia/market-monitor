@@ -1,0 +1,79 @@
+{
+ "session": "2026-09-28",
+ "frozen_at": "2026-09-28T22:25:04+00:00",
+ "sha256": "10f36f832ef40f601f131ea6180b25625a80660db01840773df73d380187d370",
+ "items": [
+  {
+   "id": "2026-09-28-q1",
+   "q": "AI 安全事件引发的芯片抛售，是一次性冲击还是趋势起点？",
+   "q_en": "Is the AI-safety chip selloff a one-off shock or the start of a trend?",
+   "expect": "若只是情绪冲击，美股 CPO 成员（12 只）等权在 10/5 收盘前收复 9/28 的跌幅。",
+   "expect_en": "If it is a sentiment shock, the 12 US CPO members recover their 9/28 equal-weighted loss by the 10/5 close.",
+   "horizon": "2026-10-05",
+   "confidence": "低",
+   "confidence_en": "Low",
+   "falsifier": "10/5 收盘时，美股 CPO 等权相对 9/25 收盘仍为负。",
+   "falsifier_en": "At the 10/5 close the US CPO equal-weighted return versus the 9/25 close is still negative.",
+   "now": "9/28 美股 CPO 大跌，SOX 约 -2%",
+   "now_en": "US CPO sharply lower 9/28; SOX ~-2%",
+   "evidence": [
+    "Yahoo Finance 9/28",
+    "本看台快照"
+   ]
+  },
+  {
+   "id": "2026-09-28-q2",
+   "q": "10 年期美债站上 5.2% 后，黄金会否在周五非农前继续承压？",
+   "q_en": "With the 10-year above 5.2%, will gold stay under pressure into Friday's payrolls?",
+   "expect": "只要 10 年期维持在 5.2% 以上，黄金期货 10/2 收盘低于 9/28 收盘（4,154.7）。",
+   "expect_en": "As long as the 10-year stays above 5.2%, gold futures close below the 9/28 close (4,154.7) on 10/2.",
+   "horizon": "2026-10-02",
+   "confidence": "中",
+   "confidence_en": "Medium",
+   "falsifier": "10 年期仍在 5.2% 以上，但黄金 10/2 收盘高于 4,154.7。",
+   "falsifier_en": "The 10-year is still above 5.2% but gold closes above 4,154.7 on 10/2.",
+   "now": "黄金 4,154.7（-3.85%）；10 年期 5.24%",
+   "now_en": "Gold 4,154.7 (-3.85%); 10-year 5.24%",
+   "evidence": [
+    "Yahoo Finance 9/28",
+    "USAGOLD 9/28"
+   ]
+  },
+  {
+   "id": "2026-09-28-q3",
+   "q": "英国首购计划的涨幅，能否撑到预算公布细节之前？",
+   "q_en": "Will the UK first-home rally hold until the Budget details?",
+   "expect": "五大建房商（Persimmon、Barratt Redrow、Taylor Wimpey、Vistry、Bellway）10/9 收盘时，相对 9/25 收盘等权仍高于 +8%。",
+   "expect_en": "The big five housebuilders stay more than +8% above their 9/25 closes, equal-weighted, at the 10/9 close.",
+   "horizon": "2026-10-09",
+   "confidence": "中",
+   "confidence_en": "Medium",
+   "falsifier": "10/9 收盘时等权涨幅回落到 +5% 以下。",
+   "falsifier_en": "By the 10/9 close the equal-weighted gain has fallen below +5%.",
+   "now": "9/28 等权约 +11.8%",
+   "now_en": "~+11.8% EW on 9/28",
+   "evidence": [
+    "Yahoo Finance UK 9/28",
+    "本看台快照"
+   ]
+  },
+  {
+   "id": "2026-09-28-q4",
+   "q": "A股光模块会否在国庆休市前继续下跌？",
+   "q_en": "Will A-share optical names keep falling before the National Day break?",
+   "expect": "4 只 A股 CPO 成员 9/29–9/30 两日累计等权收益为负。",
+   "expect_en": "The four A-share CPO members' cumulative EW return over 9/29–9/30 is negative.",
+   "horizon": "2026-09-30",
+   "confidence": "低",
+   "confidence_en": "Low",
+   "falsifier": "两日累计等权收益为正。",
+   "falsifier_en": "The two-day cumulative EW return is positive.",
+   "now": "9/28 等权 -8.94%，光迅科技跌停",
+   "now_en": "-8.94% EW on 9/28; Accelink limit-down",
+   "evidence": [
+    "财闻网 9/28",
+    "FX168 9/28"
+   ]
+  }
+ ]
+}

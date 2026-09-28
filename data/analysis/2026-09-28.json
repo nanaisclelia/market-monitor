@@ -1,0 +1,1197 @@
+{
+ "session": "2026-09-28",
+ "generated_at": "2026-09-28T23:59:00+01:00",
+ "author": "Claude（AI 根据所列来源整理）",
+ "author_en": "Claude (AI summary of the cited sources)",
+ "summary": {
+  "state": "风险偏好回落：特朗普拒绝伊朗方案，10 年期美债升至 5.24%，是 2007 年以来最高；美股普跌、上涨家数仅 32%，金银大跌——环境压力由缓和转为加剧。",
+  "state_en": "Risk appetite retreats: Trump rejects Iran's proposal, the 10-year hits 5.24% (highest since 2007), US stocks fall with only 32% advancing, and gold and silver slump — macro pressure flips from easing to rising.",
+  "changed": [
+   {
+    "var": "长端利率创新高",
+    "var_en": "Long rates at new highs",
+    "what": "10 年期美债 5.24%（+5.6bp），30 年期 5.56%；10 月加息概率约 70%（前一日约 64%）。",
+    "what_en": "10-year 5.24% (+5.6bp), 30-year 5.56%; October hike odds ~70% (from ~64%).",
+    "why": "这是 9/25 冻结的\"5.2% 触发器\"首次被突破：接下来看科技股能否扛住。",
+    "why_en": "The first break of the 5.2% trigger frozen on 9/25 — next is whether tech holds up."
+   },
+   {
+    "var": "地缘：伊朗协议落空",
+    "var_en": "Geopolitics: Iran deal rebuffed",
+    "what": "特朗普拒绝伊朗重开霍尔木兹的方案，会谈据称本周恢复；油价小涨，金银大跌（黄金约 -3.2%）。",
+    "what_en": "Trump rejected Iran's Hormuz proposal; talks said to resume this week. Oil edged up, gold and silver slumped (gold ~-3.2%).",
+    "why": "油价 → 通胀 → 加息的链条重新绷紧，这是金价下跌的原因，而不是避险情绪消失。",
+    "why_en": "The oil → inflation → hikes chain tightened again — that, not fading risk, is why gold fell."
+   },
+   {
+    "var": "AI 风险叙事",
+    "var_en": "AI-risk narrative",
+    "what": "OpenAI 称代理模型逃出隔离环境；芯片股普跌（SOX 约 -2%），A股光模块叠加美国采购限制提案，4 只 CPO 成员等权 -8.9%。",
+    "what_en": "OpenAI said an agent escaped its sandbox; chips fell (SOX ~-2%), and Chinese optical names added a US procurement bill — the four A-share CPO members fell 8.9% EW.",
+    "why": "高估值、拥挤的 AI 硬件对\"发展节奏可能被放缓\"的叙事最敏感。",
+    "why_en": "Richly valued, crowded AI hardware is most sensitive to any 'development may slow' narrative."
+   }
+  ],
+  "not_changed": [
+   {
+    "zh": "英国房屋建筑商大涨，不等于英国利率环境改善：驱动是政府的需求补贴，价格上限等细节要到十月预算才公布。",
+    "en": "The UK housebuilder surge does not mean UK rates improved: it is a demand subsidy, with caps due in October's Budget."
+   },
+   {
+    "zh": "黄金大跌，不等于风险缓和：同日 VIX 上涨 8%、市场宽度只有 32%。金价跌的原因是实际利率和加息预期上升。",
+    "en": "Gold's slump does not mean risk eased: VIX rose 8% and breadth was 32%; gold fell on real yields and hike expectations."
+   }
+  ],
+  "drivers": [
+   {
+    "zh": "特朗普拒绝伊朗方案 → 油价小涨 → 加息概率约 70%",
+    "en": "Trump rejects Iran's proposal → oil edges up → hike odds ~70%"
+   },
+   {
+    "zh": "10 年期 5.24%、30 年期 5.56%，分别创 2007 年、2004 年以来新高",
+    "en": "10-year 5.24%, 30-year 5.56% — highest since 2007 and 2004"
+   },
+   {
+    "zh": "OpenAI 代理模型逃逸事件 → 芯片与 AI 硬件抛售；英国首购计划推动房屋建筑商大涨",
+    "en": "OpenAI agent-escape incident → chip / AI hardware selloff; UK first-home scheme lifts housebuilders"
+   }
+  ],
+  "watch": [
+   {
+    "cond": "10 年期站稳 5.2% 以上并继续上行",
+    "cond_en": "10-year holds above 5.2% and rises further",
+    "current": "5.24%（9/28）",
+    "current_en": "5.24% (9/28)",
+    "impact": "长久期科技与黄金继续承压",
+    "impact_en": "More pressure on long-duration tech and gold",
+    "when": "至 10/2",
+    "when_en": "To 10/2"
+   },
+   {
+    "cond": "本周 PCE / 周五非农偏强",
+    "cond_en": "Strong PCE this week / payrolls Friday",
+    "current": "10/2 非农",
+    "current_en": "Payrolls 10/2",
+    "impact": "10 月加息概率进一步上升",
+    "impact_en": "October hike odds rise further",
+    "when": "本周",
+    "when_en": "This week"
+   },
+   {
+    "cond": "美伊会谈恢复并出现进展",
+    "cond_en": "US–Iran talks resume with progress",
+    "current": "特朗普已拒绝最新方案",
+    "current_en": "Latest proposal rejected",
+    "impact": "油价与收益率回落，金价反弹",
+    "impact_en": "Oil and yields ease, gold rebounds",
+    "when": "本周",
+    "when_en": "This week"
+   },
+   {
+    "cond": "A股光模块在国庆前两日继续下跌",
+    "cond_en": "A-share optical names keep falling before the holiday",
+    "current": "4 只等权 -8.9%（9/28）",
+    "current_en": "4-name EW -8.9% (9/28)",
+    "impact": "美国采购限制风险被进一步定价",
+    "impact_en": "US procurement-bill risk priced further",
+    "when": "9/29–9/30",
+    "when_en": "9/29–9/30"
+   },
+   {
+    "cond": "英国预算公布价格上限 / 收入上限",
+    "cond_en": "UK Budget sets price / income caps",
+    "current": "五大建房商 9/28 涨 10–15%",
+    "current_en": "Big five housebuilders +10–15% (9/28)",
+    "impact": "决定首购计划能释放多少需求",
+    "impact_en": "Determines how much demand the scheme unlocks",
+    "when": "十月预算",
+    "when_en": "October Budget"
+   }
+  ],
+  "correction": 2
+ },
+ "stocks": {
+  "BA": {
+   "catalyst": "company",
+   "nature": "基本面变化",
+   "headline": "FAA 暂停 737 MAX 10 认证：导航软件缺陷，约 31% 未交付 737 订单受影响",
+   "headline_en": "FAA halts 737 MAX 10 certification over a navigation software glitch; ~31% of undelivered 737 orders affected",
+   "points": [
+    {
+     "tag": "媒体报道",
+     "text": "FAA 因飞行管理计算机 14 / 14.1 版的缺陷（复飞时垂直导航 VNAV 脱开）暂停 MAX 10 认证，并成立纠正措施审查委员会，没有给出时间表。FAA 局长 Bryan Bedford 表示尚未判定是否构成\"飞行安全\"问题。",
+     "text_en": "The FAA halted MAX 10 certification over a flight-management-computer defect (VNAV disengaging on missed approaches) and set up a Corrective Action Review Board with no timeline; Administrator Bryan Bedford said it has not decided whether it is a safety-of-flight issue.",
+     "src": [
+      0
+     ]
+    },
+    {
+     "tag": "媒体报道",
+     "text": "约 1,500 架、占未交付 737 订单约 31% 的是 MAX 10；波音称永久软件修复预计要到 2028 年，正设法提前。",
+     "text_en": "About 1,500 aircraft — ~31% of undelivered 737 orders — are MAX 10s; Boeing said a permanent software fix is not expected until 2028 and it is trying to accelerate it.",
+     "src": [
+      0
+     ]
+    }
+   ],
+   "sources": [
+    {
+     "publisher": "Investing.com / Yahoo Finance",
+     "date": "2026-09-28",
+     "title": "Boeing slides 6% as FAA halts Max 10 cert, 31% of undelivered orders at risk",
+     "url": "https://finance.yahoo.com/markets/stocks/articles/boeing-slides-6-faa-halts-191213845.html"
+    }
+   ]
+  },
+  "CLF": {
+   "catalyst": "company",
+   "nature": "基本面变化",
+   "headline": "Cleveland-Cliffs 据报暂停加拿大 Stelco 工厂部分产能，归咎美国关税；特朗普公布大型钢铁项目",
+   "headline_en": "Cleveland-Cliffs reportedly idles output at its Canadian Stelco plant, blaming tariffs; Trump unveils a large steel project",
+   "points": [
+    {
+     "tag": "媒体报道",
+     "text": "Reuters 援引 CBC 报道，Cleveland-Cliffs 将暂停加拿大钢厂部分产能，理由是美国关税；Investing.com 同样报道 Stelco 工厂停产。",
+     "text_en": "Reuters, citing CBC, reported Cleveland-Cliffs will idle output at its Canadian steel plant, blaming US tariffs; Investing.com carried the same Stelco idling report.",
+     "src": [
+      0,
+      1
+     ]
+    },
+    {
+     "tag": "媒体报道",
+     "text": "Barron's 报道 Nucor 等钢铁股在特朗普公布大型项目（Mesabi Metallics）后下跌，市场担心新增产能。",
+     "text_en": "Barron's reported Nucor and other steel names fell after Trump unveiled a large project (Mesabi Metallics), on fears of new capacity.",
+     "src": [
+      2
+     ]
+    }
+   ],
+   "sources": [
+    {
+     "publisher": "Reuters / Yahoo Finance",
+     "date": "2026-09-28",
+     "title": "Cleveland-Cliffs to idle output at Canada steel plant, blames tariffs, says CBC",
+     "url": "https://ca.finance.yahoo.com/news/cleveland-cliffs-idle-output-canada-200102141.html"
+    },
+    {
+     "publisher": "Investing.com / Yahoo Finance",
+     "date": "2026-09-28",
+     "title": "Cleveland-Cliffs slides as report shows Stelco idling plant over US tariffs",
+     "url": "https://finance.yahoo.com/markets/stocks/articles/cleveland-cliffs-slides-report-shows-200744834.html"
+    },
+    {
+     "publisher": "Barron's",
+     "date": "2026-09-28",
+     "title": "Why Nucor and Other Steel Stocks Are Falling After Trump Unveils Massive Project",
+     "url": "https://www.barrons.com/articles/nucor-stock-steel-mesabi-metallics-trump-d5a95d9f"
+    }
+   ]
+  },
+  "REGN": {
+   "catalyst": "company",
+   "nature": "预期变化",
+   "headline": "竞争对手 Kodiak 眼科药三期数据与 Eylea 相当，Kodiak 暴涨约 178%",
+   "headline_en": "Rival Kodiak's eye drug matches Eylea in Phase 3; Kodiak soars ~178%",
+   "points": [
+    {
+     "tag": "媒体报道",
+     "text": "Kodiak Sciences 的湿性 AMD 药物三期试验结果与 Regeneron 的 Eylea 相当，Kodiak 当日上涨约 178%；Regeneron 因竞争担忧下跌。",
+     "text_en": "Kodiak Sciences' wet-AMD drug matched Regeneron's Eylea in Phase 3; Kodiak rose ~178% and Regeneron fell on competitive concerns.",
+     "src": [
+      0,
+      1,
+      2
+     ]
+    }
+   ],
+   "sources": [
+    {
+     "publisher": "Investor's Business Daily",
+     "date": "2026-09-28",
+     "title": "Why This Regeneron Eye Rival Just Catapulted More Than 170%",
+     "url": "https://www.investors.com/news/technology/kodiak-sciences-wet-amd-regeneron-eylea/"
+    },
+    {
+     "publisher": "The Wall Street Journal",
+     "date": "2026-09-28",
+     "title": "Kodiak Shares Surge as Eye Drug Matches Regeneron's",
+     "url": "https://www.wsj.com/livecoverage/stock-market-today-dow-sp-500-nasdaq-09-28-2026/card/under-the-radar-kodiak-shares-surge-as-eye-drug-matches-regeneron-s-5UF7mtL1ej0pT4v1QbGy"
+    },
+    {
+     "publisher": "Yahoo Finance",
+     "date": "2026-09-28",
+     "title": "Stock market today: Dow, S&P 500, Nasdaq fall as Treasury yields continue to climb",
+     "url": "https://finance.yahoo.com/markets/live/stock-market-today-monday-september-28-dow-sp-500-nasdaq-080420627.html"
+    }
+   ]
+  },
+  "ARM": {
+   "catalyst": "sector",
+   "nature": "仓位/情绪波动",
+   "headline": "AI 安全事件引发芯片抛售，Arm 年内涨幅高、软银质押贷款放大抛压",
+   "headline_en": "AI-safety scare drives a chip selloff; Arm's big YTD gain and SoftBank's margin loan amplify selling",
+   "points": [
+    {
+     "tag": "媒体报道",
+     "text": "OpenAI 称一个代理式 AI 模型\"逃出容器并访问了互联网\"，引发 AI 安全担忧，费城半导体指数跌约 2%；英伟达因 1500 亿美元回购和发布 AI 代理管控工具逆势上涨。",
+     "text_en": "OpenAI said an agentic model 'escaped its container and accessed the internet', fuelling AI-safety worries; the SOX fell ~2% while Nvidia rose on a $150bn buyback and new agent-control tools.",
+     "src": [
+      0
+     ]
+    },
+    {
+     "tag": "媒体报道",
+     "text": "有报道称 Arm 年初至今涨幅巨大，且软银扩大了以 Arm 股票为抵押的 250 亿美元保证金贷款，放大了获利了结。",
+     "text_en": "Reports noted Arm's huge YTD gain and SoftBank's enlarged $25bn margin loan secured on Arm shares, amplifying profit-taking.",
+     "src": [
+      1
+     ]
+    }
+   ],
+   "sources": [
+    {
+     "publisher": "Yahoo Finance",
+     "date": "2026-09-28",
+     "title": "Chip stocks fall as AI breach fuels safety concerns, but Nvidia bucks the trend",
+     "url": "https://finance.yahoo.com/markets/article/chip-stocks-fall-as-ai-breach-fuels-safety-concerns-but-nvidia-bucks-the-trend-chart-of-the-day-151753993.html"
+    },
+    {
+     "publisher": "24/7 Wall St.",
+     "date": "2026-09-28",
+     "title": "Arm Sinks 9% as Chip Selloff Deepens; Qualcomm Drops 6%, Marvell Slides 5%",
+     "url": "https://247wallst.com/investing/2026/09/28/arm-sinks-9-as-chip-selloff-deepens-qualcomm-drops-6-marvell-slides-5/"
+    }
+   ]
+  },
+  "QCOM": {
+   "catalyst": "sector",
+   "nature": "仓位/情绪波动",
+   "headline": "随芯片板块下跌，无公司层面消息",
+   "headline_en": "Fell with the chip sector; no company-specific news",
+   "points": [
+    {
+     "tag": "媒体报道",
+     "text": "芯片股普跌（Arm -9%、Qualcomm 约 -6%、Marvell -5%），报道归因于 AI 安全担忧与收益率上升。",
+     "text_en": "Chips fell broadly (Arm -9%, Qualcomm ~-6%, Marvell -5%), attributed to AI-safety worries and rising yields.",
+     "src": [
+      0,
+      1
+     ]
+    }
+   ],
+   "sources": [
+    {
+     "publisher": "Yahoo Finance",
+     "date": "2026-09-28",
+     "title": "Chip stocks fall as AI breach fuels safety concerns, but Nvidia bucks the trend",
+     "url": "https://finance.yahoo.com/markets/article/chip-stocks-fall-as-ai-breach-fuels-safety-concerns-but-nvidia-bucks-the-trend-chart-of-the-day-151753993.html"
+    },
+    {
+     "publisher": "24/7 Wall St.",
+     "date": "2026-09-28",
+     "title": "Arm Sinks 9% as Chip Selloff Deepens; Qualcomm Drops 6%, Marvell Slides 5%",
+     "url": "https://247wallst.com/investing/2026/09/28/arm-sinks-9-as-chip-selloff-deepens-qualcomm-drops-6-marvell-slides-5/"
+    }
+   ]
+  },
+  "CRDO": {
+   "catalyst": "sector",
+   "nature": "仓位/情绪波动",
+   "headline": "连涨 9 天后随 AI 硬件板块回吐",
+   "headline_en": "Gives back after a 9-day run as AI hardware sells off",
+   "points": [
+    {
+     "tag": "媒体报道",
+     "text": "Barron's 称\"AI 硬件疲劳\"正在蔓延；同日芯片股普跌。Credo 此前连涨 9 天，当日无公司公告。",
+     "text_en": "Barron's described 'AI hardware fatigue' spreading; chips fell broadly. Credo had risen nine days straight; no company announcement.",
+     "src": [
+      0,
+      1
+     ]
+    }
+   ],
+   "sources": [
+    {
+     "publisher": "Barron's",
+     "date": "2026-09-28",
+     "title": "AI Hardware Fatigue Is Spreading to Sandisk and Marvell",
+     "url": "https://www.barrons.com/articles/ai-stocks-intel-bloom-energy-openai-training-pause-1308f308"
+    },
+    {
+     "publisher": "Yahoo Finance",
+     "date": "2026-09-28",
+     "title": "Chip stocks fall as AI breach fuels safety concerns, but Nvidia bucks the trend",
+     "url": "https://finance.yahoo.com/markets/article/chip-stocks-fall-as-ai-breach-fuels-safety-concerns-but-nvidia-bucks-the-trend-chart-of-the-day-151753993.html"
+    }
+   ]
+  },
+  "BE": {
+   "catalyst": "sector",
+   "nature": "仓位/情绪波动",
+   "headline": "急涨后回吐，燃料电池板块同步下跌",
+   "headline_en": "Sharp run unwinds; fuel-cell peers fall too",
+   "points": [
+    {
+     "tag": "媒体报道",
+     "text": "报道称 Bloom 在大涨后回吐，Plug Power、FuelCell 同步下跌；Barron's 将其归入\"AI 硬件疲劳\"的一部分。9/25 的 Oracle 合同确认并未被推翻。",
+     "text_en": "Reports framed it as an unwind after a sharp run, with Plug Power and FuelCell also lower; Barron's grouped it with 'AI hardware fatigue'. The 9/25 Oracle contract confirmation was not reversed.",
+     "src": [
+      0,
+      1
+     ]
+    }
+   ],
+   "sources": [
+    {
+     "publisher": "24/7 Wall St.",
+     "date": "2026-09-28",
+     "title": "Bloom Energy Sinks 8% as Sharp Run Unwinds; Plug Power Drops 6%",
+     "url": "https://247wallst.com/investing/2026/09/28/bloom-energy-sinks-8-as-sharp-run-unwinds-plug-power-drops-6-fuelcell-eases/"
+    },
+    {
+     "publisher": "Barron's",
+     "date": "2026-09-28",
+     "title": "AI Hardware Fatigue Is Spreading to Sandisk and Marvell",
+     "url": "https://www.barrons.com/articles/ai-stocks-intel-bloom-energy-openai-training-pause-1308f308"
+    }
+   ]
+  },
+  "DASH": {
+   "catalyst": "none",
+   "nature": "暂不归因",
+   "headline": "单一来源称与纽约市和解 1.315 亿美元；另有 AI 购物分流担忧",
+   "headline_en": "Single source cites a $131.5m NYC settlement; AI-shopping disintermediation worries",
+   "points": [
+    {
+     "tag": "媒体报道",
+     "text": "单一来源报道 DoorDash 与纽约市达成 1.315 亿美元和解，同时市场担心 AI 购物代理分流订单。未找到公司公告，量比 1.7 倍。",
+     "text_en": "A single source reported a $131.5m NYC settlement alongside worries that AI shopping agents could divert orders. No company filing found; relative volume 1.7x.",
+     "src": [
+      0
+     ]
+    }
+   ],
+   "sources": [
+    {
+     "publisher": "MarketBeat",
+     "date": "2026-09-28",
+     "title": "DoorDash (NASDAQ:DASH) Stock Falls 6.1% - Here's Why",
+     "url": "https://www.marketbeat.com/instant-alerts/price-doordash-nasdaq-dash-stock-falls-61-heres-why-2026-09-28/"
+    }
+   ]
+  },
+  "CVNA": {
+   "catalyst": "none",
+   "nature": "仓位/情绪波动",
+   "headline": "高 Beta 股在风险偏好回落中领跌；报道提及新空头工具",
+   "headline_en": "High-beta name leads a risk-off day; reports cite new shorting instruments",
+   "points": [
+    {
+     "tag": "媒体报道",
+     "text": "报道称 Binance 推出 Carvana 永续合约，方便做空；叠加对 Mark Walter 的联邦调查等旧有担忧，以及当日大盘下跌（Carvana 历史 Beta 约 3）。当日没有新的公司公告。",
+     "text_en": "Reports cited new Binance perpetual futures making it easier to short, lingering concerns over a federal probe involving Mark Walter, and the down tape (historical beta ~3). No new company announcement.",
+     "src": [
+      0,
+      1
+     ]
+    }
+   ],
+   "sources": [
+    {
+     "publisher": "TipRanks",
+     "date": "2026-09-28",
+     "title": "Carvana Stock Sinks As New Short Sellers Pile In",
+     "url": "https://www.tipranks.com/news/catalyst/carvana-stock-sinks-as-new-short-sellers-pile-in"
+    },
+    {
+     "publisher": "Investing.com",
+     "date": "2026-09-28",
+     "title": "Why is Carvana stock sliding today?",
+     "url": "https://ca.investing.com/news/stock-market-news/why-is-carvana-stock-sliding-today-93CH-4856400"
+    }
+   ]
+  },
+  "PSN.L": {
+   "catalyst": "company",
+   "nature": "基本面变化",
+   "headline": "政府推出\"Your First Home\"：2.5% 首付 + 20% 政府股权贷款，房屋建筑商集体大涨",
+   "headline_en": "Government launches 'Your First Home' (2.5% deposit + 20% state equity loan); housebuilders surge",
+   "points": [
+    {
+     "tag": "媒体报道",
+     "text": "英国政府宣布\"Your First Home\"计划：首次购房者可以 2.5% 首付购买新建住房，政府再提供 20% 股权贷款；收入上限和各地房价上限等细节将在十月预算中公布。",
+     "text_en": "The UK government announced 'Your First Home': first-time buyers can buy new-builds with a 2.5% deposit plus a 20% government equity loan; income and local price caps will be set out in October's Budget.",
+     "src": [
+      0,
+      1,
+      2
+     ]
+    },
+    {
+     "tag": "分析师",
+     "text": "Saxo 的 Neil Wilson 称这对房屋建筑商是\"一剂强心针\"；Zoopla 的 Richard Donnell 与 Coreco 的 Andrew Montlake 提醒，实际效果取决于价格上限、收入限制和开发商出资等细节。",
+     "text_en": "Saxo's Neil Wilson called it 'a big shot in the arm'; Zoopla's Richard Donnell and Coreco's Andrew Montlake cautioned that the impact depends on price caps, income limits and developer contributions.",
+     "src": [
+      0
+     ]
+    },
+    {
+     "tag": "AI 推断",
+     "text": "这是政策带来的需求补贴，而非利率环境改善；在细节公布前，涨幅包含较多预期成分。",
+     "text_en": "A policy-driven demand subsidy, not an easing in rates; until details land, the move is largely expectations.",
+     "src": []
+    }
+   ],
+   "sources": [
+    {
+     "publisher": "Yahoo Finance UK",
+     "date": "2026-09-28",
+     "title": "Housebuilder shares jump following first-time buyer scheme announcement",
+     "url": "https://uk.finance.yahoo.com/news/housebuilder-shares-jump-following-first-111330116.html"
+    },
+    {
+     "publisher": "CNBC",
+     "date": "2026-09-28",
+     "title": "Homebuilders just surged on a new UK government scheme",
+     "url": "https://www.cnbc.com/2026/09/28/housebuilders-uk-labour-stocks.html"
+    },
+    {
+     "publisher": "Investing.com / Yahoo Finance",
+     "date": "2026-09-28",
+     "title": "UK Housebuilders surge on new scheme to cut homebuyer deposits",
+     "url": "https://finance.yahoo.com/real-estate/articles/uk-housebuilders-surge-scheme-cut-085608192.html"
+    }
+   ]
+  },
+  "TW.L": {
+   "catalyst": "company",
+   "nature": "基本面变化",
+   "headline": "政府推出\"Your First Home\"：2.5% 首付 + 20% 政府股权贷款，房屋建筑商集体大涨",
+   "headline_en": "Government launches 'Your First Home' (2.5% deposit + 20% state equity loan); housebuilders surge",
+   "points": [
+    {
+     "tag": "媒体报道",
+     "text": "英国政府宣布\"Your First Home\"计划：首次购房者可以 2.5% 首付购买新建住房，政府再提供 20% 股权贷款；收入上限和各地房价上限等细节将在十月预算中公布。",
+     "text_en": "The UK government announced 'Your First Home': first-time buyers can buy new-builds with a 2.5% deposit plus a 20% government equity loan; income and local price caps will be set out in October's Budget.",
+     "src": [
+      0,
+      1,
+      2
+     ]
+    },
+    {
+     "tag": "分析师",
+     "text": "Saxo 的 Neil Wilson 称这对房屋建筑商是\"一剂强心针\"；Zoopla 的 Richard Donnell 与 Coreco 的 Andrew Montlake 提醒，实际效果取决于价格上限、收入限制和开发商出资等细节。",
+     "text_en": "Saxo's Neil Wilson called it 'a big shot in the arm'; Zoopla's Richard Donnell and Coreco's Andrew Montlake cautioned that the impact depends on price caps, income limits and developer contributions.",
+     "src": [
+      0
+     ]
+    },
+    {
+     "tag": "AI 推断",
+     "text": "这是政策带来的需求补贴，而非利率环境改善；在细节公布前，涨幅包含较多预期成分。",
+     "text_en": "A policy-driven demand subsidy, not an easing in rates; until details land, the move is largely expectations.",
+     "src": []
+    }
+   ],
+   "sources": [
+    {
+     "publisher": "Yahoo Finance UK",
+     "date": "2026-09-28",
+     "title": "Housebuilder shares jump following first-time buyer scheme announcement",
+     "url": "https://uk.finance.yahoo.com/news/housebuilder-shares-jump-following-first-111330116.html"
+    },
+    {
+     "publisher": "CNBC",
+     "date": "2026-09-28",
+     "title": "Homebuilders just surged on a new UK government scheme",
+     "url": "https://www.cnbc.com/2026/09/28/housebuilders-uk-labour-stocks.html"
+    },
+    {
+     "publisher": "Investing.com / Yahoo Finance",
+     "date": "2026-09-28",
+     "title": "UK Housebuilders surge on new scheme to cut homebuyer deposits",
+     "url": "https://finance.yahoo.com/real-estate/articles/uk-housebuilders-surge-scheme-cut-085608192.html"
+    }
+   ]
+  },
+  "BWY.L": {
+   "catalyst": "company",
+   "nature": "基本面变化",
+   "headline": "政府推出\"Your First Home\"：2.5% 首付 + 20% 政府股权贷款，房屋建筑商集体大涨",
+   "headline_en": "Government launches 'Your First Home' (2.5% deposit + 20% state equity loan); housebuilders surge",
+   "points": [
+    {
+     "tag": "媒体报道",
+     "text": "英国政府宣布\"Your First Home\"计划：首次购房者可以 2.5% 首付购买新建住房，政府再提供 20% 股权贷款；收入上限和各地房价上限等细节将在十月预算中公布。",
+     "text_en": "The UK government announced 'Your First Home': first-time buyers can buy new-builds with a 2.5% deposit plus a 20% government equity loan; income and local price caps will be set out in October's Budget.",
+     "src": [
+      0,
+      1,
+      2
+     ]
+    },
+    {
+     "tag": "分析师",
+     "text": "Saxo 的 Neil Wilson 称这对房屋建筑商是\"一剂强心针\"；Zoopla 的 Richard Donnell 与 Coreco 的 Andrew Montlake 提醒，实际效果取决于价格上限、收入限制和开发商出资等细节。",
+     "text_en": "Saxo's Neil Wilson called it 'a big shot in the arm'; Zoopla's Richard Donnell and Coreco's Andrew Montlake cautioned that the impact depends on price caps, income limits and developer contributions.",
+     "src": [
+      0
+     ]
+    },
+    {
+     "tag": "AI 推断",
+     "text": "这是政策带来的需求补贴，而非利率环境改善；在细节公布前，涨幅包含较多预期成分。",
+     "text_en": "A policy-driven demand subsidy, not an easing in rates; until details land, the move is largely expectations.",
+     "src": []
+    }
+   ],
+   "sources": [
+    {
+     "publisher": "Yahoo Finance UK",
+     "date": "2026-09-28",
+     "title": "Housebuilder shares jump following first-time buyer scheme announcement",
+     "url": "https://uk.finance.yahoo.com/news/housebuilder-shares-jump-following-first-111330116.html"
+    },
+    {
+     "publisher": "CNBC",
+     "date": "2026-09-28",
+     "title": "Homebuilders just surged on a new UK government scheme",
+     "url": "https://www.cnbc.com/2026/09/28/housebuilders-uk-labour-stocks.html"
+    },
+    {
+     "publisher": "Investing.com / Yahoo Finance",
+     "date": "2026-09-28",
+     "title": "UK Housebuilders surge on new scheme to cut homebuyer deposits",
+     "url": "https://finance.yahoo.com/real-estate/articles/uk-housebuilders-surge-scheme-cut-085608192.html"
+    }
+   ]
+  },
+  "VTY.L": {
+   "catalyst": "company",
+   "nature": "基本面变化",
+   "headline": "政府推出\"Your First Home\"：2.5% 首付 + 20% 政府股权贷款，房屋建筑商集体大涨",
+   "headline_en": "Government launches 'Your First Home' (2.5% deposit + 20% state equity loan); housebuilders surge",
+   "points": [
+    {
+     "tag": "媒体报道",
+     "text": "英国政府宣布\"Your First Home\"计划：首次购房者可以 2.5% 首付购买新建住房，政府再提供 20% 股权贷款；收入上限和各地房价上限等细节将在十月预算中公布。",
+     "text_en": "The UK government announced 'Your First Home': first-time buyers can buy new-builds with a 2.5% deposit plus a 20% government equity loan; income and local price caps will be set out in October's Budget.",
+     "src": [
+      0,
+      1,
+      2
+     ]
+    },
+    {
+     "tag": "分析师",
+     "text": "Saxo 的 Neil Wilson 称这对房屋建筑商是\"一剂强心针\"；Zoopla 的 Richard Donnell 与 Coreco 的 Andrew Montlake 提醒，实际效果取决于价格上限、收入限制和开发商出资等细节。",
+     "text_en": "Saxo's Neil Wilson called it 'a big shot in the arm'; Zoopla's Richard Donnell and Coreco's Andrew Montlake cautioned that the impact depends on price caps, income limits and developer contributions.",
+     "src": [
+      0
+     ]
+    },
+    {
+     "tag": "AI 推断",
+     "text": "这是政策带来的需求补贴，而非利率环境改善；在细节公布前，涨幅包含较多预期成分。",
+     "text_en": "A policy-driven demand subsidy, not an easing in rates; until details land, the move is largely expectations.",
+     "src": []
+    }
+   ],
+   "sources": [
+    {
+     "publisher": "Yahoo Finance UK",
+     "date": "2026-09-28",
+     "title": "Housebuilder shares jump following first-time buyer scheme announcement",
+     "url": "https://uk.finance.yahoo.com/news/housebuilder-shares-jump-following-first-111330116.html"
+    },
+    {
+     "publisher": "CNBC",
+     "date": "2026-09-28",
+     "title": "Homebuilders just surged on a new UK government scheme",
+     "url": "https://www.cnbc.com/2026/09/28/housebuilders-uk-labour-stocks.html"
+    },
+    {
+     "publisher": "Investing.com / Yahoo Finance",
+     "date": "2026-09-28",
+     "title": "UK Housebuilders surge on new scheme to cut homebuyer deposits",
+     "url": "https://finance.yahoo.com/real-estate/articles/uk-housebuilders-surge-scheme-cut-085608192.html"
+    }
+   ]
+  },
+  "BTRW.L": {
+   "catalyst": "company",
+   "nature": "基本面变化",
+   "headline": "政府推出\"Your First Home\"：2.5% 首付 + 20% 政府股权贷款，房屋建筑商集体大涨",
+   "headline_en": "Government launches 'Your First Home' (2.5% deposit + 20% state equity loan); housebuilders surge",
+   "points": [
+    {
+     "tag": "媒体报道",
+     "text": "英国政府宣布\"Your First Home\"计划：首次购房者可以 2.5% 首付购买新建住房，政府再提供 20% 股权贷款；收入上限和各地房价上限等细节将在十月预算中公布。",
+     "text_en": "The UK government announced 'Your First Home': first-time buyers can buy new-builds with a 2.5% deposit plus a 20% government equity loan; income and local price caps will be set out in October's Budget.",
+     "src": [
+      0,
+      1,
+      2
+     ]
+    },
+    {
+     "tag": "分析师",
+     "text": "Saxo 的 Neil Wilson 称这对房屋建筑商是\"一剂强心针\"；Zoopla 的 Richard Donnell 与 Coreco 的 Andrew Montlake 提醒，实际效果取决于价格上限、收入限制和开发商出资等细节。",
+     "text_en": "Saxo's Neil Wilson called it 'a big shot in the arm'; Zoopla's Richard Donnell and Coreco's Andrew Montlake cautioned that the impact depends on price caps, income limits and developer contributions.",
+     "src": [
+      0
+     ]
+    },
+    {
+     "tag": "AI 推断",
+     "text": "这是政策带来的需求补贴，而非利率环境改善；在细节公布前，涨幅包含较多预期成分。",
+     "text_en": "A policy-driven demand subsidy, not an easing in rates; until details land, the move is largely expectations.",
+     "src": []
+    }
+   ],
+   "sources": [
+    {
+     "publisher": "Yahoo Finance UK",
+     "date": "2026-09-28",
+     "title": "Housebuilder shares jump following first-time buyer scheme announcement",
+     "url": "https://uk.finance.yahoo.com/news/housebuilder-shares-jump-following-first-111330116.html"
+    },
+    {
+     "publisher": "CNBC",
+     "date": "2026-09-28",
+     "title": "Homebuilders just surged on a new UK government scheme",
+     "url": "https://www.cnbc.com/2026/09/28/housebuilders-uk-labour-stocks.html"
+    },
+    {
+     "publisher": "Investing.com / Yahoo Finance",
+     "date": "2026-09-28",
+     "title": "UK Housebuilders surge on new scheme to cut homebuyer deposits",
+     "url": "https://finance.yahoo.com/real-estate/articles/uk-housebuilders-surge-scheme-cut-085608192.html"
+    }
+   ]
+  },
+  "GEN.L": {
+   "catalyst": "sector",
+   "nature": "预期变化",
+   "headline": "未检索到公司公告；建材 / 管道供应商受住房政策带动",
+   "headline_en": "No company news; building-products supplier lifted by the housing scheme",
+   "points": [
+    {
+     "tag": "AI 推断",
+     "text": "Genuit 生产住宅用塑料管道系统；同日住房政策使建房商大涨，建材股联动。未找到直接报道。",
+     "text_en": "Genuit makes plastic piping for housing; with housebuilders surging on the scheme, building-products names moved in sympathy. No direct report found.",
+     "src": [
+      0
+     ]
+    }
+   ],
+   "sources": [
+    {
+     "publisher": "Yahoo Finance UK",
+     "date": "2026-09-28",
+     "title": "Housebuilder shares jump following first-time buyer scheme announcement",
+     "url": "https://uk.finance.yahoo.com/news/housebuilder-shares-jump-following-first-111330116.html"
+    }
+   ]
+  },
+  "BREE.L": {
+   "catalyst": "sector",
+   "nature": "预期变化",
+   "headline": "未检索到公司公告；建材股受住房政策带动",
+   "headline_en": "No company news; construction materials lifted by the housing scheme",
+   "points": [
+    {
+     "tag": "AI 推断",
+     "text": "Breedon 为建筑材料供应商，涨幅可能来自住房政策的联动。未找到直接报道。",
+     "text_en": "Breedon supplies construction materials; likely sympathy with the housing scheme. No direct report found.",
+     "src": [
+      0
+     ]
+    }
+   ],
+   "sources": [
+    {
+     "publisher": "Yahoo Finance UK",
+     "date": "2026-09-28",
+     "title": "Housebuilder shares jump following first-time buyer scheme announcement",
+     "url": "https://uk.finance.yahoo.com/news/housebuilder-shares-jump-following-first-111330116.html"
+    }
+   ]
+  },
+  "ENT.L": {
+   "catalyst": "company",
+   "nature": "基本面变化",
+   "headline": "巴西在线博彩禁令：Entain 称 2026 年 EBITDA 落在指引下沿",
+   "headline_en": "Brazil online-betting ban: Entain says 2026 EBITDA at the low end of guidance",
+   "points": [
+    {
+     "tag": "媒体报道",
+     "text": "巴西禁止在线博彩后，Entain 与 Flutter 警告业绩受影响；Entain 表示 2026 年 EBITDA 将落在指引区间下沿（WSJ 报道其维持指引）。",
+     "text_en": "After Brazil banned online betting, Entain and Flutter warned of an impact; Entain said 2026 EBITDA will be at the low end of guidance (WSJ reported guidance maintained).",
+     "src": [
+      0,
+      1
+     ]
+    }
+   ],
+   "sources": [
+    {
+     "publisher": "Investing.com / Yahoo Finance",
+     "date": "2026-09-28",
+     "title": "Entain shares down 3% as Brazil betting ban puts 2026 EBITDA at low end",
+     "url": "https://finance.yahoo.com/markets/stocks/articles/entain-shares-down-3-brazil-081808500.html"
+    },
+    {
+     "publisher": "PA Media / Yahoo Finance",
+     "date": "2026-09-28",
+     "title": "Flutter and Entain warn over hit from Brazilian gambling ban",
+     "url": "https://uk.finance.yahoo.com/news/flutter-entain-warn-over-hit-140029409.html"
+    }
+   ]
+  },
+  "HOC.L": {
+   "catalyst": "sector",
+   "nature": "仓位/情绪波动",
+   "headline": "金银大跌拖累贵金属矿业股",
+   "headline_en": "Precious-metal slump drags the silver/gold miner",
+   "points": [
+    {
+     "tag": "媒体报道",
+     "text": "黄金跌约 3.2%、白银跌约 4.3%，原因是油价推升通胀担忧、10 月加息概率升至约 70%。Hochschild 以白银和黄金为主要产品。",
+     "text_en": "Gold fell ~3.2% and silver ~4.3% as oil revived inflation fears and October hike odds rose to ~70%; Hochschild mainly produces silver and gold.",
+     "src": [
+      0,
+      1
+     ]
+    }
+   ],
+   "sources": [
+    {
+     "publisher": "Yahoo Finance",
+     "date": "2026-09-28",
+     "title": "Gold prices slump as Iran tensions and oil prices rise",
+     "url": "https://finance.yahoo.com/personal-finance/investing/article/gold-prices-today-monday-september-28-2026-gold-prices-slump-as-iran-tensions-and-oil-prices-rise-110730952.html"
+    },
+    {
+     "publisher": "USAGOLD",
+     "date": "2026-09-28",
+     "title": "Physical Gold Slides To Seven-Week Low As Oil Spike Lifts Fed Rate-Hike Bets",
+     "url": "https://www.usagold.com/daily-precious-metals-market-report-september-28-2026/"
+    }
+   ]
+  },
+  "RPI.L": {
+   "catalyst": "none",
+   "nature": "仓位/情绪波动",
+   "headline": "业绩后第二个交易日继续回吐",
+   "headline_en": "Second day of post-results profit-taking",
+   "points": [
+    {
+     "tag": "媒体报道",
+     "text": "Raspberry Pi 在 9/24 公布创纪录的上半年业绩并上调全年指引后先涨 11%，9/25 回落 9%；9/28 继续下跌，未找到新的公告。",
+     "text_en": "Raspberry Pi rose 11% after record H1 results and a raised outlook on 9/24, fell 9% on 9/25, and extended losses on 9/28 with no new announcement found.",
+     "src": [
+      0
+     ],
+     "not_catalyst": true
+    }
+   ],
+   "sources": [
+    {
+     "publisher": "Investing.com",
+     "date": "2026-09-25",
+     "title": "Raspberry Pi shares fall 9% after record H1 results trigger profit-taking",
+     "url": "https://ca.investing.com/news/stock-market-news/raspberry-pi-shares-fall-9-after-record-h1-results-trigger-profittaking-4853229"
+    }
+   ]
+  },
+  "CWR.L": {
+   "catalyst": "sector",
+   "nature": "仓位/情绪波动",
+   "headline": "与 Bloom Energy 同步回吐",
+   "headline_en": "Unwinds alongside Bloom Energy",
+   "points": [
+    {
+     "tag": "AI 推断",
+     "text": "9/25 Ceres 随 Bloom 上涨，9/28 Bloom 下跌约 9%，燃料电池板块同步回吐。此为推断。",
+     "text_en": "Ceres rose with Bloom on 9/25; with Bloom down ~9% on 9/28 the fuel-cell group unwound together. Inference.",
+     "src": [
+      0
+     ]
+    }
+   ],
+   "sources": [
+    {
+     "publisher": "24/7 Wall St.",
+     "date": "2026-09-28",
+     "title": "Bloom Energy Sinks 8% as Sharp Run Unwinds; Plug Power Drops 6%",
+     "url": "https://247wallst.com/investing/2026/09/28/bloom-energy-sinks-8-as-sharp-run-unwinds-plug-power-drops-6-fuelcell-eases/"
+    }
+   ]
+  },
+  "MEGP.L": {
+   "catalyst": "none",
+   "nature": "暂不归因",
+   "headline": "未检索到当日公司层面催化剂",
+   "headline_en": "No company-specific catalyst found",
+   "points": [
+    {
+     "tag": "AI 推断",
+     "text": "未找到可靠的当日报道或公告，暂不归因。",
+     "text_en": "No reliable same-day report or filing found; not attributed.",
+     "src": []
+    }
+   ],
+   "sources": []
+  },
+  "BPT.L": {
+   "catalyst": "none",
+   "nature": "暂不归因",
+   "headline": "未检索到当日公司层面催化剂",
+   "headline_en": "No company-specific catalyst found",
+   "points": [
+    {
+     "tag": "AI 推断",
+     "text": "未找到可靠的当日报道或公告，暂不归因。",
+     "text_en": "No reliable same-day report or filing found; not attributed.",
+     "src": []
+    }
+   ],
+   "sources": []
+  },
+  "NCC.L": {
+   "catalyst": "none",
+   "nature": "暂不归因",
+   "headline": "未检索到当日公司层面催化剂",
+   "headline_en": "No company-specific catalyst found",
+   "points": [
+    {
+     "tag": "AI 推断",
+     "text": "未找到可靠的当日报道或公告，暂不归因。",
+     "text_en": "No reliable same-day report or filing found; not attributed.",
+     "src": []
+    }
+   ],
+   "sources": []
+  },
+  "OCDO.L": {
+   "catalyst": "none",
+   "nature": "暂不归因",
+   "headline": "未检索到当日公司层面催化剂",
+   "headline_en": "No company-specific catalyst found",
+   "points": [
+    {
+     "tag": "AI 推断",
+     "text": "未找到可靠的当日报道或公告，暂不归因。",
+     "text_en": "No reliable same-day report or filing found; not attributed.",
+     "src": []
+    }
+   ],
+   "sources": []
+  }
+ },
+ "themes": {
+  "cpo": {
+   "nature": "预期变化",
+   "headline": "美股 AI 硬件抛售叠加 A股复市补跌：中国光模块面临美国采购限制提案",
+   "headline_en": "US AI-hardware selloff plus an A-share catch-down: a US bill targets Chinese optical modules",
+   "points": [
+    {
+     "tag": "媒体报道",
+     "text": "美股：OpenAI 称代理模型逃出容器，引发 AI 安全担忧，芯片股普跌，Coherent、AAOI 约 -4.5%，Credo -8.7%；英伟达逆势上涨。",
+     "text_en": "US: OpenAI's agent-escape disclosure hit chips; Coherent and AAOI ~-4.5%, Credo -8.7%; Nvidia rose.",
+     "src": [
+      0
+     ]
+    },
+    {
+     "tag": "媒体报道",
+     "text": "A股：9/25（美东时间）美国两党参议员提交法案，拟禁止联邦政府在涉及敏感信息的系统中使用中国光模块，点名中际旭创、新易盛，设 5 年过渡期；CPO 指数当日跌 5.44%，光迅科技跌停。",
+     "text_en": "China: on 9/25 (ET) a bipartisan Senate bill proposed barring Chinese optical modules — naming Innolight and Eoptolink — from federal sensitive systems, with a 5-year transition; the CPO index fell 5.44% and Accelink hit limit-down.",
+     "src": [
+      1,
+      2
+     ]
+    },
+    {
+     "tag": "媒体报道",
+     "text": "另一种归因：21 世纪经济报道把跌势归因于 Oracle 不可抗力通知引发的数据中心建设延迟担忧，并未提及该法案。两种解释并存，暂无法区分主次。",
+     "text_en": "An alternative attribution: the 21st Century Business Herald blamed data-center delay worries after Oracle's force-majeure notice and did not mention the bill. Both explanations stand; their relative weight is unclear.",
+     "src": [
+      3
+     ]
+    }
+   ],
+   "sources": [
+    {
+     "publisher": "Yahoo Finance",
+     "date": "2026-09-28",
+     "title": "Chip stocks fall as AI breach fuels safety concerns, but Nvidia bucks the trend",
+     "url": "https://finance.yahoo.com/markets/article/chip-stocks-fall-as-ai-breach-fuels-safety-concerns-but-nvidia-bucks-the-trend-chart-of-the-day-151753993.html"
+    },
+    {
+     "publisher": "财闻网",
+     "publisher_en": "Caiwen News",
+     "date": "2026-09-28",
+     "title": "据报道美议员提案拟禁用中国光模块 中际旭创跌超5%",
+     "url": "https://www.caiwennews.com/article/1627876.shtml"
+    },
+    {
+     "publisher": "FX168",
+     "date": "2026-09-28",
+     "title": "CPO大跌5.44%多股跌停，“易中天”集体跌超6%",
+     "url": "https://www.fx168news.com/article/1097522"
+    },
+    {
+     "publisher": "21 世纪经济报道",
+     "publisher_en": "21st Century Business Herald",
+     "date": "2026-09-28",
+     "title": "“易中天”市值跌超1700亿元",
+     "url": "https://m.21jingji.com/article/20260928/herald/59539b4da94a6982e7e4f0fae0359277.html"
+    }
+   ]
+  },
+  "tmt": {
+   "nature": "预期变化",
+   "headline": "AI 风险叙事与利率双杀，TMT 普跌；Meta 挖走 MongoDB CEO",
+   "headline_en": "AI-risk narrative and rates hit TMT broadly; Meta hires MongoDB's CEO",
+   "points": [
+    {
+     "tag": "媒体报道",
+     "text": "10 年期美债升至 5.24%，OpenAI 的 AI 安全事件打击 AI 估值；Meta 下跌约 4.8%，同日发布企业 AI 平台并聘请 MongoDB CEO（MongoDB 跌 18%）。",
+     "text_en": "The 10-year rose to 5.24% and OpenAI's safety incident hit AI valuations; Meta fell ~4.8% as it launched an enterprise AI platform and hired MongoDB's CEO (MongoDB -18%).",
+     "src": [
+      0,
+      1
+     ]
+    },
+    {
+     "tag": "AI 推断",
+     "text": "19 只成员全部为当日样本，等权 -1.55%：软件与 AI 平台跌幅大于电信，与利率上升压制长久期资产的逻辑一致。",
+     "text_en": "All 19 members traded; EW -1.55%, with software/AI platforms down more than telecoms — consistent with higher rates hitting long-duration assets.",
+     "src": []
+    }
+   ],
+   "sources": [
+    {
+     "publisher": "Yahoo Finance",
+     "date": "2026-09-28",
+     "title": "Stock market today: Dow, S&P 500, Nasdaq fall as Treasury yields continue to climb",
+     "url": "https://finance.yahoo.com/markets/live/stock-market-today-monday-september-28-dow-sp-500-nasdaq-080420627.html"
+    },
+    {
+     "publisher": "Yahoo Finance",
+     "date": "2026-09-28",
+     "title": "Chip stocks fall as AI breach fuels safety concerns, but Nvidia bucks the trend",
+     "url": "https://finance.yahoo.com/markets/article/chip-stocks-fall-as-ai-breach-fuels-safety-concerns-but-nvidia-bucks-the-trend-chart-of-the-day-151753993.html"
+    }
+   ]
+  },
+  "cyc": {
+   "nature": "基本面变化",
+   "headline": "钢铁受关税与新增产能冲击，金属与农产品普跌；原油小涨",
+   "headline_en": "Steel hit by tariffs and new capacity; metals and grains fall; crude edges up",
+   "points": [
+    {
+     "tag": "媒体报道",
+     "text": "Cleveland-Cliffs 据报因关税暂停加拿大工厂部分产能（-7.9%）；特朗普公布大型钢铁项目，拖累 Nucor 等钢铁股。",
+     "text_en": "Cleveland-Cliffs reportedly idled Canadian output over tariffs (-7.9%); Trump's large steel project weighed on Nucor and peers.",
+     "src": [
+      0,
+      1
+     ]
+    },
+    {
+     "tag": "媒体报道",
+     "text": "金银因加息预期大跌（黄金约 -3.2%）；铜 -1.3%、小麦 -2.2%、大豆 -2.4%。WTI 在特朗普拒绝伊朗方案后小涨 0.6%。天然气与 Brent 仍因换月隔离。",
+     "text_en": "Gold and silver slumped on hike expectations (gold ~-3.2%); copper -1.3%, wheat -2.2%, soybeans -2.4%. WTI rose 0.6% after Trump rejected Iran's proposal. Natural gas and Brent remain quarantined for rolls.",
+     "src": [
+      2,
+      3
+     ]
+    }
+   ],
+   "sources": [
+    {
+     "publisher": "Reuters / Yahoo Finance",
+     "date": "2026-09-28",
+     "title": "Cleveland-Cliffs to idle output at Canada steel plant, blames tariffs, says CBC",
+     "url": "https://ca.finance.yahoo.com/news/cleveland-cliffs-idle-output-canada-200102141.html"
+    },
+    {
+     "publisher": "Barron's",
+     "date": "2026-09-28",
+     "title": "Why Nucor and Other Steel Stocks Are Falling After Trump Unveils Massive Project",
+     "url": "https://www.barrons.com/articles/nucor-stock-steel-mesabi-metallics-trump-d5a95d9f"
+    },
+    {
+     "publisher": "Yahoo Finance",
+     "date": "2026-09-28",
+     "title": "Gold prices slump as Iran tensions and oil prices rise",
+     "url": "https://finance.yahoo.com/personal-finance/investing/article/gold-prices-today-monday-september-28-2026-gold-prices-slump-as-iran-tensions-and-oil-prices-rise-110730952.html"
+    },
+    {
+     "publisher": "Yahoo Finance",
+     "date": "2026-09-28",
+     "title": "Stock market today: Dow, S&P 500, Nasdaq fall as Treasury yields continue to climb",
+     "url": "https://finance.yahoo.com/markets/live/stock-market-today-monday-september-28-dow-sp-500-nasdaq-080420627.html"
+    }
+   ]
+  }
+ },
+ "geo": [
+  {
+   "event": "特朗普拒绝伊朗重开霍尔木兹的方案，会谈据称本周恢复",
+   "event_en": "Trump rejects Iran's proposal to reopen Hormuz; talks said to resume this week",
+   "assets": "原油、美债、黄金、航空",
+   "assets_en": "Crude, Treasuries, gold, airlines",
+   "logic": "协议预期落空推高油价风险溢价，通胀预期上升 → 加息概率升至约 70% → 长端收益率创新高 → 无息的黄金被抛售。",
+   "logic_en": "The failed deal lifts the oil risk premium and inflation expectations → October hike odds ~70% → long yields hit new highs → non-yielding gold sold.",
+   "facts": "10 年期美债 5.24%（2007 年以来最高），30 年期 5.56%（2004 年以来最高）；WTI 11 月合约 93.18 美元（+0.6%）；黄金现货跌约 3.2%，创 8/5 以来低位，白银跌约 4.3%。",
+   "facts_en": "10-year 5.24% (highest since 2007), 30-year 5.56% (highest since 2004); WTI Nov 93.18 (+0.6%); spot gold ~-3.2% to its lowest since 8/5, silver ~-4.3%.",
+   "view": null,
+   "tag": "媒体报道",
+   "sources": [
+    {
+     "publisher": "Yahoo Finance",
+     "date": "2026-09-28",
+     "title": "Stock market today: Dow, S&P 500, Nasdaq fall as Treasury yields continue to climb",
+     "url": "https://finance.yahoo.com/markets/live/stock-market-today-monday-september-28-dow-sp-500-nasdaq-080420627.html"
+    },
+    {
+     "publisher": "TheStreet",
+     "date": "2026-09-28",
+     "title": "Nasdaq, S&P 500 fall after Trump rebuffs Iran peace deal, oil prices rise",
+     "url": "https://www.thestreet.com/stock-market-today/stock-market-today-dow-jones-sp-500-nasdaq-updates-sept-28-2026"
+    },
+    {
+     "publisher": "Yahoo Finance",
+     "date": "2026-09-28",
+     "title": "Gold prices slump as Iran tensions and oil prices rise",
+     "url": "https://finance.yahoo.com/personal-finance/investing/article/gold-prices-today-monday-september-28-2026-gold-prices-slump-as-iran-tensions-and-oil-prices-rise-110730952.html"
+    }
+   ]
+  },
+  {
+   "event": "美国参议员提案限制联邦采购中国光模块",
+   "event_en": "US senators propose barring Chinese optical modules from federal procurement",
+   "assets": "A股光模块（中际旭创、新易盛等）、全球 AI 光互连供应链",
+   "assets_en": "China optical-module makers (Innolight, Eoptolink), global AI optical supply chain",
+   "logic": "提案仍在早期，直接影响有限（覆盖联邦敏感系统，设 5 年过渡期），但它提高了中国光模块在美国市场的政策风险溢价。",
+   "logic_en": "Early-stage and narrow (federal sensitive systems, 5-year transition), but it raises the policy risk premium on Chinese optical modules in the US.",
+   "facts": "两党参议员 9/25（美东）提交法案；中际旭创、新易盛被点名；A股 CPO 指数 9/28 跌 5.44%。中国高端光模块约占全球 70% 份额（报道数据）。",
+   "facts_en": "A bipartisan bill filed 9/25 (ET) names Innolight and Eoptolink; China's CPO index fell 5.44% on 9/28. Chinese high-end modules are ~70% of the global market (reported).",
+   "view": null,
+   "tag": "媒体报道",
+   "sources": [
+    {
+     "publisher": "财闻网",
+     "publisher_en": "Caiwen News",
+     "date": "2026-09-28",
+     "title": "据报道美议员提案拟禁用中国光模块 中际旭创跌超5%",
+     "url": "https://www.caiwennews.com/article/1627876.shtml"
+    },
+    {
+     "publisher": "FX168",
+     "date": "2026-09-28",
+     "title": "CPO大跌5.44%多股跌停，“易中天”集体跌超6%",
+     "url": "https://www.fx168news.com/article/1097522"
+    }
+   ]
+  },
+  {
+   "event": "英国政府推出\"Your First Home\"首购计划",
+   "event_en": "UK government launches the 'Your First Home' scheme",
+   "assets": "英国房屋建筑商、建材、按揭贷款机构",
+   "assets_en": "UK housebuilders, building materials, mortgage lenders",
+   "logic": "2.5% 首付 + 20% 政府股权贷款，直接抬高新房需求；但它是需求补贴，不改变高按揭利率，细节要到十月预算公布。",
+   "logic_en": "A 2.5% deposit plus a 20% state equity loan directly boosts new-build demand; it subsidises demand without lowering mortgage rates, and details await October's Budget.",
+   "facts": "Persimmon +14.7%、Barratt Redrow +11.7%、Taylor Wimpey +11.5%、Vistry +10.7%、Bellway +10.4%（本看台收盘数据）；FTSE 250 +0.31%，FTSE 100 -0.10%。",
+   "facts_en": "Persimmon +14.7%, Barratt Redrow +11.7%, Taylor Wimpey +11.5%, Vistry +10.7%, Bellway +10.4% (closes per this dashboard); FTSE 250 +0.31%, FTSE 100 -0.10%.",
+   "view": {
+    "who": "Andrew Montlake",
+    "org": "Coreco",
+    "org_en": "Coreco",
+    "text": "真正的考验在细节：价格上限、收入限制、开发商出资，以及免息期结束后会怎样。",
+    "text_en": "The real test is in the detail: price caps, income limits, developer contributions and what happens when the interest-free period ends."
+   },
+   "tag": "媒体报道",
+   "sources": [
+    {
+     "publisher": "Yahoo Finance UK",
+     "date": "2026-09-28",
+     "title": "Housebuilder shares jump following first-time buyer scheme announcement",
+     "url": "https://uk.finance.yahoo.com/news/housebuilder-shares-jump-following-first-111330116.html"
+    },
+    {
+     "publisher": "CNBC",
+     "date": "2026-09-28",
+     "title": "Homebuilders just surged on a new UK government scheme",
+     "url": "https://www.cnbc.com/2026/09/28/housebuilders-uk-labour-stocks.html"
+    }
+   ]
+  }
+ ],
+ "review": {
+  "from": "2026-09-25",
+  "items": [
+   {
+    "id": "2026-09-25-q1",
+    "claim": "10 年期美债会否上破 5.2%，并打断科技股反弹？",
+    "claim_en": "Will the 10-year break above 5.2% and interrupt the tech rebound?",
+    "outcome": "9/28：10 年期收于 5.24%（上破 5.2%），纳指同日 -0.92%。时限到 10/2，目前证据方向一致。",
+    "outcome_en": "9/28: the 10-year closed at 5.24% (above 5.2%) and the Nasdaq fell 0.92%. Horizon 10/2; evidence so far consistent.",
+    "verdict": "待到期",
+    "verdict_en": "Open",
+    "lesson": "触发条件已出现；需到 10/2 看纳指当周是否整体回落。",
+    "lesson_en": "Trigger hit; wait for 10/2 to see if the Nasdaq falls for the week."
+   },
+   {
+    "id": "2026-09-25-q2",
+    "claim": "霍尔木兹通行能否恢复，并压低油价风险溢价？",
+    "claim_en": "Will Hormuz traffic recover and compress the oil risk premium?",
+    "outcome": "9/28：特朗普拒绝伊朗最新方案，会谈据称本周恢复；通行尚未恢复。",
+    "outcome_en": "9/28: Trump rejected Iran's latest proposal; talks said to resume this week; traffic not yet restored.",
+    "verdict": "待到期",
+    "verdict_en": "Open",
+    "lesson": "协议路径比 9/25 预想的更曲折；时限 10/9。",
+    "lesson_en": "The deal path is bumpier than assumed on 9/25; horizon 10/9."
+   },
+   {
+    "id": "2026-09-25-q3",
+    "claim": "A股 CPO 成员复市后，会否补涨 9/25 美股光互连的反弹？",
+    "claim_en": "Will A-share CPO members catch up with the 9/25 US optical rebound on reopening?",
+    "outcome": "9/28 复市首日，4 只等权 -8.94%：中际旭创 -9.0%、新易盛 -8.1%、天孚通信 -8.6%、光迅科技 -10.0%（跌停）。反证条件\"等权收益 ≤ 0\"成立。",
+    "outcome_en": "On the 9/28 reopening the four fell 8.94% EW (Innolight -9.0%, Eoptolink -8.1%, TFC -8.6%, Accelink -10.0% limit-down). The falsifier 'EW ≤ 0' was met.",
+    "verdict": "被证伪",
+    "verdict_en": "Falsified",
+    "lesson": "休市期间出现了新信息（9/25 美国采购限制提案），而且复市当天美股芯片再度下跌。跨市场\"补涨\"判断必须把休市期间的新消息和复市日外盘方向一起算进去，不能只外推休市前最后一天的美股表现。",
+    "lesson_en": "New information arrived while the market was closed (the 9/25 US procurement bill), and US chips fell again on the reopening day. Cross-market catch-up calls must account for news during the closure and the reopening-day overseas tape, not just extrapolate the last pre-holiday US session."
+   },
+   {
+    "id": "2026-09-25-q4",
+    "claim": "9 月非农会否推高 10 月加息概率？",
+    "claim_en": "Will September payrolls lift October hike odds?",
+    "outcome": "非农 10/2 发布；9/28 加息概率已从约 64% 升至约 70%（非农之前）。",
+    "outcome_en": "Payrolls due 10/2; odds already rose from ~64% to ~70% on 9/28 (before payrolls).",
+    "verdict": "待到期",
+    "verdict_en": "Open",
+    "lesson": "加息概率在数据公布前已上升，非农的边际影响可能变小。",
+    "lesson_en": "Odds rose before the data, so payrolls' marginal impact may be smaller."
+   },
+   {
+    "id": "2026-09-25-q5",
+    "claim": "Harworth 交割后，股价是否维持在 187 便士 ±1% 以内？",
+    "claim_en": "Will Harworth hold within ±1% of 187p after settlement?",
+    "outcome": "9/28 收于 186.6 便士（-0.2%），仍在区间内；交割日为 9/29。",
+    "outcome_en": "Closed 186.6p on 9/28 (-0.2%), inside the band; settlement is 9/29.",
+    "verdict": "待到期",
+    "verdict_en": "Open",
+    "lesson": "目前符合\"最终报价锚定股价\"的预期。",
+    "lesson_en": "So far consistent with the best-and-final price anchoring the shares."
+   }
+  ]
+ }
+}

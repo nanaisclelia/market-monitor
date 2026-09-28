@@ -58,7 +58,7 @@ def member_stats(m: dict, df: pd.DataFrame | None, q: dict | None, us_session: d
     df = df[df.index.date <= session]
     raw = df
     df, src = patch_close(raw, q, session, TZ[m["market"]])
-    need = src in (None, "MISMATCH") and m["market"] in ("us", "uk") and not (len(df) and df.index[-1].date() == session)
+    need = src in (None, "MISMATCH") and m["market"] in ("us", "uk", "cn") and not (len(df) and df.index[-1].date() == session)
     if need and calendars.latest_session(CAL[m["market"]]) == session:
         # 第二源代码映射到其他证券（如 BP-GB）：改用 Yahoo 报价接口，仍须前收一致
         yq = yahoo.quote_last(m["ticker"])
