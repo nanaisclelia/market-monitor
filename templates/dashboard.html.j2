@@ -618,6 +618,52 @@ footer.disc{background:var(--glass);-webkit-backdrop-filter:saturate(180%) blur(
 @media (hover:hover){.bchg article,.q,.tick{transition:transform .25s ease,box-shadow .25s ease}.bchg article:hover,.tick:hover{transform:translateY(-2px);box-shadow:var(--shadow-lift)}}
 @media (prefers-reduced-motion:reduce){.bchg article,.q,.tick,.card{transition:none}.bchg article:hover,.tick:hover{transform:none}}
 
+
+/* ===== density pass: tighter, fuller ===== */
+body{font-size:14px}
+main.wrap{gap:16px;padding-block:18px 90px}
+.frow{padding-block:10px 2px}
+section.blk{padding:20px 22px;gap:10px;border-radius:18px}
+.concl{padding:18px 22px;border-radius:18px}
+h2{font-size:clamp(17px,1.6vw,19px)}
+h4{font-size:13px;margin:12px 0 6px}
+th,td{padding:7px 10px}td{font-size:13px}
+.bhero{padding:8px 0 0;gap:10px}
+.bgrid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:16px;align-items:stretch}
+@media(max-width:900px){.bgrid{grid-template-columns:minmax(0,1fr)}}
+.bl{display:grid;align-content:center;gap:8px;padding:22px 24px;border-radius:18px;background:var(--panel);box-shadow:var(--shadow)}
+.bkicker{font-size:13px}
+.bstate{font:700 clamp(22px,2.6vw,30px)/1.22 var(--cond);letter-spacing:-.025em;max-width:none}
+.kt{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.kti{display:grid;grid-template-columns:1fr auto;grid-template-areas:"n s" "v s" "c s";column-gap:6px;padding:10px 12px;border-radius:14px;background:var(--panel);box-shadow:var(--shadow);min-width:0}
+.ktn{grid-area:n;font:500 12px var(--sans);color:var(--mut)}
+.ktv{grid-area:v;font:600 18px/1.2 var(--cond);letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.ktc{grid-area:c;font:500 12px var(--mono)}
+.kts{grid-area:s;align-self:center}
+.bh{font-size:clamp(17px,1.7vw,20px);margin:14px 0 0}
+.bchg{gap:10px}
+.bchg article{padding:14px 16px;gap:6px;border-radius:16px}
+.bchg h3{font-size:15.5px}
+.bchg p{font-size:13.5px;line-height:1.45}
+.why{font-size:13px!important}
+.bnot{gap:6px}
+.bnot li{font-size:14px;padding:10px 14px;border-radius:12px}
+.qs{gap:10px}
+.q{padding:14px 16px;gap:8px}
+.q h3{font-size:15px}
+.qd{font-size:12.5px;gap:3px 12px}
+.follow{padding:5px 13px;font-size:12px}
+.fix{padding:12px 16px}.fix p{font-size:13.5px}
+.mchip{padding:5px 10px;font-size:12.5px}.mchip b{font-size:12px}
+.maprow{grid-template-columns:120px minmax(0,1fr)}
+.stt{padding:12px 14px}
+.tape{gap:8px}.tick{padding:12px 14px;border-radius:14px}.tick .v{font-size:20px}
+.agg b{font-size:18px}
+.cta{padding:10px 20px;font-size:14px}.todesk{margin:6px 0 0}
+.deskhead h2{font-size:clamp(22px,2.6vw,28px)}.deskhead p{font-size:13.5px}
+.card,.gcard,.q,.stt{border-radius:14px}
+.csum{padding:10px 14px}
+@media(max-width:640px){section.blk{padding:16px 14px}.bl{padding:16px}}
 </style>
 {% if not public %}</head>
 <body>{% endif %}
@@ -682,8 +728,18 @@ footer.disc{background:var(--glass);-webkit-backdrop-filter:saturate(180%) blur(
 <div class="view" id="v-brief">
 {% if an and an.summary %}{% set sm = an.summary %}
 <section class="bhero" id="brief" aria-label="Morning brief">
-  <p class="bkicker">{{ L('晨间简报 · 3 分钟', 'Morning brief · 3 minutes') }}</p>
-  <p class="bstate">{{ L(sm.state, sm.state_en or sm.state) }}</p>
+  <div class="bgrid">
+  <div class="bl">
+    <p class="bkicker">{{ L('晨间简报 · 3 分钟', 'Morning brief · 3 minutes') }}</p>
+    <p class="bstate">{{ L(sm.state, sm.state_en or sm.state) }}</p>
+  </div>
+  {% set kt = [] %}
+  {% if us %}{% for r in us.sections.indices if r.stats and r.name in ('S&P 500', 'Nasdaq Composite') %}{% set _ = kt.append({'n': r.name.replace(' Composite', ''), 'n_en': r.name.replace(' Composite', ''), 'v': r.stats.close|num, 'c': r.stats.pct, 'bp': none, 'sp': r.spark}) %}{% endfor %}{% endif %}
+  {% if uk %}{% for r in uk.sections.indices if r.stats and r.name == 'FTSE 100' %}{% set _ = kt.append({'n': r.name, 'n_en': r.name, 'v': r.stats.close|num, 'c': r.stats.pct, 'bp': none, 'sp': r.spark}) %}{% endfor %}{% endif %}
+  {% if us %}{% for c in us.sections.cross if c.key in ('us10y', 'wti') and not c.error %}{% set _ = kt.append({'n': c.name, 'n_en': c.name_en, 'v': (c.close|num(2)) ~ ('%' if c.unit == 'bp' else ''), 'c': (none if c.unit == 'bp' else c.chg), 'bp': (c.chg if c.unit == 'bp' else none), 'sp': c.spark}) %}{% endfor %}
+  {% for m in us.sections.metals[:1] if m.futures %}{% set _ = kt.append({'n': '黄金', 'n_en': 'Gold', 'v': m.futures.close|num, 'c': m.futures.pct, 'bp': none, 'sp': m.futures.spark}) %}{% endfor %}{% endif %}
+  <div class="kt" role="list" aria-label="Key numbers">{% for k in kt %}<div class="kti" role="listitem"><span class="ktn">{{ L(k.n, k.n_en) }}</span><span class="ktv">{{ k.v }}</span><span class="ktc">{% if k.bp is not none %}<span class="{{ 'up' if k.bp > 0 else 'dn' }}">{{ k.bp|num(1, True) }}bp</span>{% else %}{{ chg(k.c) }}{% endif %}</span><span class="kts">{{ k.sp|spark(64, 20, k.n) }}</span></div>{% endfor %}</div>
+  </div>
   {% if sm.changed %}<h2 class="bh">{{ L('今天真正改变了什么', 'What actually changed') }}</h2>
   <div class="bchg">{% for c in sm.changed %}<article><h3>{{ L(c.var, c.var_en) }}</h3><p>{{ L(c.what, c.what_en) }}</p><p class="why"><span class="wk">{{ L('为什么重要', 'Why it matters') }}</span>{{ L(c.why, c.why_en) }}</p></article>{% endfor %}</div>{% endif %}
   {% if sm.not_changed %}<h2 class="bh">{{ L('今天不应过度解读', "Don't over-read") }}</h2>
