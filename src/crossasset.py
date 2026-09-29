@@ -56,6 +56,12 @@ def build(session: date, tz: str = "America/New_York", window: int = 20, assets:
             row["error"] = f"最新数据 {c.index[-1].date()} ≠ {session}"
             out.append(row)
             continue
+        from .alerts import _prev_session
+        exp = _prev_session("XNYS", session)
+        if exp and c.index[-2].date() < exp:
+            row["error"] = f"前一交易日 {exp} 的数据缺失，涨跌幅无法可靠计算"
+            out.append(row)
+            continue
         if a["kind"] == "yield":
             d = c.diff() * 100                        # bp
             chg, unit = float(d.iloc[-1]), "bp"

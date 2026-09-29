@@ -60,10 +60,10 @@ def build(session: date) -> dict:
     rows = []
     for i in idx_cfg:
         df = hist.get(i["yahoo"])
-        st = A.day_stats(df, session)
+        st = A.day_stats(df, session, cal=m["calendar"])
         if st is None:
             last = df.index[-1].date() if df is not None and len(df) else "无"
-            err.add("indices", f"{i['name']}: Yahoo 最新 K 线日期 {last}，非 {session}，数据暂缺")
+            err.add("indices", f"{i['name']}: " + (A.LAST_REASON.pop("gap", None) or f"Yahoo 最新 K 线日期 {last}，非 {session}，数据暂缺"))
         row = {"name": i["name"], "ticker": i["yahoo"], "stats": st, "source": "Yahoo Finance (yfinance)",
                "xcheck": _xcheck(st and st["close"], cq.get(i["cnbc"]), session, tz, tol),
                "spark": [round(float(x), 4) for x in df["Close"].iloc[-60:]] if st else None}
@@ -89,9 +89,9 @@ def build(session: date) -> dict:
         except Exception as e:  # noqa: BLE001
             err.add("metals", f"{x['name']} LBMA 定价获取失败: {e}")
         df = hist.get(x["yahoo"])
-        st = A.day_stats(df, session)
+        st = A.day_stats(df, session, cal=m["calendar"])
         if st is None:
-            err.add("metals", f"{x['name']} 期货 {x['yahoo']}: 当日 K 线缺失")
+            err.add("metals", f"{x['name']} 期货 {x['yahoo']}: " + (A.LAST_REASON.pop("gap", None) or "当日 K 线缺失"))
         else:
             row["futures"] = {**st, "ticker": x["yahoo"], "spark": [round(float(v), 4) for v in df["Close"].iloc[-60:]], "source": "COMEX/NYMEX 近月期货 (Yahoo)",
                               "xcheck": _xcheck(st["close"], cq.get(x["cnbc"]), session, tz, tol)}
@@ -118,14 +118,14 @@ def build(session: date) -> dict:
     # ---------- 个股异动 ----------
     try:
         uni = universe.us(acfg["universe"]["us"])
-        for m in (m for t in themes.config() for m in t["members"] if m["market"] == "us"):
-            uni.setdefault(m["ticker"], {"ticker": m["ticker"], "name": m["name"], "sector": "主题：" + m["role"]})
+        for mb in (x for t in themes.config() for x in t["members"] if x["market"] == "us"):
+            uni.setdefault(mb["ticker"], {"ticker": mb["ticker"], "name": mb["name"], "sector": "主题：" + mb["role"]})
     except Exception as e:  # noqa: BLE001
         err.add("alerts", f"标的池获取失败: {e}")
         uni = {}
     scfg = acfg["stocks"]
     sh = _upto(yahoo.history(list(uni), period="1y"), session) if uni else {}
-    missing = [t for t in uni if A.day_stats(sh.get(t), session, scfg["sigma_window"]) is None]
+    missing = [t for t in uni if A.day_stats(sh.get(t), session, scfg["sigma_window"], cal=m["calendar"]) is None]
     if uni and len(missing) > 0.2 * len(uni):
         err.add("alerts", f"{len(missing)}/{len(uni)} 只股票缺当日数据，异动结果不完整")
     # ---------- 主题追踪（CPO 等）：美股成员复用上面的日线，A股成员单独下载 ----------
@@ -141,7 +141,7 @@ def build(session: date) -> dict:
 
     hits, all_stats = [], {}
     for t, meta in uni.items():
-        st = A.day_stats(sh.get(t), session, scfg["sigma_window"])
+        st = A.day_stats(sh.get(t), session, scfg["sigma_window"], cal=m["calendar"])
         if st is None:
             continue
         all_stats[t] = st

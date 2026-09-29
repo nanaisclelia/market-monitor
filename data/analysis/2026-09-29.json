@@ -1,0 +1,629 @@
+{
+ "session": "2026-09-29",
+ "generated_at": "2026-09-30T00:40:00+01:00",
+ "author": "Claude（AI 根据所列来源整理）",
+ "author_en": "Claude (AI summary of the cited sources)",
+ "summary": {
+  "state": "情绪暂稳但未修复：美股小幅续跌、上涨家数约 40%；油价因美国释放战略储备和海湾外运恢复大跌约 4%，但 30 年期美债升至 2002 年以来最高、消费者信心降至 12 年低点——环境压力转为混合。",
+  "state_en": "Stable but not repaired: US stocks slip again with ~40% advancing; oil falls ~4% on a US reserve release and recovering Gulf flows, but the 30-year hits its highest since 2002 and consumer confidence a 12-year low — macro pressure turns mixed.",
+  "changed": [
+   {
+    "var": "油价回落",
+    "var_en": "Oil retreats",
+    "what": "美国再次释放战略石油储备，海湾外运据称恢复到战前九成以上；WTI -3.95%。",
+    "what_en": "Another US reserve release and Gulf flows reportedly above 90% of pre-war; WTI -3.95%.",
+    "why": "这是 9/28\"油价 → 加息\"链条的反方向：如果持续，会减轻通胀和收益率压力。",
+    "why_en": "The reverse of the 9/28 oil → hikes chain; if sustained it eases inflation and yield pressure."
+   },
+   {
+    "var": "监管改写护城河",
+    "var_en": "Regulation rewrites a moat",
+    "what": "FHFA 让房利美、房地美的按揭定价纳入 VantageScore，FICO 单日 -26.5%。",
+    "what_en": "FHFA brings VantageScore into Fannie/Freddie mortgage pricing; FICO -26.5% in a day.",
+    "why": "一纸监管决定可以瞬间改变一家公司的定价权，这是基本面变化，不是情绪波动。",
+    "why_en": "One regulatory decision can reset pricing power overnight — a fundamental change, not sentiment."
+   },
+   {
+    "var": "利率开始伤到消费者",
+    "var_en": "Rates start to hurt consumers",
+    "what": "消费者信心降至 12 年低点，30 年期美债升至 2002 年以来最高。",
+    "what_en": "Consumer confidence at a 12-year low; the 30-year highest since 2002.",
+    "why": "如果消费走弱而通胀仍高，美联储会更难抉择，长端利率可能继续承压。",
+    "why_en": "Weaker spending with sticky inflation makes the Fed's choice harder and can keep pressure on long rates."
+   }
+  ],
+  "not_changed": [
+   {
+    "zh": "油价大跌不等于地缘风险解除：美伊仍是间接谈判，霍尔木兹尚未正式恢复通行。",
+    "en": "Oil's drop does not mean geopolitical risk is gone: US–Iran talks are still indirect and Hormuz has not formally reopened."
+   },
+   {
+    "zh": "人民币单日升值超过 3σ，但它延续了人民银行 9 月以来连续调强中间价的趋势，当日没有找到新的政策消息。",
+    "en": "The yuan's >3σ one-day gain continues the PBOC's run of stronger fixings since September; no new policy news found on the day."
+   }
+  ],
+  "drivers": [
+   {
+    "zh": "美国释放战略储备 + 海湾外运恢复 → WTI -3.95%",
+    "en": "US reserve release + Gulf flows recover → WTI -3.95%"
+   },
+   {
+    "zh": "消费者信心 12 年低点，30 年期美债 2002 年以来最高",
+    "en": "Consumer confidence at a 12-year low; 30-year highest since 2002"
+   },
+   {
+    "zh": "FHFA 按揭评分改革（FICO -26.5%）；Carnival 创纪录业绩带动邮轮股",
+    "en": "FHFA scoring reform (FICO -26.5%); Carnival's record quarter lifts cruise lines"
+   }
+  ],
+  "watch": [
+   {
+    "cond": "10 年期站稳 5.2% 以上",
+    "cond_en": "10-year holds above 5.2%",
+    "current": "约 5.26%（9/29）",
+    "current_en": "~5.26% (9/29)",
+    "impact": "长久期资产与黄金承压",
+    "impact_en": "Pressure on long-duration assets and gold",
+    "when": "至 10/2",
+    "when_en": "To 10/2"
+   },
+   {
+    "cond": "WTI 回升至 9/28 收盘（92.98）以上",
+    "cond_en": "WTI back above the 9/28 close (92.98)",
+    "current": "88.94（9/29）",
+    "current_en": "88.94 (9/29)",
+    "impact": "油价回落的缓和效应被抵消",
+    "impact_en": "Oil's easing effect reversed",
+    "when": "至 10/2",
+    "when_en": "To 10/2"
+   },
+   {
+    "cond": "周五非农偏强",
+    "cond_en": "Strong payrolls Friday",
+    "current": "10/2 发布",
+    "current_en": "Due 10/2",
+    "impact": "加息预期进一步上升",
+    "impact_en": "Hike odds rise further",
+    "when": "10/2",
+    "when_en": "10/2"
+   },
+   {
+    "cond": "A股国庆前最后一日（9/30）",
+    "cond_en": "Last A-share session before the holiday (9/30)",
+    "current": "4 只 CPO 9/29 等权约 +1.1%",
+    "current_en": "4-name CPO ~+1.1% EW on 9/29",
+    "impact": "决定 9/28-Q4（国庆前继续下跌）能否成立",
+    "impact_en": "Decides 9/28-Q4 (further falls before the holiday)",
+    "when": "9/30",
+    "when_en": "9/30"
+   },
+   {
+    "cond": "Vesuvius 董事会回应 RHI 方案",
+    "cond_en": "Vesuvius board responds to RHI",
+    "current": "467 便士 vs 隐含约 551 便士",
+    "current_en": "467p vs ~551p implied",
+    "impact": "价差收窄或扩大",
+    "impact_en": "Spread narrows or widens",
+    "when": "待定",
+    "when_en": "TBD"
+   }
+  ],
+  "correction": 1
+ },
+ "stocks": {
+  "FICO": {
+   "catalyst": "company",
+   "nature": "基本面变化",
+   "headline": "FHFA：房利美、房地美按揭定价纳入竞品 VantageScore，FICO 按揭评分垄断受冲击",
+   "headline_en": "FHFA: Fannie and Freddie to price mortgages with rival VantageScore, threatening FICO's mortgage-scoring monopoly",
+   "points": [
+    {
+     "tag": "媒体报道",
+     "text": "FHFA 负责人 Bill Pulte 宣布，房利美和房地美将采用统一的按揭定价模型，并纳入与 FICO 直接竞争的 VantageScore 数据；同时 TransUnion 把 VantageScore 4.0 的按揭定价延长到 2028 年 12 月。",
+     "text_en": "FHFA head Bill Pulte announced Fannie Mae and Freddie Mac will adopt a unified mortgage-pricing model incorporating rival VantageScore; TransUnion extended VantageScore 4.0 mortgage pricing to December 2028.",
+     "src": [
+      0,
+      1
+     ]
+    },
+    {
+     "tag": "AI 推断",
+     "text": "按揭评分是 FICO 利润最高的业务之一，这次是监管层面的竞争格局改变，而不是一季度业绩波动；单日下跌 26.5%、量比 10.9 倍，说明市场在重新评估长期定价权。",
+     "text_en": "Mortgage scoring is among FICO's most profitable lines; this is a regulatory change in competition, not a quarterly wobble. A 26.5% drop on 10.9x volume reflects a reset of long-term pricing power.",
+     "src": []
+    }
+   ],
+   "sources": [
+    {
+     "publisher": "Yahoo Finance",
+     "date": "2026-09-29",
+     "title": "Fair Isaac stock plunges 20% after Fannie and Freddie open door to FICO credit score rival",
+     "url": "https://finance.yahoo.com/markets/stocks/article/fair-isaac-stock-plunges-20-after-fannie-and-freddie-open-door-to-fico-credit-score-rival-142841650.html"
+    },
+    {
+     "publisher": "Yahoo Finance",
+     "date": "2026-09-29",
+     "title": "FICO stock drops 20%: Analysts break down the impact of FHFA's move",
+     "url": "https://finance.yahoo.com/markets/stocks/articles/fico-stock-drops-20-analysts-140013032.html"
+    }
+   ]
+  },
+  "CCL": {
+   "catalyst": "company",
+   "nature": "基本面变化",
+   "headline": "三季度业绩创纪录，上调全年 EPS 指引",
+   "headline_en": "Record Q3 results and a raised full-year EPS guide",
+   "points": [
+    {
+     "tag": "已证实",
+     "text": "Carnival 9/29 提交 8-K 发布三季度业绩：调整后 EPS 1.43 美元、收入 84.3 亿美元均创纪录，并上调全年调整后 EPS 指引至 2.24 美元；三季度客户预付款同比增约 7%，2027 年已订舱位与价格处于纪录水平。",
+     "text_en": "Carnival's 9/29 8-K: record adjusted EPS of $1.43 and revenue of $8.43bn; full-year adjusted EPS guide raised to $2.24; Q3 customer deposits up ~7% YoY and 2027 booked occupancy and pricing at records.",
+     "src": [
+      0,
+      1
+     ]
+    }
+   ],
+   "sources": [
+    {
+     "publisher": "SEC EDGAR",
+     "date": "2026-09-29",
+     "title": "Carnival Corp 8-K — Q3 2026 earnings release",
+     "url": "https://www.sec.gov/Archives/edgar/data/0000815097/000081509726000104/a20263qearningsrelease8-k.htm"
+    },
+    {
+     "publisher": "Investing.com",
+     "date": "2026-09-29",
+     "title": "Carnival stock rises 12% on earnings beat and raised guidance",
+     "url": "https://www.investing.com/news/analyst-ratings/carnival-stock-rises-12-on-earnings-beat-and-raised-guidance-93CH-4923207"
+    }
+   ]
+  },
+  "RCL": {
+   "catalyst": "sector",
+   "nature": "预期变化",
+   "headline": "受 Carnival 业绩带动，邮轮板块上涨",
+   "headline_en": "Cruise peers rally on Carnival's results",
+   "points": [
+    {
+     "tag": "AI 推断",
+     "text": "Royal Caribbean 当日没有公司公告，涨幅与 Carnival 创纪录业绩、2027 年订舱强劲带来的行业需求上修一致。",
+     "text_en": "No Royal Caribbean announcement; the move matches the sector demand upgrade implied by Carnival's record results and strong 2027 bookings.",
+     "src": [
+      0
+     ]
+    }
+   ],
+   "sources": [
+    {
+     "publisher": "Investing.com",
+     "date": "2026-09-29",
+     "title": "Carnival stock rises 12% on earnings beat and raised guidance",
+     "url": "https://www.investing.com/news/analyst-ratings/carnival-stock-rises-12-on-earnings-beat-and-raised-guidance-93CH-4923207"
+    }
+   ]
+  },
+  "BE": {
+   "catalyst": "company",
+   "nature": "预期变化",
+   "headline": "Jefferies 上调目标价、RBC 重申看好，燃料电池板块反弹",
+   "headline_en": "Jefferies raises its target, RBC reiterates, fuel cells rebound",
+   "points": [
+    {
+     "tag": "分析师",
+     "text": "Jefferies 将目标价上调至 264 美元；RBC Capital 重申 Outperform、目标价 335 美元，理由是公司在 Fremont 新增约 15.8 万平方英尺厂房，显示需求可能强于预期。",
+     "text_en": "Jefferies raised its target to $264; RBC Capital reiterated Outperform with a $335 target, citing ~158k sq ft of new Fremont floor space as a sign demand may be stronger than thought.",
+     "src": [
+      0,
+      1
+     ]
+    },
+    {
+     "tag": "媒体报道",
+     "text": "9/28 燃料电池股大跌后，9/29 整个板块反弹，并不只是 Bloom 一家的消息。",
+     "text_en": "After the 9/28 fuel-cell selloff the whole group rebounded on 9/29 — not a Bloom-only story.",
+     "src": [
+      1
+     ]
+    }
+   ],
+   "sources": [
+    {
+     "publisher": "Yahoo Finance",
+     "date": "2026-09-29",
+     "title": "What's Up With the Jump in Bloom Energy Stock?",
+     "url": "https://finance.yahoo.com/markets/stocks/articles/whats-jump-bloom-energy-stock-143010760.html"
+    },
+    {
+     "publisher": "Benzinga",
+     "date": "2026-09-29",
+     "title": "Bloom Energy Jumps 13% As AI Stocks Defy 5.3% Treasury Yields",
+     "url": "https://www.benzinga.com/markets/market-summary/26/09/62058677/bloom-energy-jumps-13-percent-ai-rally-defies-high-yields-markets-tuesday"
+    }
+   ]
+  },
+  "VSVS.L": {
+   "catalyst": "company",
+   "nature": "基本面变化",
+   "headline": "确认收到 RHI Magnesita 现金加股票收购提议，报价较前收溢价约 47%",
+   "headline_en": "Confirms a cash-and-shares proposal from RHI Magnesita at a ~47% premium",
+   "points": [
+    {
+     "tag": "媒体报道",
+     "text": "Vesuvius 确认自 2025 年 9 月以来多次收到 RHI Magnesita 主动提出的收购提议；最新方案为每股 470 便士现金加每 10 股换 0.28 股新 RHI 股，按 RHI 一个月成交均价计约合每股 551 便士，较 9/28 收盘溢价约 47%。董事会正在与顾问评估，此前已拒绝 448 便士的现金报价。",
+     "text_en": "Vesuvius confirmed repeated unsolicited approaches from RHI Magnesita since September 2025; the latest is 470p cash plus 0.28 new RHI shares per 10 Vesuvius shares, ~551p per share on RHI's one-month VWAP — a ~47% premium to the 9/28 close. The board is evaluating it and had rejected a 448p cash offer.",
+     "src": [
+      0,
+      1
+     ]
+    },
+    {
+     "tag": "AI 推断",
+     "text": "研究解读：收盘价 467 便士明显低于约 551 便士的隐含报价，差距反映了董事会可能再次拒绝、以及股票对价随 RHI 股价波动的风险。不构成个体化行动建议。",
+     "text_en": "Research reading: the 467p close sits well below the ~551p implied value, reflecting the risk the board rejects again and that the share component moves with RHI's price. Not individual advice.",
+     "src": []
+    }
+   ],
+   "sources": [
+    {
+     "publisher": "Investing.com / Yahoo Finance",
+     "date": "2026-09-29",
+     "title": "Vesuvius shares jump 23% after confirming RHI Magnesita takeover proposal",
+     "url": "https://finance.yahoo.com/markets/stocks/articles/vesuvius-shares-jump-23-confirming-084708623.html"
+    },
+    {
+     "publisher": "Bloomberg",
+     "date": "2026-09-29",
+     "title": "Vesuvius Surges After Cash-and-Shares Bid From RHI Magnesita",
+     "url": "https://www.bloomberg.com/news/articles/2026-09-29/vesuvius-surges-after-cash-and-shares-bid-from-rhi-magnesita"
+    }
+   ]
+  },
+  "CBG.L": {
+   "catalyst": "company",
+   "nature": "基本面变化",
+   "headline": "年度业绩：成本节约大幅超出目标，资本充足率上升；不派末期股息",
+   "headline_en": "Full-year results: cost savings well ahead of target, capital up; no final dividend",
+   "points": [
+    {
+     "tag": "媒体报道",
+     "text": "截至 7 月底的年度成本节约约 3600 万英镑，远超约 2500 万英镑的目标，预计 2027 财年末超过 6000 万英镑；CET1 升至 14.1%。调整后经营利润下降 17% 至 1.203 亿英镑，并因汽车金融赔偿方案的不确定性不派末期股息。",
+     "text_en": "Annualised cost savings of ~£36m to end-July, well ahead of a ~£25m target, expected to exceed £60m by end-FY27; CET1 rose to 14.1%. Adjusted operating profit fell 17% to £120.3m and no final dividend was declared given motor-finance redress uncertainty.",
+     "src": [
+      0,
+      1
+     ]
+    }
+   ],
+   "sources": [
+    {
+     "publisher": "Yahoo Finance UK",
+     "date": "2026-09-29",
+     "title": "Close Brothers shares jump nearly 11% as cost savings beat target",
+     "url": "https://uk.finance.yahoo.com/news/close-brothers-shares-jump-nearly-074600768.html"
+    },
+    {
+     "publisher": "Proactive Investors",
+     "date": "2026-09-29",
+     "title": "Close Brothers shares jump nearly 11% as cost savings beat target",
+     "url": "https://www.proactiveinvestors.com/companies/news/1099282/close-brothers-shares-jump-nearly-11-as-cost-savings-beat-target-1099282.html"
+    }
+   ]
+  },
+  "ZIG.L": {
+   "catalyst": "company",
+   "nature": "基本面变化",
+   "headline": "上调全年盈利预期至市场区间上沿",
+   "headline_en": "Lifts full-year profit expectations to the top of the range",
+   "points": [
+    {
+     "tag": "媒体报道",
+     "text": "Zigup 称开局强劲（尤其西班牙与 FMG 业务），预计调整后税前利润位于市场预期区间 1.632–1.70 亿英镑的上沿。",
+     "text_en": "Zigup cited a strong start (notably Spain and FMG) and expects adjusted pre-tax profit at the top of the £163.2–170.0m consensus range.",
+     "src": [
+      0
+     ]
+    }
+   ],
+   "sources": [
+    {
+     "publisher": "MarketScreener",
+     "date": "2026-09-29",
+     "title": "WINNERS & LOSERS: Vesuvius soars on bid; Zigup lifts outlook",
+     "url": "https://www.marketscreener.com/news/winners-losers-vesuvius-soars-on-bid-zigup-lifts-outlook-ce785addda81f52d"
+    }
+   ]
+  },
+  "ONT.L": {
+   "catalyst": "none",
+   "nature": "仓位/情绪波动",
+   "headline": "创 12 个月新高，未检索到当日公告",
+   "headline_en": "12-month high; no same-day announcement found",
+   "points": [
+    {
+     "tag": "媒体报道",
+     "text": "单一来源报道股价创 12 个月新高；未找到当日公告，可能延续近期的反弹动量。",
+     "text_en": "A single source notes a new 12-month high; no same-day announcement found, likely continuing recent momentum.",
+     "src": [
+      0
+     ]
+    }
+   ],
+   "sources": [
+    {
+     "publisher": "MarketBeat",
+     "date": "2026-09-29",
+     "title": "Oxford Nanopore Technologies (LON:ONT) Sets New 12-Month High",
+     "url": "https://www.marketbeat.com/instant-alerts/price-oxford-nanopore-technologies-lon-ont-sets-new-12-month-high-time-to-buy-2026-09-29/"
+    }
+   ]
+  },
+  "VTY.L": {
+   "catalyst": "none",
+   "nature": "仓位/情绪波动",
+   "headline": "首购计划带来的涨幅回吐；上半年亏损是背景消息",
+   "headline_en": "Gives back first-home gains; the H1 loss is background",
+   "points": [
+    {
+     "tag": "媒体报道",
+     "text": "Vistry 9/24 前后公布上半年亏损大于预期、下调全年利润和现金预测（非当日消息）。",
+     "text_en": "Around 9/24 Vistry reported a wider-than-expected H1 loss and cut its profit and cash outlook (not same-day news).",
+     "src": [
+      0
+     ],
+     "not_catalyst": true
+    },
+    {
+     "tag": "AI 推断",
+     "text": "9/28 首购计划带动 Vistry 上涨 10.7%，9/29 回落 7.8%；在五大建房商中基本面最弱，最先回吐。此为推断。",
+     "text_en": "Vistry rose 10.7% on the 9/28 scheme and fell 7.8% on 9/29 — the weakest balance sheet of the big five gave back first. Inference.",
+     "src": []
+    }
+   ],
+   "sources": [
+    {
+     "publisher": "Investing.com",
+     "date": "2026-09-24",
+     "title": "Vistry shares fall 8% after wider-than-expected H1 loss",
+     "url": "https://www.investing.com/news/earnings/vistry-posts-wider-h1-loss-as-ceo-review-hits-profit-cuts-fy26-outlook-4914533"
+    }
+   ]
+  },
+  "SAGA.L": {
+   "catalyst": "none",
+   "nature": "暂不归因",
+   "headline": "未检索到当日公司层面催化剂",
+   "headline_en": "No company-specific catalyst found",
+   "points": [
+    {
+     "tag": "AI 推断",
+     "text": "未找到可靠的当日报道或公告，暂不归因。",
+     "text_en": "No reliable same-day report or filing found; not attributed.",
+     "src": []
+    }
+   ],
+   "sources": []
+  }
+ },
+ "themes": {
+  "cpo": {
+   "nature": "仓位/情绪波动",
+   "headline": "美股光互连在 9/28 抛售后反弹；A股涨跌互现",
+   "headline_en": "US optical names rebound after the 9/28 selloff; A-shares mixed",
+   "points": [
+    {
+     "tag": "媒体报道",
+     "text": "AI 相关股在 5.3% 附近的收益率下仍然反弹，Lumentum +5.7%、Marvell +4.5%、AAOI +4.0%；报道把它描述为 9/28 抛售后的修复。",
+     "text_en": "AI names rebounded despite ~5.3% yields: Lumentum +5.7%, Marvell +4.5%, AAOI +4.0% — described as a recovery from the 9/28 selloff.",
+     "src": [
+      0
+     ]
+    },
+    {
+     "tag": "AI 推断",
+     "text": "A股 4 只：天孚通信 +4.6%、光迅科技 +1.9%，中际旭创 -0.2%、新易盛 -1.7%，等权约 +1.1%。与美国采购限制提案直接相关的两家（中际旭创、新易盛）仍然偏弱。此为推断。",
+     "text_en": "A-shares: TFC +4.6%, Accelink +1.9%, Innolight -0.2%, Eoptolink -1.7% — ~+1.1% EW. The two names directly named in the US bill stayed weak. Inference.",
+     "src": []
+    }
+   ],
+   "sources": [
+    {
+     "publisher": "Benzinga",
+     "date": "2026-09-29",
+     "title": "Bloom Energy Jumps 13% As AI Stocks Defy 5.3% Treasury Yields",
+     "url": "https://www.benzinga.com/markets/market-summary/26/09/62058677/bloom-energy-jumps-13-percent-ai-rally-defies-high-yields-markets-tuesday"
+    }
+   ]
+  },
+  "tmt": {
+   "nature": "仓位/情绪波动",
+   "headline": "持平：Meta、Oracle 反弹，其余小幅波动",
+   "headline_en": "Flat: Meta and Oracle rebound, the rest drift",
+   "points": [
+    {
+     "tag": "AI 推断",
+     "text": "19 只等权 -0.06%。Meta +3.2%、Oracle +3.9% 在前一日大跌后反弹；没有找到板块级新消息。",
+     "text_en": "EW -0.06% across 19. Meta +3.2% and Oracle +3.9% rebounded after big falls; no sector-level news found.",
+     "src": []
+    }
+   ],
+   "sources": []
+  },
+  "cyc": {
+   "nature": "预期变化",
+   "headline": "油价大跌拖累能源，铜价上涨；钢铁股继续承压",
+   "headline_en": "Oil slump drags energy, copper rises; steel still under pressure",
+   "points": [
+    {
+     "tag": "媒体报道",
+     "text": "美国下令再次释放战略石油储备，同时有分析称海湾原油外运已恢复到战前九成以上；WTI 跌 3.95%。",
+     "text_en": "The US ordered another strategic reserve release and analysts said Gulf oil flows are back above 90% of pre-war levels; WTI fell 3.95%.",
+     "src": [
+      0,
+      1
+     ]
+    },
+    {
+     "tag": "AI 推断",
+     "text": "铜 +1.4%、大豆 +0.7%；Nucor -3.4% 延续前一日对新增钢铁产能的担忧。此为推断。",
+     "text_en": "Copper +1.4%, soybeans +0.7%; Nucor -3.4% extends the prior day's new-capacity worry. Inference.",
+     "src": []
+    }
+   ],
+   "sources": [
+    {
+     "publisher": "Yahoo Finance",
+     "date": "2026-09-29",
+     "title": "Stock Market Today (Sept. 29, 2026): S&P 500 Falls on Easing Oil",
+     "url": "https://finance.yahoo.com/markets/stocks/articles/stock-market-today-sept-29-135304543.html"
+    },
+    {
+     "publisher": "Bloomberg",
+     "date": "2026-09-29",
+     "title": "Stock Market Today: Dow, S&P Live Updates",
+     "url": "https://www.bloomberg.com/news/articles/2026-09-28/stock-market-today-dow-s-p-live-updates"
+    }
+   ]
+  }
+ },
+ "geo": [
+  {
+   "event": "美伊通过中间人间接会谈；美国再次释放战略石油储备",
+   "event_en": "US and Iran hold indirect talks via mediators; the US orders another strategic reserve release",
+   "assets": "原油、能源股、通胀预期",
+   "assets_en": "Crude, energy equities, inflation expectations",
+   "logic": "供应增加（储备释放 + 海湾外运恢复）压低油价，削弱 9/28 的\"油价 → 加息\"链条；但协议仍未达成，油价对消息的双向敏感度很高。",
+   "logic_en": "More supply (reserve release plus recovering Gulf flows) pushes oil down, loosening the 9/28 oil → hikes chain; with no deal yet, prices stay headline-sensitive both ways.",
+   "facts": "WTI 跌 3.95% 至 88.94 美元；Brent 报道跌破 103 美元（本看台 Brent 因合约换月隔离）；伊朗预计收到美方对其最新停火方案的回复。",
+   "facts_en": "WTI fell 3.95% to $88.94; Brent reportedly below $103 (quarantined here for a contract roll); Iran expected the US reply to its latest ceasefire proposal.",
+   "view": null,
+   "tag": "媒体报道",
+   "sources": [
+    {
+     "publisher": "Yahoo Finance",
+     "date": "2026-09-29",
+     "title": "Stock Market Today (Sept. 29, 2026): S&P 500 Falls on Easing Oil",
+     "url": "https://finance.yahoo.com/markets/stocks/articles/stock-market-today-sept-29-135304543.html"
+    },
+    {
+     "publisher": "Bloomberg",
+     "date": "2026-09-29",
+     "title": "Stock Market Today: Dow, S&P Live Updates",
+     "url": "https://www.bloomberg.com/news/articles/2026-09-28/stock-market-today-dow-s-p-live-updates"
+    }
+   ]
+  },
+  {
+   "event": "FHFA 改革按揭信用评分：房利美、房地美纳入 VantageScore",
+   "event_en": "FHFA reforms mortgage credit scoring: Fannie and Freddie adopt VantageScore",
+   "assets": "FICO、信用评级机构（TransUnion、Equifax、Experian）、按揭发放",
+   "assets_en": "FICO, credit bureaus (TransUnion, Equifax, Experian), mortgage originators",
+   "logic": "监管决定直接改变市场结构：竞品进入按揭定价，FICO 的定价权和利润率面临长期压力。",
+   "logic_en": "A regulatory decision rewires market structure: a rival enters mortgage pricing, pressuring FICO's pricing power and margins long term.",
+   "facts": "FHFA 负责人 Bill Pulte 宣布统一按揭定价模型并纳入 VantageScore；TransUnion 将 VantageScore 4.0 按揭定价延长至 2028 年 12 月；FICO 当日 -26.5%。",
+   "facts_en": "FHFA head Bill Pulte announced a unified mortgage-pricing model incorporating VantageScore; TransUnion extended VantageScore 4.0 mortgage pricing to December 2028; FICO -26.5%.",
+   "view": null,
+   "tag": "媒体报道",
+   "sources": [
+    {
+     "publisher": "Yahoo Finance",
+     "date": "2026-09-29",
+     "title": "Fair Isaac stock plunges 20% after Fannie and Freddie open door to FICO credit score rival",
+     "url": "https://finance.yahoo.com/markets/stocks/article/fair-isaac-stock-plunges-20-after-fannie-and-freddie-open-door-to-fico-credit-score-rival-142841650.html"
+    },
+    {
+     "publisher": "Yahoo Finance",
+     "date": "2026-09-29",
+     "title": "FICO stock drops 20%: Analysts break down the impact of FHFA's move",
+     "url": "https://finance.yahoo.com/markets/stocks/articles/fico-stock-drops-20-analysts-140013032.html"
+    }
+   ]
+  },
+  {
+   "event": "美国消费者信心降至 12 年低点，30 年期美债升至 2002 年以来最高",
+   "event_en": "US consumer confidence hits a 12-year low; 30-year yield highest since 2002",
+   "assets": "可选消费、长久期资产、美债",
+   "assets_en": "Consumer discretionary, long-duration assets, Treasuries",
+   "logic": "高利率开始传导到消费者信心；如果消费走弱而通胀仍高，美联储陷入两难，长端利率的风险溢价可能继续上升。",
+   "logic_en": "High rates are feeding into consumer confidence; weaker spending with sticky inflation leaves the Fed in a bind and can keep lifting the long-end term premium.",
+   "facts": "10 年期约 5.26%，30 年期升至 2002 年以来最高；S&P 500 连续两日下跌，上涨家数约 40%。",
+   "facts_en": "10-year ~5.26%, 30-year highest since 2002; S&P 500 down two days in a row with ~40% advancing.",
+   "view": null,
+   "tag": "媒体报道",
+   "sources": [
+    {
+     "publisher": "Yahoo Finance",
+     "date": "2026-09-29",
+     "title": "Stock Market Today (Sept. 29, 2026): S&P 500 Falls on Easing Oil",
+     "url": "https://finance.yahoo.com/markets/stocks/articles/stock-market-today-sept-29-135304543.html"
+    },
+    {
+     "publisher": "TheStreet",
+     "date": "2026-09-29",
+     "title": "Stock Market Today (Sept. 29, 2026): S&P 500 falls as consumer confidence slides",
+     "url": "https://www.thestreet.com/stock-market-today/stock-market-today-dow-jones-sp-500-nasdaq-updates-sept-29-2026"
+    }
+   ]
+  }
+ ],
+ "review": {
+  "from": "2026-09-28",
+  "items": [
+   {
+    "id": "2026-09-25-q5",
+    "claim": "（9/25）Harworth 交割后，股价是否维持在 187 便士 ±1% 以内？",
+    "claim_en": "(9/25) Will Harworth hold within ±1% of 187p after settlement?",
+    "outcome": "9/29 交割日收于 187.0 便士，与报价相同，在区间内。",
+    "outcome_en": "Closed 187.0p on the 9/29 settlement date — at the offer price, inside the band.",
+    "verdict": "证据一致",
+    "verdict_en": "Evidence consistent",
+    "lesson": "在\"最终报价 + 收购方持股过半\"的结构下，价格被牢牢锚定在报价上。",
+    "lesson_en": "A best-and-final price plus a majority holder anchored the shares firmly."
+   },
+   {
+    "id": "2026-09-28-q2",
+    "claim": "10 年期站上 5.2% 后，黄金会否在周五前继续承压（10/2 收盘低于 4,154.7）？",
+    "claim_en": "With the 10-year above 5.2%, will gold stay below 4,154.7 into Friday?",
+    "outcome": "9/29 黄金期货收于 4,215.0，比 9/28 上涨约 1.45%，而 10 年期仍在 5.26%。中途证据与预期相反；时限 10/2。",
+    "outcome_en": "Gold futures closed 4,215.0 on 9/29, ~+1.45% vs 9/28, with the 10-year still at 5.26%. Interim evidence runs against the call; horizon 10/2.",
+    "verdict": "待到期",
+    "verdict_en": "Open",
+    "lesson": "数据管线一度把 9/29 黄金算成 -2.46%（Yahoo 缺了 9/28 的 K 线，涨跌幅被跨日错算）。如果直接采用，会误判为\"证据一致\"。已更正，并新增\"前一交易日 K 线必须存在\"的检查。",
+    "lesson_en": "The pipeline first computed gold at -2.46% on 9/29 (Yahoo dropped the 9/28 bar, so the change spanned two days). Taken at face value it would have looked 'consistent'. Corrected, and a 'previous-session bar must exist' check was added."
+   },
+   {
+    "id": "2026-09-28-q1",
+    "claim": "芯片抛售是一次性冲击吗（美股 CPO 在 10/5 前收复 9/25 水平）？",
+    "claim_en": "Is the chip selloff a one-off (US CPO back to its 9/25 level by 10/5)?",
+    "outcome": "9/29 美股 CPO 11 只反弹，相对 9/25 收盘等权 -0.31%，接近收复。",
+    "outcome_en": "The 11 US CPO names rebounded on 9/29, -0.31% EW versus the 9/25 close — nearly recovered.",
+    "verdict": "待到期",
+    "verdict_en": "Open",
+    "lesson": "修复速度快于预期；时限 10/5。",
+    "lesson_en": "Faster recovery than expected; horizon 10/5."
+   },
+   {
+    "id": "2026-09-28-q3",
+    "claim": "英国首购计划的涨幅能否撑到预算前（10/9 仍高于 9/25 +8%）？",
+    "claim_en": "Will the UK first-home rally hold (>+8% vs 9/25 on 10/9)?",
+    "outcome": "9/29 五大建房商相对 9/25 等权 +8.9%，刚好高于阈值；Vistry 仅 +2.0%。",
+    "outcome_en": "On 9/29 the big five were +8.9% EW versus 9/25, just above the threshold; Vistry only +2.0%.",
+    "verdict": "待到期",
+    "verdict_en": "Open",
+    "lesson": "分化出现：基本面最弱的 Vistry 最先回吐。",
+    "lesson_en": "Dispersion emerging: the weakest balance sheet, Vistry, gave back first."
+   },
+   {
+    "id": "2026-09-28-q4",
+    "claim": "A股光模块会否在国庆前继续下跌（9/29–9/30 累计为负）？",
+    "claim_en": "Will A-share optical names keep falling before the holiday (9/29–9/30 cumulative negative)?",
+    "outcome": "9/29 4 只等权约 +1.1%，方向与预期相反；9/30 收盘后判定。",
+    "outcome_en": "~+1.1% EW on 9/29, against the call; decided after the 9/30 close.",
+    "verdict": "待到期",
+    "verdict_en": "Open",
+    "lesson": "与美国提案直接相关的两家仍偏弱，其余两家反弹。",
+    "lesson_en": "The two names in the US bill stayed weak; the other two rebounded."
+   }
+  ]
+ }
+}

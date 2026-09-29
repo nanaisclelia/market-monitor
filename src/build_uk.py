@@ -58,7 +58,7 @@ def build(session: date) -> dict:
     for i in idx_cfg:
         df, src = _patch_close(_upto({"x": hist.get(i["yahoo"])}, session)["x"] if hist.get(i["yahoo"]) is not None else None,
                                cq.get(i["cnbc"]), session, tz)
-        st = A.day_stats(df, session)
+        st = A.day_stats(df, session, cal=cal)
         if st is None:
             err.add("indices", f"{i['name']}: 当日收盘价缺失（Yahoo 与 CNBC 均无），数据暂缺")
         row = {"name": i["name"], "ticker": i["yahoo"], "stats": st, "close_source": src,
@@ -102,7 +102,7 @@ def build(session: date) -> dict:
         sh[t] = df
         if src and src.startswith("CNBC"):
             patched += 1
-        st = A.day_stats(df, session, scfg["sigma_window"])
+        st = A.day_stats(df, session, scfg["sigma_window"], cal=cal)
         if st:
             stats[t] = (st, src)
     missing = len(uni) - len(stats)

@@ -12,10 +12,30 @@ def _pct(a, b):
     return None if not b or b != b else (a / b - 1) * 100
 
 
-def day_stats(df: pd.DataFrame, session: date, window: int = 20) -> dict | None:
-    """session 当日的收盘统计；若最新一根 K 线不是 session（未结算/停牌），返回 None。"""
+LAST_REASON: dict = {}
+
+
+def _prev_session(cal: str, session: date) -> date | None:
+    from datetime import timedelta
+    from . import calendars
+    d = session - timedelta(days=1)
+    for _ in range(15):
+        if calendars.is_session(cal, d):
+            return d
+        d -= timedelta(days=1)
+    return None
+
+
+def day_stats(df: pd.DataFrame, session: date, window: int = 20, cal: str | None = None) -> dict | None:
+    """session 当日的收盘统计；若最新一根 K 线不是 session（未结算/停牌），返回 None。
+    提供交易所日历 cal 时，还要求倒数第二根 K 线正好是上一个交易日——否则涨跌幅会跨日错算（如 Yahoo 丢失中间一根 K 线）。"""
     if df is None or len(df) < window + 2 or df.index[-1].date() != session:
         return None
+    if cal:
+        exp = _prev_session(cal, session)
+        if exp and df.index[-2].date() != exp:
+            LAST_REASON["gap"] = f"前一交易日 {exp} 的 K 线缺失（数据源最近一根为 {df.index[-2].date()}），涨跌幅无法可靠计算"
+            return None
     c, v = df["Close"], df["Volume"]
     rets = c.pct_change() * 100
     sigma = rets.iloc[-window - 1:-1].std()

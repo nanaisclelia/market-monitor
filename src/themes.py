@@ -67,9 +67,9 @@ def member_stats(m: dict, df: pd.DataFrame | None, q: dict | None, us_session: d
             df, src = patch_close(raw, yq, session, TZ[m["market"]])
             src = "Yahoo 报价（第二源无报价或代码不匹配）" if src and src != "MISMATCH" else None
     row["close_source"] = None if src in (None, "MISMATCH") else src
-    st = A.day_stats(df, session, scfg["sigma_window"])
+    st = A.day_stats(df, session, scfg["sigma_window"], cal=CAL[m["market"]])
     if st is None:
-        row["error"] = f"最新 K 线 {df.index[-1].date() if len(df) else '无'} ≠ {session}"
+        row["error"] = A.LAST_REASON.pop("gap", None) or f"最新 K 线 {df.index[-1].date() if len(df) else '无'} ≠ {session}"
         return row
     c = df["Close"]
     ytd = c[c.index.year == session.year]

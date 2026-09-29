@@ -1,0 +1,59 @@
+{
+ "session": "2026-09-29",
+ "frozen_at": "2026-09-29T23:27:39+00:00",
+ "sha256": "5355bc98d5741a9c3392ea4c958a51b741b8d66c59b7dcfd142e7814c8018b26",
+ "items": [
+  {
+   "id": "2026-09-29-q1",
+   "q": "FHFA 新政后，FICO 会否在 10/9 前收复一半跌幅？",
+   "q_en": "After the FHFA move, will FICO recover half its loss by 10/9?",
+   "expect": "这是结构性变化，FICO 10/9 收盘仍低于 729 美元（9/29 跌幅的一半位置）。",
+   "expect_en": "A structural change: FICO still closes below $729 (the half-way point of the 9/29 drop) on 10/9.",
+   "horizon": "2026-10-09",
+   "confidence": "中",
+   "confidence_en": "Medium",
+   "falsifier": "10/9 收盘 ≥ 729 美元。",
+   "falsifier_en": "10/9 close ≥ $729.",
+   "now": "617.87（前收 840.89）",
+   "now_en": "617.87 (prev 840.89)",
+   "evidence": [
+    "Yahoo Finance 9/29"
+   ]
+  },
+  {
+   "id": "2026-09-29-q2",
+   "q": "油价回落能否持续到周五？",
+   "q_en": "Will oil's retreat hold into Friday?",
+   "expect": "在储备释放与海湾外运恢复的情况下，WTI 10/2 收盘不高于 9/28 收盘（92.98）。",
+   "expect_en": "With the reserve release and recovering Gulf flows, WTI closes no higher than the 9/28 close (92.98) on 10/2.",
+   "horizon": "2026-10-02",
+   "confidence": "中",
+   "confidence_en": "Medium",
+   "falsifier": "WTI 10/2 收盘高于 92.98。",
+   "falsifier_en": "WTI closes above 92.98 on 10/2.",
+   "now": "88.94（9/29）",
+   "now_en": "88.94 (9/29)",
+   "evidence": [
+    "Yahoo Finance 9/29",
+    "Bloomberg 9/29"
+   ]
+  },
+  {
+   "id": "2026-09-29-q3",
+   "q": "美股市场宽度会否在周五前修复到 50% 以上？",
+   "q_en": "Will US breadth recover above 50% before Friday?",
+   "expect": "若 10 年期维持 5.2% 以上，9/30–10/2 任一交易日 S&P 500 + 纳指 100 的上涨占比都不超过 50%。",
+   "expect_en": "If the 10-year stays above 5.2%, S&P 500 + Nasdaq-100 advancers stay at or below 50% on every session 9/30–10/2.",
+   "horizon": "2026-10-02",
+   "confidence": "低",
+   "confidence_en": "Low",
+   "falsifier": "任一交易日上涨占比超过 50%。",
+   "falsifier_en": "Any session with more than 50% advancing.",
+   "now": "39.7%（9/29）",
+   "now_en": "39.7% (9/29)",
+   "evidence": [
+    "本看台快照"
+   ]
+  }
+ ]
+}
