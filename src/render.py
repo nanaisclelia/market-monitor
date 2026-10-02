@@ -4,7 +4,7 @@ from __future__ import annotations
 from datetime import datetime
 from zoneinfo import ZoneInfo
 
-from jinja2 import Environment, FileSystemLoader, select_autoescape
+from jinja2 import Environment, FileSystemLoader, Undefined, select_autoescape
 from markupsafe import Markup
 
 from datetime import date, timedelta
@@ -22,7 +22,8 @@ def _fmt_time(iso_s: str | None, tz: str, fmt: str = "%Y-%m-%d %H:%M %Z") -> str
 
 
 def _num(v, d=2, sign=False, pct=False):
-    if v is None:
+    # 缺失值（None、Jinja 未定义、NaN）一律显示为「—」，避免单只标的字段缺失拖垮整页渲染
+    if v is None or isinstance(v, Undefined) or (isinstance(v, float) and v != v):
         return "—"
     s = f"{v:+,.{d}f}" if sign else f"{v:,.{d}f}"
     return s + ("%" if pct else "")

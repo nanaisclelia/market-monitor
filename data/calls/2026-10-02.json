@@ -1,0 +1,60 @@
+{
+ "session": "2026-10-02",
+ "frozen_at": "2026-10-02T22:13:50+00:00",
+ "sha256": "d3c2107ce7fc73fd4e661631c50f62726c5ea7fdeb0a6db8daa392b27206a431",
+ "items": [
+  {
+   "id": "2026-10-02-q1",
+   "q": "就业降温后，10 年期会否在 10/9 前回落到 5.2% 以下？",
+   "q_en": "After cooling jobs, does the 10-year fall below 5.2% by 10/9?",
+   "expect": "若就业降温成立，10/5–10/9 至少有一个交易日 10 年期收于 5.2% 以下；若一直高于 5.2%，说明长端由期限溢价而非加息预期驱动。",
+   "expect_en": "If cooling jobs hold, the 10-year closes below 5.2% on at least one session 10/5–10/9; if it stays above, the long end is driven by term premium rather than hike odds.",
+   "horizon": "2026-10-09",
+   "confidence": "中",
+   "confidence_en": "Medium",
+   "falsifier": "10/5–10/9 每个交易日都收于 5.2% 以上。",
+   "falsifier_en": "Every close 10/5–10/9 above 5.2%.",
+   "now": "5.28%（10/2）",
+   "now_en": "5.28% (10/2)",
+   "evidence": [
+    "CNBC 10/2",
+    "GuruFocus 10/2"
+   ]
+  },
+  {
+   "id": "2026-10-02-q2",
+   "q": "东芝扩产对存储股是一次性冲击还是结构性重估？",
+   "q_en": "Is Toshiba's expansion a one-off or a structural reset for storage?",
+   "expect": "结构性：希捷和西部数据 10/9 收盘都仍低于 10/1 收盘（945.57 / 462.56）。若两者都收复，则是一次性冲击。",
+   "expect_en": "Structural: Seagate and Western Digital both still close below their 10/1 closes (945.57 / 462.56) on 10/9. If both recover, it was one-off.",
+   "horizon": "2026-10-09",
+   "confidence": "中",
+   "confidence_en": "Medium",
+   "falsifier": "两者 10/9 收盘都高于 10/1 收盘。",
+   "falsifier_en": "Both close above their 10/1 closes on 10/9.",
+   "now": "STX 849.0 / WDC 415.3",
+   "now_en": "STX 849.0 / WDC 415.3",
+   "evidence": [
+    "Yahoo Finance 10/2"
+   ]
+  },
+  {
+   "id": "2026-10-02-q3",
+   "q": "A股 CPO 10/8 复市：按\"被政策点名 vs 未点名\"拆分后会怎样？",
+   "q_en": "A-share CPO reopens 10/8: how do named versus un-named names behave?",
+   "expect": "吸取 9/28 的教训：若休市期间没有新的针对性利空，未被点名的天孚通信、光迅科技 10/8 等权为正；被点名的中际旭创、新易盛相对另两家跑输。",
+   "expect_en": "Applying the 9/28 lesson: absent new targeted news during the break, the un-named TFC and Accelink are positive EW on 10/8, and the named Innolight and Eoptolink underperform them.",
+   "horizon": "2026-10-08",
+   "confidence": "低",
+   "confidence_en": "Low",
+   "falsifier": "未点名两家 10/8 等权 ≤ 0，或被点名两家跑赢另两家。",
+   "falsifier_en": "Un-named pair EW ≤ 0 on 10/8, or the named pair outperforms.",
+   "now": "停在 9/30 收盘",
+   "now_en": "Frozen at 9/30 close",
+   "evidence": [
+    "本看台快照",
+    "财闻网 9/28"
+   ]
+  }
+ ]
+}
